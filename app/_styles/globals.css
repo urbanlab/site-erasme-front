@@ -1,0 +1,123 @@
+:root {
+    --background: #f4f4f4;
+    --tonic: #c7ff02;
+    --white: #ffffff;
+    --black: #000000;
+
+    --regular-font-weight: 400; /* regular */
+    --medium-font-weight: 500; /* medium */
+    --semi-bold-font-weight: 600; /* semi-bold */
+    --bold-font-weight: 700; /* bold */
+
+    /* see README for more information on the filters */
+    --svg-filter-black-to-white: invert(100%) sepia(0%) saturate(2%) hue-rotate(83deg) brightness(110%) contrast(101%);
+    --svg-filter-black-to-tonic: invert(86%) sepia(96%) saturate(5370%) hue-rotate(15deg) brightness(101%) contrast(103%);
+
+    /* TODO: Add in a theme in the future !? */
+    --primary-color: var(--white);
+    --secondary-color: var(--black);
+    --accent-color: var(--tonic);
+
+    --default-body-font-size: 1rem;
+    --default-body-line-height: 1.25;
+    --default-body-font-weight: var(--regular-font-weight);
+
+    --section-description-font-size: 1.125rem;
+    --section-description-line-height: 1.5;
+    --section-description-font-weight: var(--medium-font-weight);
+
+    --h1-font-size: 1.75rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --h4-font-size: 1.125rem;
+
+    --button-font-size: 1.25rem;
+
+
+    --main-padding: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+}
+
+body {
+    background: var(--background);
+    margin: 0;
+	display: grid;
+}
+
+p {
+    font-size: var(--default-body-font-size);
+    line-height: var(--default-body-line-height);
+    font-weight: var(--default-body-font-weight);
+}
+
+h5 {
+    font-size: var(--section-description-font-size);
+    line-height: var(--section-description-line-height);
+    font-weight: var(--section-description-font-weight);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-weight: var(--bold-font-weight);
+    margin: 0;
+}
+
+h1 {
+    font-size: var(--h1-font-size);
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: var(--h2-font-size)
+}
+
+h3 {
+    font-size: var(--h3-font-size);
+}
+
+h4 {
+    font-size: var(--h4-font-size);
+}
+
+ul,
+li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* Large  Desktop */
+@media screen and (min-width: 120rem) {
+    :root {
+        --default-body-font-size: 1.125rem;
+        --default-body-line-height: 1.5;
+
+        --section-description-font-size: 2rem;
+
+        --h1-font-size: 5rem;
+        --h2-font-size: 3.75rem;
+        --h3-font-size: 3rem;
+        --h4-font-size: 2rem;
+        
+        --main-padding: 80px;
+    }
+
+}

@@ -1,0 +1,42 @@
+.button {
+    font: inherit;
+    border: 2px solid transparent;
+
+    padding: 0.625rem 1.25rem;
+
+    border-radius: 1.25rem;
+
+    font-size: var(--button-font-size);
+}
+
+.button:hover {
+    background-color: var(--accent-color);
+}
+
+.button:active {
+    background-color: var(--accent-color);
+    border-color: var(--secondary-color);
+}
+
+.ghost {
+    background: transparent;
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.text {
+    background: transparent;
+    color: var(--secondary-color);
+}
+
+.filled {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+}
+.filled > img {
+    filter: var(--svg-filter-black-to-white);
+}
+.filled:hover > img,
+.filled:active > img {
+    filter: none;
+}

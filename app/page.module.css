@@ -1,168 +1,164 @@
-.page {
-  --gray-rgb: 0, 0, 0;
-  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
-  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-
-  display: grid;
-  grid-template-rows: 20px 1fr 20px;
-  align-items: center;
-  justify-items: center;
-  min-height: 100svh;
-  padding: 80px;
-  gap: 64px;
-  font-family: var(--font-geist-sans);
+.localVariables {
+    --section-gap: 42px;
+    --inside-section-gap: 24px;
 }
 
-@media (prefers-color-scheme: dark) {
-  .page {
-    --gray-rgb: 255, 255, 255;
-    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
-    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-  }
+.mainContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: var(--section-gap);
+    margin-bottom: var(--section-gap);
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  grid-row-start: 2;
+.presentationContainer {
+    display: grid;
+    gap: var(--inside-section-gap);
 }
 
-.main ol {
-  font-family: var(--font-geist-mono);
-  padding-left: 0;
-  margin: 0;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  list-style-position: inside;
-}
-
-.main li:not(:last-of-type) {
-  margin-bottom: 8px;
-}
-
-.main code {
-  font-family: inherit;
-  background: var(--gray-alpha-100);
-  padding: 2px 4px;
-  border-radius: 4px;
-  font-weight: 600;
-}
-
-.ctas {
-  display: flex;
-  gap: 16px;
-}
-
-.ctas a {
-  appearance: none;
-  border-radius: 128px;
-  height: 48px;
-  padding: 0 20px;
-  border: none;
-  border: 1px solid transparent;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 500;
-}
-
-a.primary {
-  background: var(--foreground);
-  color: var(--background);
-  gap: 8px;
-}
-
-a.secondary {
-  border-color: var(--gray-alpha-200);
-  min-width: 158px;
-}
-
-.footer {
-  grid-row-start: 3;
-  display: flex;
-  gap: 24px;
-}
-
-.footer a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.footer img {
-  flex-shrink: 0;
-}
-
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
-
-  .footer a:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-}
-
-@media (max-width: 600px) {
-  .page {
-    padding: 32px;
-    padding-bottom: 80px;
-  }
-
-  .main {
-    align-items: center;
-  }
-
-  .main ol {
-    text-align: center;
-  }
-
-  .ctas {
+.presentationContainer > .presentationTextContainer {
+    display: flex;
     flex-direction: column;
-  }
-
-  .ctas a {
-    font-size: 14px;
-    height: 40px;
-    padding: 0 16px;
-  }
-
-  a.secondary {
-    min-width: auto;
-  }
-
-  .footer {
-    flex-wrap: wrap;
-    align-items: center;
     justify-content: center;
-  }
+    row-gap: calc(var(--inside-section-gap) / 2);
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
+.currentTopicsContainer {
+    display: grid;
+    gap: var(--inside-section-gap);
+
+    margin-top: calc(var(--section-gap) * -0.5);
+}
+
+.currentTopicsContainer > h2 {
+    text-align: end;
+}
+
+.cardsContainer {
+    display: grid;
+    gap: var(--inside-section-gap);
+}
+
+.spotlightCardsContainer {
+    display: flex;
+    gap: 10px;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    margin-left: calc(var(--main-padding) * -1);
+    margin-right: calc(var(--main-padding) * -1);
+}
+
+.spotlightCardsContainer > :first-child {
+    margin-left: var(--main-padding);
+}
+.spotlightCardsContainer > :last-child {
+    margin-right: var(--main-padding);
+}
+
+.card {
+    min-width: 19.5rem;
+    flex: 1;
+    /* TODO: make width with clamp ? */
+}
+
+.archivesContainer {
+    align-self: center;
+}
+
+
+
+
+.programsContainer {
+    display: grid;
+    row-gap: var(--inside-section-gap);
+}
+
+.programsContainer > .imageCardsContainer {
+    display: flex;
+    column-gap: 10px;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    margin-left: calc(var(--main-padding) * -1);
+    margin-right: calc(var(--main-padding) * -1);
+}
+
+.imageCardsContainer > :first-child {
+    margin-left: var(--main-padding);
+}
+.imageCardsContainer > :last-child {
+    margin-right: var(--main-padding);
+}
+
+.imageCardsContainer > .imageCard {
+    flex: 1;
+    min-width: 19.5rem;
+    min-height: 28rem;
+
+    transition: flex-grow 0.2s ease;
+}
+
+.servicesContainer {
+    background: var(--primary-color);
+    margin-left: calc(var(--main-padding) * -1);
+    margin-right: calc(var(--main-padding) * -1);
+    padding: var(--inside-section-gap) var(--main-padding);
+
+    display: grid;
+    gap: var(--inside-section-gap);
+}
+
+.servicesContainer > .tagsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--inside-section-gap);
+    margin-bottom: var(--inside-section-gap);
+}
+.missionContainer {
+    display: grid;
+    row-gap: var(--inside-section-gap);
+}
+
+.missionContainer > p {
+    line-height: 1.5;
+    letter-spacing: 0.05rem;
+    font-weight: var(--medium-font-weight);
+}
+
+@media screen and (min-width: 120rem) {
+    .presentationContainer {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
+
+    .presentationContainer > .presentationImage {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .imageCardsContainer > .imageCard:hover {
+        flex-grow: 2;
+        transition: flex-grow 0.2s ease;
+    }
+
+    .cardsContainer {
+        grid-auto-flow: column;
+        grid-auto-columns: 2fr 1fr;
+    }
+
+    .spotlightCardsContainer {
+        margin: 0; 
+
+        display: grid;
+        grid-template-areas:
+            '1st-most-recent 2nd-most-recent'
+            '3rd-most-recent 4th-most-recent';
+    }
+
+    .spotlightCardsContainer > .card {
+        margin: 0;
+    }
+
+    .currentTopicsContainer > h2 {
+        text-align: start;
+    }
 }

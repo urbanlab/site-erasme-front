@@ -1,0 +1,6 @@
+.contentContainer{
+    padding-left: var(--main-padding);
+    padding-right: var(--main-padding);
+
+    margin-top: var(--main-padding);
+}

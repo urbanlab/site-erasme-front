@@ -1,0 +1,112 @@
+.localVariables {
+    --default-gap: 0.75rem;
+    --erasme-logo-height: 2.4rem;
+    --metropole-lyon-logo-height: 4.1875rem;
+}
+
+.conditionalDisplay {
+    display: none;
+}
+
+.mainFlexContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    padding: 3rem var(--main-padding) 1.5rem var(--main-padding);
+
+    color: var(--white);
+    background-color: var(--black);
+}
+
+.mainFlexContainer img {
+    filter: var(--svg-filter-black-to-white);
+}
+
+.leftSideFlexContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--default-gap);
+}
+
+.footerLink:hover {
+    color: var(--accent-color);
+}
+
+.rightSideFlexContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.logoFlexContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    row-gap: calc(2 * var(--default-gap));
+    margin-bottom: calc(2 * var(--default-gap));
+}
+
+.logoFlexContainer img {
+    width: auto;
+    filter: var(--svg-filter-black-to-white);
+}
+
+.erasmeLogo {
+    height: var(--erasme-logo-height);
+}
+
+.metropoleLyonLogo {
+    height: var(--metropole-lyon-logo-height);
+}
+
+.socialMediaFlexContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--default-gap);
+}
+
+.socialMediaFlexContainer img {
+    --socialMediaIconSize: 2.5rem;
+
+    width: var(--socialMediaIconSize);
+    height: var(--socialMediaIconSize);
+}
+
+.socialMediaFlexContainer img:hover {
+    filter: var(--svg-filter-black-to-tonic);
+}
+
+.copyrights {
+    align-self: flex-end;
+    font-size: 0.875rem;
+}
+
+@media screen and (min-width: 120rem) {
+    .localVariables {
+        --default-gap: 1.875rem;
+        --erasme-logo-height: 3.5rem;
+        --metropole-lyon-logo-height: 5.625rem;
+    }
+
+    .mainFlexContainer {
+        padding: 5.625rem var(--main-padding) 1.5rem var(--main-padding);
+    }
+
+    .conditionalDisplay {
+        display: inline-block;
+        width: 18.75rem;
+        height: auto;
+    }
+
+    .socialMediaFlexContainer img {
+        --socialMediaIconSize: 3.125rem;
+    }
+
+    .copyrights {
+        font-size: 0.875rem;
+    }
+}

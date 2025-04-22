@@ -1,0 +1,98 @@
+.localVariables {
+    --common-border: 2px solid var(--black);
+    --border-radius: 0.5rem;
+
+    --padding: 0.3125rem 1rem;
+
+    --erasme-logo-height: 1.5rem;
+}
+
+.bigScreenButtonsContainer {
+    display: none;
+}
+
+.positioning {
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    z-index: 100;
+}
+
+.mainContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: var(--white);
+
+    border-bottom: var(--common-border);
+    border-radius: var(--border-radius);
+
+    padding: var(--padding);
+}
+
+.erasmeLogo {
+    height: var(--erasme-logo-height);
+    width: auto;
+}
+
+.smallScreenButtonsContainer {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.smallScreenButtonsContainer > button {
+    min-height: 2.75rem;
+    min-width: 2.75rem;
+    padding: 0;
+    border-radius: 0.5rem;
+}
+
+.smallScreenButtonsContainer img {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.smallScreenLinksContainer {
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    background: green;
+}
+
+@media screen and (min-width: 120rem) {
+    .localVariables {
+        --border-radius: 1.875rem;
+        --padding: 1.875rem 1.5rem;
+        --margin: 3.125rem 5rem 0 5rem;
+        --erasme-logo-height: 3.1875rem;
+    }
+
+    .smallScreenButtonsContainer {
+        display: none;
+    }
+
+    .mainContainer {
+        border: var(--common-border);
+        margin: var(--margin);
+    }
+
+    .bigScreenButtonsContainer {
+        display: flex;
+        gap: 3.125rem;
+    }
+
+    .bigScreenButtonsContainer > .secondaryContainer {
+        display: flex;
+        column-gap: 0.625rem;
+    }
+
+    .bigScreenButtonsContainer img {
+        width: 2rem;
+        height: 2rem;
+    }
+}
