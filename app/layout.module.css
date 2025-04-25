@@ -3,4 +3,6 @@
     padding-right: var(--main-padding);
 
     margin-top: var(--main-padding);
+
+    isolation: isolate;
 }

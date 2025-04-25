@@ -1,0 +1,131 @@
+.localVariables {
+    --common-border-width: 2px;
+    --common-border: var(--common-border-width) solid var(--black);
+    --border-radius: 0.5rem;
+
+    --padding-top-bottom: 0.3125rem;
+    --padding-left-right: 1rem;
+    --padding: var(--padding-top-bottom) var(--padding-left-right);
+
+    --erasme-logo-height: 1.5rem;
+
+    --button-icon-size: 1.25rem;
+}
+
+.bigScreenButtonsContainer {
+    display: none;
+}
+
+.positioning {
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    z-index: 100;
+}
+
+.mainContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: var(--white);
+
+    border-bottom: var(--common-border);
+    border-radius: var(--border-radius);
+
+    padding: var(--padding);
+}
+
+.erasmeLogo {
+    height: var(--erasme-logo-height);
+    width: auto;
+}
+
+.smallScreenButtonsContainer {
+    display: flex;
+    gap: 0.25rem;
+
+    & > button {
+        min-height: 2.75rem;
+        min-width: 2.75rem;
+        padding: 0;
+        border-radius: 0.5rem;
+    }
+}
+
+
+.smallScreenButtonsContainer img,
+.bigScreenButtonsContainer img {
+    width: var(--button-icon-size);
+    height: var(--button-icon-size);
+}
+
+.burgerMenuContainer {
+    display: flex;
+    flex-direction: column;
+    width: var(--available-width);
+
+    & :first-child {
+        align-self: flex-end;
+    }
+}
+
+.overlayContainer {
+    background: var(--primary-color);
+
+    border: var(--common-border);
+    border-radius: var(--border-radius);
+
+    padding: var(--main-padding);
+
+    z-index: 100;
+
+    max-height: 80vh; /* fallback */
+    max-height: 80dvh;
+
+    overflow-y: scroll;
+    scrollbar-width: none;
+    transition: all 0.2s ease-in-out;
+
+    &[data-starting-style] {
+        opacity: 0;
+    }
+    &[data-ending-style] {
+        opacity: 0;
+    }
+}
+
+
+@media screen and (min-width: 120rem) {
+    .localVariables {
+        --border-radius: 1.875rem;
+        --padding-top-bottom: 1.875rem;
+        --padding-left-right: 1.5rem;
+
+        --margin-top: 3.125rem;
+        --margin: var(--margin-top) var(--main-padding) 0 var(--main-padding);
+
+        --erasme-logo-height: 3.1875rem;
+        --button-icon-size: 2rem;
+    }
+
+    .smallScreenButtonsContainer {
+        display: none;
+    }
+
+    .mainContainer {
+        border: var(--common-border);
+        margin: var(--margin);
+    }
+
+    .bigScreenButtonsContainer {
+        display: flex;
+        gap: 3.125rem;
+
+        & .secondaryContainer {
+            display: flex;
+            column-gap: 0.625rem;
+            align-self: center;
+        }
+    }
+}

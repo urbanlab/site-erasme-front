@@ -44,3 +44,13 @@ The application uses color filters on svgs icons to easily change their colors. 
 ! The source svg icon must be black and have a transparent background.
 
 The filters were generated with: [filter generator](https://isotropic.co/tool/hex-color-to-css-filter/) 
+
+
+## Usefull vscode extensions
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [CSS Nesting Syntax Highlighting](https://marketplace.visualstudio.com/items/?itemName=jacobcassidy.css-nesting-syntax-highlighting)
+- [Color Highlight](https://marketplace.visualstudio.com/items/?itemName=naumovs.color-highlight)
+
+## Developpers
+- [@vbaroni](https://github.com/vbaroni)

@@ -1,19 +1,21 @@
 .button {
     font: inherit;
-    border: 2px solid transparent;
+    border: var(--button-border-width) solid transparent;
 
-    padding: 0.625rem 1.25rem;
+    padding: var(--button-top-bottom-padding) var(--button-left-right-padding);
 
-    border-radius: 1.25rem;
+    border-radius: var(--button-border-radius);
 
     font-size: var(--button-font-size);
-}
 
-.button:hover {
-    background-color: var(--accent-color);
+    &:hover {
+        background-color: var(--accent-color);
+    }
+    &:active {
+        background-color: var(--accent-color);
+    }
 }
-
-.button:active {
+.button[data-popup-open] {
     background-color: var(--accent-color);
     border-color: var(--secondary-color);
 }
@@ -32,11 +34,17 @@
 .filled {
     background: var(--secondary-color);
     color: var(--primary-color);
+
+    & > img {
+        filter: var(--svg-filter-black-to-white);
+    }
+
+    &:hover > img,
+    &:active > img {
+        filter: none;
+    }
 }
-.filled > img {
-    filter: var(--svg-filter-black-to-white);
-}
-.filled:hover > img,
-.filled:active > img {
+
+.filled[data-popup-open] > img {
     filter: none;
 }

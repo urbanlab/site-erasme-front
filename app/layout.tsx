@@ -3,7 +3,7 @@ import '@styles/globals.css';
 import { K2D } from 'next/font/google';
 import Footer from '@components/footer';
 import styles from './layout.module.css';
-import Header from '@components/header';
+import Navbar from '@components/navbar';
 
 export const metadata: Metadata = {
     title: 'ERASME',
@@ -22,7 +22,7 @@ export default function RootLayout({
     return (
         <html lang="fr" className={k2d.className}>
             <body>
-                <Header />
+                <Navbar />
                 <div className={styles.contentContainer}>{children}</div>
                 <Footer />
             </body>
