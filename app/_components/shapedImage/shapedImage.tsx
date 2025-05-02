@@ -6,11 +6,14 @@ type ShapedImageProps = {
     src: string;
     alt: string;
     className?: string;
-};
+    ref?: React.Ref<HTMLDivElement>;
+} & React.HTMLAttributes<HTMLElement>;
 
-export default function ShapedImage({ src, alt, className}: ShapedImageProps) {
+export default function ShapedImage({ src, alt, className, ref, ...inheritedProps }: ShapedImageProps) {
     return (
         <div
+            {...inheritedProps}
+            ref={ref}
             className={`${styles.maskContainer} ${styles.maskProperties} ${className}`}
             style={{ maskImage: `url(${maskShape.src})` }}
         >
