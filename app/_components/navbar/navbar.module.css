@@ -3,23 +3,18 @@
     --common-border: var(--common-border-width) solid var(--black);
     --border-radius: 0.5rem;
 
-    --padding-top-bottom: 0.3125rem;
-    --padding-left-right: 1rem;
-    --padding: var(--padding-top-bottom) var(--padding-left-right);
+    --navbar-padding-top-bottom: 0.3125rem;
+    --navbar-padding-left-right: 1rem;
+    --navbar-padding: var(--navbar-padding-top-bottom) var(--navbar-padding-left-right);
 
     --erasme-logo-height: 1.5rem;
 
     --button-icon-size: 1.25rem;
+
+    --overlay-padding: var(--main-padding);
 }
 
-.bigScreenButtonsContainer {
-    display: none;
-}
-
-.positioning {
-    position: sticky;
-    top: 0;
-    overflow: hidden;
+.zIndex {
     z-index: 100;
 }
 
@@ -33,7 +28,37 @@
     border-bottom: var(--common-border);
     border-radius: var(--border-radius);
 
-    padding: var(--padding);
+    padding: var(--navbar-padding);
+}
+
+.overlayContainer {
+    background: var(--primary-color);
+
+    border: var(--common-border);
+    border-radius: var(--border-radius);
+
+    padding: var(--overlay-padding);
+
+    max-height: 80vh; /* fallback */
+    max-height: 80dvh;
+    width: var(--available-width);
+
+    overflow-y: scroll;
+    scrollbar-width: none;
+
+    transition: all 0.2s ease-in-out;
+    &[data-starting-style] {
+        opacity: 0;
+    }
+    &[data-ending-style] {
+        opacity: 0;
+    }
+}
+
+.positioning {
+    position: sticky;
+    top: 0;
+    overflow: hidden;
 }
 
 .erasmeLogo {
@@ -41,7 +66,17 @@
     width: auto;
 }
 
-.smallScreenButtonsContainer {
+.bigScreenContainer {
+    display: none;
+}
+
+.bigScreenContainer img,
+.smallScreenContainer img {
+    width: auto;
+    height: var(--button-icon-size);
+}
+
+.smallScreenContainer {
     display: flex;
     gap: 0.25rem;
 
@@ -53,63 +88,64 @@
     }
 }
 
+.searchMenuContainer {
+    display: grid;
+    grid-template-areas:
+        '. closeButton'
+        'searchInput searchInput'
+        'filterButton searchButton'
+        'searchResults searchResults';
 
-.smallScreenButtonsContainer img,
-.bigScreenButtonsContainer img {
-    width: var(--button-icon-size);
-    height: var(--button-icon-size);
+    & .closeButton {
+        grid-area: closeButton;
+        justify-self: end;
+    }
+    & .searchInput {
+        grid-area: searchInput;
+        margin-bottom: 1.875rem;
+    }
+
+    & .searchButton {
+        grid-area: searchButton;
+        justify-self: end;
+    }
+
+    & .filterButton {
+        grid-area: filterButton;
+        justify-self: start;
+    }
+
+    & .searchResults {
+        grid-area: searchResults;
+        margin-top: 2.5rem;
+    }
 }
 
 .burgerMenuContainer {
     display: flex;
     flex-direction: column;
-    width: var(--available-width);
 
     & :first-child {
         align-self: flex-end;
     }
 }
 
-.overlayContainer {
-    background: var(--primary-color);
-
-    border: var(--common-border);
-    border-radius: var(--border-radius);
-
-    padding: var(--main-padding);
-
-    z-index: 100;
-
-    max-height: 80vh; /* fallback */
-    max-height: 80dvh;
-
-    overflow-y: scroll;
-    scrollbar-width: none;
-    transition: all 0.2s ease-in-out;
-
-    &[data-starting-style] {
-        opacity: 0;
-    }
-    &[data-ending-style] {
-        opacity: 0;
-    }
-}
-
-
-@media screen and (min-width: 120rem) {
+@media screen and (min-width: 90rem) {
     .localVariables {
         --border-radius: 1.875rem;
-        --padding-top-bottom: 1.875rem;
-        --padding-left-right: 1.5rem;
+        --navbar-padding-top-bottom: 1.875rem;
+        --navbar-padding-left-right: 1.5rem;
 
         --margin-top: 3.125rem;
         --margin: var(--margin-top) var(--main-padding) 0 var(--main-padding);
 
         --erasme-logo-height: 3.1875rem;
-        --button-icon-size: 2rem;
+        --button-icon-size: 1.3rem;
+
+        --overlay-padding: 2.5rem 4.375rem;
     }
 
-    .smallScreenButtonsContainer {
+    .smallScreenContainer {
         display: none;
     }
 
@@ -118,7 +154,14 @@
         margin: var(--margin);
     }
 
-    .bigScreenButtonsContainer {
+    .overlayContainer {
+        width: auto;
+        min-width: var(--anchor-width);
+
+        margin-top: var(--navbar-padding-top-bottom);
+    }
+
+    .bigScreenContainer {
         display: flex;
         gap: 3.125rem;
 
@@ -126,6 +169,10 @@
             display: flex;
             column-gap: 0.625rem;
             align-self: center;
+
+            & > input {
+                width: clamp(24rem, 30vw, 31.25rem);
+            }
         }
     }
 }

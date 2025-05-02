@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
-import '@styles/globals.css';
-import { K2D } from 'next/font/google';
 import Footer from '@components/footer';
+import NavbarWrapper from '@components/navbarWrapper';
+import '@styles/globals.css';
+import type { Metadata } from 'next';
+import { K2D } from 'next/font/google';
 import styles from './layout.module.css';
-import Navbar from '@components/navbar';
 
 export const metadata: Metadata = {
     title: 'ERASME',
@@ -22,7 +22,7 @@ export default function RootLayout({
     return (
         <html lang="fr" className={k2d.className}>
             <body>
-                <Navbar />
+                <NavbarWrapper />
                 <div className={styles.contentContainer}>{children}</div>
                 <Footer />
             </body>

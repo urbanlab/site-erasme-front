@@ -24,6 +24,7 @@
       "@styles/*": ["_styles/*"],
       "@components/footer": ["_components/footer/footer.tsx"],
       "@components/navbar": ["_components/navbar/navbar.tsx"],
+      "@components/navbarWrapper": ["_components/navbar/navbarWrapper.tsx"],
       "@components/button": ["_components/button/button.tsx"],
       "@components/shapedImage": ["_components/shapedImage/shapedImage.tsx"],
       "@components/card": ["_components/card/card.tsx"],
