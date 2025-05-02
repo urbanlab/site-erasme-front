@@ -1,0 +1,11 @@
+.input {
+    border: none;
+    border-bottom: 1px solid var(--black);
+
+    font: inherit;
+    line-height: 2rem;
+
+    &:focus {
+        outline: none;
+    }
+}
