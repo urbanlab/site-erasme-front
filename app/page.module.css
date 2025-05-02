@@ -13,13 +13,13 @@
 .presentationContainer {
     display: grid;
     gap: var(--inside-section-gap);
-}
 
-.presentationContainer > .presentationTextContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    row-gap: calc(var(--inside-section-gap) / 2);
+    & > .presentationTextContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        row-gap: calc(var(--inside-section-gap) / 2);
+    }
 }
 
 .currentTopicsContainer {
@@ -27,10 +27,10 @@
     gap: var(--inside-section-gap);
 
     margin-top: calc(var(--section-gap) * -0.5);
-}
 
-.currentTopicsContainer > h2 {
-    text-align: end;
+    & > h2 {
+        text-align: end;
+    }
 }
 
 .cardsContainer {
@@ -45,13 +45,13 @@
     scrollbar-width: none;
     margin-left: calc(var(--main-padding) * -1);
     margin-right: calc(var(--main-padding) * -1);
-}
 
-.spotlightCardsContainer > :first-child {
-    margin-left: var(--main-padding);
-}
-.spotlightCardsContainer > :last-child {
-    margin-right: var(--main-padding);
+    & > :first-child {
+        margin-left: var(--main-padding);
+    }
+    & > :last-child {
+        margin-right: var(--main-padding);
+    }
 }
 
 .card {
@@ -64,75 +64,78 @@
     align-self: center;
 }
 
-
-
-
 .programsContainer {
     display: grid;
     row-gap: var(--inside-section-gap);
 }
 
-.programsContainer > .imageCardsContainer {
+.imageCardsContainer {
     display: flex;
     column-gap: 10px;
+
     overflow-x: scroll;
     scrollbar-width: none;
+
     margin-left: calc(var(--main-padding) * -1);
     margin-right: calc(var(--main-padding) * -1);
-}
 
-.imageCardsContainer > :first-child {
-    margin-left: var(--main-padding);
-}
-.imageCardsContainer > :last-child {
-    margin-right: var(--main-padding);
-}
+    & > :first-child {
+        margin-left: var(--main-padding);
+    }
+    & > :last-child {
+        margin-right: var(--main-padding);
+    }
 
-.imageCardsContainer > .imageCard {
-    flex: 1;
-    min-width: 19.5rem;
-    min-height: 28rem;
+    & > .imageCard {
+        flex: 1;
 
-    transition: flex-grow 0.2s ease;
+        min-width: 19.5rem;
+        min-height: 28rem;
+
+        transition: flex-grow 0.2s ease;
+    }
 }
 
 .servicesContainer {
+    display: grid;
+    gap: var(--inside-section-gap);
+
     background: var(--primary-color);
+
     margin-left: calc(var(--main-padding) * -1);
     margin-right: calc(var(--main-padding) * -1);
     padding: var(--inside-section-gap) var(--main-padding);
 
-    display: grid;
-    gap: var(--inside-section-gap);
+    & > .tagsContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--inside-section-gap);
+
+        margin-bottom: var(--inside-section-gap);
+    }
 }
 
-.servicesContainer > .tagsContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--inside-section-gap);
-    margin-bottom: var(--inside-section-gap);
-}
 .missionContainer {
     display: grid;
     row-gap: var(--inside-section-gap);
-}
 
-.missionContainer > p {
-    line-height: 1.5;
-    letter-spacing: 0.05rem;
-    font-weight: var(--medium-font-weight);
+    & > p {
+        line-height: 1.5;
+        letter-spacing: 0.05rem;
+        font-weight: var(--medium-font-weight);
+    }
 }
 
 @media screen and (min-width: 90rem) {
     .presentationContainer {
         display: grid;
         grid-template-columns: 1fr 2fr;
-    }
 
-    .presentationContainer > .presentationImage {
-        grid-column: 2;
-        grid-row: 1;
+        & .presentationImage {
+            grid-column: 2;
+            grid-row: 1;
+        }
     }
 
     .imageCardsContainer > .imageCard:hover {
@@ -146,16 +149,16 @@
     }
 
     .spotlightCardsContainer {
-        margin: 0; 
+        margin: 0;
 
         display: grid;
         grid-template-areas:
             '1st-most-recent 2nd-most-recent'
             '3rd-most-recent 4th-most-recent';
-    }
 
-    .spotlightCardsContainer > .card {
-        margin: 0;
+        & > .card {
+            margin: 0;
+        }
     }
 
     .currentTopicsContainer > h2 {
