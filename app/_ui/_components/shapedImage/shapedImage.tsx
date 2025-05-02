@@ -1,21 +1,30 @@
 import Image from 'next/image';
 import styles from './shapedImage.module.css';
-import maskShape from '@public/mask.svg';
+import maskMedium from '@public/mask-medium.svg';
+import maskWide from '@public/mask-wide.svg';
+import maskNarrow from '@public/mask-narrow.svg';
 
 type ShapedImageProps = {
     src: string;
     alt: string;
+    maskShape: 'narrow' | 'medium' | 'wide';
     className?: string;
     ref?: React.Ref<HTMLDivElement>;
 } & React.HTMLAttributes<HTMLElement>;
 
-export default function ShapedImage({ src, alt, className, ref, ...inheritedProps }: ShapedImageProps) {
+const maskShapeMapping = {
+    narrow: { url: maskNarrow.src },
+    medium: { url: maskMedium.src },
+    wide: { url: maskWide.src },
+};
+
+export default function ShapedImage({ src, alt, maskShape, className, ref, ...inheritedProps }: ShapedImageProps) {
     return (
         <div
             {...inheritedProps}
             ref={ref}
             className={`${styles.maskContainer} ${styles.maskProperties} ${className}`}
-            style={{ maskImage: `url(${maskShape.src})` }}
+            style={{ maskImage: `url(${maskShapeMapping[maskShape].url})` }}
         >
             <Image src={src} alt={alt} className={styles.backgroundImage} />
         </div>
