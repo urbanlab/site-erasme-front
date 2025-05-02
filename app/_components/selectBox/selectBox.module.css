@@ -1,0 +1,67 @@
+.trigger {
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+
+    cursor: pointer;
+
+    font: inherit;
+    font-size: var(--button-font-size);
+
+    border: var(--button-border-width) solid var(--secondary-color);
+    border-radius: var(--button-border-radius);
+
+    padding: var(--button-top-bottom-padding) var(--button-left-right-padding);
+
+    &:hover {
+        background-color: var(--accent-color);
+    }
+    &:active {
+        background-color: var(--accent-color);
+    }
+
+    & span {
+        display: flex;
+        align-items: center;
+    }
+
+    &[data-popup-open] {
+        background-color: var(--accent-color);
+        border-color: var(--secondary-color);
+
+        & .chevronIcon {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.popup {
+    background-color: var(--primary-color);
+
+    border-radius: var(--button-border-radius);
+    border: var(--button-border-width) solid var(--secondary-color);
+
+    padding: 0.5rem;
+}
+
+.item {
+    cursor: pointer;
+
+    font: inherit;
+    font-size: var(--button-font-size);
+
+    border: var(--button-border-width) solid transparent;
+    border-radius: var(--button-border-radius);
+
+    padding: var(--button-top-bottom-padding) var(--button-left-right-padding);
+
+    &[data-highlighted] {
+        background-color: var(--accent-color);
+    }
+}
+
+.chevronIcon {
+    height: 36px;
+    width: 36px;
+    transition: transform 0.15s ease-in-out;
+}
