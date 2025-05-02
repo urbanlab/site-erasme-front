@@ -137,3 +137,20 @@ img {
         --main-padding: 80px;
     }
 }
+
+/* Standard Desktop */
+@media screen and (min-width: 90rem) {
+    :root {
+        --default-body-font-size: 1rem;
+        --default-body-line-height: 1.5;
+
+        --section-description-font-size: 2rem;
+
+        --h1-font-size: 4rem;
+        --h2-font-size: 3rem;
+        --h3-font-size: 2.25rem;
+        --h4-font-size: 1.5rem;
+
+        --main-padding: 80px;
+    }
+}

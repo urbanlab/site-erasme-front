@@ -124,7 +124,7 @@
     font-weight: var(--medium-font-weight);
 }
 
-@media screen and (min-width: 120rem) {
+@media screen and (min-width: 90rem) {
     .presentationContainer {
         display: grid;
         grid-template-columns: 1fr 2fr;
