@@ -1,10 +1,10 @@
 'use client';
 
 import { Popover } from '@base-ui-components/react';
-import Backdrop from '@components/backdrop';
-import Button from '@components/button';
-import InputField from '@components/inputField';
-import SelectBox from '@components/selectBox';
+import Backdrop from '@ui/elements/backdrop';
+import Button from '@ui/elements/button';
+import InputField from '@ui/elements/inputField';
+import SelectBox from '@ui/elements/selectBox';
 import burgerMenuIcon from '@public/burger-menu-icon.svg';
 import closeButtonIcon from '@public/close-button-icon.svg';
 import emailIcon from '@public/email-icon.svg';

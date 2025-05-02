@@ -1,6 +1,6 @@
 'use client';
 
-import Backdrop from '@components/backdrop';
+import Backdrop from '@ui/elements/backdrop';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import Navbar from './navbar';

@@ -1,5 +1,5 @@
-import Footer from '@components/footer';
-import NavbarWrapper from '@components/navbarWrapper';
+import Footer from '@ui/components/footer';
+import NavbarWrapper from '@ui/components/navbarWrapper';
 import '@styles/globals.css';
 import type { Metadata } from 'next';
 import { K2D } from 'next/font/google';

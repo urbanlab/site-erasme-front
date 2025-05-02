@@ -1,4 +1,4 @@
-import Arrow from '@components/arrow';
+import Arrow from '@ui/elements/arrow';
 import styles from './card.module.css';
 
 type CardProps = {

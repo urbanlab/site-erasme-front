@@ -1,4 +1,4 @@
-import Arrow from '@components/arrow';
+import Arrow from '@ui/elements/arrow';
 import styles from './imageCard.module.css';
 import Image from 'next/image';
 

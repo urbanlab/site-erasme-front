@@ -1,11 +1,11 @@
 // import Image from 'next/image';
-import ShapedImage from '@components/shapedImage';
+import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
-import Button from '@components/button';
+import Button from '@ui/elements/button';
 import heroImage from '@public/hero-img.svg';
-import Card from '@components/card';
-import List from '@components/list';
-import ImageCard from '@components/imageCard';
+import Card from '@ui/components/card';
+import List from '@ui/elements/list';
+import ImageCard from '@ui/components/imageCard';
 
 const pageTexts = {
     presentationSection: {

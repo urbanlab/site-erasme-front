@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from './list.module.css';
-import Arrow from '@components/arrow';
+import Arrow from '@ui/elements/arrow';
 
 type rowProps = {
     title: string;
