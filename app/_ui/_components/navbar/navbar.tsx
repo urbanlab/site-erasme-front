@@ -1,19 +1,20 @@
 'use client';
 
-import { Popover } from '@base-ui-components/react';
-import Backdrop from '@ui/elements/backdrop';
-import Button from '@ui/elements/button';
-import InputField from '@ui/elements/inputField';
-import SelectBox from '@ui/elements/selectBox';
+import { Menu, Popover } from '@base-ui-components/react';
 import burgerMenuIcon from '@public/burger-menu-icon.svg';
 import closeButtonIcon from '@public/close-button-icon.svg';
 import emailIcon from '@public/email-icon.svg';
 import erasmeLogo from '@public/erasme-logo.svg';
 import searchIcon from '@public/search-icon.svg';
+import Backdrop from '@ui/elements/backdrop';
+import Button from '@ui/elements/button';
+import InputField from '@ui/elements/inputField';
+import SelectBox from '@ui/elements/selectBox';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
 import styles from './navbar.module.css';
+
 
 const headerLinks = [
     {
@@ -60,9 +61,10 @@ const typeFilters = [
 type NavbarProps = {
     isSearchMode?: boolean;
     handleSearchMode: () => void;
+    handleNavigation: () => void;
 };
 
-export default function Navbar({ isSearchMode, handleSearchMode }: NavbarProps) {
+export default function Navbar({ isSearchMode, handleSearchMode, handleNavigation }: NavbarProps) {
     /**
      * TODO:
      * - Implement forms for search filters
@@ -74,17 +76,15 @@ export default function Navbar({ isSearchMode, handleSearchMode }: NavbarProps) 
     const mainDivRef = useRef<HTMLDivElement>(null);
     const searchInputRef = useRef<HTMLInputElement>(null);
 
-    const onBurgerMenuClick = () => {
-        console.log('burger menu clicked');
-    };
-
     return (
         <>
             <div
                 ref={mainDivRef}
                 className={`${styles.mainContainer} ${styles.positioning} ${styles.zIndex} ${styles.localVariables}`}
             >
-                <Image src={erasmeLogo} alt="Logo Erasme" className={styles.erasmeLogo} />
+                <Link href="/" onNavigate={handleNavigation}>
+                    <Image src={erasmeLogo} alt="Logo Erasme" className={styles.erasmeLogo} />
+                </Link>
 
                 {/* SMALL SCREENS ONLY */}
                 <div className={styles.smallScreenContainer}>
@@ -93,7 +93,7 @@ export default function Navbar({ isSearchMode, handleSearchMode }: NavbarProps) 
                     </Button>
 
                     {/* SEARCH MENU */}
-                    <Popover.Root onOpenChange={onBurgerMenuClick} modal={true}>
+                    <Popover.Root modal={true}>
                         <Popover.Trigger
                             render={
                                 <Button variant="text">
@@ -118,10 +118,7 @@ export default function Navbar({ isSearchMode, handleSearchMode }: NavbarProps) 
                                     <InputField type="text" autoFocus className={styles.searchInput} />
 
                                     {/* SEARCH FILTER */}
-                                    <SelectBox
-                                        className={{ trigger: styles.filterButton }}
-                                        items={typeFilters}
-                                    />
+                                    <SelectBox className={{ trigger: styles.filterButton }} items={typeFilters} />
 
                                     <Button variant="filled" className={styles.searchButton}>
                                         Rechercher
@@ -134,21 +131,21 @@ export default function Navbar({ isSearchMode, handleSearchMode }: NavbarProps) 
                     </Popover.Root>
 
                     {/* BURGER MENU */}
-                    <Popover.Root onOpenChange={onBurgerMenuClick} modal={true}>
-                        <Popover.Trigger
+                    <Menu.Root modal={true}>
+                        <Menu.Trigger
                             render={
                                 <Button variant="filled">
                                     <Image src={burgerMenuIcon} alt="links"></Image>
                                 </Button>
                             }
                         />
-                        <Popover.Portal>
-                            <Popover.Backdrop render={<Backdrop />} />
-                            <Popover.Positioner anchor={mainDivRef.current} align="start" side="bottom">
-                                <Popover.Popup
+                        <Menu.Portal>
+                            <Menu.Backdrop render={<Backdrop />} />
+                            <Menu.Positioner anchor={mainDivRef.current} align="start" side="bottom">
+                                <Menu.Popup
                                     className={`${styles.localVariables} ${styles.overlayContainer} ${styles.burgerMenuContainer}`}
                                 >
-                                    <Popover.Close
+                                    <Menu.Item
                                         render={
                                             <Button variant="text">
                                                 <Image src={closeButtonIcon} alt="close menu"></Image>
@@ -157,14 +154,19 @@ export default function Navbar({ isSearchMode, handleSearchMode }: NavbarProps) 
                                     />
 
                                     {headerLinks.map((link, index) => (
-                                        <Link href={link.href} key={index}>
-                                            <Button variant="text">{link.label}</Button>
-                                        </Link>
+                                        <Menu.Item
+                                            key={index}
+                                            render={
+                                                <Link href={link.href}>
+                                                    <Button variant="text">{link.label}</Button>
+                                                </Link>
+                                            }
+                                        />
                                     ))}
-                                </Popover.Popup>
-                            </Popover.Positioner>
-                        </Popover.Portal>
-                    </Popover.Root>
+                                </Menu.Popup>
+                            </Menu.Positioner>
+                        </Menu.Portal>
+                    </Menu.Root>
                 </div>
 
                 {/* BIG SCREENS ONLY */}
@@ -206,7 +208,7 @@ export default function Navbar({ isSearchMode, handleSearchMode }: NavbarProps) 
                         <>
                             <div className={styles.secondaryContainer}>
                                 {headerLinks.map((link, index) => (
-                                    <Link href={link.href} key={index}>
+                                    <Link href={link.href} key={index} onNavigate={handleNavigation}>
                                         <Button variant="text">{link.label}</Button>
                                     </Link>
                                 ))}
