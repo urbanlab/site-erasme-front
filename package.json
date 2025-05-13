@@ -7,9 +7,12 @@
     "docker-dev": "docker build -t site-erasme-front:dev . && docker run -p 3000:3000 site-erasme-front:dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
+    "@apollo/client": "^3.13.8",
+    "@apollo/client-integration-nextjs": "^0.12.2",
     "@base-ui-components/react": "^1.0.0-alpha.8",
     "next": "^15.3.1",
     "prettier": "^3.5.3",
@@ -18,6 +21,8 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@graphql-codegen/cli": "^5.0.6",
+    "@graphql-codegen/client-preset": "^4.8.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

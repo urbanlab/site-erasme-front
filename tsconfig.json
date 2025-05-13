@@ -34,6 +34,7 @@
       "@ui/components/shapedImage": ["_ui/_components/shapedImage/shapedImage.tsx"],
       "@ui/components/card": ["_ui/_components/card/card.tsx"],
       "@ui/components/imageCard": ["_ui/_components/imageCard/imageCard.tsx"],
+      "@graphql/*": ["_graphql/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
