@@ -2,8 +2,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    right: -1;
-    bottom: -1;
+    right: 0;
+    bottom: 0;
     background-color: var(--inactive-background-color);
     isolation: isolate;
 }
