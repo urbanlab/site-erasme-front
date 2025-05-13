@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 
 const k2d = K2D({
     weight: ['400', '500', '600', '700'],
+    subsets: ['latin', 'latin-ext'],
 });
 
 export default function RootLayout({
