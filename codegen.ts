@@ -1,7 +1,8 @@
 import { CodegenConfig } from '@graphql-codegen/cli';
+import './loadEnvConfig';
 
 const config: CodegenConfig = {
-    schema: 'http://localhost:8880/spip.php?action=graphql', //TODO: add to env
+    schema: process.env.GRAPHQL_ENDPOINT,
     documents: ['**/queries.tsx'],
     generates: {
         'app/_graphql/__generated__/': {

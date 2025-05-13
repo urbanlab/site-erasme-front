@@ -6,7 +6,7 @@ export const { getClient, query, PreloadQuery } = registerApolloClient(() => {
         cache: new InMemoryCache(),
         link: new HttpLink({
             // this needs to be an absolute url, as relative urls cannot be used in SSR
-            uri: 'http://localhost:8880/spip.php?action=graphql', //TODO: pass as env variable
+            uri: process.env.GRAPHQL_ENDPOINT,
             fetchOptions: {
                 // you can pass additional options that should be passed to `fetch` here,
                 // e.g. Next.js-related `fetch` options regarding caching and revalidation
