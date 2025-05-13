@@ -24,11 +24,11 @@ export default function NavbarWrapper() {
         <>
             <Navbar
                 isSearchMode={isSearchMode}
-                handleSearchMode={() => setIsSearchMode(previsSearchMode => !previsSearchMode)}
+                handleSearchMode={() => setIsSearchMode(previousSearchMode => !previousSearchMode)}
                 handleNavigation={() => setIsSearchMode(false)}
             />
 
-            {isSearchMode && createPortal(<Backdrop onClick={() => setIsSearchMode(previsSearchMode => !previsSearchMode)} />, document.body)}
+            {isSearchMode && createPortal(<Backdrop onClick={() => setIsSearchMode(previousSearchMode => !previousSearchMode)} />, document.body)}
         </>
     );
 }
