@@ -9,6 +9,8 @@ type ShapedImageProps = {
     alt: string;
     maskShape: 'narrow' | 'medium' | 'wide';
     className?: string;
+    width?: number;
+    height?: number;
     ref?: React.Ref<HTMLDivElement>;
 } & React.HTMLAttributes<HTMLElement>;
 
@@ -18,7 +20,16 @@ const maskShapeMapping = {
     wide: { url: maskWide.src },
 };
 
-export default function ShapedImage({ src, alt, maskShape, className, ref, ...inheritedProps }: ShapedImageProps) {
+export default function ShapedImage({
+    src,
+    alt,
+    maskShape,
+    width,
+    height,
+    className,
+    ref,
+    ...inheritedProps
+}: ShapedImageProps) {
     return (
         <div
             {...inheritedProps}
@@ -26,7 +37,7 @@ export default function ShapedImage({ src, alt, maskShape, className, ref, ...in
             className={`${styles.maskContainer} ${styles.maskProperties} ${className}`}
             style={{ maskImage: `url(${maskShapeMapping[maskShape].url})` }}
         >
-            <Image src={src} alt={alt} className={styles.backgroundImage} />
+            <Image src={src} alt={alt} className={styles.backgroundImage} width={width} height={height} />
         </div>
     );
 }
