@@ -3,7 +3,7 @@ import './loadEnvConfig';
 
 const config: CodegenConfig = {
     schema: process.env.GRAPHQL_ENDPOINT,
-    documents: ['**/queries.tsx'],
+    documents: ['**/queries.ts'],
     generates: {
         'app/_graphql/__generated__/': {
             preset: 'client',
