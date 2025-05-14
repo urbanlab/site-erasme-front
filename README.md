@@ -45,12 +45,23 @@ The application uses color filters on svgs icons to easily change their colors. 
 
 The filters were generated with: [filter generator](https://isotropic.co/tool/hex-color-to-css-filter/) 
 
+## GraphQL
+
+### Apollo Client
+! If you are running the backend in local (localhost) and you want to build a docker image for the frontend (that will query the local backend graphql endpoint), you need to define the host part of the GRAPHQL_ENPOINT variable in .env file with your internal network IP address (`192.168.*.*`). `localhost` WON'T WORK WITH APOLLO CLIENT.
+On Linux, You can find your IP address using the following command in the terminal:
+
+```bash
+ip -4 addr show | grep -oP '(?<=inet\s)192\.168\.\d+\.\d+'
+```
+
 
 ## Usefull vscode extensions
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [CSS Nesting Syntax Highlighting](https://marketplace.visualstudio.com/items/?itemName=jacobcassidy.css-nesting-syntax-highlighting)
 - [Color Highlight](https://marketplace.visualstudio.com/items/?itemName=naumovs.color-highlight)
+- [GraphQL: Syntax Highlighting](https://marketplace.visualstudio.com/items/?itemName=GraphQL.vscode-graphql-syntax)
 
 ## Developpers
 - [@vbaroni](https://github.com/vbaroni)
