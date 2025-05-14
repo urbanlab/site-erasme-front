@@ -1,29 +1,39 @@
+import { query } from '@graphql/apolloClient';
+import { RUBRIQUE_PRESENTATION } from '@graphql/queries';
+import heroImage from '@public/hero-img.svg';
+import RemoteHtml from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
-import heroImage from '@public/hero-img.svg';
 
-const pageTexts = {
-    presentationSection: {
-        title: 'PROJETS',
-        description:
-            'Vous trouverez ici les programmes et projets conduits par Erasme, avec ses partenaires, visant à la production de communs  : méthodologies, outils, usages. Accédez aux actualités, ressources et réflexions pour vous documenter, et participer.',
-    },
-};
+export default async function Projets() {
+    const { data } = await query({
+        query: RUBRIQUE_PRESENTATION,
+        variables: { id: parseInt(process.env.SPIP_RUBRIQUES_PROJETS_ID ?? '') },
+    });
 
-
-export default function Projets() {
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
             {/* PRESENTATION SECTION */}
             <div className={styles.presentationContainer}>
-                <ShapedImage src={heroImage} alt="" maskShape='narrow' className={styles.presentationImage} />
+                <ShapedImage
+                    src={data.getRubrique?.logo ?? heroImage}
+                    alt=""
+                    maskShape="narrow"
+                    className={styles.presentationImage}
+                    width={1920} //TODO: get value from API
+                    height={621} //TODO: get value from API
+                />
                 <div className={styles.presentationTextContainer}>
-                    <h1>{pageTexts.presentationSection.title}</h1>
-                    <h5>{pageTexts.presentationSection.description}</h5>
+                    <h1>{data?.getRubrique?.titre}</h1>
+                    {data?.getRubrique?.texte && (
+                        <h5>
+                            <RemoteHtml html={data.getRubrique.texte} />
+                        </h5>
+                    )}
                 </div>
             </div>
-        </div>
 
-        
+            <div className={styles.contentContainer}></div>
+        </div>
     );
 }
