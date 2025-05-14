@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="fr" className={k2d.className}>
-            <body>
+            <body className={styles.bodyWrapper}>
                 <NavbarWrapper />
                 <div className={styles.contentContainer}>{children}</div>
                 <Footer />

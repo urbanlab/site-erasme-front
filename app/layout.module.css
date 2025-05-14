@@ -1,4 +1,11 @@
-.contentContainer{
+.bodyWrapper {
+    min-height: 100vh; /* fallback */
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+.contentContainer {
     padding-left: var(--main-padding);
     padding-right: var(--main-padding);
 
