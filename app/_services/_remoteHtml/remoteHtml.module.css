@@ -1,4 +1,8 @@
 .remoteHtml {
+    & * {
+        all: inherit;
+    }
+
     iframe {
         max-width: 100%;
     }
