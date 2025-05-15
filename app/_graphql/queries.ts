@@ -16,8 +16,29 @@ const RUBRIQUE_PRESENTATION = gql(`
             titre
             texte
             logo
+        }
     }
-  }
 `);
 
-export { ARTICLE, RUBRIQUE_PRESENTATION };
+const LIST_PROJETS = gql(`
+    query ListProjets($where: String!, $pagination: Int = 10, $page: Int = 1) {
+        rubriques(where: [$where], pagination: $pagination, page: $page) {
+            result {
+                id
+                titre
+                texte
+
+                articles {
+                    result {
+                        id
+                        titre
+                        date
+                        date_modif
+                    }
+                }
+            }
+        }
+    }
+`);
+
+export { ARTICLE, RUBRIQUE_PRESENTATION, LIST_PROJETS };

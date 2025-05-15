@@ -15,11 +15,13 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 type Documents = {
     "\n    query Article($id: Int!) {\n        getArticle(id: $id) {\n            id\n            titre\n            slug\n        }\n    }\n": typeof types.ArticleDocument,
-    "\n    query RubriquePresentation($id: Int!) {\n        getRubrique(id: $id) {\n            titre\n            texte\n            logo\n    }\n  }\n": typeof types.RubriquePresentationDocument,
+    "\n    query RubriquePresentation($id: Int!) {\n        getRubrique(id: $id) {\n            titre\n            texte\n            logo\n        }\n    }\n": typeof types.RubriquePresentationDocument,
+    "\n    query ListProjets($where: String!, $pagination: Int = 10, $page: Int = 1) {\n        rubriques(where: [$where], pagination: $pagination, page: $page) {\n            result {\n                id\n                titre\n                texte\n\n                articles {\n                    result {\n                        id\n                        titre\n                        date\n                        date_modif\n                    }\n                }\n            }\n        }\n    }\n": typeof types.ListProjetsDocument,
 };
 const documents: Documents = {
     "\n    query Article($id: Int!) {\n        getArticle(id: $id) {\n            id\n            titre\n            slug\n        }\n    }\n": types.ArticleDocument,
-    "\n    query RubriquePresentation($id: Int!) {\n        getRubrique(id: $id) {\n            titre\n            texte\n            logo\n    }\n  }\n": types.RubriquePresentationDocument,
+    "\n    query RubriquePresentation($id: Int!) {\n        getRubrique(id: $id) {\n            titre\n            texte\n            logo\n        }\n    }\n": types.RubriquePresentationDocument,
+    "\n    query ListProjets($where: String!, $pagination: Int = 10, $page: Int = 1) {\n        rubriques(where: [$where], pagination: $pagination, page: $page) {\n            result {\n                id\n                titre\n                texte\n\n                articles {\n                    result {\n                        id\n                        titre\n                        date\n                        date_modif\n                    }\n                }\n            }\n        }\n    }\n": types.ListProjetsDocument,
 };
 
 /**
@@ -43,7 +45,11 @@ export function gql(source: "\n    query Article($id: Int!) {\n        getArticl
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n    query RubriquePresentation($id: Int!) {\n        getRubrique(id: $id) {\n            titre\n            texte\n            logo\n    }\n  }\n"): (typeof documents)["\n    query RubriquePresentation($id: Int!) {\n        getRubrique(id: $id) {\n            titre\n            texte\n            logo\n    }\n  }\n"];
+export function gql(source: "\n    query RubriquePresentation($id: Int!) {\n        getRubrique(id: $id) {\n            titre\n            texte\n            logo\n        }\n    }\n"): (typeof documents)["\n    query RubriquePresentation($id: Int!) {\n        getRubrique(id: $id) {\n            titre\n            texte\n            logo\n        }\n    }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n    query ListProjets($where: String!, $pagination: Int = 10, $page: Int = 1) {\n        rubriques(where: [$where], pagination: $pagination, page: $page) {\n            result {\n                id\n                titre\n                texte\n\n                articles {\n                    result {\n                        id\n                        titre\n                        date\n                        date_modif\n                    }\n                }\n            }\n        }\n    }\n"): (typeof documents)["\n    query ListProjets($where: String!, $pagination: Int = 10, $page: Int = 1) {\n        rubriques(where: [$where], pagination: $pagination, page: $page) {\n            result {\n                id\n                titre\n                texte\n\n                articles {\n                    result {\n                        id\n                        titre\n                        date\n                        date_modif\n                    }\n                }\n            }\n        }\n    }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
