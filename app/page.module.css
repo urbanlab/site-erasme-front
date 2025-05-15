@@ -1,32 +1,32 @@
 .localVariables {
-    --section-gap: 42px;
-    --inside-section-gap: 24px;
+    --gap-section: 42px;
+    --gap-inside-section: 24px;
 }
 
 .mainContainer {
     display: grid;
     grid-template-columns: 1fr;
-    row-gap: var(--section-gap);
-    margin-bottom: var(--section-gap);
+    row-gap: var(--gap-section);
+    margin-bottom: var(--gap-section);
 }
 
 .presentationContainer {
     display: grid;
-    gap: var(--inside-section-gap);
+    gap: var(--gap-inside-section);
 
     & > .presentationTextContainer {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        row-gap: calc(var(--inside-section-gap) / 2);
+        row-gap: calc(var(--gap-inside-section) / 2);
     }
 }
 
 .currentTopicsContainer {
     display: grid;
-    gap: var(--inside-section-gap);
+    gap: var(--gap-inside-section);
 
-    margin-top: calc(var(--section-gap) * -0.5);
+    margin-top: calc(var(--gap-section) * -0.5);
 
     & > h2 {
         text-align: end;
@@ -35,7 +35,7 @@
 
 .cardsContainer {
     display: grid;
-    gap: var(--inside-section-gap);
+    gap: var(--gap-inside-section);
 }
 
 .spotlightCardsContainer {
@@ -43,14 +43,14 @@
     gap: 10px;
     overflow-x: scroll;
     scrollbar-width: none;
-    margin-left: calc(var(--main-padding) * -1);
-    margin-right: calc(var(--main-padding) * -1);
+    margin-left: calc(var(--padding-main) * -1);
+    margin-right: calc(var(--padding-main) * -1);
 
     & > :first-child {
-        margin-left: var(--main-padding);
+        margin-left: var(--padding-main);
     }
     & > :last-child {
-        margin-right: var(--main-padding);
+        margin-right: var(--padding-main);
     }
 }
 
@@ -66,7 +66,7 @@
 
 .programsContainer {
     display: grid;
-    row-gap: var(--inside-section-gap);
+    row-gap: var(--gap-inside-section);
 }
 
 .imageCardsContainer {
@@ -76,14 +76,14 @@
     overflow-x: scroll;
     scrollbar-width: none;
 
-    margin-left: calc(var(--main-padding) * -1);
-    margin-right: calc(var(--main-padding) * -1);
+    margin-left: calc(var(--padding-main) * -1);
+    margin-right: calc(var(--padding-main) * -1);
 
     & > :first-child {
-        margin-left: var(--main-padding);
+        margin-left: var(--padding-main);
     }
     & > :last-child {
-        margin-right: var(--main-padding);
+        margin-right: var(--padding-main);
     }
 
     & > .imageCard {
@@ -98,32 +98,32 @@
 
 .servicesContainer {
     display: grid;
-    gap: var(--inside-section-gap);
+    gap: var(--gap-inside-section);
 
-    background: var(--primary-color);
+    background: var(--color-primary);
 
-    margin-left: calc(var(--main-padding) * -1);
-    margin-right: calc(var(--main-padding) * -1);
-    padding: var(--inside-section-gap) var(--main-padding);
+    margin-left: calc(var(--padding-main) * -1);
+    margin-right: calc(var(--padding-main) * -1);
+    padding: var(--gap-inside-section) var(--padding-main);
 
     & > .tagsContainer {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: var(--inside-section-gap);
+        gap: var(--gap-inside-section);
 
-        margin-bottom: var(--inside-section-gap);
+        margin-bottom: var(--gap-inside-section);
     }
 }
 
 .missionContainer {
     display: grid;
-    row-gap: var(--inside-section-gap);
+    row-gap: var(--gap-inside-section);
 
     & > p {
         line-height: 1.5;
         letter-spacing: 0.05rem;
-        font-weight: var(--medium-font-weight);
+        font-weight: var(--font-weight-medium);
     }
 }
 

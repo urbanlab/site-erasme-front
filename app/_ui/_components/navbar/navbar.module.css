@@ -1,17 +1,17 @@
 .localVariables {
-    --common-border-width: 2px;
-    --common-border: var(--common-border-width) solid var(--black);
+    --border-width-common: 2px;
+    --border-common: var(--border-width-common) solid var(--black);
     --border-radius: 0.5rem;
 
     --navbar-padding-top-bottom: 0.3125rem;
     --navbar-padding-left-right: 1rem;
     --navbar-padding: var(--navbar-padding-top-bottom) var(--navbar-padding-left-right);
 
-    --erasme-logo-height: 1.5rem;
+    --height-logo-erasme: 1.5rem;
 
     --button-icon-size: 1.25rem;
 
-    --overlay-padding: var(--main-padding);
+    --overlay-padding: var(--padding-main);
 }
 
 .zIndex {
@@ -25,16 +25,16 @@
 
     background: var(--white);
 
-    border-bottom: var(--common-border);
+    border-bottom: var(--border-common);
     border-radius: var(--border-radius);
 
     padding: var(--navbar-padding);
 }
 
 .overlayContainer {
-    background: var(--primary-color);
+    background: var(--color-primary);
 
-    border: var(--common-border);
+    border: var(--border-common);
     border-radius: var(--border-radius);
 
     padding: var(--overlay-padding);
@@ -61,7 +61,7 @@
 }
 
 .erasmeLogo {
-    height: var(--erasme-logo-height);
+    height: var(--height-logo-erasme);
     width: auto;
 }
 
@@ -136,9 +136,9 @@
         --navbar-padding-left-right: 1.5rem;
 
         --margin-top: 3.125rem;
-        --margin: var(--margin-top) var(--main-padding) 0 var(--main-padding);
+        --margin: var(--margin-top) var(--padding-main) 0 var(--padding-main);
 
-        --erasme-logo-height: 3.1875rem;
+        --height-logo-erasme: 3.1875rem;
         --button-icon-size: 1.3rem;
 
         --overlay-padding: 2.5rem 4.375rem;
@@ -149,7 +149,7 @@
     }
 
     .mainContainer {
-        border: var(--common-border);
+        border: var(--border-common);
         margin: var(--margin);
     }
 

@@ -4,6 +4,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--inactive-background-color);
+    background-color: var(--color-inactive-background);
     isolation: isolate;
 }

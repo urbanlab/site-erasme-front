@@ -8,16 +8,16 @@
     font: inherit;
     font-size: var(--button-font-size);
 
-    border: var(--button-border-width) solid var(--secondary-color);
+    border: var(--button-border-width) solid var(--color-secondary);
     border-radius: var(--button-border-radius);
 
     padding: var(--button-top-bottom-padding) var(--button-left-right-padding);
 
     &:hover {
-        background-color: var(--accent-color);
+        background-color: var(--color-accent);
     }
     &:active {
-        background-color: var(--accent-color);
+        background-color: var(--color-accent);
     }
 
     & span {
@@ -26,8 +26,8 @@
     }
 
     &[data-popup-open] {
-        background-color: var(--accent-color);
-        border-color: var(--secondary-color);
+        background-color: var(--color-accent);
+        border-color: var(--color-secondary);
 
         & .chevronIcon {
             transform: rotate(180deg);
@@ -36,10 +36,10 @@
 }
 
 .popup {
-    background-color: var(--primary-color);
+    background-color: var(--color-primary);
 
     border-radius: var(--button-border-radius);
-    border: var(--button-border-width) solid var(--secondary-color);
+    border: var(--button-border-width) solid var(--color-secondary);
 
     padding: 0.5rem;
 }
@@ -56,7 +56,7 @@
     padding: var(--button-top-bottom-padding) var(--button-left-right-padding);
 
     &[data-highlighted] {
-        background-color: var(--accent-color);
+        background-color: var(--color-accent);
     }
 }
 

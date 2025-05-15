@@ -1,25 +1,25 @@
 .localVariables {
-    --section-gap: 42px;
-    --inside-section-gap: 24px;
+    --gap-section: 42px;
+    --gap-inside-section: 24px;
 }
 
 .mainContainer {
     display: grid;
     grid-template-columns: 1fr;
-    row-gap: var(--section-gap);
+    row-gap: var(--gap-section);
 
-    margin-bottom: var(--section-gap);
+    margin-bottom: var(--gap-section);
 }
 
 .presentationContainer {
     display: grid;
-    gap: var(--inside-section-gap);
+    gap: var(--gap-inside-section);
 
     & > .presentationTextContainer {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        row-gap: calc(var(--inside-section-gap) / 2);
+        row-gap: calc(var(--gap-inside-section) / 2);
     }
 }
 

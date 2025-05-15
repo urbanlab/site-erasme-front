@@ -5,10 +5,10 @@
     --black: #000000;
     --black-20-opacity: #00000033;
 
-    --regular-font-weight: 400; /* regular */
-    --medium-font-weight: 500; /* medium */
-    --semi-bold-font-weight: 600; /* semi-bold */
-    --bold-font-weight: 700; /* bold */
+    --font-weight-regular: 400; /* regular */
+    --font-weight-medium: 500; /* medium */
+    --font-weight-semi-bold: 600; /* semi-bold */
+    --font-weight-bold: 700; /* bold */
 
     /* see README for more information on the filters */
     --svg-filter-black-to-white: invert(100%) sepia(0%) saturate(2%) hue-rotate(83deg) brightness(110%) contrast(101%);
@@ -16,32 +16,32 @@
         contrast(103%);
 
     /* TODO: Add in a theme in the future !? */
-    --primary-color: var(--white);
-    --secondary-color: var(--black);
-    --accent-color: var(--tonic);
-    --background-color: var(--off-white);
-    --inactive-background-color: var(--black-20-opacity);
+    --color-primary: var(--white);
+    --color-secondary: var(--black);
+    --color-accent: var(--tonic);
+    --color-background: var(--off-white);
+    --color-inactive-background: var(--black-20-opacity);
 
-    --default-body-font-size: 1rem;
-    --default-body-line-height: 1.25;
-    --default-body-font-weight: var(--regular-font-weight);
+    --font-size-default-body: 1rem;
+    --line-height-default-body: 1.25;
+    --font-weight-default-body: var(--font-weight-regular);
 
-    --section-description-font-size: 1.125rem;
-    --section-description-line-height: 1.5;
-    --section-description-font-weight: var(--medium-font-weight);
+    --font-size-section-description: 1.125rem;
+    --line-height-section-description: 1.5;
+    --font-weight-section-description: var(--font-weight-medium);
 
-    --h1-font-size: 1.75rem;
-    --h2-font-size: 1.5rem;
-    --h3-font-size: 1.25rem;
-    --h4-font-size: 1.125rem;
+    --font-size-h1: 1.75rem;
+    --font-size-h2: 1.5rem;
+    --font-size-h3: 1.25rem;
+    --font-size-h4: 1.125rem;
+
+    --padding-main: 16px;
 
     --button-font-size: 1.25rem;
     --button-top-bottom-padding: 0.625rem;
     --button-left-right-padding: 1.25rem;
     --button-border-radius: 1.25rem;
     --button-border-width: 2px;
-
-    --main-padding: 16px;
 }
 
 * {
@@ -60,45 +60,45 @@ html {
 }
 
 body {
-    background: var(--background-color);
+    background: var(--color-background);
     margin: 0;
 }
 
 p {
-    font-size: var(--default-body-font-size);
-    line-height: var(--default-body-line-height);
-    font-weight: var(--default-body-font-weight);
+    font-size: var(--font-size-default-body);
+    line-height: var(--line-height-default-body);
+    font-weight: var(--font-weight-default-body);
 }
 
 h5 {
-    font-size: var(--section-description-font-size);
-    line-height: var(--section-description-line-height);
-    font-weight: var(--section-description-font-weight);
+    font-size: var(--font-size-section-description);
+    line-height: var(--line-height-section-description);
+    font-weight: var(--font-weight-section-description);
 }
 
 h1,
 h2,
 h3,
 h4 {
-    font-weight: var(--bold-font-weight);
+    font-weight: var(--font-weight-bold);
     margin: 0;
 }
 
 h1 {
-    font-size: var(--h1-font-size);
+    font-size: var(--font-size-h1);
     text-transform: uppercase;
 }
 
 h2 {
-    font-size: var(--h2-font-size);
+    font-size: var(--font-size-h2);
 }
 
 h3 {
-    font-size: var(--h3-font-size);
+    font-size: var(--font-size-h3);
 }
 
 h4 {
-    font-size: var(--h4-font-size);
+    font-size: var(--font-size-h4);
 }
 
 ul,
@@ -125,33 +125,33 @@ img {
 /* Large  Desktop */
 @media screen and (min-width: 120rem) {
     :root {
-        --default-body-font-size: 1.125rem;
-        --default-body-line-height: 1.5;
+        --font-size-default-body: 1.125rem;
+        --line-height-default-body: 1.5;
 
-        --section-description-font-size: 2rem;
+        --font-size-section-description: 2rem;
 
-        --h1-font-size: 5rem;
-        --h2-font-size: 3.75rem;
-        --h3-font-size: 3rem;
-        --h4-font-size: 2rem;
+        --font-size-h1: 5rem;
+        --font-size-h2: 3.75rem;
+        --font-size-h3: 3rem;
+        --font-size-h4: 2rem;
 
-        --main-padding: 80px;
+        --padding-main: 80px;
     }
 }
 
 /* Standard Desktop */
 @media screen and (min-width: 90rem) {
     :root {
-        --default-body-font-size: 1rem;
-        --default-body-line-height: 1.5;
+        --font-size-default-body: 1rem;
+        --line-height-default-body: 1.5;
 
-        --section-description-font-size: 2rem;
+        --font-size-section-description: 2rem;
 
-        --h1-font-size: 4rem;
-        --h2-font-size: 3rem;
-        --h3-font-size: 2.25rem;
-        --h4-font-size: 1.5rem;
+        --font-size-h1: 4rem;
+        --font-size-h2: 3rem;
+        --font-size-h3: 2.25rem;
+        --font-size-h4: 1.5rem;
 
-        --main-padding: 80px;
+        --padding-main: 80px;
     }
 }

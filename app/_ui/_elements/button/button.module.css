@@ -9,31 +9,31 @@
     font-size: var(--button-font-size);
 
     &:hover {
-        background-color: var(--accent-color);
+        background-color: var(--color-accent);
     }
     &:active {
-        background-color: var(--accent-color);
+        background-color: var(--color-accent);
     }
 }
 .button[data-popup-open] {
-    background-color: var(--accent-color);
-    border-color: var(--secondary-color);
+    background-color: var(--color-accent);
+    border-color: var(--color-secondary);
 }
 
 .ghost {
     background: transparent;
-    color: var(--secondary-color);
-    border-color: var(--secondary-color);
+    color: var(--color-secondary);
+    border-color: var(--color-secondary);
 }
 
 .text {
     background: transparent;
-    color: var(--secondary-color);
+    color: var(--color-secondary);
 }
 
 .filled {
-    background: var(--secondary-color);
-    color: var(--primary-color);
+    background: var(--color-secondary);
+    color: var(--color-primary);
 
     & > img {
         filter: var(--svg-filter-black-to-white);

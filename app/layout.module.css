@@ -6,10 +6,10 @@
 }
 
 .contentContainer {
-    padding-left: var(--main-padding);
-    padding-right: var(--main-padding);
+    padding-left: var(--padding-main);
+    padding-right: var(--padding-main);
 
-    margin-top: var(--main-padding);
+    margin-top: var(--padding-main);
 
     isolation: isolate;
 }
