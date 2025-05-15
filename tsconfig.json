@@ -36,6 +36,7 @@
       "@ui/components/imageCard": ["_ui/_components/imageCard/imageCard.tsx"],
       "@graphql/*": ["_graphql/*"],
       "@services/remoteHtml": ["_services/_remoteHtml/remoteHtml.tsx"],
+      "@services/apollo/*": ["_services/_apollo/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
