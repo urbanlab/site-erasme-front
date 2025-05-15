@@ -48,12 +48,14 @@ The filters were generated with: [filter generator](https://isotropic.co/tool/he
 ## GraphQL
 
 ### Apollo Client
-! If you are running the backend in local (localhost) and you want to build a docker image for the frontend (that will query the local backend graphql endpoint), you need to define the host part of the GRAPHQL_ENPOINT variable in .env file with your internal network IP address (`192.168.*.*`). `localhost` WON'T WORK WITH APOLLO CLIENT.
+! If you are running the backend in local (localhost) and you want to build a **docker** image for the frontend (that will query the local backend graphql endpoint), you need to define the host part of the GRAPHQL_ENPOINT variable in .env file with your internal network IP address (`192.168.*.*`). `localhost` WON'T WORK WITH APOLLO CLIENT.
 On Linux, You can find your IP address using the following command in the terminal:
 
 ```bash
 ip -4 addr show | grep -oP '(?<=inet\s)192\.168\.\d+\.\d+'
 ```
+
+HOWEVER, If you do **not** use docker (i.e you use turbopack to run the application in local), you must use `localhost` as the host part of the GRAPHQL_ENPOINT variable in .env
 
 
 ## Usefull vscode extensions
