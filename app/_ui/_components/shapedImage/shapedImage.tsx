@@ -1,31 +1,30 @@
-import Image from 'next/image';
-import styles from './shapedImage.module.css';
 import maskMedium from '@public/mask-medium.svg';
-import maskWide from '@public/mask-wide.svg';
 import maskNarrow from '@public/mask-narrow.svg';
+import maskWide from '@public/mask-wide.svg';
+import Image from 'next/image';
+
+type MaskShapeType = 'narrow' | 'medium' | 'wide';
 
 type ShapedImageProps = {
     src: string;
     alt: string;
-    maskShape: 'narrow' | 'medium' | 'wide';
+    maskShape: MaskShapeType;
     className?: string;
     width?: number;
     height?: number;
     ref?: React.Ref<HTMLDivElement>;
 } & React.HTMLAttributes<HTMLElement>;
 
-const maskShapeMapping = {
-    narrow: { url: maskNarrow.src },
-    medium: { url: maskMedium.src },
-    wide: { url: maskWide.src },
+const maskShapeMapping: Record<MaskShapeType, { src: string }> = {
+    narrow: { src: maskNarrow.src },
+    medium: { src: maskMedium.src },
+    wide: { src: maskWide.src },
 };
 
 export default function ShapedImage({
     src,
     alt,
     maskShape,
-    width,
-    height,
     className,
     ref,
     ...inheritedProps
@@ -34,10 +33,32 @@ export default function ShapedImage({
         <div
             {...inheritedProps}
             ref={ref}
-            className={`${styles.maskContainer} ${styles.maskProperties} ${className}`}
-            style={{ maskImage: `url(${maskShapeMapping[maskShape].url})` }}
+            className={className}
+            style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr',
+            }}
         >
-            <Image src={src} alt={alt} className={styles.backgroundImage} width={width} height={height} />
+            <div
+                style={{
+                    position: 'relative',
+                    minHeight: '350px',
+                }}
+            >
+                <Image
+                    src={src}
+                    fill
+                    alt={alt}
+                    sizes="(max-width: 90rem) 66vw, 100vw"
+                    style={{
+                        maskImage: `url(${maskShapeMapping[maskShape].src})`,
+                        maskPosition: 'center',
+                        maskSize: 'contain',
+                        maskRepeat: 'no-repeat',
+                        objectFit: 'cover',
+                    }}
+                />
+            </div>
         </div>
     );
 }

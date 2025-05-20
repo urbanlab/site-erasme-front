@@ -18,8 +18,6 @@ const RubriquePresentation = async () => {
                 alt=""
                 maskShape="narrow"
                 className={styles.presentationImage}
-                width={1920} //TODO: get value from API
-                height={621} //TODO: get value from API
             />
             <div className={styles.presentationTextContainer}>
                 <h1>{data?.getRubrique?.titre}</h1>
@@ -38,6 +36,7 @@ const ListProjets = async () => {
         query: LIST_PROJETS,
         variables: { where: `id_parent=${process.env.SPIP_RUBRIQUES_PROJETS_ID}` },
     });
+
     return (
         <ul>
             {data.rubriques?.result?.map(projet => {
