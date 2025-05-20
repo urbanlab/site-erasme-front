@@ -45,6 +45,10 @@ The application uses color filters on svgs icons to easily change their colors. 
 
 The filters were generated with: [filter generator](https://isotropic.co/tool/hex-color-to-css-filter/) 
 
+## ShapedImage masks
+The shapedImage component uses an svg mask. If a new mask is added, make sure that its svg code has:
+`preserveAspectRatio="none" width="100%" height="100%"` in the `<svg>` tag
+
 ## GraphQL
 
 ### Apollo Client
