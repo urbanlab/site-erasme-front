@@ -1,9 +1,9 @@
-import maskMedium from '@public/mask-medium.svg';
+import maskCorner from '@public/mask-corner.svg';
 import maskNarrow from '@public/mask-narrow.svg';
 import maskWide from '@public/mask-wide.svg';
 import Image from 'next/image';
 
-type MaskShapeType = 'narrow' | 'medium' | 'wide';
+type MaskShapeType = 'narrow' | 'wide' | 'corner';
 
 type ShapedImageProps = {
     src: string;
@@ -17,8 +17,8 @@ type ShapedImageProps = {
 
 const maskShapeMapping: Record<MaskShapeType, { src: string }> = {
     narrow: { src: maskNarrow.src },
-    medium: { src: maskMedium.src },
     wide: { src: maskWide.src },
+    corner: { src: maskCorner.src },
 };
 
 export default function ShapedImage({

@@ -20,8 +20,6 @@ export default async function Prototypes() {
                     alt=""
                     maskShape="narrow"
                     className={styles.presentationImage}
-                    width={1920} //TODO: get value from API
-                    height={621} //TODO: get value from API
                 />
                 <div className={styles.presentationTextContainer}>
                     <h1>{data?.getRubrique?.titre}</h1>

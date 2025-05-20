@@ -94,7 +94,7 @@ export default function Home() {
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
             {/* PRESENTATION SECTION */}
             <div className={styles.presentationContainer}>
-                <ShapedImage src={heroImage} alt="Logo Erasme" maskShape='medium' className={styles.presentationImage} />
+                <ShapedImage src={heroImage} alt="Logo Erasme" maskShape='wide' className={styles.presentationImage} />
                 <div className={styles.presentationTextContainer}>
                     <h1>{pageTexts.presentationSection.title}</h1>
                     <h5>{pageTexts.presentationSection.description}</h5>
