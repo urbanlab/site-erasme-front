@@ -1,0 +1,25 @@
+.tag {
+    background: transparent;
+    
+    width: fit-content;
+    
+    cursor: default;
+
+    padding: var(--button-top-bottom-padding) var(--button-left-right-padding);
+    
+    font: inherit;
+    font-size: var(--button-font-size);
+    text-transform: lowercase;
+    color: var(--color-secondary);
+
+    border: var(--button-border-width) solid transparent;
+    border-color: var(--color-secondary);
+    border-radius: var(--button-border-radius);
+
+    &:hover {
+        background-color: var(--color-accent);
+    }
+    &:active {
+        background-color: var(--color-accent);
+    }
+}

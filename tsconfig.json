@@ -28,6 +28,7 @@
       "@ui/elements/selectBox": ["_ui/_elements/selectBox/selectBox.tsx"],
       "@ui/elements/arrow": ["_ui/_elements/arrow/arrow.tsx"],
       "@ui/elements/list": ["_ui/_elements/list/list.tsx"],
+      "@ui/elements/tag": ["_ui/_elements/tag/tag.tsx"],
       "@ui/components/footer": ["_ui/_components/footer/footer.tsx"],
       "@ui/components/navbar": ["_ui/_components/navbar/navbar.tsx"],
       "@ui/components/navbarWrapper": ["_ui/_components/navbar/navbarWrapper.tsx"],
