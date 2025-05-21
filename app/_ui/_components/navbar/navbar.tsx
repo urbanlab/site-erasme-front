@@ -22,10 +22,6 @@ const headerLinks = [
         href: '/projets',
     },
     {
-        label: 'PROTOTYPES',
-        href: '/prototypes',
-    },
-    {
         label: 'URBAN LAB',
         href: '/urban-lab',
     },
