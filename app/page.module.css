@@ -1,5 +1,5 @@
 .localVariables {
-    --gap-section: 42px;
+    --gap-section: 2.625rem;
     --gap-inside-section: 24px;
 }
 
@@ -135,6 +135,7 @@
         & .presentationImage {
             grid-column: 2;
             grid-row: 1;
+            min-height: 700px;
         }
     }
 

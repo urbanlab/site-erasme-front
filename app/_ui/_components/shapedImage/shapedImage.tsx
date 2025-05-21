@@ -42,7 +42,7 @@ export default function ShapedImage({
             <div
                 style={{
                     position: 'relative',
-                    minHeight: '350px',
+                    minHeight: '200px',
                 }}
             >
                 <Image

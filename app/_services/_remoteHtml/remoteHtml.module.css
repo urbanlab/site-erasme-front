@@ -1,9 +1,22 @@
 .remoteHtml {
     & * {
-        all: inherit;
+        font-family: inherit;
+        line-height: inherit;
     }
 
-    iframe {
+    iframe,
+    img {
         max-width: 100%;
+    }
+
+    figure,
+    iframe {
+        display: flex;
+        justify-self: center;
+    }
+
+    a {
+        text-decoration: underline;
+        cursor: pointer;
     }
 }
