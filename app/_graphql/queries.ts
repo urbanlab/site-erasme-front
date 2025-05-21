@@ -5,7 +5,20 @@ const ARTICLE = gql(`
         getArticle(id: $id) {
             id
             titre
-            slug
+            date
+            logo
+            texte
+            
+            auteurs {
+                result {
+                    id
+                    titre
+                }  
+            }
+            
+            rubrique {
+                logo
+            }
         }
     }
 `);
