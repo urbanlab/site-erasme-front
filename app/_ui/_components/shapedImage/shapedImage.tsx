@@ -2,6 +2,7 @@ import maskCorner from '@public/mask-corner.svg';
 import maskNarrow from '@public/mask-narrow.svg';
 import maskWide from '@public/mask-wide.svg';
 import Image from 'next/image';
+import styles from './shapedImage.module.css';
 
 type MaskShapeType = 'narrow' | 'wide' | 'corner';
 
@@ -21,14 +22,7 @@ const maskShapeMapping: Record<MaskShapeType, { src: string }> = {
     corner: { src: maskCorner.src },
 };
 
-export default function ShapedImage({
-    src,
-    alt,
-    maskShape,
-    className,
-    ref,
-    ...inheritedProps
-}: ShapedImageProps) {
+export default function ShapedImage({ src, alt, maskShape, className, ref, ...inheritedProps }: ShapedImageProps) {
     return (
         <div
             {...inheritedProps}
@@ -40,9 +34,9 @@ export default function ShapedImage({
             }}
         >
             <div
+                className={styles.imageContainer}
                 style={{
                     position: 'relative',
-                    minHeight: '200px',
                 }}
             >
                 <Image

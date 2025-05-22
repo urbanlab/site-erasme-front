@@ -1,0 +1,9 @@
+.imageContainer {
+    min-height: 200px;
+}
+
+@media screen and (min-width: 90rem) {
+    .imageContainer {
+        min-height: 500px;
+    }
+}

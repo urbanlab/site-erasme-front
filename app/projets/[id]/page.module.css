@@ -57,10 +57,6 @@
             'date logo'
             'authors logo'
             '. logo';
-
-        & .logo {
-            min-height: 500px;
-        }
     }
 
     .contentContainer {
