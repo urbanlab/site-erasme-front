@@ -1,9 +1,9 @@
 import { MENTIONS_LEGALES } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { query } from '@services/apollo/apolloClient';
+import RemoteHtml from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
-import RemoteHtml from '@services/remoteHtml';
 
 export default async function MentionsLegales() {
     const { data } = await query({

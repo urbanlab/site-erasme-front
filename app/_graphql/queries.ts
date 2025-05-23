@@ -1,5 +1,15 @@
 import { gql } from './__generated__';
 
+const MENTIONS_LEGALES = gql(`
+    query MentionsLegales($id: Int!) {
+        getArticle(id: $id) {
+            id
+            titre
+            logo
+            texte
+        }
+    }`);
+
 const ARTICLE = gql(`
     query Article($id: Int!) {
         getArticle(id: $id) {
