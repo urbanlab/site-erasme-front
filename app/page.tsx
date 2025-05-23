@@ -4,7 +4,6 @@ import styles from './page.module.css';
 import Button from '@ui/elements/button';
 import heroImage from '@public/hero-img.svg';
 import Card from '@ui/components/card';
-import List from '@ui/elements/list';
 import ImageCard from '@ui/components/imageCard';
 
 const pageTexts = {
@@ -133,14 +132,16 @@ export default function Home() {
             {/* <List
                 rows={[
                     {
-                        title: 'ESSE É O CARA lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
-                        date: '07/12/2021',
-                        link: 'https://google.com',
+                        id: 0,
+                        title: 'ESSE É O CARA lorem ipsum dolor sit amet CARA lorem ipsum dolor sit amet  CARA lorem ipsum dolor sit amet  CARA lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
+                        tag: 'projet',
+                        items: ['primeiro projeto', 'segundo proijeto']
                     },
                     {
-                        title: 'ESSE É O CARA lorem.',
-                        date: '07/12/2021',
-                        link: 'https://google.com.br',
+                        id: 1,
+                        title: 'ESSE voluptatum.',
+                        tag: 'prototype',
+                        items: ['projeto', 'segundo proijeto', 'oi']
                     },
                 ]}
             /> */}
