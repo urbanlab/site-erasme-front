@@ -1,4 +1,5 @@
 import { gql } from './__generated__';
+import './fragments';
 
 const MENTIONS_LEGALES = gql(`
     query MentionsLegales($id: Int!) {
@@ -13,9 +14,7 @@ const MENTIONS_LEGALES = gql(`
 const ARTICLE = gql(`
     query Article($id: Int!) {
         getArticle(id: $id) {
-            id
-            titre
-            date
+            ...articleInformationFields
             logo
             texte
             
@@ -43,20 +42,32 @@ const RUBRIQUE_PRESENTATION = gql(`
     }
 `);
 
+// TODO: VOIR OMMENT TRAVAILLER AVEC DES FRAGMENTS. LE TYPE LISTPROJETQURY VA APPARAITRE DANS
+// D'AUTRES ENDROITS ET IL ME FAUDRA BIND EUX AUSSI.
+//  EX: PAGE EUIPE -> TYPEQUEEMNT, ÇA SERA UNE REQEUTE 'auteurs' avec le champs RUBRIQUES inclus. Cette partie devra être
+// bindé à l'accordion (du coup il faut que ça soit le meme type)
+// Ça sera la meme problematique pour le resultate de la recherche!
+
 const LIST_PROJETS = gql(`
     query ListProjets($where: String!, $pagination: Int = 10, $page: Int = 1) {
         rubriques(where: [$where], pagination: $pagination, page: $page) {
+            pagination{
+                ...paginationFields
+            }
             result {
                 id
                 titre
                 texte
-
+                date
                 articles {
-                    result {
-                        id
-                        titre
-                        date
-                        date_modif
+                    ... on ArticlePagination {
+                        pagination {
+                            ...paginationFields
+                        }
+                        result {
+                            ...articleInformationFields
+                        }
+                        
                     }
                 }
             }
@@ -64,4 +75,4 @@ const LIST_PROJETS = gql(`
     }
 `);
 
-export { ARTICLE, RUBRIQUE_PRESENTATION, LIST_PROJETS };
+export { ARTICLE, RUBRIQUE_PRESENTATION, LIST_PROJETS, MENTIONS_LEGALES };
