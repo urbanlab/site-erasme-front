@@ -1,5 +1,6 @@
 import { Accordion } from '@base-ui-components/react/accordion';
 import { ListProjetsQuery } from '@graphql/__generated__/graphql';
+import RemoteHtml from '@services/remoteHtml';
 import Arrow from '@ui/elements/arrow';
 import Tag from '@ui/elements/tag';
 import styles from './rubriqueProjetsAccordion.module.css';
@@ -19,6 +20,7 @@ export default function RubriqueProjetsAccordion({ rubriques }: ListProjetsQuery
                             </div>
                         </Accordion.Trigger>
                         <Accordion.Panel className={styles.panel}>
+                            {rubrique?.texte && <RemoteHtml html={rubrique.texte} />}
                             {/* TODO: create ArticleList componenent and use it here */}
                         </Accordion.Panel>
                     </Accordion.Item>
@@ -27,4 +29,3 @@ export default function RubriqueProjetsAccordion({ rubriques }: ListProjetsQuery
         </Accordion.Root>
     );
 }
-
