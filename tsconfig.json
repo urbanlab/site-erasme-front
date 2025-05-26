@@ -34,6 +34,7 @@
       "@ui/components/shapedImage": ["_ui/_components/shapedImage/shapedImage.tsx"],
       "@ui/components/card": ["_ui/_components/card/card.tsx"],
       "@ui/components/imageCard": ["_ui/_components/imageCard/imageCard.tsx"],
+      "@ui/components/rubriqueProjetsAccordion": ["_ui/_components/rubriqueProjetsAccordion/rubriqueProjetsAccordion.tsx"],
       "@graphql/*": ["_graphql/*"],
       "@services/remoteHtml": ["_services/_remoteHtml/remoteHtml.tsx"],
       "@services/apollo/*": ["_services/_apollo/*"],
