@@ -14,7 +14,10 @@ const MENTIONS_LEGALES = gql(`
 const ARTICLE = gql(`
     query Article($id: Int!) {
         getArticle(id: $id) {
-            ...articleInformationFields
+            id
+            titre
+            date
+            date_modif                
             logo
             texte
             
