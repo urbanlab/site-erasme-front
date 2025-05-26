@@ -1,11 +1,11 @@
 .tag {
     background: transparent;
-    
-    width: fit-content;
-    
-    cursor: default;
 
-    padding: var(--button-top-bottom-padding) var(--button-left-right-padding);
+    width: fit-content;
+
+    cursor: pointer;
+
+    padding: var(--padding);
     
     font: inherit;
     font-size: var(--button-font-size);
@@ -23,3 +23,12 @@
         background-color: var(--color-accent);
     }
 }
+
+.small {
+    --padding: 0.625rem 1.25rem;
+}
+
+.default {
+    --padding: var(--button-top-bottom-padding) var(--button-left-right-padding);
+}
+
