@@ -35,6 +35,7 @@
       "@ui/components/card": ["_ui/_components/card/card.tsx"],
       "@ui/components/imageCard": ["_ui/_components/imageCard/imageCard.tsx"],
       "@ui/components/rubriqueProjetsAccordion": ["_ui/_components/rubriqueProjetsAccordion/rubriqueProjetsAccordion.tsx"],
+      "@ui/components/articleList": ["_ui/_components/articleList/articleList.tsx"],
       "@graphql/*": ["_graphql/*"],
       "@services/remoteHtml": ["_services/_remoteHtml/remoteHtml.tsx"],
       "@services/apollo/*": ["_services/_apollo/*"],
