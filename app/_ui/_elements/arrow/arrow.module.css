@@ -1,7 +1,11 @@
 .arrow {
+    display: grid;
+    align-items: center;
+    justify-content: center;
     transform: var(--orientation);
     cursor: pointer;
-    transition: transform 0.2s ease-in-out;    
+    transition: transform 0.2s ease-in-out;
+
 }
 
 .arrow:hover {

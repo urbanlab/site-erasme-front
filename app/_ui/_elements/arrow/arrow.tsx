@@ -2,8 +2,6 @@ import styles from './arrow.module.css';
 
 const ArrowIcon = ({size}: {size?: number}) => (
     <svg
-        // width='90%'
-        // height='90%'
         width={size ?? '80%'}
         height={size ?? '80%'}
         viewBox="0 0 33 32"
