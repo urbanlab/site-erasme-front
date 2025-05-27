@@ -4,6 +4,7 @@ import RemoteHtml from '@services/remoteHtml';
 import Arrow from '@ui/elements/arrow';
 import Tag from '@ui/elements/tag';
 import styles from './rubriqueProjetsAccordion.module.css';
+import ArticleList from '@ui/components/articleList';
 
 export default function RubriqueProjetsAccordion({ rubriques }: ListProjetsQuery) {
     return (
@@ -21,7 +22,7 @@ export default function RubriqueProjetsAccordion({ rubriques }: ListProjetsQuery
                         </Accordion.Trigger>
                         <Accordion.Panel className={styles.panel}>
                             {rubrique?.texte && <RemoteHtml html={rubrique.texte} />}
-                            {/* TODO: create ArticleList componenent and use it here */}
+                            <ArticleList result={rubrique?.articles?.result} />
                         </Accordion.Panel>
                     </Accordion.Item>
                 );
