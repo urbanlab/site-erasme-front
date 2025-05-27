@@ -15,22 +15,30 @@
     display: grid;
     gap: var(--gap-inside-section);
 
-    & > .presentationTextContainer {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        row-gap: calc(var(--gap-inside-section) / 2);
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        'logo'
+        'title'
+        'description';
+
+    & .logo {
+        grid-area: logo;
+    }
+    & .title {
+        grid-area: title;
+    }
+    & .description {
+        grid-area: description;
     }
 }
 
 @media screen and (min-width: 90rem) {
     .presentationContainer {
-        display: grid;
         grid-template-columns: 1fr 1fr;
-
-        & .presentationImage {
-            grid-column: 2;
-            grid-row: 1;
-        }
+        grid-template-areas:
+            '. logo'
+            'title logo'
+            'description logo'
+            '. logo';
     }
 }

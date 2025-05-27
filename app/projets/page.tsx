@@ -16,21 +16,13 @@ const RubriquePresentation = async () => {
 
     return (
         <div className={styles.presentationContainer}>
-            <ShapedImage
-                src={data.getRubrique?.logo ?? heroImage}
-                alt=""
-                maskShape="narrow"
-                className={styles.presentationImage}
-            />
-            <div className={styles.presentationTextContainer}>
-                <h1>{data?.getRubrique?.titre}</h1>
-                <Tag value="Projet" />
-                {data?.getRubrique?.texte && (
-                    <h5>
-                        <RemoteHtml html={data.getRubrique.texte} />
-                    </h5>
-                )}
-            </div>
+            <ShapedImage src={data.getRubrique?.logo ?? heroImage} alt="" maskShape="narrow" className={styles.logo} />
+            <h1 className={styles.title}>{data?.getRubrique?.titre}</h1>
+            {data?.getRubrique?.texte && (
+                <h5 className={styles.description}>
+                    <RemoteHtml html={data.getRubrique.texte} />
+                </h5>
+            )}
         </div>
     );
 };
