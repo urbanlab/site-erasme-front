@@ -1,5 +1,6 @@
 import { ArticleQuery } from '@graphql/__generated__/graphql';
 import { ARTICLE } from '@graphql/queries';
+import heroImage from '@public/hero-img.svg';
 import { query } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
@@ -10,14 +11,14 @@ import styles from './page.module.css';
 //Pre-fetch some articles during build time
 export async function generateStaticParams() {
     //TODO: implement logic
-    return [{ id: '2025' }];
+    return [{ id: '2125' }];
 }
 
 const ArticlePresentation = ({ data }: { data: ArticleQuery }) => {
     return (
         <div className={styles.presentationContainer}>
             <ShapedImage
-                src={data.getArticle?.logo ?? data.getArticle?.rubrique?.logo ?? ''}
+                src={data.getArticle?.logo ?? data.getArticle?.rubrique?.logo ?? heroImage}
                 alt="logo de l'article"
                 maskShape="wide"
                 className={styles.logo}
@@ -25,12 +26,12 @@ const ArticlePresentation = ({ data }: { data: ArticleQuery }) => {
             <h1 className={styles.title}>{data.getArticle?.titre}</h1>
             <Tag value="projet" className={styles.tag} />
             <p className={styles.date}>{dateFormat(data.getArticle?.date)}</p>
-            <div className={styles.authors}>
-                {'Par :'}
+            <ul className={styles.authors}>
+                {data.getArticle?.auteurs?.result && data.getArticle?.auteurs?.result?.length > 0 && <li>Par :</li>}
                 {data.getArticle?.auteurs?.result?.map(author => {
                     return <li key={author?.id}>{author?.titre}</li>;
                 })}
-            </div>
+            </ul>
         </div>
     );
 };
@@ -38,7 +39,7 @@ const ArticlePresentation = ({ data }: { data: ArticleQuery }) => {
 export default async function Article({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
-    const { data } = await query({ query: ARTICLE, variables: { id: parseInt(id) } });
+    const { data } = await query<ArticleQuery>({ query: ARTICLE, variables: { id: parseInt(id) } });
 
     return (
         <>
