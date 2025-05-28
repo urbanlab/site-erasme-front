@@ -1,0 +1,43 @@
+.localVariables {
+    --gap-section: 2.625rem;
+}
+
+.mainContainer {
+    display: grid;
+    grid-template-areas:
+        'logo'
+        'servicesContainer';
+    gap: var(--gap-section);
+    margin-bottom: var(--gap-section);
+
+    & .logo {
+        grid-area: logo;
+    }
+    & .servicesContainer {
+        grid-area: servicesContainer;
+        display: grid;
+        gap: var(--gap-section);
+    }
+}
+
+@media screen and (min-width: 90rem) {
+    .mainContainer {
+        & .servicesContainer {
+            gap: calc(2 * var(--gap-section));
+
+            & .service {
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                grid-template-areas: 'title content';
+                gap: var(--gap-section);
+
+                & .title {
+                    grid-area: title;
+                }
+                & .content {
+                    grid-area: content;
+                }
+            }
+        }
+    }
+}

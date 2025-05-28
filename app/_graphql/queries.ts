@@ -1,6 +1,21 @@
 import { gql } from './__generated__';
 import './fragments';
 
+const SERVICES = gql(`
+    query Services($id: Int!) {
+        getRubrique(id: $id) {
+            logo
+            articles {
+                result {
+                    id
+                    titre
+                    texte
+                }
+            }
+        }
+    }
+`);
+
 const MENTIONS_LEGALES = gql(`
     query MentionsLegales($id: Int!) {
         getArticle(id: $id) {
@@ -9,7 +24,8 @@ const MENTIONS_LEGALES = gql(`
             logo
             texte
         }
-    }`);
+    }
+`);
 
 const ARTICLE = gql(`
     query Article($id: Int!) {
@@ -17,7 +33,7 @@ const ARTICLE = gql(`
             id
             titre
             date
-            date_modif                
+            date_modif
             logo
             texte
             
@@ -78,4 +94,4 @@ const LIST_PROJETS = gql(`
     }
 `);
 
-export { ARTICLE, RUBRIQUE_PRESENTATION, LIST_PROJETS, MENTIONS_LEGALES };
+export { ARTICLE, RUBRIQUE_PRESENTATION, LIST_PROJETS, MENTIONS_LEGALES, SERVICES };

@@ -1,0 +1,51 @@
+import { SERVICES } from '@graphql/queries';
+import heroImage from '@public/hero-img.svg';
+import { query } from '@services/apollo/apolloClient';
+import RemoteHtml from '@services/remoteHtml';
+import ShapedImage from '@ui/components/shapedImage';
+import styles from './page.module.css';
+
+export default async function Services() {
+    const { data } = await query({
+        query: SERVICES,
+        variables: { id: parseInt(process.env.SPIP_RUBRIQUES_SERVICES_ID ?? '') },
+    });
+
+    return (
+        <div className={`${styles.mainContainer} ${styles.localVariables}`}>
+            <ShapedImage
+                className={styles.logo}
+                alt="logo rubrique"
+                maskShape="wide"
+                src={data.getRubrique?.logo ?? heroImage}
+            />
+            <ul className={styles.servicesContainer}>
+                {data.getRubrique?.articles?.result?.map(service => {
+                    return (
+                        <li
+                            key={service?.id}
+                            className={styles.service}
+                            id={service?.titre ?? ''}
+                            style={{
+                                /**
+                                 * This is a workaround.
+                                 * This behavior should be fixed by Next.js on the upcoming versions.
+                                 *
+                                 * For now, when navigating to an ID using Next Link, the sticky header (the navbar in this case)
+                                 * stays upfront. The '0' position for the anchor is considered on the top of the page,
+                                 * and not on the bottom of the navbar.
+                                 * The 'scrollMarginTop' property defines an offset from the top of the page.
+                                 * Here, the value corresponds to an estimation of the navbar's height on desktop.
+                                 */
+                                scrollMarginTop: '7.5rem',
+                            }}
+                        >
+                            <h1 className={styles.title}>{service?.titre}</h1>
+                            {service?.texte && <RemoteHtml html={service.texte} className={styles.content} />}
+                        </li>
+                    );
+                })}
+            </ul>
+        </div>
+    );
+}
