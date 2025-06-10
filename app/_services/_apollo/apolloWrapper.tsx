@@ -19,6 +19,9 @@ function makeClient() {
         // via the `context` property on the options passed as a second argument
         // to an Apollo Client data fetching hook, e.g.:
         // const { data } = useSuspenseQuery(MY_QUERY, { context: { fetchOptions: { ... }}});
+        headers: {
+            'X-Auth-Token': process.env.GRAPHQL_TOKEN ?? '',
+        },
     });
 
     // use the `ApolloClient` from "@apollo/client-integration-nextjs"
