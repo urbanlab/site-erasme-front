@@ -2,7 +2,6 @@ import { Select } from '@base-ui-components/react/select';
 import chevronIcon from '@public/chevron-up-icon.svg';
 import Image from 'next/image';
 import styles from './selectBox.module.css';
-import React from 'react';
 
 type SelectBoxProps = {
     placeholder?: string;
@@ -12,7 +11,7 @@ type SelectBoxProps = {
 
 export default function SelectBox({ placeholder, items, className }: SelectBoxProps) {
     return (
-        <Select.Root alignItemToTrigger={false} modal={false}>
+        <Select.Root modal={false}>
             <Select.Trigger className={`${styles.trigger} ${className?.trigger}`}>
                 <Select.Value placeholder={placeholder ?? 'Tout'} />
                 <Select.Icon>
@@ -20,14 +19,10 @@ export default function SelectBox({ placeholder, items, className }: SelectBoxPr
                 </Select.Icon>
             </Select.Trigger>
             <Select.Portal>
-                <Select.Positioner side="top" align="end">
+                <Select.Positioner alignItemWithTrigger={false} side="top" align="end">
                     <Select.Popup className={`${styles.popup} ${className?.popup}`}>
                         {items.map(item => (
-                            <Select.Item
-                                className={styles.item}
-                                key={item.value}
-                                value={item.value}
-                            >
+                            <Select.Item className={styles.item} key={item.value} value={item.value}>
                                 <Select.ItemText>{item.label}</Select.ItemText>
                             </Select.Item>
                         ))}
