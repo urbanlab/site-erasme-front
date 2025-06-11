@@ -2,7 +2,13 @@ import { CodegenConfig } from '@graphql-codegen/cli';
 import './loadEnvConfig';
 
 const config: CodegenConfig = {
-    schema: process.env.GRAPHQL_ENDPOINT,
+    schema: {
+        [process.env.GRAPHQL_ENDPOINT ?? '']: {
+            headers: {
+                'X-Auth-Token': process.env.GRAPHQL_TOKEN ?? '',
+            },
+        },
+    },
     documents: ['**/queries.ts', '**/fragments.ts'],
     generates: {
         'app/_graphql/__generated__/': {
