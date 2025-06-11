@@ -1,7 +1,8 @@
 .remoteHtml {
-    & * {
-        font-family: inherit;
-        line-height: inherit;
+    &div {
+        font-size: var(--font-size-default-body);
+        line-height: var(--line-height-default-body);
+        font-weight: var(--font-weight-default-body);
     }
 
     iframe,
