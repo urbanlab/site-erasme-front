@@ -40,6 +40,7 @@
       "@services/remoteHtml": ["_services/_remoteHtml/remoteHtml.tsx"],
       "@services/apollo/*": ["_services/_apollo/*"],
       "@utils/dateUtils": ["_utils/dateUtils.tsx"],
+      "@hooks/*": ["_hooks/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
