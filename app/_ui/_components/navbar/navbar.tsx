@@ -74,7 +74,7 @@ export default function Navbar({ isSearchMode, handleSearchMode, handleNavigatio
 
     return (
         <>
-            <div
+            <header
                 ref={mainDivRef}
                 className={`${styles.mainContainer} ${styles.positioning} ${styles.zIndex} ${styles.localVariables}`}
             >
@@ -219,7 +219,7 @@ export default function Navbar({ isSearchMode, handleSearchMode, handleNavigatio
                         </>
                     )}
                 </div>
-            </div>
+            </header>
         </>
     );
 }
