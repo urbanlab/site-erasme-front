@@ -1,3 +1,4 @@
+import { MentionsLegalesQuery } from '@graphql/__generated__/graphql';
 import { MENTIONS_LEGALES } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { query } from '@services/apollo/apolloClient';
@@ -6,7 +7,7 @@ import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
 
 export default async function MentionsLegales() {
-    const { data } = await query({
+    const { data } = await query<MentionsLegalesQuery>({
         query: MENTIONS_LEGALES,
         variables: { id: parseInt(process.env.SPIP_PAGE_MENTIONS_LEGALES_ID ?? '') },
     });
