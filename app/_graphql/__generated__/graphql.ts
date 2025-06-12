@@ -164,13 +164,8 @@ export enum Collection {
   Auteurs = 'AUTEURS',
   Documents = 'DOCUMENTS',
   GroupesMots = 'GROUPES_MOTS',
-  Mailshots = 'MAILSHOTS',
-  Mailsubscribers = 'MAILSUBSCRIBERS',
-  Mailsubscribinglists = 'MAILSUBSCRIBINGLISTS',
   Mots = 'MOTS',
-  Newsletters = 'NEWSLETTERS',
-  Rubriques = 'RUBRIQUES',
-  Syndic = 'SYNDIC'
+  Rubriques = 'RUBRIQUES'
 }
 
 /** Un objet Document */
@@ -247,119 +242,6 @@ export type Groupe_MotsPagination = ObjetPagination & {
   result?: Maybe<Array<Maybe<Groupe_Mots>>>;
 };
 
-/** Un objet Mailshot */
-export type Mailshot = Objet & {
-  __typename?: 'Mailshot';
-  current?: Maybe<Scalars['Int']['output']>;
-  date?: Maybe<Scalars['Date']['output']>;
-  date_alerte_fail?: Maybe<Scalars['Date']['output']>;
-  date_start?: Maybe<Scalars['Date']['output']>;
-  descriptif?: Maybe<Scalars['String']['output']>;
-  failed?: Maybe<Scalars['Int']['output']>;
-  from_email?: Maybe<Scalars['String']['output']>;
-  from_name?: Maybe<Scalars['String']['output']>;
-  graceful?: Maybe<Scalars['String']['output']>;
-  html?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  listes?: Maybe<Scalars['String']['output']>;
-  logo?: Maybe<Scalars['String']['output']>;
-  maj?: Maybe<Scalars['Date']['output']>;
-  nb_clic?: Maybe<Scalars['Int']['output']>;
-  nb_read?: Maybe<Scalars['Int']['output']>;
-  nb_spam?: Maybe<Scalars['Int']['output']>;
-  points?: Maybe<Scalars['Int']['output']>;
-  rang?: Maybe<Scalars['Int']['output']>;
-  slug?: Maybe<Scalars['String']['output']>;
-  statut?: Maybe<Scalars['String']['output']>;
-  sujet?: Maybe<Scalars['String']['output']>;
-  texte?: Maybe<Scalars['String']['output']>;
-  titre?: Maybe<Scalars['String']['output']>;
-  total?: Maybe<Scalars['Int']['output']>;
-  typeCollection?: Maybe<Collection>;
-};
-
-/** Résultats d'une liste d'objets et de sa pagination */
-export type MailshotPagination = ObjetPagination & {
-  __typename?: 'MailshotPagination';
-  pagination?: Maybe<Pagination>;
-  result?: Maybe<Array<Maybe<Mailshot>>>;
-};
-
-/** Un objet Mailsubscriber */
-export type Mailsubscriber = Objet & {
-  __typename?: 'Mailsubscriber';
-  auteurs?: Maybe<AuteurPagination>;
-  date?: Maybe<Scalars['Date']['output']>;
-  descriptif?: Maybe<Scalars['String']['output']>;
-  email?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  invite_email_from?: Maybe<Scalars['String']['output']>;
-  invite_email_text?: Maybe<Scalars['String']['output']>;
-  jeton?: Maybe<Scalars['String']['output']>;
-  lang?: Maybe<Scalars['String']['output']>;
-  logo?: Maybe<Scalars['String']['output']>;
-  maj?: Maybe<Scalars['Date']['output']>;
-  optin?: Maybe<Scalars['String']['output']>;
-  points?: Maybe<Scalars['Int']['output']>;
-  rang?: Maybe<Scalars['Int']['output']>;
-  slug?: Maybe<Scalars['String']['output']>;
-  statut?: Maybe<Scalars['String']['output']>;
-  titre?: Maybe<Scalars['String']['output']>;
-  typeCollection?: Maybe<Collection>;
-};
-
-
-/** Un objet Mailsubscriber */
-export type MailsubscriberAuteursArgs = {
-  page?: Scalars['Int']['input'];
-  pagination?: Scalars['Int']['input'];
-  where?: Array<Scalars['String']['input']>;
-};
-
-/** Résultats d'une liste d'objets et de sa pagination */
-export type MailsubscriberPagination = ObjetPagination & {
-  __typename?: 'MailsubscriberPagination';
-  pagination?: Maybe<Pagination>;
-  result?: Maybe<Array<Maybe<Mailsubscriber>>>;
-};
-
-/** Un objet Mailsubscribinglist */
-export type Mailsubscribinglist = Objet & {
-  __typename?: 'Mailsubscribinglist';
-  adresse_envoi_email?: Maybe<Scalars['String']['output']>;
-  adresse_envoi_nom?: Maybe<Scalars['String']['output']>;
-  auteurs?: Maybe<AuteurPagination>;
-  date?: Maybe<Scalars['Date']['output']>;
-  descriptif?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  identifiant?: Maybe<Scalars['String']['output']>;
-  logo?: Maybe<Scalars['String']['output']>;
-  maj?: Maybe<Scalars['Date']['output']>;
-  points?: Maybe<Scalars['Int']['output']>;
-  rang?: Maybe<Scalars['Int']['output']>;
-  segments?: Maybe<Scalars['String']['output']>;
-  slug?: Maybe<Scalars['String']['output']>;
-  statut?: Maybe<Scalars['String']['output']>;
-  titre?: Maybe<Scalars['String']['output']>;
-  titre_public?: Maybe<Scalars['String']['output']>;
-  typeCollection?: Maybe<Collection>;
-};
-
-
-/** Un objet Mailsubscribinglist */
-export type MailsubscribinglistAuteursArgs = {
-  page?: Scalars['Int']['input'];
-  pagination?: Scalars['Int']['input'];
-  where?: Array<Scalars['String']['input']>;
-};
-
-/** Résultats d'une liste d'objets et de sa pagination */
-export type MailsubscribinglistPagination = ObjetPagination & {
-  __typename?: 'MailsubscribinglistPagination';
-  pagination?: Maybe<Pagination>;
-  result?: Maybe<Array<Maybe<Mailsubscribinglist>>>;
-};
-
 /** Métas autorisées */
 export type MetaList = {
   __typename?: 'MetaList';
@@ -400,62 +282,6 @@ export type MotPagination = ObjetPagination & {
   __typename?: 'MotPagination';
   pagination?: Maybe<Pagination>;
   result?: Maybe<Array<Maybe<Mot>>>;
-};
-
-/** Un objet Newsletter */
-export type Newsletter = Objet & {
-  __typename?: 'Newsletter';
-  adresse_envoi_email?: Maybe<Scalars['String']['output']>;
-  adresse_envoi_nom?: Maybe<Scalars['String']['output']>;
-  adresse_site?: Maybe<Scalars['String']['output']>;
-  auteurs?: Maybe<AuteurPagination>;
-  baked?: Maybe<Scalars['String']['output']>;
-  chapo?: Maybe<Scalars['String']['output']>;
-  date?: Maybe<Scalars['Date']['output']>;
-  date_redac?: Maybe<Scalars['Date']['output']>;
-  descriptif?: Maybe<Scalars['String']['output']>;
-  documents?: Maybe<DocumentPagination>;
-  email_test?: Maybe<Scalars['String']['output']>;
-  html_email?: Maybe<Scalars['String']['output']>;
-  html_page?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  lang?: Maybe<Scalars['String']['output']>;
-  liste?: Maybe<Scalars['String']['output']>;
-  logo?: Maybe<Scalars['String']['output']>;
-  maj?: Maybe<Scalars['Date']['output']>;
-  patron?: Maybe<Scalars['String']['output']>;
-  points?: Maybe<Scalars['Int']['output']>;
-  rang?: Maybe<Scalars['Int']['output']>;
-  recurrence?: Maybe<Scalars['String']['output']>;
-  slug?: Maybe<Scalars['String']['output']>;
-  statut?: Maybe<Scalars['String']['output']>;
-  texte?: Maybe<Scalars['String']['output']>;
-  texte_email?: Maybe<Scalars['String']['output']>;
-  titre?: Maybe<Scalars['String']['output']>;
-  typeCollection?: Maybe<Collection>;
-};
-
-
-/** Un objet Newsletter */
-export type NewsletterAuteursArgs = {
-  page?: Scalars['Int']['input'];
-  pagination?: Scalars['Int']['input'];
-  where?: Array<Scalars['String']['input']>;
-};
-
-
-/** Un objet Newsletter */
-export type NewsletterDocumentsArgs = {
-  page?: Scalars['Int']['input'];
-  pagination?: Scalars['Int']['input'];
-  where?: Array<Scalars['String']['input']>;
-};
-
-/** Résultats d'une liste d'objets et de sa pagination */
-export type NewsletterPagination = ObjetPagination & {
-  __typename?: 'NewsletterPagination';
-  pagination?: Maybe<Pagination>;
-  result?: Maybe<Array<Maybe<Newsletter>>>;
 };
 
 /** Un objet */
@@ -505,40 +331,20 @@ export type Query = {
   getDocument?: Maybe<Document>;
   /** Retourne un objet Groupe_mots */
   getGroupe_mots?: Maybe<Groupe_Mots>;
-  /** Retourne un objet Mailshot */
-  getMailshot?: Maybe<Mailshot>;
-  /** Retourne un objet Mailsubscriber */
-  getMailsubscriber?: Maybe<Mailsubscriber>;
-  /** Retourne un objet Mailsubscribinglist */
-  getMailsubscribinglist?: Maybe<Mailsubscribinglist>;
   /** Retourne les métas autorisées */
   getMetas: MetaList;
   /** Retourne un objet Mot */
   getMot?: Maybe<Mot>;
-  /** Retourne un objet Newsletter */
-  getNewsletter?: Maybe<Newsletter>;
   /** Retourne un objet Rubrique */
   getRubrique?: Maybe<Rubrique>;
-  /** Retourne un objet Site */
-  getSite?: Maybe<Site>;
   /** Retourne une collection d'objets Groupe_mots */
   groupes_mots?: Maybe<Groupe_MotsPagination>;
-  /** Retourne une collection d'objets Mailshot */
-  mailshots?: Maybe<MailshotPagination>;
-  /** Retourne une collection d'objets Mailsubscriber */
-  mailsubscribers?: Maybe<MailsubscriberPagination>;
-  /** Retourne une collection d'objets Mailsubscribinglist */
-  mailsubscribinglists?: Maybe<MailsubscribinglistPagination>;
   /** Retourne une collection d'objets Mot */
   mots?: Maybe<MotPagination>;
-  /** Retourne une collection d'objets Newsletter */
-  newsletters?: Maybe<NewsletterPagination>;
   /** Résultats de recherche sur les objets */
   recherche: RecherchePagination;
   /** Retourne une collection d'objets Rubrique */
   rubriques?: Maybe<RubriquePagination>;
-  /** Retourne une collection d'objets Site */
-  syndic?: Maybe<SitePagination>;
 };
 
 
@@ -591,43 +397,13 @@ export type QueryGetGroupe_MotsArgs = {
 
 
 /** Liste des requêtes disponibles */
-export type QueryGetMailshotArgs = {
-  id: Scalars['Int']['input'];
-};
-
-
-/** Liste des requêtes disponibles */
-export type QueryGetMailsubscriberArgs = {
-  id: Scalars['Int']['input'];
-};
-
-
-/** Liste des requêtes disponibles */
-export type QueryGetMailsubscribinglistArgs = {
-  id: Scalars['Int']['input'];
-};
-
-
-/** Liste des requêtes disponibles */
 export type QueryGetMotArgs = {
   id: Scalars['Int']['input'];
 };
 
 
 /** Liste des requêtes disponibles */
-export type QueryGetNewsletterArgs = {
-  id: Scalars['Int']['input'];
-};
-
-
-/** Liste des requêtes disponibles */
 export type QueryGetRubriqueArgs = {
-  id: Scalars['Int']['input'];
-};
-
-
-/** Liste des requêtes disponibles */
-export type QueryGetSiteArgs = {
   id: Scalars['Int']['input'];
 };
 
@@ -641,39 +417,7 @@ export type QueryGroupes_MotsArgs = {
 
 
 /** Liste des requêtes disponibles */
-export type QueryMailshotsArgs = {
-  page?: Scalars['Int']['input'];
-  pagination?: Scalars['Int']['input'];
-  where?: Array<Scalars['String']['input']>;
-};
-
-
-/** Liste des requêtes disponibles */
-export type QueryMailsubscribersArgs = {
-  page?: Scalars['Int']['input'];
-  pagination?: Scalars['Int']['input'];
-  where?: Array<Scalars['String']['input']>;
-};
-
-
-/** Liste des requêtes disponibles */
-export type QueryMailsubscribinglistsArgs = {
-  page?: Scalars['Int']['input'];
-  pagination?: Scalars['Int']['input'];
-  where?: Array<Scalars['String']['input']>;
-};
-
-
-/** Liste des requêtes disponibles */
 export type QueryMotsArgs = {
-  page?: Scalars['Int']['input'];
-  pagination?: Scalars['Int']['input'];
-  where?: Array<Scalars['String']['input']>;
-};
-
-
-/** Liste des requêtes disponibles */
-export type QueryNewslettersArgs = {
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -691,14 +435,6 @@ export type QueryRechercheArgs = {
 
 /** Liste des requêtes disponibles */
 export type QueryRubriquesArgs = {
-  page?: Scalars['Int']['input'];
-  pagination?: Scalars['Int']['input'];
-  where?: Array<Scalars['String']['input']>;
-};
-
-
-/** Liste des requêtes disponibles */
-export type QuerySyndicArgs = {
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -737,7 +473,6 @@ export type Rubrique = Objet & {
   slug?: Maybe<Scalars['String']['output']>;
   statut?: Maybe<Scalars['String']['output']>;
   statut_tmp?: Maybe<Scalars['String']['output']>;
-  syndic?: Maybe<SitePagination>;
   texte?: Maybe<Scalars['String']['output']>;
   titre?: Maybe<Scalars['String']['output']>;
   typeCollection?: Maybe<Collection>;
@@ -783,14 +518,6 @@ export type RubriqueRubriquesArgs = {
   where?: Array<Scalars['String']['input']>;
 };
 
-
-/** Un objet Rubrique */
-export type RubriqueSyndicArgs = {
-  page?: Scalars['Int']['input'];
-  pagination?: Scalars['Int']['input'];
-  where?: Array<Scalars['String']['input']>;
-};
-
 /** Résultats d'une liste d'objets et de sa pagination */
 export type RubriquePagination = ObjetPagination & {
   __typename?: 'RubriquePagination';
@@ -799,41 +526,7 @@ export type RubriquePagination = ObjetPagination & {
 };
 
 /** Type UNION permettant de retourner n'importe quel type d'objet */
-export type SearchResult = Article | Auteur | Document | Groupe_Mots | Mailshot | Mailsubscriber | Mailsubscribinglist | Mot | Newsletter | Rubrique | Site;
-
-/** Un objet Site */
-export type Site = Objet & {
-  __typename?: 'Site';
-  date?: Maybe<Scalars['Date']['output']>;
-  date_index?: Maybe<Scalars['Date']['output']>;
-  date_syndic?: Maybe<Scalars['Date']['output']>;
-  descriptif?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  logo?: Maybe<Scalars['String']['output']>;
-  maj?: Maybe<Scalars['Date']['output']>;
-  miroir?: Maybe<Scalars['String']['output']>;
-  moderation?: Maybe<Scalars['String']['output']>;
-  oubli?: Maybe<Scalars['String']['output']>;
-  points?: Maybe<Scalars['Int']['output']>;
-  rang?: Maybe<Scalars['Int']['output']>;
-  resume?: Maybe<Scalars['String']['output']>;
-  rubrique?: Maybe<Rubrique>;
-  secteur?: Maybe<Rubrique>;
-  slug?: Maybe<Scalars['String']['output']>;
-  statut?: Maybe<Scalars['String']['output']>;
-  syndication?: Maybe<Scalars['String']['output']>;
-  titre?: Maybe<Scalars['String']['output']>;
-  typeCollection?: Maybe<Collection>;
-  url_site?: Maybe<Scalars['String']['output']>;
-  url_syndic?: Maybe<Scalars['String']['output']>;
-};
-
-/** Résultats d'une liste d'objets et de sa pagination */
-export type SitePagination = ObjetPagination & {
-  __typename?: 'SitePagination';
-  pagination?: Maybe<Pagination>;
-  result?: Maybe<Array<Maybe<Site>>>;
-};
+export type SearchResult = Article | Auteur | Document | Groupe_Mots | Mot | Rubrique;
 
 export type PaginationFieldsFragment = { __typename?: 'Pagination', currentPage: number, totalPages: number, hasNextPage: boolean, hasPreviousPage: boolean } & { ' $fragmentName'?: 'PaginationFieldsFragment' };
 
@@ -852,6 +545,13 @@ export type MentionsLegalesQueryVariables = Exact<{
 
 
 export type MentionsLegalesQuery = { __typename?: 'Query', getArticle?: { __typename?: 'Article', id?: string | null, titre?: string | null, logo?: string | null, texte?: string | null } | null };
+
+export type SimpleArticleQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type SimpleArticleQuery = { __typename?: 'Query', getArticle?: { __typename?: 'Article', id?: string | null, titre?: string | null, logo?: string | null, texte?: string | null } | null };
 
 export type ArticleQueryVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -889,6 +589,7 @@ export const PaginationFieldsFragmentDoc = {"kind":"Document","definitions":[{"k
 export const ArticleInformationFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"articleInformationFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"date_modif"}}]}}]} as unknown as DocumentNode<ArticleInformationFieldsFragment, unknown>;
 export const ServicesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Services"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getRubrique"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"articles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"texte"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ServicesQuery, ServicesQueryVariables>;
 export const MentionsLegalesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MentionsLegales"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getArticle"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"texte"}}]}}]}}]} as unknown as DocumentNode<MentionsLegalesQuery, MentionsLegalesQueryVariables>;
-export const ArticleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Article"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getArticle"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"date_modif"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"texte"}},{"kind":"Field","name":{"kind":"Name","value":"auteurs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"rubrique"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]}}]} as unknown as DocumentNode<ArticleQuery, ArticleQueryVariables>;
+export const SimpleArticleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SimpleArticle"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getArticle"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"texte"}}]}}]}}]} as unknown as DocumentNode<SimpleArticleQuery, SimpleArticleQueryVariables>;
+export const ArticleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Article"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getArticle"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"date_modif"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"texte"}},{"kind":"Field","name":{"kind":"Name","value":"description_title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"description_title_second"}},{"kind":"Field","name":{"kind":"Name","value":"description_second"}},{"kind":"Field","name":{"kind":"Name","value":"chiffres_cles"}},{"kind":"Field","name":{"kind":"Name","value":"description_lateral_title"}},{"kind":"Field","name":{"kind":"Name","value":"description_lateral"}},{"kind":"Field","name":{"kind":"Name","value":"developpement"}},{"kind":"Field","name":{"kind":"Name","value":"mots"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"motsAndGroupMotsFromArticleFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"documentsFromArticleFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"auteurs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"rubrique"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"motsAndGroupMotsFromArticleFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"MotPagination"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"groupe"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"documentsFromArticleFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"DocumentPagination"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"hauteur"}},{"kind":"Field","name":{"kind":"Name","value":"largeur"}},{"kind":"Field","name":{"kind":"Name","value":"fichier"}}]}}]}}]} as unknown as DocumentNode<ArticleQuery, ArticleQueryVariables>;
 export const RubriquePresentationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"RubriquePresentation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getRubrique"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"texte"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]} as unknown as DocumentNode<RubriquePresentationQuery, RubriquePresentationQueryVariables>;
 export const ListProjetsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ListProjets"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"pagination"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"10"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"page"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rubriques"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ListValue","values":[{"kind":"Variable","name":{"kind":"Name","value":"where"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"Variable","name":{"kind":"Name","value":"pagination"}}},{"kind":"Argument","name":{"kind":"Name","value":"page"},"value":{"kind":"Variable","name":{"kind":"Name","value":"page"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pagination"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"paginationFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"texte"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"articles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ArticlePagination"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pagination"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"paginationFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"articleInformationFields"}}]}}]}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"paginationFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Pagination"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currentPage"}},{"kind":"Field","name":{"kind":"Name","value":"totalPages"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"hasPreviousPage"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"articleInformationFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"date_modif"}}]}}]} as unknown as DocumentNode<ListProjetsQuery, ListProjetsQueryVariables>;

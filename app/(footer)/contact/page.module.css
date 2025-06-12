@@ -1,0 +1,68 @@
+.localVariables {
+    --gap-section: 2.625rem;
+
+    --margin-bottom-section-title: 1rem;
+}
+
+.mainContainer {
+    display: grid;
+    grid-template-areas:
+        'logo'
+        'contentContainer';
+    gap: var(--gap-section);
+    margin-bottom: var(--gap-section);
+
+    .logo {
+        grid-area: logo;
+    }
+
+    .contentContainer {
+        grid-area: contentContainer;
+        display: grid;
+        grid-template-areas:
+            'nousRejoindre'
+            'wrapper'
+            'laclasse'
+            'reseauxSociaux';
+        gap: var(--gap-section);
+
+        & .wrapper {
+            grid-area: wrapper;
+        }
+
+        & .laclasse {
+            grid-area: laclasse;
+        }
+        & .reseauxSociaux {
+            grid-area: reseauxSociaux;
+        }
+
+        & h2 {
+            margin-bottom: var(--margin-bottom-section-title);
+        }
+    }
+}
+
+.tabsList {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-bottom: 1.875rem;
+}
+
+@media screen and (min-width: 90rem) {
+    .localVariables {
+        --gap-section: 4.375rem;
+        --margin-bottom-section-title: 2.5rem;
+    }
+
+    .mainContainer {
+        .contentContainer {
+            grid-template-columns: 1fr 1fr;
+            grid-template-areas:
+                'nousRejoindre nousRejoindre'
+                'wrapper wrapper'
+                'laclasse reseauxSociaux';
+        }
+    }
+}

@@ -15,7 +15,8 @@
         background-color: var(--color-accent);
     }
 }
-.button[data-popup-open] {
+.button[data-popup-open],
+.button[data-selected] {
     background-color: var(--color-accent);
     border-color: var(--color-secondary);
 }

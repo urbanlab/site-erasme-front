@@ -27,6 +27,17 @@ const MENTIONS_LEGALES = gql(`
     }
 `);
 
+const SIMPLE_ARTICLE = gql(`
+    query SimpleArticle($id: Int!) {
+        getArticle(id: $id) {
+            id
+            titre
+            logo
+            texte
+        }
+    } 
+`);
+
 const ARTICLE = gql(`
     query Article($id: Int!) {
         getArticle(id: $id) {
@@ -94,4 +105,4 @@ const LIST_PROJETS = gql(`
     }
 `);
 
-export { ARTICLE, RUBRIQUE_PRESENTATION, LIST_PROJETS, MENTIONS_LEGALES, SERVICES };
+export { ARTICLE, RUBRIQUE_PRESENTATION, LIST_PROJETS, MENTIONS_LEGALES, SERVICES, SIMPLE_ARTICLE };
