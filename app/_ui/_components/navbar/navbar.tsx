@@ -12,9 +12,9 @@ import InputField from '@ui/elements/inputField';
 import SelectBox from '@ui/elements/selectBox';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef } from 'react';
+import { RefObject, useRef } from 'react';
 import styles from './navbar.module.css';
-
+import { useIsDesktop } from '@hooks/useIsDesktop';
 
 const headerLinks = [
     {
@@ -54,6 +54,174 @@ const typeFilters = [
     },
 ];
 
+const SearchFilter = ({ isDesktop }: { isDesktop?: boolean }) => {
+    return (
+        <SelectBox
+            className={
+                isDesktop
+                    ? {
+                          trigger: styles.filterButton,
+                          popup: `${styles.overlayContainer} ${styles.localVariables}`,
+                      }
+                    : {
+                          trigger: styles.filterButton,
+                      }
+            }
+            items={typeFilters}
+        />
+    );
+};
+
+const MobileNavbarAndSearchMenu = ({ mainDivRef }: { mainDivRef: RefObject<HTMLDivElement | null> }) => {
+    return (
+        <div className={styles.smallScreenContainer}>
+            <Link href="/contact">
+                <Button variant="text">
+                    <Image src={emailIcon} alt="contact"></Image>
+                </Button>
+            </Link>
+
+            {/* SEARCH MENU */}
+            <Popover.Root modal={true}>
+                <Popover.Trigger
+                    render={
+                        <Button variant="text">
+                            <Image src={searchIcon} alt="menu de recherche"></Image>
+                        </Button>
+                    }
+                />
+                <Popover.Portal>
+                    <Popover.Backdrop render={<Backdrop />} />
+                    <Popover.Positioner anchor={mainDivRef.current} align="start" side="bottom">
+                        <Popover.Popup
+                            className={`${styles.localVariables} ${styles.overlayContainer} ${styles.searchMenuContainer}`}
+                        >
+                            <Popover.Close
+                                render={
+                                    <Button variant="text" className={styles.closeButton}>
+                                        <Image src={closeButtonIcon} alt="fermer menu de recherche"></Image>
+                                    </Button>
+                                }
+                            />
+
+                            <InputField type="text" autoFocus className={styles.searchInput} />
+
+                            <SearchFilter />
+
+                            <Button variant="filled" className={styles.searchButton}>
+                                Rechercher
+                            </Button>
+
+                            <div className={styles.searchResults}>CECI EST LE RESULTAT DE LA RECHERCHE</div>
+                        </Popover.Popup>
+                    </Popover.Positioner>
+                </Popover.Portal>
+            </Popover.Root>
+
+            {/* BURGER MENU */}
+            <Menu.Root modal={true}>
+                <Menu.Trigger
+                    render={
+                        <Button variant="filled">
+                            <Image src={burgerMenuIcon} alt="liens vers d'autres pages"></Image>
+                        </Button>
+                    }
+                />
+                <Menu.Portal>
+                    <Menu.Backdrop render={<Backdrop />} />
+                    <Menu.Positioner anchor={mainDivRef.current} align="start" side="bottom">
+                        <Menu.Popup
+                            className={`${styles.localVariables} ${styles.overlayContainer} ${styles.burgerMenuContainer}`}
+                        >
+                            <Menu.Item
+                                render={
+                                    <Button variant="text">
+                                        <Image src={closeButtonIcon} alt="fermer menu de recherche"></Image>
+                                    </Button>
+                                }
+                            />
+
+                            {headerLinks.map((link, index) => (
+                                <Menu.Item
+                                    key={index}
+                                    render={
+                                        <Link href={link.href}>
+                                            <Button variant="text">{link.label}</Button>
+                                        </Link>
+                                    }
+                                />
+                            ))}
+                        </Menu.Popup>
+                    </Menu.Positioner>
+                </Menu.Portal>
+            </Menu.Root>
+        </div>
+    );
+};
+
+const DesktopNavbarAndSearchMenu = ({
+    isSearchMode,
+    handleSearchMode,
+    handleNavigation,
+}: {
+    isSearchMode: boolean;
+    handleSearchMode: () => void;
+    handleNavigation: () => void;
+}) => {
+    const searchInputRef = useRef<HTMLInputElement>(null);
+
+    return (
+        <div className={styles.bigScreenContainer}>
+            {isSearchMode ? (
+                <>
+                    <div className={styles.secondaryContainer}>
+                        <SearchFilter isDesktop />
+
+                        <InputField type="text" ref={searchInputRef} autoFocus />
+                        <Button variant="filled">Rechercher</Button>
+                        <Button variant="ghost" onClick={handleSearchMode}>
+                            Fermer
+                        </Button>
+
+                        {/* SEARCH SUGGESTIONS */}
+                        <Popover.Root open={isSearchMode}>
+                            <Popover.Portal>
+                                <Popover.Positioner anchor={searchInputRef} align="start" side="bottom">
+                                    <Popover.Popup
+                                        className={`${styles.overlayContainer} ${styles.localVariables}`}
+                                        initialFocus={searchInputRef}
+                                    >
+                                        TODO: IMPLEMENT SEARCH SUGGESTIONS
+                                    </Popover.Popup>
+                                </Popover.Positioner>
+                            </Popover.Portal>
+                        </Popover.Root>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <div className={styles.secondaryContainer}>
+                        {headerLinks.map((link, index) => (
+                            <Link href={link.href} key={index} onNavigate={handleNavigation}>
+                                <Button variant="text">{link.label}</Button>
+                            </Link>
+                        ))}
+                    </div>
+                    <div className={styles.secondaryContainer}>
+                        <Button variant="ghost" onClick={handleSearchMode}>
+                            <Image src={searchIcon} alt="search"></Image>
+                        </Button>
+
+                        <Link href="/contact" onNavigate={handleNavigation}>
+                            <Button variant="filled">CONTACT</Button>
+                        </Link>
+                    </div>
+                </>
+            )}
+        </div>
+    );
+};
+
 type NavbarProps = {
     isSearchMode?: boolean;
     handleSearchMode: () => void;
@@ -66,11 +234,11 @@ export default function Navbar({ isSearchMode, handleSearchMode, handleNavigatio
      * - Implement forms for search filters
      * - Implement search suggestions
      * - Remove magic strings
-     * - Refacto the code, using smaller components/modules
      */
 
     const mainDivRef = useRef<HTMLDivElement>(null);
-    const searchInputRef = useRef<HTMLInputElement>(null);
+
+    const isDesktop = useIsDesktop();
 
     return (
         <>
@@ -82,143 +250,15 @@ export default function Navbar({ isSearchMode, handleSearchMode, handleNavigatio
                     <Image src={erasmeLogo} alt="Logo Erasme" className={styles.erasmeLogo} />
                 </Link>
 
-                {/* SMALL SCREENS ONLY */}
-                <div className={styles.smallScreenContainer}>
-                    <Button variant="text">
-                        <Image src={emailIcon} alt="contact"></Image>
-                    </Button>
-
-                    {/* SEARCH MENU */}
-                    <Popover.Root modal={true}>
-                        <Popover.Trigger
-                            render={
-                                <Button variant="text">
-                                    <Image src={searchIcon} alt="search"></Image>
-                                </Button>
-                            }
-                        />
-                        <Popover.Portal>
-                            <Popover.Backdrop render={<Backdrop />} />
-                            <Popover.Positioner anchor={mainDivRef.current} align="start" side="bottom">
-                                <Popover.Popup
-                                    className={`${styles.localVariables} ${styles.overlayContainer} ${styles.searchMenuContainer}`}
-                                >
-                                    <Popover.Close
-                                        render={
-                                            <Button variant="text" className={styles.closeButton}>
-                                                <Image src={closeButtonIcon} alt="close menu"></Image>
-                                            </Button>
-                                        }
-                                    />
-
-                                    <InputField type="text" autoFocus className={styles.searchInput} />
-
-                                    {/* SEARCH FILTER */}
-                                    <SelectBox className={{ trigger: styles.filterButton }} items={typeFilters} />
-
-                                    <Button variant="filled" className={styles.searchButton}>
-                                        Rechercher
-                                    </Button>
-
-                                    <div className={styles.searchResults}>CECI EST LE RESULTAT DE LA RECHERCHE</div>
-                                </Popover.Popup>
-                            </Popover.Positioner>
-                        </Popover.Portal>
-                    </Popover.Root>
-
-                    {/* BURGER MENU */}
-                    <Menu.Root modal={true}>
-                        <Menu.Trigger
-                            render={
-                                <Button variant="filled">
-                                    <Image src={burgerMenuIcon} alt="links"></Image>
-                                </Button>
-                            }
-                        />
-                        <Menu.Portal>
-                            <Menu.Backdrop render={<Backdrop />} />
-                            <Menu.Positioner anchor={mainDivRef.current} align="start" side="bottom">
-                                <Menu.Popup
-                                    className={`${styles.localVariables} ${styles.overlayContainer} ${styles.burgerMenuContainer}`}
-                                >
-                                    <Menu.Item
-                                        render={
-                                            <Button variant="text">
-                                                <Image src={closeButtonIcon} alt="close menu"></Image>
-                                            </Button>
-                                        }
-                                    />
-
-                                    {headerLinks.map((link, index) => (
-                                        <Menu.Item
-                                            key={index}
-                                            render={
-                                                <Link href={link.href}>
-                                                    <Button variant="text">{link.label}</Button>
-                                                </Link>
-                                            }
-                                        />
-                                    ))}
-                                </Menu.Popup>
-                            </Menu.Positioner>
-                        </Menu.Portal>
-                    </Menu.Root>
-                </div>
-
-                {/* BIG SCREENS ONLY */}
-                <div className={styles.bigScreenContainer}>
-                    {isSearchMode ? (
-                        <>
-                            <div className={styles.secondaryContainer}>
-                                {/* SEARCH FILTER */}
-                                <SelectBox
-                                    className={{
-                                        trigger: styles.filterButton,
-                                        popup: `${styles.overlayContainer} ${styles.localVariables}`,
-                                    }}
-                                    items={typeFilters}
-                                />
-
-                                <InputField type="text" ref={searchInputRef} autoFocus />
-                                <Button variant="filled">Rechercher</Button>
-                                <Button variant="ghost" onClick={handleSearchMode}>
-                                    Fermer
-                                </Button>
-
-                                {/* SEARCH SUGGESTIONS */}
-                                <Popover.Root open={isSearchMode}>
-                                    <Popover.Portal>
-                                        <Popover.Positioner anchor={searchInputRef} align="start" side="bottom">
-                                            <Popover.Popup
-                                                className={`${styles.overlayContainer} ${styles.localVariables}`}
-                                                initialFocus={searchInputRef}
-                                            >
-                                                TODO: IMPLEMENT SEARCH SUGGESTIONS
-                                            </Popover.Popup>
-                                        </Popover.Positioner>
-                                    </Popover.Portal>
-                                </Popover.Root>
-                            </div>
-                        </>
-                    ) : (
-                        <>
-                            <div className={styles.secondaryContainer}>
-                                {headerLinks.map((link, index) => (
-                                    <Link href={link.href} key={index} onNavigate={handleNavigation}>
-                                        <Button variant="text">{link.label}</Button>
-                                    </Link>
-                                ))}
-                            </div>
-                            <div className={styles.secondaryContainer}>
-                                <Button variant="ghost" onClick={handleSearchMode}>
-                                    <Image src={searchIcon} alt="search"></Image>
-                                </Button>
-
-                                <Button variant="filled">CONTACT</Button>
-                            </div>
-                        </>
-                    )}
-                </div>
+                {isDesktop ? (
+                    <DesktopNavbarAndSearchMenu
+                        isSearchMode={isSearchMode ?? false}
+                        handleSearchMode={handleSearchMode}
+                        handleNavigation={handleNavigation}
+                    />
+                ) : (
+                    <MobileNavbarAndSearchMenu mainDivRef={mainDivRef} />
+                )}
             </header>
         </>
     );
