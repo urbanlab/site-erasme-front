@@ -6,8 +6,7 @@ import { ApolloNextAppProvider, ApolloClient, InMemoryCache } from '@apollo/clie
 // have a function to create a client for you
 function makeClient() {
     const httpLink = new HttpLink({
-        // this needs to be an absolute url, as relative urls cannot be used in SSR
-        uri: process.env.GRAPHQL_ENDPOINT,
+        uri: '/proxy', // use the proxy route to handle the request
         // you can disable result caching here if you want to
         // (this does not work if you are rendering your page with `export const dynamic = "force-static"`)
         fetchOptions: {
@@ -19,9 +18,6 @@ function makeClient() {
         // via the `context` property on the options passed as a second argument
         // to an Apollo Client data fetching hook, e.g.:
         // const { data } = useSuspenseQuery(MY_QUERY, { context: { fetchOptions: { ... }}});
-        headers: {
-            'X-Auth-Token': process.env.GRAPHQL_TOKEN ?? '',
-        },
     });
 
     // use the `ApolloClient` from "@apollo/client-integration-nextjs"
