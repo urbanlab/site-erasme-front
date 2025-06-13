@@ -5,13 +5,12 @@ import { query } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
 import RubriqueProjetsAccordion from '@ui/components/rubriqueProjetsAccordion';
 import ShapedImage from '@ui/components/shapedImage';
-import Tag from '@ui/elements/tag';
 import styles from './page.module.css';
 
 const RubriquePresentation = async () => {
     const { data } = await query<RubriquePresentationQuery>({
         query: RUBRIQUE_PRESENTATION,
-        variables: { id: parseInt(process.env.SPIP_RUBRIQUES_PROJETS_ID ?? '') },
+        variables: { id: parseInt(process.env.SPIP_RUBRIQUE_PROJETS_ID ?? '') },
     });
 
     return (
@@ -30,7 +29,7 @@ const RubriquePresentation = async () => {
 const ProjetsList = async () => {
     const { data } = await query<ListProjetsQuery>({
         query: LIST_PROJETS,
-        variables: { where: `id_parent=${process.env.SPIP_RUBRIQUES_PROJETS_ID}` },
+        variables: { where: `id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}` },
     });
 
     return <RubriqueProjetsAccordion rubriques={data.rubriques} />;

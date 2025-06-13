@@ -24,7 +24,7 @@ const ArticleSection = async ({ id, className }: { id: string; className?: strin
 export default async function Contact() {
     const { data } = await query<RubriquePresentationQuery>({
         query: RUBRIQUE_PRESENTATION,
-        variables: { id: parseInt(process.env.SPIP_RUBRIQUES_CONTACT_ID ?? '') },
+        variables: { id: parseInt(process.env.SPIP_RUBRIQUE_CONTACT_ID ?? '') },
     });
 
     return (
@@ -38,29 +38,29 @@ export default async function Contact() {
 
             <div className={styles.contentContainer}>
                 <ArticleSection
-                    id={process.env.SPIP_RUBRIQUES_CONTACT_ARTICLES_NOUS_JOINDRE_ID ?? ''}
+                    id={process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_NOUS_JOINDRE_ID ?? ''}
                     className={styles.nousRejoindre}
                 />
 
                 <AddessesWrapper
                     bureauxAdministratifsSection={
                         <ArticleSection
-                            id={process.env.SPIP_RUBRIQUES_CONTACT_ARTICLES_BUREAUX_ADMINISTRATIFS_ID ?? ''}
+                            id={process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_BUREAUX_ADMINISTRATIFS_ID ?? ''}
                         />
                     }
                     urbanLabSection={
-                        <ArticleSection id={process.env.SPIP_RUBRIQUES_CONTACT_ARTICLES_URBAN_LAB_ID ?? ''} />
+                        <ArticleSection id={process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_URBAN_LAB_ID ?? ''} />
                     }
                     className={styles.wrapper}
                 />
 
                 <ArticleSection
-                    id={process.env.SPIP_RUBRIQUES_CONTACT_ARTICLES_LACLASSE_ID ?? ''}
+                    id={process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_LACLASSE_ID ?? ''}
                     className={styles.laclasse}
                 />
 
                 <ArticleSection
-                    id={process.env.SPIP_RUBRIQUES_CONTACT_ARTICLES_RESEAUX_SOCIAUX_ID ?? ''}
+                    id={process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_RESEAUX_SOCIAUX_ID ?? ''}
                     className={styles.reseauxSociaux}
                 />
             </div>

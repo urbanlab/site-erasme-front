@@ -8,7 +8,7 @@ import styles from './page.module.css';
 export default async function Services() {
     const { data } = await query({
         query: SERVICES,
-        variables: { id: parseInt(process.env.SPIP_RUBRIQUES_SERVICES_ID ?? '') },
+        variables: { id: parseInt(process.env.SPIP_RUBRIQUE_SERVICES_ID ?? '') },
     });
 
     return (

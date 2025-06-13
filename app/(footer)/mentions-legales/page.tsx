@@ -9,7 +9,7 @@ import styles from './page.module.css';
 export default async function MentionsLegales() {
     const { data } = await query<MentionsLegalesQuery>({
         query: MENTIONS_LEGALES,
-        variables: { id: parseInt(process.env.SPIP_PAGE_MENTIONS_LEGALES_ID ?? '') },
+        variables: { id: parseInt(process.env.SPIP_ARTICLE_MENTIONS_LEGALES_ID ?? '') },
     });
 
     return (
