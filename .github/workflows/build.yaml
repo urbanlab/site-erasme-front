@@ -31,7 +31,7 @@ jobs:
           push: true
           context: .
           tags: erasme/erasme.org-v2-front:${{ github.ref == 'refs/heads/main' && 'latest' || 'dev' }} , erasme/erasme.org-v2-front:${{ github.sha }}
-          build-arg: |
+          build-args: |
             BACKEND_BASE_URL=${{ vars.BACKEND_BASE_URL }}
             GRAPHQL_ENDPOINT=${{ vars.GRAPHQL_ENDPOINT }}
             GRAPHQL_TOKEN=${{ secrets.GRAPHQL_TOKEN }}
