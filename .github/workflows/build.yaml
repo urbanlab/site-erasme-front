@@ -29,6 +29,7 @@ env:
 jobs:
   app:
     runs-on: ubuntu-latest
+    environment: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2

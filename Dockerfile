@@ -82,7 +82,7 @@ RUN echo $SPIP_RUBRIQUE_CONTACT_ARTICLE_NOUS_JOINDRE_ID
 RUN echo $SPIP_RUBRIQUE_CONTACT_ARTICLE_LACLASSE_ID
 RUN echo $SPIP_RUBRIQUE_CONTACT_ARTICLE_RESEAUX_SOCIAUX_ID
 
-RUN npm run build; 
+RUN npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
