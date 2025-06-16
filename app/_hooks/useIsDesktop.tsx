@@ -16,7 +16,6 @@ export function useIsDesktop() {
     const [isDesktop, setIsDesktop] = useState(false);
 
     useEffect(() => {
-        console.log('useIsDesktop hook initialized');
         // Skip SSR
         if (typeof window === 'undefined') return;
 
