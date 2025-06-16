@@ -1,7 +1,7 @@
 export async function POST(request: Request) {
     const body = await request.text();
 
-    const response = await fetch(process.env.GRAPHQL_ENDPOINT ?? '', {
+    const response = await fetch(`${process.env.BACKEND_BASE_URL}/${process.env.GRAPHQL_ENDPOINT}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
