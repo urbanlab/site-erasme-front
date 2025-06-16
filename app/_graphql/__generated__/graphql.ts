@@ -80,6 +80,7 @@ export type Article = Objet & {
 
 /** Un objet Article */
 export type ArticleAuteursArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -88,6 +89,7 @@ export type ArticleAuteursArgs = {
 
 /** Un objet Article */
 export type ArticleDocumentsArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -96,6 +98,7 @@ export type ArticleDocumentsArgs = {
 
 /** Un objet Article */
 export type ArticleMotsArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -146,6 +149,7 @@ export type Auteur = Objet & {
 
 /** Un objet Auteur */
 export type AuteurDocumentsArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -230,6 +234,7 @@ export type Groupe_Mots = Objet & {
 
 /** Un objet Groupe_mots */
 export type Groupe_MotsMotsArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -272,6 +277,7 @@ export type Mot = Objet & {
 
 /** Un objet Mot */
 export type MotDocumentsArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -350,6 +356,7 @@ export type Query = {
 
 /** Liste des requêtes disponibles */
 export type QueryArticlesArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -358,6 +365,7 @@ export type QueryArticlesArgs = {
 
 /** Liste des requêtes disponibles */
 export type QueryAuteursArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -366,6 +374,7 @@ export type QueryAuteursArgs = {
 
 /** Liste des requêtes disponibles */
 export type QueryDocumentsArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -410,6 +419,7 @@ export type QueryGetRubriqueArgs = {
 
 /** Liste des requêtes disponibles */
 export type QueryGroupes_MotsArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -418,6 +428,7 @@ export type QueryGroupes_MotsArgs = {
 
 /** Liste des requêtes disponibles */
 export type QueryMotsArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -435,6 +446,7 @@ export type QueryRechercheArgs = {
 
 /** Liste des requêtes disponibles */
 export type QueryRubriquesArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -481,6 +493,7 @@ export type Rubrique = Objet & {
 
 /** Un objet Rubrique */
 export type RubriqueArticlesArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -489,6 +502,7 @@ export type RubriqueArticlesArgs = {
 
 /** Un objet Rubrique */
 export type RubriqueAuteursArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -497,6 +511,7 @@ export type RubriqueAuteursArgs = {
 
 /** Un objet Rubrique */
 export type RubriqueDocumentsArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -505,6 +520,7 @@ export type RubriqueDocumentsArgs = {
 
 /** Un objet Rubrique */
 export type RubriqueMotsArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -513,6 +529,7 @@ export type RubriqueMotsArgs = {
 
 /** Un objet Rubrique */
 export type RubriqueRubriquesArgs = {
+  orderby?: Array<Scalars['String']['input']>;
   page?: Scalars['Int']['input'];
   pagination?: Scalars['Int']['input'];
   where?: Array<Scalars['String']['input']>;
@@ -590,6 +607,6 @@ export const ArticleInformationFieldsFragmentDoc = {"kind":"Document","definitio
 export const ServicesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Services"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getRubrique"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"articles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"texte"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ServicesQuery, ServicesQueryVariables>;
 export const MentionsLegalesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MentionsLegales"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getArticle"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"texte"}}]}}]}}]} as unknown as DocumentNode<MentionsLegalesQuery, MentionsLegalesQueryVariables>;
 export const SimpleArticleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SimpleArticle"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getArticle"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"texte"}}]}}]}}]} as unknown as DocumentNode<SimpleArticleQuery, SimpleArticleQueryVariables>;
-export const ArticleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Article"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getArticle"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"date_modif"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"texte"}},{"kind":"Field","name":{"kind":"Name","value":"description_title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"description_title_second"}},{"kind":"Field","name":{"kind":"Name","value":"description_second"}},{"kind":"Field","name":{"kind":"Name","value":"chiffres_cles"}},{"kind":"Field","name":{"kind":"Name","value":"description_lateral_title"}},{"kind":"Field","name":{"kind":"Name","value":"description_lateral"}},{"kind":"Field","name":{"kind":"Name","value":"developpement"}},{"kind":"Field","name":{"kind":"Name","value":"mots"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"motsAndGroupMotsFromArticleFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"documentsFromArticleFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"auteurs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"rubrique"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"motsAndGroupMotsFromArticleFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"MotPagination"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"groupe"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"documentsFromArticleFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"DocumentPagination"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"hauteur"}},{"kind":"Field","name":{"kind":"Name","value":"largeur"}},{"kind":"Field","name":{"kind":"Name","value":"fichier"}}]}}]}}]} as unknown as DocumentNode<ArticleQuery, ArticleQueryVariables>;
+export const ArticleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Article"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getArticle"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"date_modif"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"texte"}},{"kind":"Field","name":{"kind":"Name","value":"auteurs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"rubrique"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]}}]} as unknown as DocumentNode<ArticleQuery, ArticleQueryVariables>;
 export const RubriquePresentationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"RubriquePresentation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getRubrique"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"texte"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]} as unknown as DocumentNode<RubriquePresentationQuery, RubriquePresentationQueryVariables>;
 export const ListProjetsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ListProjets"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"pagination"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"10"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"page"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rubriques"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ListValue","values":[{"kind":"Variable","name":{"kind":"Name","value":"where"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"Variable","name":{"kind":"Name","value":"pagination"}}},{"kind":"Argument","name":{"kind":"Name","value":"page"},"value":{"kind":"Variable","name":{"kind":"Name","value":"page"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pagination"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"paginationFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"texte"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"articles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ArticlePagination"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pagination"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"paginationFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"articleInformationFields"}}]}}]}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"paginationFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Pagination"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currentPage"}},{"kind":"Field","name":{"kind":"Name","value":"totalPages"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"hasPreviousPage"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"articleInformationFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"date_modif"}}]}}]} as unknown as DocumentNode<ListProjetsQuery, ListProjetsQueryVariables>;
