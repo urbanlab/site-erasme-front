@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+# Developpment
+
 ## Getting Started
 
 First, run the development server:
@@ -67,6 +69,32 @@ This application has both server and client side requests to the backend. Server
 
 To prevent CORS problems and to enhance security (caching the graphql token on browser), all client requests pass through a proxy, which is configured in `/proxy/route.tsx` file.
 
+---
+# DevOps
+
+To add a new environment variable:
+## For local development 
+Simply add the new variable in the .env local file
+    - Do not forget to update `.env.example` file as well
+
+## For the deployed version:
+- Update Dockerfile with ARG and ENV lines, like the following:
+    ```
+    ARG MY_NEW_VARIABLE
+    ENV MY_NEW_VARIABLE=$MY_NEW_VARIABLE
+    ```
+
+- Update `.github/workflows/build.yaml`
+  - Add `MY_NEW_VARIABLE ${{ vars.MY_NEW_VARIABLE }}` to `env` section 
+    - ! If it's a secret, use **secrets** instead of **vars**
+  - Add `MY_NEW_VARIABLE` to `build-args` property on Docker build/push step
+  
+- Update github environment variable on _Settings --> Environments --> [dev/prod] --> Add environment [variable/secret]_
+  - Do not forget to update all the concerned environments
+  - /!\ You must have admin rights for the repository
+
+
+---
 ## Usefull vscode extensions
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
