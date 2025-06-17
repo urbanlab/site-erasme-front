@@ -4,9 +4,10 @@ import { query } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
+import { ServicesQuery } from '@graphql/__generated__/graphql';
 
 export default async function Services() {
-    const { data } = await query({
+    const { data } = await query<ServicesQuery>({
         query: SERVICES,
         variables: { id: parseInt(process.env.SPIP_RUBRIQUE_SERVICES_ID ?? '') },
     });
