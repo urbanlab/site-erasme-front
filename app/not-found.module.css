@@ -1,0 +1,44 @@
+.localVariables {
+    --gap-section: 2.625rem;
+    --gap-inside-section: 24px;
+}
+
+.mainContainer {
+    display: grid;
+
+    gap: var(--gap-inside-section);
+    margin-bottom: var(--gap-section);
+
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        'logo'
+        'title'
+        'description'
+        'button';
+
+    & .logo {
+        grid-area: logo;
+    }
+    & .title {
+        grid-area: title;
+    }
+    & .description {
+        grid-area: description;
+    }
+    & .button {
+        grid-area: button;
+        justify-self: start;
+    }
+}
+
+@media screen and (min-width: 90rem) {
+    .mainContainer {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            '. logo'
+            'title logo'
+            'description logo'
+            'button logo'
+            '. logo';
+    }
+}
