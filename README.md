@@ -62,6 +62,8 @@ On Linux, You can find your IP address using the following command in the termin
 ip -4 addr show | grep -oP '(?<=inet\s)192\.168\.\d+\.\d+'
 ```
 
+Note that you will also need to add `build-arg` for all the environment variables on the docker command.
+
 HOWEVER, If you do **not** use docker (i.e you use turbopack to run the application in local), you must use `localhost` for the BACKEND_BASE_URL variable in .env
 
 ### Configuration
@@ -92,6 +94,9 @@ Simply add the new variable in the .env local file
 - Update github environment variable on _Settings --> Environments --> [dev/prod] --> Add environment [variable/secret]_
   - Do not forget to update all the concerned environments
   - /!\ You must have admin rights for the repository
+
+- Some variables must be available for the server during runtime (typically: `BACKEND_BASE_URL`, `GRAPHQL_ENDPOINT` and `GRAPHQL_TOKEN`). For these, in addition to the other steps, you must update them on kubernetes' (Rancher) --> *Environment Variables* on the frontend Deployment. 
+  - nb: since there is a proxy configured, there is no need to expose these variables to the browser (i.e **no** need to prefix them with `NEXT_PUBLIC`)
 
 
 ---
