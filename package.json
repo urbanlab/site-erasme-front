@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev-no-turbopack": "next dev",
     "docker-dev": "docker build -t site-erasme-front:dev . && docker run -p 3000:3000 site-erasme-front:dev",
     "build": "next build",
     "start": "next start",
