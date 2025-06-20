@@ -17,4 +17,55 @@ const ARTICLE_INFORMATION_FIELDS_FRAGMENT = gql(`
     }
 `);
 
-export {PAGINATION_FIELDS_FRAGMENT, ARTICLE_INFORMATION_FIELDS_FRAGMENT};
+const LIST_PROJETS_FIELDS_FRAGMENT = gql(`
+    fragment listProjetsFields on Rubrique{
+        id
+        titre
+        texte
+        date
+        articles {
+            ... on ArticlePagination {
+                pagination {
+                    ...paginationFields
+                }
+                result {
+                    ...articleInformationFields
+                }
+                
+            }
+        }
+    }
+`)
+
+const MOTS_AND_GROUPE_MOTS_FROM_ARTICLE_FIELDS_FRAGMENT = gql(`
+    fragment motsAndGroupMotsFromArticleFields on MotPagination {
+        result{
+            id
+            titre
+            groupe {
+                id
+                titre
+            }
+        }
+    }    
+`);
+
+const DOCUMENTS_FROM_ARTICLE_FIELDS_FRAGMENT = gql(`
+    fragment documentsFromArticleFields on DocumentPagination {
+        result {
+            id
+            alt
+            hauteur
+            largeur
+            fichier
+        }
+    }
+`);
+
+export {
+    PAGINATION_FIELDS_FRAGMENT,
+    ARTICLE_INFORMATION_FIELDS_FRAGMENT,
+    MOTS_AND_GROUPE_MOTS_FROM_ARTICLE_FIELDS_FRAGMENT,
+    DOCUMENTS_FROM_ARTICLE_FIELDS_FRAGMENT,
+    LIST_PROJETS_FIELDS_FRAGMENT,
+};

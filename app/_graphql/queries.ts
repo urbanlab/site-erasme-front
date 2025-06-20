@@ -47,7 +47,28 @@ const ARTICLE = gql(`
             date_modif
             logo
             texte
-            
+
+            #Prototypes
+            description_title
+            description
+            description_title_second
+            description_second
+            chiffres_cles
+            description_lateral_title
+            description_lateral
+            developpement
+            # descr_tech_technique
+
+            #We want to fetch all 'mots'
+            mots(pagination: 100) {
+                ...motsAndGroupMotsFromArticleFields
+            }
+
+            #We want to fetch all 'documents' (images)
+            documents (pagination: 100) {
+                ...documentsFromArticleFields
+            }
+
             auteurs {
                 result {
                     id
@@ -72,37 +93,41 @@ const RUBRIQUE_PRESENTATION = gql(`
     }
 `);
 
-// TODO: VOIR OMMENT TRAVAILLER AVEC DES FRAGMENTS. LE TYPE LISTPROJETQURY VA APPARAITRE DANS
-// D'AUTRES ENDROITS ET IL ME FAUDRA BIND EUX AUSSI.
-//  EX: PAGE EUIPE -> TYPEQUEEMNT, ÇA SERA UNE REQEUTE 'auteurs' avec le champs RUBRIQUES inclus. Cette partie devra être
-// bindé à l'accordion (du coup il faut que ça soit le meme type)
-// Ça sera la meme problematique pour le resultate de la recherche!
-
 const LIST_PROJETS = gql(`
     query ListProjets($where: String!, $pagination: Int = 10, $page: Int = 1) {
         rubriques(where: [$where], pagination: $pagination, page: $page) {
-            pagination{
+            pagination {
                 ...paginationFields
             }
             result {
-                id
-                titre
-                texte
-                date
-                articles {
-                    ... on ArticlePagination {
-                        pagination {
-                            ...paginationFields
-                        }
-                        result {
-                            ...articleInformationFields
-                        }
-                        
-                    }
-                }
+                ...listProjetsFields
             }
         }
     }
 `);
 
-export { ARTICLE, RUBRIQUE_PRESENTATION, LIST_PROJETS, MENTIONS_LEGALES, SERVICES, SIMPLE_ARTICLE };
+/**
+ * The current implementation of the search endpoint doesn't give the option to pre-filter
+ * which category (article, rubrique..) to search for. We are obligated to fetch all the categories
+ * each time.
+ * To make sure all the items are included in the response, we use a high 'pagination' value.
+ * The filters are applied later, by the search hook function.
+ */
+const SEARCH = gql(`
+    query Search($texte: String!, $pagination: Int = 10, $page: Int = 1) {
+        recherche(texte: $texte, pagination: $pagination, page: $page) {
+            result {
+                
+                ...on Rubrique {
+                    ...listProjetsFields
+                }
+                ...on Article {
+                    # ...articleInformationFields
+                    titre
+                    __typename
+                }
+            }
+        }
+    }`);
+
+export { ARTICLE, RUBRIQUE_PRESENTATION, LIST_PROJETS, MENTIONS_LEGALES, SERVICES, SIMPLE_ARTICLE, SEARCH };

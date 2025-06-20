@@ -14,7 +14,12 @@ const config: CodegenConfig = {
         'app/_graphql/__generated__/': {
             preset: 'client',
             presetConfig: {
-                gqlTagName: 'gql', //changes the default tag from graphql to gql
+                //Changes the default tag from graphql to gql
+                gqlTagName: 'gql',
+
+                //Changes the default fragment helper function name from useFragement to getFragmentData, since it's not a React hook.
+                //See https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#the-usefragment-helper
+                fragmentMasking: { unmaskFunctionName: 'getFragmentData' },
             },
             plugins: [],
         },

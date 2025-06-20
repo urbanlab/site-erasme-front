@@ -1,15 +1,18 @@
 import { Accordion } from '@base-ui-components/react/accordion';
-import { ListProjetsQuery } from '@graphql/__generated__/graphql';
+import { getFragmentData } from '@graphql/__generated__/fragment-masking';
+import { ListProjetsFieldsFragmentDoc, ListProjetsQuery } from '@graphql/__generated__/graphql';
 import RemoteHtml from '@services/remoteHtml';
+import ArticleList from '@ui/components/articleList';
 import Arrow from '@ui/elements/arrow';
 import Tag from '@ui/elements/tag';
 import styles from './rubriqueProjetsAccordion.module.css';
-import ArticleList from '@ui/components/articleList';
 
 export default function RubriqueProjetsAccordion({ rubriques }: ListProjetsQuery) {
     return (
         <Accordion.Root className={`${styles.accordion} ${styles.localVariables}`}>
-            {rubriques?.result?.map((rubrique, index) => {
+            {rubriques?.result?.map((rubriqueFragment, index) => {
+                const rubrique = getFragmentData(ListProjetsFieldsFragmentDoc, rubriqueFragment);
+
                 return (
                     <Accordion.Item key={index} className={styles.item}>
                         <Accordion.Trigger className={styles.trigger}>
