@@ -1,17 +1,23 @@
 import { Accordion } from '@base-ui-components/react/accordion';
-import { getFragmentData } from '@graphql/__generated__/fragment-masking';
-import { ListProjetsFieldsFragmentDoc, ListProjetsQuery } from '@graphql/__generated__/graphql';
+import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
+import {
+    ArticleInformationFieldsFragmentDoc,
+    ListProjetsFieldsFragment
+} from '@graphql/__generated__/graphql';
 import RemoteHtml from '@services/remoteHtml';
 import ArticleList from '@ui/components/articleList';
 import Arrow from '@ui/elements/arrow';
 import Tag from '@ui/elements/tag';
 import styles from './rubriqueProjetsAccordion.module.css';
 
-export default function RubriqueProjetsAccordion({ rubriques }: ListProjetsQuery) {
+export default function RubriqueProjetsAccordion({ projets }: { projets: ListProjetsFieldsFragment[] }) {
     return (
         <Accordion.Root className={`${styles.accordion} ${styles.localVariables}`}>
-            {rubriques?.result?.map((rubriqueFragment, index) => {
-                const rubrique = getFragmentData(ListProjetsFieldsFragmentDoc, rubriqueFragment);
+            {projets?.map((rubrique, index) => {
+                const articlesFragment = getFragmentData(
+                    ArticleInformationFieldsFragmentDoc,
+                    rubrique.articles?.result as FragmentType<typeof ArticleInformationFieldsFragmentDoc>[]
+                );
 
                 return (
                     <Accordion.Item key={index} className={styles.item}>
@@ -25,7 +31,7 @@ export default function RubriqueProjetsAccordion({ rubriques }: ListProjetsQuery
                         </Accordion.Trigger>
                         <Accordion.Panel className={styles.panel}>
                             {rubrique?.texte && <RemoteHtml html={rubrique.texte} />}
-                            <ArticleList result={rubrique?.articles?.result} />
+                            <ArticleList articles={articlesFragment} />
                         </Accordion.Panel>
                     </Accordion.Item>
                 );

@@ -1,4 +1,9 @@
-import { ListProjetsQuery, RubriquePresentationQuery } from '@graphql/__generated__/graphql';
+import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
+import {
+    ListProjetsFieldsFragmentDoc,
+    ListProjetsQuery,
+    RubriquePresentationQuery,
+} from '@graphql/__generated__/graphql';
 import { LIST_PROJETS, RUBRIQUE_PRESENTATION } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { query } from '@services/apollo/apolloClient';
@@ -32,7 +37,12 @@ const ProjetsList = async () => {
         variables: { where: `id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}` },
     });
 
-    return <RubriqueProjetsAccordion rubriques={data.rubriques} />;
+    const rubriquesFragment = getFragmentData(
+        ListProjetsFieldsFragmentDoc,
+        data?.rubriques?.result as FragmentType<typeof ListProjetsFieldsFragmentDoc>[]
+    );
+
+    return <RubriqueProjetsAccordion projets={rubriquesFragment} />;
 };
 
 export default async function Projets() {
