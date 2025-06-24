@@ -86,12 +86,12 @@
         margin-right: 0;
 
         & .trigger {
-            grid-template-columns: 1.2fr 1fr;
+            grid-template-columns: 1.2fr auto;
             column-gap: 30px;
 
             & .desktopFields {
                 display: grid;
-                grid-template-columns: 1fr auto;
+                grid-template-columns: auto;
                 align-items: center;
             }
 

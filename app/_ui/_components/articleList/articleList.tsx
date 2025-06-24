@@ -5,18 +5,29 @@ import { dateFormat } from '@utils/dateUtils';
 import Link from 'next/link';
 import styles from './articleList.module.css';
 
-export default function ArticleList({ articles }: { articles: ArticleInformationFieldsFragment[] }) {
+export default function ArticleList({
+    articles,
+    isTagStyle = false,
+}: {
+    articles: ArticleInformationFieldsFragment[];
+    isTagStyle?: boolean;
+}) {
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
             <ul>
                 {articles?.map(article => {
+                    const tag = article.isprototype ? 'prototype' : 'article';
+
                     return (
                         <li key={article?.id}>
                             <Link href={`/projets/${article?.id}`} className={styles.item}>
                                 <p className={styles.title}>{article?.titre}</p>
                                 <div className={`${styles.conditionalDisplay} ${styles.desktopFields}`}>
-                                    {/* TODO: update tag value */}
-                                    <Tag className={styles.tag} value={'project'} size="small" />
+                                    {isTagStyle ? (
+                                        <Tag className={styles.tag} value={tag} size="small" />
+                                    ) : (
+                                        <p>{tag}</p>
+                                    )}
                                     <p className={styles.date}>{dateFormat(article?.date)}</p>
                                     <Arrow className={styles.arrow} orientation="northeast" size={28} />
                                 </div>

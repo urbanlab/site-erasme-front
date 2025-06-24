@@ -24,8 +24,6 @@ export default function RubriqueProjetsAccordion({ projets }: { projets: ListPro
                         <Accordion.Trigger className={styles.trigger}>
                             <div className={styles.title}>{rubrique?.titre}</div>
                             <div className={`${styles.conditionalDisplay} ${styles.desktopFields}`}>
-                                {/* TODO: update tag value */}
-                                <Tag className={styles.tag} value={'project'} />
                                 <Arrow className={styles.arrow} orientation="northeast" size={28} />
                             </div>
                         </Accordion.Trigger>
