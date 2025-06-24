@@ -7,7 +7,6 @@ import {
 import RemoteHtml from '@services/remoteHtml';
 import ArticleList from '@ui/components/articleList';
 import Arrow from '@ui/elements/arrow';
-import Tag from '@ui/elements/tag';
 import styles from './rubriqueProjetsAccordion.module.css';
 
 export default function RubriqueProjetsAccordion({ projets }: { projets: ListProjetsFieldsFragment[] }) {

@@ -1,5 +1,6 @@
 .localVariables {
     --padding-top-bottom: 0.625rem;
+    --padding-left-right: 0.625rem;
 }
 
 .mainContainer {
@@ -13,7 +14,7 @@
         grid-template-columns: 1fr;
         align-items: center;
 
-        padding: var(--padding-top-bottom) 0;
+        padding: var(--padding-top-bottom) var(--padding-left-right);
 
         background: transparent;
 
@@ -50,7 +51,10 @@
 
             &:hover {
                 background: var(--color-primary);
-                font-weight: var(--font-weight-bold);
+
+                & * {
+                    font-weight: var(--font-weight-bold);
+                }
 
                 & .tag {
                     background: var(--color-accent);

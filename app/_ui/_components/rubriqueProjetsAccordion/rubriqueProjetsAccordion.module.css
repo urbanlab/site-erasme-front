@@ -1,6 +1,6 @@
 .localVariables {
     --padding-top-bottom: 0.625rem;
-    --padding-left-right: var(--padding-main);
+    --padding-left-right: 0.625rem;
 
     --panel-padding: 1.25rem 1.25rem 3.125rem 1.25rem;
     --panel-border-radius: 15px;
@@ -8,9 +8,6 @@
 }
 
 .accordion {
-    margin-left: calc(var(--padding-main) * -1);
-    margin-right: calc(var(--padding-main) * -1);
-
     & * {
         font: inherit;
     }
@@ -23,6 +20,12 @@
 
         &:last-child {
             border-bottom: 1px solid var(--color-secondary);
+        }
+
+        &[data-panel-open] {
+            & .title {
+                font-weight: var(--font-weight-bold);
+            }
         }
     }
 
@@ -50,6 +53,10 @@
             background: var(--color-primary);
 
             border-bottom: 1px solid var(--color-secondary);
+
+            & .title {
+                font-weight: var(--font-weight-bold);
+            }
         }
     }
 
@@ -74,7 +81,6 @@
 @media screen and (min-width: 90rem) {
     .localVariables {
         --padding-top-bottom: 1.375rem;
-        --padding-left-right: 1.875rem;
 
         --panel-padding: 2.5rem 5rem 5rem 5rem;
         --panel-border-radius: 30px;
@@ -82,8 +88,6 @@
     }
 
     .accordion {
-        margin-left: 0;
-        margin-right: 0;
 
         & .trigger {
             grid-template-columns: 1.2fr auto;
@@ -95,11 +99,13 @@
                 align-items: center;
             }
 
-            &[data-panel-open] {
-                & .tag {
-                    background: var(--color-accent);
+            &:hover {
+                & .title {
+                    font-weight: var(--font-weight-bold);
                 }
+            }
 
+            &[data-panel-open] {
                 & .arrow {
                     transform: rotate(90deg);
                 }
