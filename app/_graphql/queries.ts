@@ -41,10 +41,8 @@ const SIMPLE_ARTICLE = gql(`
 const ARTICLE = gql(`
     query Article($id: Int!) {
         getArticle(id: $id) {
-            id
-            titre
-            date
-            date_modif
+            ...articleInformationFields
+            
             logo
             texte
 
@@ -114,17 +112,14 @@ const LIST_PROJETS = gql(`
  * The filters are applied later, by the search hook function.
  */
 const SEARCH = gql(`
-    query Search($texte: String!, $pagination: Int = 10, $page: Int = 1) {
-        recherche(texte: $texte, pagination: $pagination, page: $page) {
+    query Search($texte: String!, $pagination: Int = 5000, $page: Int = 1, $where: String!) {
+        recherche(texte: $texte, pagination: $pagination, page: $page, where: $where) {
             result {
-                
                 ...on Rubrique {
                     ...listProjetsFields
                 }
                 ...on Article {
-                    # ...articleInformationFields
-                    titre
-                    __typename
+                    ...articleInformationFields
                 }
             }
         }

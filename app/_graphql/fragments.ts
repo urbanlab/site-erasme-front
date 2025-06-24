@@ -6,6 +6,7 @@ const PAGINATION_FIELDS_FRAGMENT = gql(`
         totalPages
         hasNextPage
         hasPreviousPage
+        totalItems
     }
 `);
 const ARTICLE_INFORMATION_FIELDS_FRAGMENT = gql(`
@@ -14,6 +15,7 @@ const ARTICLE_INFORMATION_FIELDS_FRAGMENT = gql(`
         titre
         date
         date_modif
+        isprototype
     }
 `);
 
