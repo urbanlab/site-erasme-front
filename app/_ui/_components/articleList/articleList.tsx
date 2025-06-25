@@ -7,9 +7,11 @@ import styles from './articleList.module.css';
 
 export default function ArticleList({
     articles,
+    handleNavigation,
     isTagStyle = false,
 }: {
     articles: ArticleInformationFieldsFragment[];
+    handleNavigation?: () => void;
     isTagStyle?: boolean;
 }) {
     return (
@@ -20,7 +22,7 @@ export default function ArticleList({
 
                     return (
                         <li key={article?.id}>
-                            <Link href={`/projets/${article?.id}`} className={styles.item}>
+                            <Link href={`/projets/${article?.id}`} className={styles.item} onNavigate={handleNavigation}>
                                 <p className={styles.title}>{article?.titre}</p>
                                 <div className={`${styles.conditionalDisplay} ${styles.desktopFields}`}>
                                     {isTagStyle ? (

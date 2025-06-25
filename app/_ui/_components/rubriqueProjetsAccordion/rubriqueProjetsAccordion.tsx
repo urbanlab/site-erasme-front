@@ -1,15 +1,18 @@
 import { Accordion } from '@base-ui-components/react/accordion';
 import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
-import {
-    ArticleInformationFieldsFragmentDoc,
-    ListProjetsFieldsFragment
-} from '@graphql/__generated__/graphql';
+import { ArticleInformationFieldsFragmentDoc, ListProjetsFieldsFragment } from '@graphql/__generated__/graphql';
 import RemoteHtml from '@services/remoteHtml';
 import ArticleList from '@ui/components/articleList';
 import Arrow from '@ui/elements/arrow';
 import styles from './rubriqueProjetsAccordion.module.css';
 
-export default function RubriqueProjetsAccordion({ projets }: { projets: ListProjetsFieldsFragment[] }) {
+export default function RubriqueProjetsAccordion({
+    projets,
+    handleNavigation,
+}: {
+    projets: ListProjetsFieldsFragment[];
+    handleNavigation?: () => void;
+}) {
     return (
         <Accordion.Root className={`${styles.accordion} ${styles.localVariables}`}>
             {projets?.map((rubrique, index) => {
@@ -28,7 +31,7 @@ export default function RubriqueProjetsAccordion({ projets }: { projets: ListPro
                         </Accordion.Trigger>
                         <Accordion.Panel className={styles.panel}>
                             {rubrique?.texte && <RemoteHtml html={rubrique.texte} />}
-                            <ArticleList articles={articlesFragment} />
+                            <ArticleList articles={articlesFragment} handleNavigation={handleNavigation} />
                         </Accordion.Panel>
                     </Accordion.Item>
                 );

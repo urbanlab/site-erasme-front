@@ -10,10 +10,12 @@ import styles from './searchResults.module.css';
 export default function SearchResults({
     searchInput,
     searchFilter,
+    handleNavigation,
     className,
 }: {
     searchInput: string;
     searchFilter: SearchFilterItem;
+    handleNavigation?: () => void;
     className?: string;
 }) {
     const isDesktop = useIsDesktop();
@@ -31,14 +33,14 @@ export default function SearchResults({
             {shouldDisplay(searchFilterMap.article) && articles && articles.length > 0 && (
                 <div>
                     <h4 className={styles.sectionTitle}>{`ARTICLES: ${articles.length}`}</h4>
-                    <ArticleList articles={articles} />
+                    <ArticleList articles={articles} handleNavigation={handleNavigation} />
                 </div>
             )}
 
             {shouldDisplay(searchFilterMap.rubrique) && rubriques && rubriques.length > 0 && (
                 <div>
                     <h4 className={styles.sectionTitle}>{`RUBRIQUES: ${rubriques.length}`}</h4>
-                    <RubriqueProjetsAccordion projets={rubriques} />
+                    <RubriqueProjetsAccordion projets={rubriques} handleNavigation={handleNavigation} />
                 </div>
             )}
         </div>

@@ -6,14 +6,14 @@ import closeButtonIcon from '@public/close-button-icon.svg';
 import emailIcon from '@public/email-icon.svg';
 import erasmeLogo from '@public/erasme-logo.svg';
 import searchIcon from '@public/search-icon.svg';
+import SearchFilterSelectBox from '@ui/components/searchFilterSelectBox';
 import Backdrop from '@ui/elements/backdrop';
 import Button from '@ui/elements/button';
 import InputField from '@ui/elements/inputField';
-import SearchFilterSelectBox from '@ui/components/searchFilterSelectBox';
 import { SearchFilterItem, searchFilterMap } from '@utils/searchUtils';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FormEvent, RefObject, Suspense, useRef } from 'react';
+import { FormEvent, RefObject, useRef } from 'react';
 import styles from './navbar.module.css';
 import SearchResults from './searchResults';
 
@@ -88,6 +88,7 @@ const SearchForm = ({
 };
 
 const MobileNavbarAndSearchMenu = ({
+    isSearchMode,
     searchInput,
     searchFilter,
     showSearchResults,
@@ -96,6 +97,7 @@ const MobileNavbarAndSearchMenu = ({
     handleSearchFilterChange,
     mainDivRef,
 }: {
+    isSearchMode: boolean;
     searchInput: string;
     searchFilter: SearchFilterItem;
     showSearchResults: boolean;
@@ -113,7 +115,7 @@ const MobileNavbarAndSearchMenu = ({
             </Link>
 
             {/* SEARCH MENU */}
-            <Popover.Root modal={true} onOpenChangeComplete={handleSearchMode}>
+            <Popover.Root modal={true} open={isSearchMode} onOpenChange={handleSearchMode}>
                 <Popover.Trigger
                     render={
                         <Button variant="text">
@@ -141,7 +143,11 @@ const MobileNavbarAndSearchMenu = ({
 
                             {showSearchResults && (
                                 <div className={styles.searchResults}>
-                                    <SearchResults searchInput={searchInput} searchFilter={searchFilter} />
+                                    <SearchResults
+                                        searchInput={searchInput}
+                                        searchFilter={searchFilter}
+                                        handleNavigation={handleSearchMode}
+                                    />
                                 </div>
                             )}
                         </Popover.Popup>
@@ -232,19 +238,21 @@ const DesktopNavbarAndSearchMenu = ({
 
                         {/* SEARCH SUGGESTIONS */}
                         {showSearchResults ? (
-                            <Suspense fallback="TA CARREGANDO">
-                                <Popover.Root open={showSearchResults}>
-                                    <Popover.Portal>
-                                        <Popover.Positioner anchor={mainDivRef} align="start" side="bottom">
-                                            <Popover.Popup
-                                                className={`${styles.overlayContainer} ${styles.localVariables} ${styles.desktopSearchResultsContainer}`}
-                                            >
-                                                <SearchResults searchInput={searchInput} searchFilter={searchFilter} />
-                                            </Popover.Popup>
-                                        </Popover.Positioner>
-                                    </Popover.Portal>
-                                </Popover.Root>
-                            </Suspense>
+                            <Popover.Root open={showSearchResults}>
+                                <Popover.Portal>
+                                    <Popover.Positioner anchor={mainDivRef} align="start" side="bottom">
+                                        <Popover.Popup
+                                            className={`${styles.overlayContainer} ${styles.localVariables} ${styles.desktopSearchResultsContainer}`}
+                                        >
+                                            <SearchResults
+                                                searchInput={searchInput}
+                                                searchFilter={searchFilter}
+                                                handleNavigation={handleNavigation}
+                                            />
+                                        </Popover.Popup>
+                                    </Popover.Positioner>
+                                </Popover.Portal>
+                            </Popover.Root>
                         ) : (
                             <Popover.Root open={!showSearchResults}>
                                 <Popover.Portal>
@@ -341,6 +349,7 @@ export default function Navbar({
                     />
                 ) : (
                     <MobileNavbarAndSearchMenu
+                        isSearchMode={isSearchMode}
                         searchInput={searchInput}
                         searchFilter={searchFilter}
                         showSearchResults={showSearchResults}
