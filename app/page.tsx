@@ -1,10 +1,10 @@
-// import Image from 'next/image';
-import ShapedImage from '@ui/components/shapedImage';
-import styles from './page.module.css';
-import Button from '@ui/elements/button';
 import heroImage from '@public/hero-img.svg';
 import Card from '@ui/components/card';
 import ImageCard from '@ui/components/imageCard';
+import ShapedImage from '@ui/components/shapedImage';
+import Tag from '@ui/elements/tag';
+import Link from 'next/link';
+import styles from './page.module.css';
 
 const pageTexts = {
     presentationSection: {
@@ -28,11 +28,7 @@ const pageTexts = {
         tags: [
             'Inspirer',
             'Explorer',
-            'Accélérer',
-            'Incubation',
-            'Recherche et développement',
-            'Veille',
-            'Prototypage',
+            'Accélérer'
         ],
     },
     missionSection: {
@@ -88,91 +84,100 @@ const imageCardsContent = [
     },
 ];
 
+const PresentationSection = () => {
+    return (
+        <div className={styles.presentationContainer}>
+            <ShapedImage src={heroImage} alt="Logo Erasme" maskShape="wide" className={styles.presentationImage} />
+            <div className={styles.presentationTextContainer}>
+                <h1>{pageTexts.presentationSection.title}</h1>
+                <h5>{pageTexts.presentationSection.description}</h5>
+            </div>
+        </div>
+    );
+};
+
+const EnCeMomentSection = () => {
+    return (
+        <div className={styles.currentTopicsContainer}>
+            <h2>{pageTexts.currentTopicsSection.title}</h2>
+            <div className={styles.cardsContainer}>
+                <div className={styles.spotlightCardsContainer}>
+                    {cardsContent.map((card, index) => (
+                        <Card
+                            className={styles.card}
+                            variant="filled"
+                            title={card.title}
+                            date={card.date}
+                            body={card.body}
+                            key={index}
+                        />
+                    ))}
+                </div>
+                <div className={styles.archivesContainer}>
+                    <Card
+                        className={styles.card}
+                        variant="ghost"
+                        title="lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum."
+                        date="07/12/2021"
+                        body="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum."
+                    />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const ProgrammesSection = () => {
+    return (
+        <div className={styles.programsContainer}>
+            <h2>{pageTexts.ProgramsSection.title}</h2>
+            <div className={styles.imageCardsContainer}>
+                {imageCardsContent.map((card, index) => (
+                    <ImageCard className={styles.imageCard} title={card.title} image={card.image} key={index} />
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const ServicesSection = () => {
+    return (
+        <div className={styles.servicesContainer}>
+            <h2>{pageTexts.servicesSection.title}</h2>
+            <div className={styles.tagsContainer}>
+                {pageTexts.servicesSection.tags.map((tag, index) => (
+                    <Link key={index} href={`/services#${tag}`}>
+                        <Tag value={tag} />
+                    </Link>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const MissionsSection = () => {
+    return (
+        <div className={styles.missionContainer}>
+            <h2>{pageTexts.missionSection.title}</h2>
+            <p>{pageTexts.missionSection.description}</p>
+        </div>
+    );
+};
+
 export default function Home() {
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
-            {/* PRESENTATION SECTION */}
-            <div className={styles.presentationContainer}>
-                <ShapedImage src={heroImage} alt="Logo Erasme" maskShape='wide' className={styles.presentationImage} />
-                <div className={styles.presentationTextContainer}>
-                    <h1>{pageTexts.presentationSection.title}</h1>
-                    <h5>{pageTexts.presentationSection.description}</h5>
-                </div>
-            </div>
+            <PresentationSection />
 
-            {/* CURRENT TOPICS SECTION */}
-            <div className={styles.currentTopicsContainer}>
-                <h2>{pageTexts.currentTopicsSection.title}</h2>
-                <div className={styles.cardsContainer}>
-                    <div className={styles.spotlightCardsContainer}>
-                        {cardsContent.map((card, index) => (
-                            <Card
-                                className={styles.card}
-                                variant="filled"
-                                title={card.title}
-                                date={card.date}
-                                body={card.body}
-                                key={index}
-                            />
-                        ))}
-                    </div>
-                    <div className={styles.archivesContainer}>
-                        <Card
-                            className={styles.card}
-                            variant="ghost"
-                            title="lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum."
-                            date="07/12/2021"
-                            body="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum."
-                        />
-                    </div>
-                </div>
-            </div>
+            <EnCeMomentSection />
 
             {/* ACCOMPLISHMENTS (Réalisations) SECTION */}
-            {/* <List
-                rows={[
-                    {
-                        id: 0,
-                        title: 'ESSE É O CARA lorem ipsum dolor sit amet CARA lorem ipsum dolor sit amet  CARA lorem ipsum dolor sit amet  CARA lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
-                        tag: 'projet',
-                        items: ['primeiro projeto', 'segundo proijeto']
-                    },
-                    {
-                        id: 1,
-                        title: 'ESSE voluptatum.',
-                        tag: 'prototype',
-                        items: ['projeto', 'segundo proijeto', 'oi']
-                    },
-                ]}
-            /> */}
 
-            {/* PROGRAMS SECTION */}
-            <div className={styles.programsContainer}>
-                <h2>{pageTexts.ProgramsSection.title}</h2>
-                <div className={styles.imageCardsContainer}>
-                    {imageCardsContent.map((card, index) => (
-                        <ImageCard className={styles.imageCard} title={card.title} image={card.image} key={index} />
-                    ))}
-                </div>
-            </div>
+            <ProgrammesSection />
 
-            {/* SERVICES SECTION */}
-            <div className={styles.servicesContainer}>
-                <h2>{pageTexts.servicesSection.title}</h2>
-                <div className={styles.tagsContainer}>
-                    {pageTexts.servicesSection.tags.map((tag, index) => (
-                        <Button className={styles.serviceButton} variant="ghost" key={index}>
-                            {tag}
-                        </Button>
-                    ))}
-                </div>
-            </div>
+            <ServicesSection />
 
-            {/* MISSIONS SECTION */}
-            <div className={styles.missionContainer}>
-                <h2>{pageTexts.missionSection.title}</h2>
-                <p>{pageTexts.missionSection.description}</p>
-            </div>
+            <MissionsSection />
         </div>
     );
 }
