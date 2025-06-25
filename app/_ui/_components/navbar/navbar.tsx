@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu, Popover } from '@base-ui-components/react';
+import { Field, Form, Menu, Popover } from '@base-ui-components/react';
 import burgerMenuIcon from '@public/burger-menu-icon.svg';
 import closeButtonIcon from '@public/close-button-icon.svg';
 import emailIcon from '@public/email-icon.svg';
@@ -9,12 +9,13 @@ import searchIcon from '@public/search-icon.svg';
 import Backdrop from '@ui/elements/backdrop';
 import Button from '@ui/elements/button';
 import InputField from '@ui/elements/inputField';
-import SelectBox from '@ui/elements/selectBox';
+import SearchFilterSelectBox from '@ui/components/searchFilterSelectBox';
+import { SearchFilterItem, searchFilterMap } from '@utils/searchUtils';
 import Image from 'next/image';
 import Link from 'next/link';
-import { RefObject, useRef } from 'react';
+import { FormEvent, RefObject, Suspense, useRef } from 'react';
 import styles from './navbar.module.css';
-import { useIsDesktop } from '@hooks/useIsDesktop';
+import SearchResults from './searchResults';
 
 const headerLinks = [
     {
@@ -31,48 +32,78 @@ const headerLinks = [
     },
 ];
 
-const typeFilters = [
-    {
-        label: 'Tout',
-        value: 'tout',
-    },
-    {
-        label: 'Article',
-        value: 'article',
-    },
-    {
-        label: 'Brève',
-        value: 'brève',
-    },
-    {
-        label: 'Image',
-        value: 'image',
-    },
-    {
-        label: 'Document',
-        value: 'document',
-    },
-];
-
-const SearchFilter = ({ isDesktop }: { isDesktop?: boolean }) => {
+const SearchFilter = ({
+    filter,
+    handleSearchFilterChange,
+    isDesktop,
+}: {
+    filter: SearchFilterItem;
+    handleSearchFilterChange: (event: SearchFilterItem) => void;
+    isDesktop?: boolean;
+}) => {
     return (
-        <SelectBox
+        <SearchFilterSelectBox
             className={
                 isDesktop
                     ? {
-                          trigger: styles.filterButton,
+                          trigger: styles.searchFilter,
                           popup: `${styles.overlayContainer} ${styles.localVariables}`,
                       }
                     : {
-                          trigger: styles.filterButton,
+                          trigger: styles.searchFilter,
                       }
             }
-            items={typeFilters}
+            items={Object.values(searchFilterMap)}
+            value={filter}
+            handleSearchFilterChange={handleSearchFilterChange}
         />
     );
 };
 
-const MobileNavbarAndSearchMenu = ({ mainDivRef }: { mainDivRef: RefObject<HTMLDivElement | null> }) => {
+const SearchForm = ({
+    handleSearchFormSubmit,
+    searchInputRef,
+}: {
+    handleSearchFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
+    searchInputRef?: RefObject<HTMLInputElement | null>;
+}) => {
+    return (
+        <Form onSubmit={handleSearchFormSubmit} style={{ display: 'contents' }}>
+            <Field.Root style={{ display: 'contents' }}>
+                <InputField
+                    type="text"
+                    name="searchInput"
+                    autoFocus
+                    required
+                    ref={searchInputRef}
+                    className={styles.searchInput}
+                />
+            </Field.Root>
+
+            <Button type="submit" variant="filled" className={styles.searchButton}>
+                Rechercher
+            </Button>
+        </Form>
+    );
+};
+
+const MobileNavbarAndSearchMenu = ({
+    searchInput,
+    searchFilter,
+    showSearchResults,
+    handleSearchMode,
+    handleSearchFormSubmit,
+    handleSearchFilterChange,
+    mainDivRef,
+}: {
+    searchInput: string;
+    searchFilter: SearchFilterItem;
+    showSearchResults: boolean;
+    handleSearchMode: () => void;
+    handleSearchFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
+    handleSearchFilterChange: (event: SearchFilterItem) => void;
+    mainDivRef: RefObject<HTMLDivElement | null>;
+}) => {
     return (
         <div className={styles.smallScreenContainer}>
             <Link href="/contact">
@@ -82,7 +113,7 @@ const MobileNavbarAndSearchMenu = ({ mainDivRef }: { mainDivRef: RefObject<HTMLD
             </Link>
 
             {/* SEARCH MENU */}
-            <Popover.Root modal={true}>
+            <Popover.Root modal={true} onOpenChangeComplete={handleSearchMode}>
                 <Popover.Trigger
                     render={
                         <Button variant="text">
@@ -104,15 +135,15 @@ const MobileNavbarAndSearchMenu = ({ mainDivRef }: { mainDivRef: RefObject<HTMLD
                                 }
                             />
 
-                            <InputField type="text" autoFocus className={styles.searchInput} />
+                            <SearchForm handleSearchFormSubmit={handleSearchFormSubmit} />
 
-                            <SearchFilter />
+                            <SearchFilter filter={searchFilter} handleSearchFilterChange={handleSearchFilterChange} />
 
-                            <Button variant="filled" className={styles.searchButton}>
-                                Rechercher
-                            </Button>
-
-                            <div className={styles.searchResults}>CECI EST LE RESULTAT DE LA RECHERCHE</div>
+                            {showSearchResults && (
+                                <div className={styles.searchResults}>
+                                    <SearchResults searchInput={searchInput} searchFilter={searchFilter} />
+                                </div>
+                            )}
                         </Popover.Popup>
                     </Popover.Positioner>
                 </Popover.Portal>
@@ -136,7 +167,7 @@ const MobileNavbarAndSearchMenu = ({ mainDivRef }: { mainDivRef: RefObject<HTMLD
                             <Menu.Item
                                 render={
                                     <Button variant="text">
-                                        <Image src={closeButtonIcon} alt="fermer menu de recherche"></Image>
+                                        <Image src={closeButtonIcon} alt="fermer menu des liens"></Image>
                                     </Button>
                                 }
                             />
@@ -161,12 +192,24 @@ const MobileNavbarAndSearchMenu = ({ mainDivRef }: { mainDivRef: RefObject<HTMLD
 
 const DesktopNavbarAndSearchMenu = ({
     isSearchMode,
+    searchInput,
+    searchFilter,
+    showSearchResults,
     handleSearchMode,
+    handleSearchFormSubmit,
+    handleSearchFilterChange,
     handleNavigation,
+    mainDivRef,
 }: {
     isSearchMode: boolean;
+    searchInput: string;
+    searchFilter: SearchFilterItem;
+    showSearchResults: boolean;
     handleSearchMode: () => void;
+    handleSearchFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
+    handleSearchFilterChange: (event: SearchFilterItem) => void;
     handleNavigation: () => void;
+    mainDivRef: RefObject<HTMLDivElement | null>;
 }) => {
     const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -174,42 +217,63 @@ const DesktopNavbarAndSearchMenu = ({
         <div className={styles.bigScreenContainer}>
             {isSearchMode ? (
                 <>
-                    <div className={styles.secondaryContainer}>
-                        <SearchFilter isDesktop />
+                    <div className={styles.searchMenuContainer}>
+                        <SearchForm handleSearchFormSubmit={handleSearchFormSubmit} searchInputRef={searchInputRef} />
 
-                        <InputField type="text" ref={searchInputRef} autoFocus />
-                        <Button variant="filled">Rechercher</Button>
+                        <SearchFilter
+                            isDesktop
+                            filter={searchFilter}
+                            handleSearchFilterChange={handleSearchFilterChange}
+                        />
+
                         <Button variant="ghost" onClick={handleSearchMode}>
                             Fermer
                         </Button>
 
                         {/* SEARCH SUGGESTIONS */}
-                        <Popover.Root open={isSearchMode}>
-                            <Popover.Portal>
-                                <Popover.Positioner anchor={searchInputRef} align="start" side="bottom">
-                                    <Popover.Popup
-                                        className={`${styles.overlayContainer} ${styles.localVariables}`}
-                                        initialFocus={searchInputRef}
-                                    >
-                                        TODO: IMPLEMENT SEARCH SUGGESTIONS
-                                    </Popover.Popup>
-                                </Popover.Positioner>
-                            </Popover.Portal>
-                        </Popover.Root>
+                        {showSearchResults ? (
+                            <Suspense fallback="TA CARREGANDO">
+                                <Popover.Root open={showSearchResults}>
+                                    <Popover.Portal>
+                                        <Popover.Positioner anchor={mainDivRef} align="start" side="bottom">
+                                            <Popover.Popup
+                                                className={`${styles.overlayContainer} ${styles.localVariables} ${styles.desktopSearchResultsContainer}`}
+                                            >
+                                                <SearchResults searchInput={searchInput} searchFilter={searchFilter} />
+                                            </Popover.Popup>
+                                        </Popover.Positioner>
+                                    </Popover.Portal>
+                                </Popover.Root>
+                            </Suspense>
+                        ) : (
+                            <Popover.Root open={!showSearchResults}>
+                                <Popover.Portal>
+                                    <Popover.Positioner anchor={searchInputRef} align="start" side="bottom">
+                                        <Popover.Popup
+                                            className={`${styles.overlayContainer} ${styles.localVariables} ${styles.verticalOffset}`}
+                                            initialFocus={searchInputRef}
+                                        >
+                                            TODO: IMPLEMENT SEARCH SUGGESTIONS
+                                        </Popover.Popup>
+                                    </Popover.Positioner>
+                                </Popover.Portal>
+                            </Popover.Root>
+                        )}
                     </div>
                 </>
             ) : (
                 <>
-                    <div className={styles.secondaryContainer}>
+                    <div className={styles.mainNavigationContainer}>
                         {headerLinks.map((link, index) => (
                             <Link href={link.href} key={index} onNavigate={handleNavigation}>
                                 <Button variant="text">{link.label}</Button>
                             </Link>
                         ))}
                     </div>
-                    <div className={styles.secondaryContainer}>
+
+                    <div className={styles.mainNavigationContainer}>
                         <Button variant="ghost" onClick={handleSearchMode}>
-                            <Image src={searchIcon} alt="search"></Image>
+                            <Image src={searchIcon} alt="activer mode recherche"></Image>
                         </Button>
 
                         <Link href="/contact" onNavigate={handleNavigation}>
@@ -223,22 +287,35 @@ const DesktopNavbarAndSearchMenu = ({
 };
 
 type NavbarProps = {
-    isSearchMode?: boolean;
+    isDesktop: boolean;
+    isSearchMode: boolean;
+    searchInput: string;
+    searchFilter: SearchFilterItem;
+    showSearchResults: boolean;
     handleSearchMode: () => void;
+    handleSearchFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
+    handleSearchFilterChange: (event: SearchFilterItem) => void;
     handleNavigation: () => void;
 };
 
-export default function Navbar({ isSearchMode, handleSearchMode, handleNavigation }: NavbarProps) {
+export default function Navbar({
+    isDesktop,
+    isSearchMode,
+    searchInput,
+    searchFilter,
+    showSearchResults,
+    handleSearchMode,
+    handleSearchFormSubmit,
+    handleSearchFilterChange,
+    handleNavigation,
+}: NavbarProps) {
     /**
      * TODO:
-     * - Implement forms for search filters
      * - Implement search suggestions
      * - Remove magic strings
      */
 
     const mainDivRef = useRef<HTMLDivElement>(null);
-
-    const isDesktop = useIsDesktop();
 
     return (
         <>
@@ -252,12 +329,26 @@ export default function Navbar({ isSearchMode, handleSearchMode, handleNavigatio
 
                 {isDesktop ? (
                     <DesktopNavbarAndSearchMenu
-                        isSearchMode={isSearchMode ?? false}
+                        isSearchMode={isSearchMode}
+                        searchInput={searchInput}
+                        searchFilter={searchFilter}
+                        showSearchResults={showSearchResults}
                         handleSearchMode={handleSearchMode}
+                        handleSearchFormSubmit={handleSearchFormSubmit}
+                        handleSearchFilterChange={handleSearchFilterChange}
                         handleNavigation={handleNavigation}
+                        mainDivRef={mainDivRef}
                     />
                 ) : (
-                    <MobileNavbarAndSearchMenu mainDivRef={mainDivRef} />
+                    <MobileNavbarAndSearchMenu
+                        searchInput={searchInput}
+                        searchFilter={searchFilter}
+                        showSearchResults={showSearchResults}
+                        handleSearchMode={handleSearchMode}
+                        handleSearchFormSubmit={handleSearchFormSubmit}
+                        handleSearchFilterChange={handleSearchFilterChange}
+                        mainDivRef={mainDivRef}
+                    />
                 )}
             </header>
         </>

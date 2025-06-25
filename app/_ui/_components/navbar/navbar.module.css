@@ -92,13 +92,14 @@
     grid-template-areas:
         '. closeButton'
         'searchInput searchInput'
-        'filterButton searchButton'
+        'searchFilter searchButton'
         'searchResults searchResults';
 
     & .closeButton {
         grid-area: closeButton;
         justify-self: end;
     }
+
     & .searchInput {
         grid-area: searchInput;
         margin-bottom: 1.875rem;
@@ -109,8 +110,8 @@
         justify-self: end;
     }
 
-    & .filterButton {
-        grid-area: filterButton;
+    & .searchFilter {
+        grid-area: searchFilter;
         justify-self: start;
     }
 
@@ -156,7 +157,9 @@
     .overlayContainer {
         width: auto;
         min-width: var(--anchor-width);
+    }
 
+    .verticalOffset {
         margin-top: var(--navbar-padding-top-bottom);
     }
 
@@ -164,14 +167,39 @@
         display: flex;
         gap: 3.125rem;
 
-        & .secondaryContainer {
+        .searchMenuContainer {
+            display: grid;
+            grid-template-areas: 'searchFilter searchInput searchButton closeButton';
+            column-gap: 0.625rem;
+
+            & .closeButton {
+                justify-self: unset;
+            }
+
+            & .searchInput {
+                margin-bottom: unset;
+                width: clamp(24rem, 30vw, 31.25rem);
+            }
+
+            & .searchButton {
+                justify-self: unset;
+            }
+
+            & .searchFilter {
+                justify-self: unset;
+            }
+        }
+
+        & .mainNavigationContainer {
             display: flex;
             column-gap: 0.625rem;
             align-self: center;
-
-            & > input {
-                width: clamp(24rem, 30vw, 31.25rem);
-            }
         }
+    }
+
+    .desktopSearchResultsContainer {
+        max-width: var(--anchor-width);
+        margin-top: unset;
+        background: var(--color-background);
     }
 }

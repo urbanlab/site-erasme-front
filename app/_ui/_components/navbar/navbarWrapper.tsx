@@ -1,12 +1,33 @@
 'use client';
 
+import { useIsDesktop } from '@hooks/useIsDesktop';
 import Backdrop from '@ui/elements/backdrop';
-import { useState } from 'react';
+import { SearchFilterItem, searchFilterMap } from '@utils/searchUtils';
+import { FormEvent, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Navbar from './navbar';
 
 export default function NavbarWrapper() {
     const [isSearchMode, setIsSearchMode] = useState(false);
+    const [showSearchResults, setShowSearchResults] = useState(false);
+    const [searchInput, setSearchInput] = useState('');
+    const [searchFilter, setSearchFilter] = useState<SearchFilterItem>(searchFilterMap.tout);
+
+    const isDesktop = useIsDesktop();
+
+    const handleSearchFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        const formData = new FormData(event?.currentTarget);
+        const inputValue = formData.get('searchInput') as string;
+
+        setSearchInput(inputValue);
+        setShowSearchResults(true);
+    };
+
+    const handleSearchFilterChange = (event: SearchFilterItem) => {
+        setSearchFilter(event);
+    };
 
     //Test to block scroll when the search menu is open, but I don't like it very much. Removing for now.
     //Probably needs to apply to html instead...
@@ -23,12 +44,26 @@ export default function NavbarWrapper() {
     return (
         <>
             <Navbar
+                isDesktop={isDesktop}
                 isSearchMode={isSearchMode}
-                handleSearchMode={() => setIsSearchMode(previousSearchMode => !previousSearchMode)}
+                searchInput={searchInput}
+                searchFilter={searchFilter}
+                showSearchResults={showSearchResults}
+                handleSearchMode={() => {
+                    setIsSearchMode(previousSearchMode => !previousSearchMode);
+                    setShowSearchResults(false);
+                }}
+                handleSearchFormSubmit={handleSearchFormSubmit}
                 handleNavigation={() => setIsSearchMode(false)}
+                handleSearchFilterChange={handleSearchFilterChange}
             />
 
-            {isSearchMode && createPortal(<Backdrop onClick={() => setIsSearchMode(previousSearchMode => !previousSearchMode)} />, document.body)}
+            {isDesktop &&
+                isSearchMode &&
+                createPortal(
+                    <Backdrop onClick={() => setIsSearchMode(previousSearchMode => !previousSearchMode)} />,
+                    document.body
+                )}
         </>
     );
 }

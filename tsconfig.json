@@ -41,6 +41,7 @@
       "@services/remoteHtml": ["_services/_remoteHtml/remoteHtml.tsx"],
       "@services/apollo/*": ["_services/_apollo/*"],
       "@utils/dateUtils": ["_utils/dateUtils.tsx"],
+      "@utils/searchUtils": ["_utils/searchUtils.tsx"],
       "@hooks/*": ["_hooks/*"],
     }
   },
