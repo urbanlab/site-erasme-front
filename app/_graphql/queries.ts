@@ -46,6 +46,7 @@ const ARTICLE = gql(`
             logo
             texte
 
+            isprototype
             #Prototypes
             description_title
             description

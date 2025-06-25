@@ -1,4 +1,4 @@
-import { ArticleQuery } from '@graphql/__generated__/graphql';
+import { ArticleInformationFieldsFragmentDoc, ArticleQuery } from '@graphql/__generated__/graphql';
 import { ARTICLE } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { query } from '@services/apollo/apolloClient';
@@ -7,6 +7,8 @@ import ShapedImage from '@ui/components/shapedImage';
 import Tag from '@ui/elements/tag';
 import { dateFormat } from '@utils/dateUtils';
 import styles from './page.module.css';
+import ArticlePrototype from './articlePrototype';
+import { FragmentType, getFragmentData } from '@graphql/__generated__';
 
 //Pre-fetch some articles during build time
 export async function generateStaticParams() {
@@ -15,6 +17,11 @@ export async function generateStaticParams() {
 }
 
 const ArticlePresentation = ({ data }: { data: ArticleQuery }) => {
+    const articleInformationFieldsFragment = getFragmentData(
+        ArticleInformationFieldsFragmentDoc,
+        data.getArticle as FragmentType<typeof ArticleInformationFieldsFragmentDoc>
+    );
+
     return (
         <div className={styles.presentationContainer}>
             <ShapedImage
@@ -23,9 +30,9 @@ const ArticlePresentation = ({ data }: { data: ArticleQuery }) => {
                 maskShape="wide"
                 className={styles.logo}
             />
-            <h1 className={styles.title}>{data.getArticle?.titre}</h1>
+            <h1 className={styles.title}>{articleInformationFieldsFragment.titre}</h1>
             <Tag value="projet" className={styles.tag} />
-            <p className={styles.date}>{dateFormat(data.getArticle?.date)}</p>
+            <p className={styles.date}>{dateFormat(articleInformationFieldsFragment.date)}</p>
             <ul className={styles.authors}>
                 {data.getArticle?.auteurs?.result && data.getArticle?.auteurs?.result?.length > 0 && <li>Par :</li>}
                 {data.getArticle?.auteurs?.result?.map(author => {
@@ -36,10 +43,16 @@ const ArticlePresentation = ({ data }: { data: ArticleQuery }) => {
     );
 };
 
+const ArticleCommon = ({ data }: { data: ArticleQuery }) => {
+    return <>{data.getArticle?.texte && <RemoteHtml html={data.getArticle.texte} />} </>;
+};
+
 export default async function Article({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
     const { data } = await query<ArticleQuery>({ query: ARTICLE, variables: { id: parseInt(id) } });
+
+    const isPrototype: boolean = data.getArticle?.isprototype === 'on';
 
     return (
         <>
@@ -47,7 +60,7 @@ export default async function Article({ params }: { params: Promise<{ id: string
                 <ArticlePresentation data={data} />
 
                 <div className={styles.contentContainer}>
-                    {data.getArticle?.texte && <RemoteHtml html={data.getArticle.texte} />}
+                    {isPrototype ? <ArticlePrototype data={data} /> : <ArticleCommon data={data} />}
                 </div>
             </div>
         </>

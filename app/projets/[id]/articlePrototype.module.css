@@ -1,0 +1,131 @@
+.localVariables {
+    --bottom-margin-info-card-title: 0.625rem;
+    --padding-info-card: 1rem;
+    --border-radius-info-card: 20px;
+
+    --margin-bottom-section-title: 1rem;
+
+    --gap-section: 2rem;
+}
+
+.mainContainer {
+    display: grid;
+    row-gap: var(--gap-section);
+
+    & h2,
+    h4 {
+        margin-bottom: var(--margin-bottom-section-title);
+    }
+}
+
+.infoCardContainer {
+    display: grid;
+    grid-auto-rows: 1fr;
+    row-gap: 16px;
+
+    .infoCard {
+        background: var(--color-primary);
+        border: 2px solid var(--color-secondary);
+        border-radius: var(--border-radius-info-card);
+        padding: var(--padding-info-card);
+
+        .infoCardTitle {
+            text-align: center;
+            margin-bottom: var(--bottom-margin-info-card-title);
+        }
+
+        & li {
+            list-style: disc inside;
+        }
+    }
+}
+
+.timelineContainer {
+    display: grid;
+    grid-auto-rows: max-content;
+    justify-content: center;
+    text-align: center;
+    gap: 1.875rem;
+
+    .timelineItem {
+        & > div {
+            margin-bottom: 1.875rem;
+        }
+
+        .highlighted {
+            background: var(--color-accent);
+            padding: 1.875rem;
+            border-radius: 1.25rem;
+        }
+        .itemYear {
+            font-family: inherit;
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-bold);
+
+            margin-bottom: 5px;
+        }
+        .itemDescription {
+            font-family: inherit;
+            font-size: 1.25rem;
+            font-weight: var(--font-weight-medium);
+        }
+
+        &:last-child > .itemSeparator {
+            display: none;
+        }
+    }
+}
+
+.keyMetricsContainer {
+    display: grid;
+
+    .keyMetricItem {
+        display: flex;
+        align-items: center;
+        
+        margin-bottom: var(--bottom-margin-info-card-title);
+    }
+
+    .keyMetricValue {
+        background: var(--color-primary);
+        padding: 0.625rem 1rem;
+        border-radius: 20px;
+        margin-right: 0.625rem;
+        font-weight: var(--font-weight-bold);
+    }
+}
+
+.tabsList {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-bottom: 1.875rem;
+}
+
+@media screen and (min-width: 90rem) {
+    .localVariables {
+        --bottom-margin-info-card-title: 1.875rem;
+        --padding-info-card: 2.5rem 1.875rem 3.75rem 1.875rem;
+        --border-radius-info-card: 30px;
+
+        --margin-bottom-section-title: 2.5rem;
+
+        --gap-section: 4.375rem;
+    }
+
+    .infoCardContainer {
+        display: flex;
+        justify-content: space-between;
+        column-gap: 50px;
+
+        padding: 4.375rem 5rem;
+
+        background: var(--color-primary);
+
+        border-radius: 30px;
+
+        .infoCard {
+            flex: 1;
+        }
+    }
+}
