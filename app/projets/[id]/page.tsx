@@ -1,3 +1,4 @@
+import { FragmentType, getFragmentData } from '@graphql/__generated__';
 import { ArticleInformationFieldsFragmentDoc, ArticleQuery } from '@graphql/__generated__/graphql';
 import { ARTICLE } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
@@ -6,9 +7,8 @@ import RemoteHtml from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
 import Tag from '@ui/elements/tag';
 import { dateFormat } from '@utils/dateUtils';
-import styles from './page.module.css';
 import ArticlePrototype from './articlePrototype';
-import { FragmentType, getFragmentData } from '@graphql/__generated__';
+import styles from './page.module.css';
 
 //Pre-fetch some articles during build time
 export async function generateStaticParams() {
@@ -16,7 +16,7 @@ export async function generateStaticParams() {
     return [{ id: '2125' }];
 }
 
-const ArticlePresentation = ({ data, isPrototype }: { data: ArticleQuery, isPrototype: boolean }) => {
+const ArticlePresentation = ({ data, isPrototype }: { data: ArticleQuery; isPrototype: boolean }) => {
     const articleInformationFieldsFragment = getFragmentData(
         ArticleInformationFieldsFragmentDoc,
         data.getArticle as FragmentType<typeof ArticleInformationFieldsFragmentDoc>
