@@ -40,6 +40,10 @@
         filter: var(--svg-filter-black-to-white);
     }
 
+    &:hover {
+        color: var(--color-secondary)
+    }
+
     &:hover > img,
     &:active > img {
         filter: none;
