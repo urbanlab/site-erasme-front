@@ -41,7 +41,8 @@
     }
 
     &:hover {
-        color: var(--color-secondary)
+        color: var(--color-secondary);
+        border-color: var(--color-secondary);
     }
 
     &:hover > img,
