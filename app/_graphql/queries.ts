@@ -93,8 +93,8 @@ const RUBRIQUE_PRESENTATION = gql(`
 `);
 
 const LIST_PROJETS = gql(`
-    query ListProjets($where: String!, $pagination: Int = 10, $page: Int = 1) {
-        rubriques(where: [$where], pagination: $pagination, page: $page) {
+    query ListProjets($where: [String!], $rubriquesOrderBy: [String!], $articlesInRubriqueOrderBy: [String!] $pagination: Int = 10, $page: Int = 1) {
+        rubriques(where: $where, orderby: $rubriquesOrderBy, pagination: $pagination, page: $page) {
             pagination {
                 ...paginationFields
             }
@@ -113,8 +113,8 @@ const LIST_PROJETS = gql(`
  * The filters are applied later, by the search hook function.
  */
 const SEARCH = gql(`
-    query Search($texte: String!, $pagination: Int = 5000, $page: Int = 1, $where: String!) {
-        recherche(texte: $texte, pagination: $pagination, page: $page, where: $where) {
+    query Search($texte: String!, $generalOrderBy: [String!], $articlesInRubriqueOrderBy: [String!], $pagination: Int = 5000, $page: Int = 1, $where: String!) {
+        recherche(texte: $texte, orderby: $generalOrderBy, pagination: $pagination, page: $page, where: $where) {
             result {
                 ...on Rubrique {
                     ...listProjetsFields

@@ -34,7 +34,11 @@ const RubriquePresentation = async () => {
 const ProjetsList = async () => {
     const { data } = await query<ListProjetsQuery>({
         query: LIST_PROJETS,
-        variables: { where: `id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}` },
+        variables: {
+            where: [`id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`],
+            rubriquesOrderBy: [`date_DESC`],
+            articlesInRubriqueOrderBy: [`date_DESC`],
+        },
     });
 
     const rubriquesFragment = getFragmentData(

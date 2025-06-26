@@ -21,7 +21,12 @@ export function useSearchResults({ searchInput }: { searchInput: string }) {
     const [searchResults, setSearchResults] = useState<SearchResults>({ articles: [], rubriques: [] });
 
     const { data } = useSuspenseQuery<SearchQuery>(SEARCH, {
-        variables: { texte: searchInput, where: `statut="publie"` },
+        variables: {
+            texte: searchInput,
+            where: `statut="publie"`,
+            generalOrderBy: [`date_DESC`],
+            articlesInRubriqueOrderBy: [`date_DESC`],
+        },
     });
     useEffect(() => {
         const searchQuery = () => {

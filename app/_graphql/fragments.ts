@@ -25,7 +25,7 @@ const LIST_PROJETS_FIELDS_FRAGMENT = gql(`
         titre
         texte
         date
-        articles {
+        articles(orderby: $articlesInRubriqueOrderBy) {
             ... on ArticlePagination {
                 pagination {
                     ...paginationFields
