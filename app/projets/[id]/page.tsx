@@ -16,7 +16,7 @@ export async function generateStaticParams() {
     return [{ id: '2125' }];
 }
 
-const ArticlePresentation = ({ data }: { data: ArticleQuery }) => {
+const ArticlePresentation = ({ data, isPrototype }: { data: ArticleQuery, isPrototype: boolean }) => {
     const articleInformationFieldsFragment = getFragmentData(
         ArticleInformationFieldsFragmentDoc,
         data.getArticle as FragmentType<typeof ArticleInformationFieldsFragmentDoc>
@@ -31,7 +31,7 @@ const ArticlePresentation = ({ data }: { data: ArticleQuery }) => {
                 className={styles.logo}
             />
             <h1 className={styles.title}>{articleInformationFieldsFragment.titre}</h1>
-            <Tag value="projet" className={styles.tag} />
+            <Tag value={isPrototype ? 'prototype' : 'article'} className={styles.tag} />
             <p className={styles.date}>{dateFormat(articleInformationFieldsFragment.date)}</p>
             <ul className={styles.authors}>
                 {data.getArticle?.auteurs?.result && data.getArticle?.auteurs?.result?.length > 0 && <li>Par :</li>}
@@ -57,7 +57,7 @@ export default async function Article({ params }: { params: Promise<{ id: string
     return (
         <>
             <div className={`${styles.mainContainer} ${styles.localVariables}`}>
-                <ArticlePresentation data={data} />
+                <ArticlePresentation data={data} isPrototype={isPrototype} />
 
                 <div className={styles.contentContainer}>
                     {isPrototype ? <ArticlePrototype data={data} /> : <ArticleCommon data={data} />}
