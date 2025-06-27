@@ -1,4 +1,4 @@
-import { ArticleQuery, MotsAndGroupMotsFromArticleFieldsFragment } from '@graphql/__generated__/graphql';
+import { ArticleAndPrototypeQuery, MotsAndGroupMotsFromArticleFieldsFragment } from '@graphql/__generated__/graphql';
 import RemoteHtml from '@services/remoteHtml';
 import styles from './articlePrototype.module.css';
 import { DevelopmentAndTimelineSectionsWrapper } from './clientComponents';
@@ -93,7 +93,7 @@ const InfoCardWrapper = ({
     data,
     cardsSectionObject,
 }: {
-    data: ArticleQuery;
+    data: ArticleAndPrototypeQuery;
     cardsSectionObject: {
         title: string;
         groupeMotsId: string;
@@ -172,7 +172,7 @@ const parseKeyMetricsData = (data: string): { value: string; description: string
     });
 };
 
-export default function ArticlePrototype({ data, className }: { data: ArticleQuery; className?: string }) {
+export default function ArticlePrototype({ data, className }: { data: ArticleAndPrototypeQuery; className?: string }) {
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables} ${className}`}>
             <DescriptionSection
