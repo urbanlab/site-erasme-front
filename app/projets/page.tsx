@@ -1,10 +1,10 @@
 import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
 import {
+    AllProjectsAndNestedCollectionsQuery,
     ListProjetsFieldsFragmentDoc,
-    ListProjetsQuery,
-    RubriquePresentationQuery,
+    RubriquePresentationQuery
 } from '@graphql/__generated__/graphql';
-import { LIST_PROJETS, RUBRIQUE_PRESENTATION } from '@graphql/queries';
+import { ALL_PROJECTS_AND_NESTED_COLLECTIONS, RUBRIQUE_PRESENTATION } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { query } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
@@ -32,14 +32,25 @@ const RubriquePresentation = async () => {
 };
 
 const ProjetsList = async () => {
-    const { data } = await query<ListProjetsQuery>({
-        query: LIST_PROJETS,
+    // const { data } = await query<ListProjetsQuery>({
+    //     query: LIST_PROJETS,
+    //     variables: {
+    //         where: [`id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`],
+    //         rubriquesOrderBy: [`date_DESC`],
+    //         articlesInRubriqueOrderBy: [`date_DESC`],
+    //     },
+    // });
+
+    const { data } = await query<AllProjectsAndNestedCollectionsQuery>({
+        query: ALL_PROJECTS_AND_NESTED_COLLECTIONS,
         variables: {
             where: [`id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`],
             rubriquesOrderBy: [`date_DESC`],
             articlesInRubriqueOrderBy: [`date_DESC`],
         },
     });
+
+    
 
     const rubriquesFragment = getFragmentData(
         ListProjetsFieldsFragmentDoc,

@@ -19,25 +19,53 @@ const ARTICLE_INFORMATION_FIELDS_FRAGMENT = gql(`
     }
 `);
 
+// const LIST_PROJETS_FIELDS_FRAGMENT = gql(`
+//     fragment listProjetsFields on Rubrique{
+//         id
+//         titre
+//         texte
+//         date
+//         articles(orderby: $articlesInRubriqueOrderBy) {
+//             ... on ArticlePagination {
+//                 pagination {
+//                     ...paginationFields
+//                 }
+//                 result {
+//                     ...articleInformationFields
+//                 }
+                
+//             }
+//         }
+//     }
+// `)
+
 const LIST_PROJETS_FIELDS_FRAGMENT = gql(`
     fragment listProjetsFields on Rubrique{
         id
         titre
         texte
         date
-        articles(orderby: $articlesInRubriqueOrderBy) {
-            ... on ArticlePagination {
+        articles(orderby: $articlesInRubriqueOrderBy, pagination: $pagination) {
+            ...on ArticlePagination {
                 pagination {
                     ...paginationFields
                 }
                 result {
                     ...articleInformationFields
+                
+                    mots(pagination: $pagination) {
+                        ...on MotPagination {
+                            ...motsAndGroupMotsFromArticleFields
+                        }
+                    }
                 }
+
                 
             }
         }
     }
 `)
+
 
 const MOTS_AND_GROUPE_MOTS_FROM_ARTICLE_FIELDS_FRAGMENT = gql(`
     fragment motsAndGroupMotsFromArticleFields on MotPagination {
