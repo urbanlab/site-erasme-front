@@ -1,6 +1,9 @@
 import { FragmentType, getFragmentData } from '@graphql/__generated__';
-import { ArticleInformationFieldsFragmentDoc, ArticleQuery } from '@graphql/__generated__/graphql';
-import { ARTICLE } from '@graphql/queries';
+import {
+    ArticleAndPrototypeQuery,
+    ArticleInformationFieldsFragmentDoc
+} from '@graphql/__generated__/graphql';
+import { ARTICLE_AND_PROTOTYPE } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { query } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
@@ -16,7 +19,7 @@ export async function generateStaticParams() {
     return [{ id: '2125' }];
 }
 
-const ArticlePresentation = ({ data, isPrototype }: { data: ArticleQuery; isPrototype: boolean }) => {
+const ArticlePresentation = ({ data, isPrototype }: { data: ArticleAndPrototypeQuery; isPrototype: boolean }) => {
     const articleInformationFieldsFragment = getFragmentData(
         ArticleInformationFieldsFragmentDoc,
         data.getArticle as FragmentType<typeof ArticleInformationFieldsFragmentDoc>
@@ -43,14 +46,17 @@ const ArticlePresentation = ({ data, isPrototype }: { data: ArticleQuery; isProt
     );
 };
 
-const ArticleCommon = ({ data }: { data: ArticleQuery }) => {
+const ArticleCommon = ({ data }: { data: ArticleAndPrototypeQuery }) => {
     return <>{data.getArticle?.texte && <RemoteHtml html={data.getArticle.texte} />} </>;
 };
 
 export default async function Article({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
-    const { data } = await query<ArticleQuery>({ query: ARTICLE, variables: { id: parseInt(id) } });
+    const { data } = await query<ArticleAndPrototypeQuery>({
+        query: ARTICLE_AND_PROTOTYPE,
+        variables: { id: parseInt(id) },
+    });
 
     const isPrototype: boolean = data.getArticle?.isprototype === 'on';
 

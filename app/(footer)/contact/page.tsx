@@ -1,5 +1,5 @@
-import { RubriquePresentationQuery, SimpleArticleQuery } from '@graphql/__generated__/graphql';
-import { RUBRIQUE_PRESENTATION, SIMPLE_ARTICLE } from '@graphql/queries';
+import { ArticleBasicQuery, RubriquePresentationQuery } from '@graphql/__generated__/graphql';
+import { ARTICLE_BASIC, RUBRIQUE_PRESENTATION } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { query } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
@@ -8,8 +8,8 @@ import { AddessesWrapper } from './clientComponents';
 import styles from './page.module.css';
 
 const ArticleSection = async ({ id, className }: { id: string; className?: string }) => {
-    const { data } = await query<SimpleArticleQuery>({
-        query: SIMPLE_ARTICLE,
+    const { data } = await query<ArticleBasicQuery>({
+        query: ARTICLE_BASIC,
         variables: { id: parseInt(id ?? '') },
     });
 

@@ -1,8 +1,8 @@
 import { gql } from './__generated__';
 import './fragments';
 
-const SERVICES = gql(`
-    query Services($id: Int!) {
+const SERVICES_RUBRIQUE = gql(`
+    query ServicesRubrique($id: Int!) {
         getRubrique(id: $id) {
             logo
             articles {
@@ -16,30 +16,19 @@ const SERVICES = gql(`
     }
 `);
 
-const MENTIONS_LEGALES = gql(`
-    query MentionsLegales($id: Int!) {
+const ARTICLE_BASIC = gql(`
+    query ArticleBasic($id: Int!) {
         getArticle(id: $id) {
             id
             titre
-            logo
             texte
+            logo
         }
     }
 `);
 
-const SIMPLE_ARTICLE = gql(`
-    query SimpleArticle($id: Int!) {
-        getArticle(id: $id) {
-            id
-            titre
-            logo
-            texte
-        }
-    } 
-`);
-
-const ARTICLE = gql(`
-    query Article($id: Int!) {
+const ARTICLE_AND_PROTOTYPE = gql(`
+    query ArticleAndPrototype($id: Int!) {
         getArticle(id: $id) {
             ...articleInformationFields
             
@@ -85,6 +74,7 @@ const ARTICLE = gql(`
 const RUBRIQUE_PRESENTATION = gql(`
     query RubriquePresentation($id: Int!) {
         getRubrique(id: $id) {
+            id
             titre
             texte
             logo
@@ -126,4 +116,4 @@ const SEARCH = gql(`
         }
     }`);
 
-export { ARTICLE, RUBRIQUE_PRESENTATION, LIST_PROJETS, MENTIONS_LEGALES, SERVICES, SIMPLE_ARTICLE, SEARCH };
+export { ARTICLE_AND_PROTOTYPE, RUBRIQUE_PRESENTATION, LIST_PROJETS, ARTICLE_BASIC, SERVICES_RUBRIQUE, SEARCH };
