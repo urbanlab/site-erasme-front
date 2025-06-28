@@ -27,6 +27,7 @@
       "@ui/elements/inputField": ["_ui/_elements/inputField/inputField.tsx"],
       "@ui/elements/arrow": ["_ui/_elements/arrow/arrow.tsx"],
       "@ui/elements/tag": ["_ui/_elements/tag/tag.tsx"],
+      "@ui/elements/loader": ["_ui/_elements/loader/loader.tsx"],
       "@ui/components/searchFilterSelectBox": ["_ui/_components/searchFilterSelectBox/searchFilterSelectBox.tsx"],
       "@ui/components/footer": ["_ui/_components/footer/footer.tsx"],
       "@ui/components/navbar": ["_ui/_components/navbar/navbar.tsx"],

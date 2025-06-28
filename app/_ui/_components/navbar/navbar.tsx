@@ -10,10 +10,11 @@ import SearchFilterSelectBox from '@ui/components/searchFilterSelectBox';
 import Backdrop from '@ui/elements/backdrop';
 import Button from '@ui/elements/button';
 import InputField from '@ui/elements/inputField';
+import Loader from '@ui/elements/loader';
 import { SearchFilterItem, searchFilterMap } from '@utils/searchUtils';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FormEvent, RefObject, useRef } from 'react';
+import { FormEvent, RefObject, Suspense, useRef } from 'react';
 import styles from './navbar.module.css';
 import SearchResults from './searchResults';
 
@@ -143,11 +144,13 @@ const MobileNavbarAndSearchMenu = ({
 
                             {showSearchResults && (
                                 <div className={styles.searchResults}>
-                                    <SearchResults
-                                        searchInput={searchInput}
-                                        searchFilter={searchFilter}
-                                        handleNavigation={handleSearchMode}
-                                    />
+                                    <Suspense fallback={<Loader />}>
+                                        <SearchResults
+                                            searchInput={searchInput}
+                                            searchFilter={searchFilter}
+                                            handleNavigation={handleSearchMode}
+                                        />
+                                    </Suspense>
                                 </div>
                             )}
                         </Popover.Popup>
@@ -244,11 +247,13 @@ const DesktopNavbarAndSearchMenu = ({
                                         <Popover.Popup
                                             className={`${styles.overlayContainer} ${styles.localVariables} ${styles.desktopSearchResultsContainer}`}
                                         >
-                                            <SearchResults
-                                                searchInput={searchInput}
-                                                searchFilter={searchFilter}
-                                                handleNavigation={handleNavigation}
-                                            />
+                                            <Suspense fallback={<Loader />}>
+                                                <SearchResults
+                                                    searchInput={searchInput}
+                                                    searchFilter={searchFilter}
+                                                    handleNavigation={handleNavigation}
+                                                />
+                                            </Suspense>
                                         </Popover.Popup>
                                     </Popover.Positioner>
                                 </Popover.Portal>
