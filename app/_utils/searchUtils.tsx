@@ -1,4 +1,6 @@
-export const searchFilterMap = {
+import { SelectBoxBaseItem } from '@ui/elements/selectBox';
+
+export const searchFilterMap: Record<string, SelectBoxBaseItem> = {
     tout: {
         label: 'Tout',
         value: '',
@@ -19,10 +21,4 @@ export const searchFilterMap = {
         label: 'Document',
         value: 'Document',
     },
-} ;
-
-type SearchFilterKey = keyof typeof searchFilterMap;
-// "tout" | "article" | "rubrique" | "image" | "document"
-
-export type SearchFilterItem = (typeof searchFilterMap)[SearchFilterKey];
-// { label: string; value: string }
+};

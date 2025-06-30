@@ -1,13 +1,17 @@
 import { Select } from '@base-ui-components/react/select';
 import chevronIcon from '@public/chevron-up-icon.svg';
-import { SearchFilterItem } from '@utils/searchUtils';
 import Image from 'next/image';
 import styles from './selectBox.module.css';
 
+export type SelectBoxBaseItem = {
+    label: string | number;
+    value: string | number;
+};
+
 type SelectBoxProps = {
-    items: SearchFilterItem[] | { label: string | number; value: string | number }[];
-    value: SearchFilterItem | { label: string | number; value: string | number };
-    handleValueChange: (event: SearchFilterItem | { label: string | number; value: string | number }) => void;
+    items: SelectBoxBaseItem[];
+    value: SelectBoxBaseItem;
+    handleValueChange: (event: SelectBoxBaseItem) => void;
     placeholder?: string | number;
     className?: { trigger?: string; popup?: string };
 };

@@ -4,7 +4,8 @@ import { useIsDesktop } from '@hooks/useIsDesktop';
 import { useSearchResults } from '@hooks/useSearchResults';
 import ArticleList from '@ui/components/articleList';
 import RubriqueProjetsAccordion from '@ui/components/rubriqueProjetsAccordion';
-import { SearchFilterItem, searchFilterMap } from '@utils/searchUtils';
+import { SelectBoxBaseItem } from '@ui/elements/selectBox';
+import { searchFilterMap } from '@utils/searchUtils';
 import styles from './searchResults.module.css';
 
 export default function SearchResults({
@@ -14,7 +15,7 @@ export default function SearchResults({
     className,
 }: {
     searchInput: string;
-    searchFilter: SearchFilterItem;
+    searchFilter: SelectBoxBaseItem;
     handleNavigation?: () => void;
     className?: string;
 }) {
@@ -22,7 +23,7 @@ export default function SearchResults({
 
     const { articles, rubriques } = useSearchResults({ searchInput: searchInput });
 
-    const shouldDisplay = (filter: SearchFilterItem): boolean => {
+    const shouldDisplay = (filter: SelectBoxBaseItem): boolean => {
         return searchFilter === searchFilterMap.tout || searchFilter === filter;
     };
 

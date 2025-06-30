@@ -10,8 +10,8 @@ import Backdrop from '@ui/elements/backdrop';
 import Button from '@ui/elements/button';
 import InputField from '@ui/elements/inputField';
 import Loader from '@ui/elements/loader';
-import SelectBox from '@ui/elements/selectBox';
-import { SearchFilterItem, searchFilterMap } from '@utils/searchUtils';
+import SelectBox, { SelectBoxBaseItem } from '@ui/elements/selectBox';
+import { searchFilterMap } from '@utils/searchUtils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FormEvent, RefObject, Suspense, useRef } from 'react';
@@ -38,8 +38,8 @@ const SearchFilter = ({
     handleSearchFilterChange,
     isDesktop,
 }: {
-    filter: SearchFilterItem;
-    handleSearchFilterChange: (event: SearchFilterItem) => void;
+    filter: SelectBoxBaseItem;
+    handleSearchFilterChange: (event: SelectBoxBaseItem) => void;
     isDesktop?: boolean;
 }) => {
     return (
@@ -100,11 +100,11 @@ const MobileNavbarAndSearchMenu = ({
 }: {
     isSearchMode: boolean;
     searchInput: string;
-    searchFilter: SearchFilterItem;
+    searchFilter: SelectBoxBaseItem;
     showSearchResults: boolean;
     handleSearchMode: () => void;
     handleSearchFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
-    handleSearchFilterChange: (event: SearchFilterItem) => void;
+    handleSearchFilterChange: (event: SelectBoxBaseItem) => void;
     mainDivRef: RefObject<HTMLDivElement | null>;
 }) => {
     return (
@@ -212,11 +212,11 @@ const DesktopNavbarAndSearchMenu = ({
 }: {
     isSearchMode: boolean;
     searchInput: string;
-    searchFilter: SearchFilterItem;
+    searchFilter: SelectBoxBaseItem;
     showSearchResults: boolean;
     handleSearchMode: () => void;
     handleSearchFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
-    handleSearchFilterChange: (event: SearchFilterItem) => void;
+    handleSearchFilterChange: (event: SelectBoxBaseItem) => void;
     handleNavigation: () => void;
     mainDivRef: RefObject<HTMLDivElement | null>;
 }) => {
@@ -303,11 +303,11 @@ type NavbarProps = {
     isDesktop: boolean;
     isSearchMode: boolean;
     searchInput: string;
-    searchFilter: SearchFilterItem;
+    searchFilter: SelectBoxBaseItem;
     showSearchResults: boolean;
     handleSearchMode: () => void;
     handleSearchFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
-    handleSearchFilterChange: (event: SearchFilterItem) => void;
+    handleSearchFilterChange: (event: SelectBoxBaseItem) => void;
     handleNavigation: () => void;
 };
 
