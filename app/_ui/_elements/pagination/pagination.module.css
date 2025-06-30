@@ -1,0 +1,9 @@
+.mainContainer {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.currentPage {
+    background: var(--color-accent);
+}
