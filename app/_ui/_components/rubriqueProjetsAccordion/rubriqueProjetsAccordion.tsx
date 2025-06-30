@@ -15,14 +15,14 @@ export default function RubriqueProjetsAccordion({
 }) {
     return (
         <Accordion.Root className={`${styles.accordion} ${styles.localVariables}`}>
-            {projets?.map((rubrique, index) => {
+            {projets?.map(rubrique => {
                 const articlesFragment = getFragmentData(
                     ArticleInformationFieldsFragmentDoc,
                     rubrique.articles?.result as FragmentType<typeof ArticleInformationFieldsFragmentDoc>[]
                 );
 
                 return (
-                    <Accordion.Item key={index} className={styles.item}>
+                    <Accordion.Item key={rubrique.id} className={styles.item}>
                         <Accordion.Trigger className={styles.trigger}>
                             <div className={styles.title}>{rubrique?.titre}</div>
                             <div className={`${styles.conditionalDisplay} ${styles.desktopFields}`}>
