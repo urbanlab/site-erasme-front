@@ -5,9 +5,10 @@ type PaginationProps = {
     currentPage: number;
     totalPages: number;
     onPageChange: (page: number) => void;
+    className?: string;
 };
 
-export default function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
+export default function Pagination({ currentPage, totalPages, onPageChange, className }: PaginationProps) {
     const getPageNumbers = () => {
         const pages = [];
 
@@ -19,7 +20,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
     };
 
     return (
-        <div className={styles.mainContainer}>
+        <div className={`${styles.mainContainer} ${className}`}>
             <p>Pages</p>
             {getPageNumbers().map(page => {
                 const isCurrentPage: boolean = page === currentPage;
