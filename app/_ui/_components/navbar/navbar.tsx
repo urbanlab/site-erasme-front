@@ -6,11 +6,11 @@ import closeButtonIcon from '@public/close-button-icon.svg';
 import emailIcon from '@public/email-icon.svg';
 import erasmeLogo from '@public/erasme-logo.svg';
 import searchIcon from '@public/search-icon.svg';
-import SearchFilterSelectBox from '@ui/components/searchFilterSelectBox';
 import Backdrop from '@ui/elements/backdrop';
 import Button from '@ui/elements/button';
 import InputField from '@ui/elements/inputField';
 import Loader from '@ui/elements/loader';
+import SelectBox from '@ui/elements/selectBox';
 import { SearchFilterItem, searchFilterMap } from '@utils/searchUtils';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -43,7 +43,7 @@ const SearchFilter = ({
     isDesktop?: boolean;
 }) => {
     return (
-        <SearchFilterSelectBox
+        <SelectBox
             className={
                 isDesktop
                     ? {
@@ -56,7 +56,7 @@ const SearchFilter = ({
             }
             items={Object.values(searchFilterMap)}
             value={filter}
-            handleSearchFilterChange={handleSearchFilterChange}
+            handleValueChange={handleSearchFilterChange}
         />
     );
 };

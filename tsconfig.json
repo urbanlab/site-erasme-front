@@ -29,7 +29,7 @@
       "@ui/elements/tag": ["_ui/_elements/tag/tag.tsx"],
       "@ui/elements/loader": ["_ui/_elements/loader/loader.tsx"],
       "@ui/elements/pagination": ["_ui/_elements/pagination/pagination.tsx"],
-      "@ui/components/searchFilterSelectBox": ["_ui/_components/searchFilterSelectBox/searchFilterSelectBox.tsx"],
+      "@ui/elements/selectBox": ["_ui/_elements/selectBox/selectBox.tsx"],
       "@ui/components/footer": ["_ui/_components/footer/footer.tsx"],
       "@ui/components/navbar": ["_ui/_components/navbar/navbar.tsx"],
       "@ui/components/navbarWrapper": ["_ui/_components/navbar/navbarWrapper.tsx"],
