@@ -13,17 +13,17 @@ const ArrowIcon = ({size}: {size?: number}) => (
   </svg>
 );
 
-type orientation = 'northeast' | 'southwest' | 'northwest' | 'southeast' | 'north' | 'south' | 'east' | 'west';
+type Orientation = 'northeast' | 'southwest' | 'northwest' | 'southeast' | 'north' | 'south' | 'east' | 'west';
 
 type ArrowProps = {
-    orientation: orientation;
-    hoverOrientation?: orientation;
+    orientation: Orientation;
+    hoverOrientation?: Orientation;
     className?: string;
     size?: number;
 };
 
 export default function Arrow({ orientation, hoverOrientation, size, className }: ArrowProps) {
-    const arrowRotation = (orientation: orientation) => {
+    const arrowRotation = (orientation: Orientation) => {
         switch (orientation) {
             case 'north':
                 return 'rotate(-90deg)';
