@@ -5,20 +5,14 @@ import Image from 'next/image';
 import styles from './selectBox.module.css';
 
 type SelectBoxProps = {
-    items: SearchFilterItem[] | { label: string; value: string }[];
-    value: SearchFilterItem | { label: string; value: string };
-    handleValueChange: (event: SearchFilterItem | { label: string; value: string }) => void;
+    items: SearchFilterItem[] | { label: string | number; value: string | number }[];
+    value: SearchFilterItem | { label: string | number; value: string | number };
+    handleValueChange: (event: SearchFilterItem | { label: string | number; value: string | number }) => void;
     placeholder?: string | number;
     className?: { trigger?: string; popup?: string };
 };
 
-export default function SelectBox({
-    items,
-    value,
-    handleValueChange,
-    placeholder,
-    className,
-}: SelectBoxProps) {
+export default function SelectBox({ items, value, handleValueChange, placeholder, className }: SelectBoxProps) {
     return (
         <Select.Root modal={false} value={value} onValueChange={handleValueChange}>
             <Select.Trigger className={`${styles.trigger} ${className?.trigger}`}>
