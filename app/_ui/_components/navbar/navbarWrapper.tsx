@@ -1,8 +1,8 @@
 'use client';
 
+import { ControlledComponentType } from '@globals/types';
 import { useIsDesktop } from '@hooks/useIsDesktop';
 import Backdrop from '@ui/elements/backdrop';
-import { SelectBoxBaseItem } from '@ui/elements/selectBox';
 import { searchFilterMap } from '@utils/searchUtils';
 import { FormEvent, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -12,7 +12,7 @@ export default function NavbarWrapper() {
     const [isSearchMode, setIsSearchMode] = useState(false);
     const [showSearchResults, setShowSearchResults] = useState(false);
     const [searchInput, setSearchInput] = useState('');
-    const [searchFilter, setSearchFilter] = useState<SelectBoxBaseItem>(searchFilterMap.tout);
+    const [searchFilter, setSearchFilter] = useState<ControlledComponentType>(searchFilterMap.tout);
 
     const isDesktop = useIsDesktop();
 
@@ -26,7 +26,7 @@ export default function NavbarWrapper() {
         setShowSearchResults(true);
     };
 
-    const handleSearchFilterChange = (event: SelectBoxBaseItem) => {
+    const handleSearchFilterChange = (event: ControlledComponentType) => {
         setSearchFilter(event);
     };
 

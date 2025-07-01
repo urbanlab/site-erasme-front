@@ -1,6 +1,7 @@
 'use client';
 
 import { Field, Form, Menu, Popover } from '@base-ui-components/react';
+import { ControlledComponentType } from '@globals/types';
 import burgerMenuIcon from '@public/burger-menu-icon.svg';
 import closeButtonIcon from '@public/close-button-icon.svg';
 import emailIcon from '@public/email-icon.svg';
@@ -10,7 +11,7 @@ import Backdrop from '@ui/elements/backdrop';
 import Button from '@ui/elements/button';
 import InputField from '@ui/elements/inputField';
 import Loader from '@ui/elements/loader';
-import SelectBox, { SelectBoxBaseItem } from '@ui/elements/selectBox';
+import SelectBox from '@ui/elements/selectBox';
 import { searchFilterMap } from '@utils/searchUtils';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -38,8 +39,8 @@ const SearchFilter = ({
     handleSearchFilterChange,
     isDesktop,
 }: {
-    filter: SelectBoxBaseItem;
-    handleSearchFilterChange: (event: SelectBoxBaseItem) => void;
+    filter: ControlledComponentType;
+    handleSearchFilterChange: (event: ControlledComponentType) => void;
     isDesktop?: boolean;
 }) => {
     return (
@@ -100,11 +101,11 @@ const MobileNavbarAndSearchMenu = ({
 }: {
     isSearchMode: boolean;
     searchInput: string;
-    searchFilter: SelectBoxBaseItem;
+    searchFilter: ControlledComponentType;
     showSearchResults: boolean;
     handleSearchMode: () => void;
     handleSearchFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
-    handleSearchFilterChange: (event: SelectBoxBaseItem) => void;
+    handleSearchFilterChange: (event: ControlledComponentType) => void;
     mainDivRef: RefObject<HTMLDivElement | null>;
 }) => {
     return (
@@ -212,11 +213,11 @@ const DesktopNavbarAndSearchMenu = ({
 }: {
     isSearchMode: boolean;
     searchInput: string;
-    searchFilter: SelectBoxBaseItem;
+    searchFilter: ControlledComponentType;
     showSearchResults: boolean;
     handleSearchMode: () => void;
     handleSearchFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
-    handleSearchFilterChange: (event: SelectBoxBaseItem) => void;
+    handleSearchFilterChange: (event: ControlledComponentType) => void;
     handleNavigation: () => void;
     mainDivRef: RefObject<HTMLDivElement | null>;
 }) => {
@@ -303,11 +304,11 @@ type NavbarProps = {
     isDesktop: boolean;
     isSearchMode: boolean;
     searchInput: string;
-    searchFilter: SelectBoxBaseItem;
+    searchFilter: ControlledComponentType;
     showSearchResults: boolean;
     handleSearchMode: () => void;
     handleSearchFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
-    handleSearchFilterChange: (event: SelectBoxBaseItem) => void;
+    handleSearchFilterChange: (event: ControlledComponentType) => void;
     handleNavigation: () => void;
 };
 

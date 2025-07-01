@@ -2,16 +2,12 @@ import { Select } from '@base-ui-components/react/select';
 import chevronIcon from '@public/chevron-up-icon.svg';
 import Image from 'next/image';
 import styles from './selectBox.module.css';
-
-export type SelectBoxBaseItem = {
-    label: string | number;
-    value: string | number;
-};
+import { ControlledComponentType } from '@globals/types';
 
 type SelectBoxProps = {
-    items: SelectBoxBaseItem[];
-    value: SelectBoxBaseItem;
-    handleValueChange: (event: SelectBoxBaseItem) => void;
+    items: ControlledComponentType[];
+    value: ControlledComponentType;
+    handleValueChange: (event: ControlledComponentType) => void;
     placeholder?: string | number;
     className?: { trigger?: string; popup?: string };
 };

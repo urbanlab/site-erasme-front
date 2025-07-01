@@ -1,6 +1,6 @@
-import { SelectBoxBaseItem } from '@ui/elements/selectBox';
+import { ControlledComponentType } from "@globals/types";
 
-export const searchFilterMap: Record<string, SelectBoxBaseItem> = {
+export const searchFilterMap: Record<string, ControlledComponentType> = {
     tout: {
         label: 'Tout',
         value: '',
