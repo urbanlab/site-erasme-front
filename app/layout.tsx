@@ -1,4 +1,4 @@
-import '@styles/globals.css';
+import '@globals/styles.css';
 import Footer from '@ui/components/footer';
 import NavbarWrapper from '@ui/components/navbarWrapper';
 import type { Metadata } from 'next';

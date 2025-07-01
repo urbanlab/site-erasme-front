@@ -21,7 +21,7 @@
     "baseUrl": "app/",
     "paths": {
       "@public/*": ["../public/*"],
-      "@styles/*": ["_styles/*"],
+      "@globals/*": ["_globals/*"],
       "@ui/elements/button": ["_ui/_elements/button/button.tsx"],
       "@ui/elements/backdrop": ["_ui/_elements/backdrop/backdrop.tsx"],
       "@ui/elements/inputField": ["_ui/_elements/inputField/inputField.tsx"],
