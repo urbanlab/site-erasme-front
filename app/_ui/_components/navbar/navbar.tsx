@@ -1,7 +1,7 @@
 'use client';
 
 import { Field, Form, Menu, Popover } from '@base-ui-components/react';
-import { ControlledComponentType } from '@globals/types';
+import { ControlledComponentValueType } from '@globals/types';
 import burgerMenuIcon from '@public/burger-menu-icon.svg';
 import closeButtonIcon from '@public/close-button-icon.svg';
 import emailIcon from '@public/email-icon.svg';
@@ -35,12 +35,12 @@ const headerLinks = [
 ];
 
 const SearchFilter = ({
-    filter,
+    selectedSearchFilter,
     handleSearchFilterChange,
     isDesktop,
 }: {
-    filter: ControlledComponentType;
-    handleSearchFilterChange: (event: ControlledComponentType) => void;
+    selectedSearchFilter: ControlledComponentValueType;
+    handleSearchFilterChange: (searchFilter: ControlledComponentValueType) => void;
     isDesktop?: boolean;
 }) => {
     return (
@@ -56,7 +56,7 @@ const SearchFilter = ({
                       }
             }
             items={Object.values(searchFilterMap)}
-            value={filter}
+            value={selectedSearchFilter}
             handleValueChange={handleSearchFilterChange}
         />
     );
@@ -92,7 +92,7 @@ const SearchForm = ({
 const MobileNavbarAndSearchMenu = ({
     isSearchMode,
     searchInput,
-    searchFilter,
+    selectedSearchFilter,
     showSearchResults,
     handleSearchMode,
     handleSearchFormSubmit,
@@ -101,11 +101,11 @@ const MobileNavbarAndSearchMenu = ({
 }: {
     isSearchMode: boolean;
     searchInput: string;
-    searchFilter: ControlledComponentType;
+    selectedSearchFilter: ControlledComponentValueType;
     showSearchResults: boolean;
     handleSearchMode: () => void;
     handleSearchFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
-    handleSearchFilterChange: (event: ControlledComponentType) => void;
+    handleSearchFilterChange: (searchFilter: ControlledComponentValueType) => void;
     mainDivRef: RefObject<HTMLDivElement | null>;
 }) => {
     return (
@@ -141,14 +141,17 @@ const MobileNavbarAndSearchMenu = ({
 
                             <SearchForm handleSearchFormSubmit={handleSearchFormSubmit} />
 
-                            <SearchFilter filter={searchFilter} handleSearchFilterChange={handleSearchFilterChange} />
+                            <SearchFilter
+                                selectedSearchFilter={selectedSearchFilter}
+                                handleSearchFilterChange={handleSearchFilterChange}
+                            />
 
                             {showSearchResults && (
                                 <div className={styles.searchResults}>
                                     <Suspense fallback={<Loader />}>
                                         <SearchResults
                                             searchInput={searchInput}
-                                            searchFilter={searchFilter}
+                                            searchFilter={selectedSearchFilter}
                                             handleNavigation={handleSearchMode}
                                         />
                                     </Suspense>
@@ -203,7 +206,7 @@ const MobileNavbarAndSearchMenu = ({
 const DesktopNavbarAndSearchMenu = ({
     isSearchMode,
     searchInput,
-    searchFilter,
+    selectedSearchFilter,
     showSearchResults,
     handleSearchMode,
     handleSearchFormSubmit,
@@ -213,11 +216,11 @@ const DesktopNavbarAndSearchMenu = ({
 }: {
     isSearchMode: boolean;
     searchInput: string;
-    searchFilter: ControlledComponentType;
+    selectedSearchFilter: ControlledComponentValueType;
     showSearchResults: boolean;
     handleSearchMode: () => void;
     handleSearchFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
-    handleSearchFilterChange: (event: ControlledComponentType) => void;
+    handleSearchFilterChange: (searchFilter: ControlledComponentValueType) => void;
     handleNavigation: () => void;
     mainDivRef: RefObject<HTMLDivElement | null>;
 }) => {
@@ -232,7 +235,7 @@ const DesktopNavbarAndSearchMenu = ({
 
                         <SearchFilter
                             isDesktop
-                            filter={searchFilter}
+                            selectedSearchFilter={selectedSearchFilter}
                             handleSearchFilterChange={handleSearchFilterChange}
                         />
 
@@ -251,7 +254,7 @@ const DesktopNavbarAndSearchMenu = ({
                                             <Suspense fallback={<Loader />}>
                                                 <SearchResults
                                                     searchInput={searchInput}
-                                                    searchFilter={searchFilter}
+                                                    searchFilter={selectedSearchFilter}
                                                     handleNavigation={handleNavigation}
                                                 />
                                             </Suspense>
@@ -304,11 +307,11 @@ type NavbarProps = {
     isDesktop: boolean;
     isSearchMode: boolean;
     searchInput: string;
-    searchFilter: ControlledComponentType;
+    selectedSearchFilter: ControlledComponentValueType;
     showSearchResults: boolean;
     handleSearchMode: () => void;
     handleSearchFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
-    handleSearchFilterChange: (event: ControlledComponentType) => void;
+    handleSearchFilterChange: (searchFilter: ControlledComponentValueType) => void;
     handleNavigation: () => void;
 };
 
@@ -316,7 +319,7 @@ export default function Navbar({
     isDesktop,
     isSearchMode,
     searchInput,
-    searchFilter,
+    selectedSearchFilter,
     showSearchResults,
     handleSearchMode,
     handleSearchFormSubmit,
@@ -345,7 +348,7 @@ export default function Navbar({
                     <DesktopNavbarAndSearchMenu
                         isSearchMode={isSearchMode}
                         searchInput={searchInput}
-                        searchFilter={searchFilter}
+                        selectedSearchFilter={selectedSearchFilter}
                         showSearchResults={showSearchResults}
                         handleSearchMode={handleSearchMode}
                         handleSearchFormSubmit={handleSearchFormSubmit}
@@ -357,7 +360,7 @@ export default function Navbar({
                     <MobileNavbarAndSearchMenu
                         isSearchMode={isSearchMode}
                         searchInput={searchInput}
-                        searchFilter={searchFilter}
+                        selectedSearchFilter={selectedSearchFilter}
                         showSearchResults={showSearchResults}
                         handleSearchMode={handleSearchMode}
                         handleSearchFormSubmit={handleSearchFormSubmit}

@@ -1,4 +1,6 @@
+export type ControlledComponentValueType = string |number | null
+
 export type ControlledComponentType = {
-    label: string | number;
-    value: string | number;
+    label: string;
+    value: ControlledComponentValueType;
 };

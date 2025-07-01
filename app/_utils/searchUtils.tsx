@@ -3,7 +3,7 @@ import { ControlledComponentType } from "@globals/types";
 export const searchFilterMap: Record<string, ControlledComponentType> = {
     tout: {
         label: 'Tout',
-        value: '',
+        value: null,
     },
     article: {
         label: 'Article',

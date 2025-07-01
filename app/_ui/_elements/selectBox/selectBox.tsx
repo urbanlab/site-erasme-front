@@ -1,22 +1,21 @@
 import { Select } from '@base-ui-components/react/select';
+import { ControlledComponentType, ControlledComponentValueType } from '@globals/types';
 import chevronIcon from '@public/chevron-up-icon.svg';
 import Image from 'next/image';
 import styles from './selectBox.module.css';
-import { ControlledComponentType } from '@globals/types';
 
 type SelectBoxProps = {
     items: ControlledComponentType[];
-    value: ControlledComponentType;
-    handleValueChange: (event: ControlledComponentType) => void;
-    placeholder?: string | number;
+    value: ControlledComponentValueType;
+    handleValueChange: (value: ControlledComponentValueType) => void;
     className?: { trigger?: string; popup?: string };
 };
 
-export default function SelectBox({ items, value, handleValueChange, placeholder, className }: SelectBoxProps) {
+export default function SelectBox({ items, value, handleValueChange, className }: SelectBoxProps) {
     return (
-        <Select.Root modal={false} value={value} onValueChange={handleValueChange}>
+        <Select.Root modal={false} value={value} items={items} onValueChange={handleValueChange}>
             <Select.Trigger className={`${styles.trigger} ${className?.trigger}`}>
-                <Select.Value placeholder={placeholder ?? ''} />
+                <Select.Value />
                 <Select.Icon>
                     <Image src={chevronIcon} className={styles.chevronIcon} alt="chevron" />
                 </Select.Icon>
@@ -24,7 +23,7 @@ export default function SelectBox({ items, value, handleValueChange, placeholder
             <Select.Positioner alignItemWithTrigger={false} side="top" align="end">
                 <Select.Popup className={`${styles.popup} ${className?.popup}`}>
                     {items.map(item => (
-                        <Select.Item className={styles.item} key={item.value} value={item}>
+                        <Select.Item className={styles.item} key={item.value} value={item.value}>
                             <Select.ItemText>{item.label}</Select.ItemText>
                         </Select.Item>
                     ))}

@@ -1,12 +1,12 @@
 'use client';
 
+import { ControlledComponentValueType } from '@globals/types';
 import { useIsDesktop } from '@hooks/useIsDesktop';
 import { useSearchResults } from '@hooks/useSearchResults';
 import ArticleList from '@ui/components/articleList';
 import RubriqueProjetsAccordion from '@ui/components/rubriqueProjetsAccordion';
 import { searchFilterMap } from '@utils/searchUtils';
 import styles from './searchResults.module.css';
-import { ControlledComponentType } from '@globals/types';
 
 export default function SearchResults({
     searchInput,
@@ -15,7 +15,7 @@ export default function SearchResults({
     className,
 }: {
     searchInput: string;
-    searchFilter: ControlledComponentType;
+    searchFilter: ControlledComponentValueType;
     handleNavigation?: () => void;
     className?: string;
 }) {
@@ -23,22 +23,22 @@ export default function SearchResults({
 
     const { articles, rubriques } = useSearchResults({ searchInput: searchInput });
 
-    const shouldDisplay = (filter: ControlledComponentType): boolean => {
-        return searchFilter === searchFilterMap.tout || searchFilter === filter;
+    const shouldDisplay = (filter: ControlledComponentValueType): boolean => {
+        return searchFilter === searchFilterMap.tout.value || searchFilter === filter;
     };
 
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables} ${className}`}>
             {isDesktop && <h3 className={styles.searchInput}>{`RECHERCHE: ${searchInput.toUpperCase()}`}</h3>}
 
-            {shouldDisplay(searchFilterMap.article) && articles && articles.length > 0 && (
+            {shouldDisplay(searchFilterMap.article.value) && articles && articles.length > 0 && (
                 <div>
                     <h4 className={styles.sectionTitle}>{`ARTICLES: ${articles.length}`}</h4>
                     <ArticleList articles={articles} handleNavigation={handleNavigation} />
                 </div>
             )}
 
-            {shouldDisplay(searchFilterMap.rubrique) && rubriques && rubriques.length > 0 && (
+            {shouldDisplay(searchFilterMap.rubrique.value) && rubriques && rubriques.length > 0 && (
                 <div>
                     <h4 className={styles.sectionTitle}>{`RUBRIQUES: ${rubriques.length}`}</h4>
                     <RubriqueProjetsAccordion projets={rubriques} handleNavigation={handleNavigation} />

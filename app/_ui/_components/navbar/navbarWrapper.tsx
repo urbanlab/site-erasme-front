@@ -1,9 +1,8 @@
 'use client';
 
-import { ControlledComponentType } from '@globals/types';
+import { ControlledComponentValueType } from '@globals/types';
 import { useIsDesktop } from '@hooks/useIsDesktop';
 import Backdrop from '@ui/elements/backdrop';
-import { searchFilterMap } from '@utils/searchUtils';
 import { FormEvent, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Navbar from './navbar';
@@ -12,7 +11,7 @@ export default function NavbarWrapper() {
     const [isSearchMode, setIsSearchMode] = useState(false);
     const [showSearchResults, setShowSearchResults] = useState(false);
     const [searchInput, setSearchInput] = useState('');
-    const [searchFilter, setSearchFilter] = useState<ControlledComponentType>(searchFilterMap.tout);
+    const [selectedSearchFilter, setSelectedSearchFilter] = useState<ControlledComponentValueType>(null);
 
     const isDesktop = useIsDesktop();
 
@@ -26,8 +25,8 @@ export default function NavbarWrapper() {
         setShowSearchResults(true);
     };
 
-    const handleSearchFilterChange = (event: ControlledComponentType) => {
-        setSearchFilter(event);
+    const handleSearchFilterChange = (searchFilter: ControlledComponentValueType) => {
+        setSelectedSearchFilter(searchFilter);
     };
 
     //Test to block scroll when the search menu is open, but I don't like it very much. Removing for now.
@@ -48,7 +47,7 @@ export default function NavbarWrapper() {
                 isDesktop={isDesktop}
                 isSearchMode={isSearchMode}
                 searchInput={searchInput}
-                searchFilter={searchFilter}
+                selectedSearchFilter={selectedSearchFilter}
                 showSearchResults={showSearchResults}
                 handleSearchMode={() => {
                     setIsSearchMode(previousSearchMode => !previousSearchMode);

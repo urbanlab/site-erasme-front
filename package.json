@@ -14,7 +14,7 @@
   "dependencies": {
     "@apollo/client": "^3.13.8",
     "@apollo/client-integration-nextjs": "^0.12.2",
-    "@base-ui-components/react": "^1.0.0-beta.0",
+    "@base-ui-components/react": "^1.0.0-beta.1",
     "isomorphic-dompurify": "^2.25.0",
     "next": "^15.3.3",
     "prettier": "^3.5.3",
