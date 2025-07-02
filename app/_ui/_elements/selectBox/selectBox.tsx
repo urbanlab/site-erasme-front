@@ -9,9 +9,10 @@ type SelectBoxProps = {
     value: ControlledComponentValueType;
     handleValueChange: (value: ControlledComponentValueType) => void;
     className?: { trigger?: string; popup?: string };
+    portalContainer?: React.RefObject<HTMLDivElement | null>;
 };
 
-export default function SelectBox({ items, value, handleValueChange, className }: SelectBoxProps) {
+export default function SelectBox({ items, value, handleValueChange, className, portalContainer }: SelectBoxProps) {
     return (
         <Select.Root modal={false} value={value} items={items} onValueChange={handleValueChange}>
             <Select.Trigger className={`${styles.trigger} ${className?.trigger}`}>
@@ -20,15 +21,17 @@ export default function SelectBox({ items, value, handleValueChange, className }
                     <Image src={chevronIcon} className={styles.chevronIcon} alt="chevron" />
                 </Select.Icon>
             </Select.Trigger>
-            <Select.Positioner alignItemWithTrigger={false} side="top" align="end">
-                <Select.Popup className={`${styles.popup} ${className?.popup}`}>
-                    {items.map(item => (
-                        <Select.Item className={styles.item} key={item.value} value={item.value}>
-                            <Select.ItemText>{item.label}</Select.ItemText>
-                        </Select.Item>
-                    ))}
-                </Select.Popup>
-            </Select.Positioner>
+            <Select.Portal container={portalContainer}>
+                <Select.Positioner alignItemWithTrigger={false} side="top" align="end">
+                    <Select.Popup className={`${styles.popup} ${className?.popup}`}>
+                        {items.map(item => (
+                            <Select.Item className={styles.item} key={item.value} value={item.value}>
+                                <Select.ItemText>{item.label}</Select.ItemText>
+                            </Select.Item>
+                        ))}
+                    </Select.Popup>
+                </Select.Positioner>
+            </Select.Portal>
         </Select.Root>
     );
 }
