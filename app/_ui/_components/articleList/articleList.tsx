@@ -18,11 +18,15 @@ export default function ArticleList({
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
             <ul>
                 {articles?.map(article => {
-                    const tag = article.isprototype ? 'prototype' : 'article';
+                    const tag = article.isprototype === '1' ? 'prototype' : 'article';
 
                     return (
                         <li key={article?.id}>
-                            <Link href={`/projets/${article?.id}`} className={styles.item} onNavigate={handleNavigation}>
+                            <Link
+                                href={`/projets/${article?.id}`}
+                                className={styles.item}
+                                onNavigate={handleNavigation}
+                            >
                                 <p className={styles.title}>{article?.titre}</p>
                                 <div className={`${styles.conditionalDisplay} ${styles.desktopFields}`}>
                                     {isTagStyle ? (

@@ -58,7 +58,7 @@ export default async function Article({ params }: { params: Promise<{ id: string
         variables: { id: parseInt(id) },
     });
 
-    const isPrototype: boolean = data.getArticle?.isprototype === 'on';
+    const isPrototype: boolean = data.getArticle?.isprototype === '1';
 
     return (
         <>
