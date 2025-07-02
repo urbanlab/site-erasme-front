@@ -9,12 +9,14 @@ import styles from './rubriqueProjetsAccordion.module.css';
 export default function RubriqueProjetsAccordion({
     projets,
     handleNavigation,
+    className,
 }: {
     projets: ListProjetsFieldsFragment[];
     handleNavigation?: () => void;
+    className?: string;
 }) {
     return (
-        <Accordion.Root className={`${styles.accordion} ${styles.localVariables}`}>
+        <Accordion.Root className={`${styles.accordion} ${styles.localVariables} ${className}`}>
             {projets?.map(rubrique => {
                 const articlesFragment = getFragmentData(
                     ArticleInformationFieldsFragmentDoc,
