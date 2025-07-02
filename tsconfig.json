@@ -30,6 +30,7 @@
       "@ui/elements/loader": ["_ui/_elements/loader/loader.tsx"],
       "@ui/elements/pagination": ["_ui/_elements/pagination/pagination.tsx"],
       "@ui/elements/selectBox": ["_ui/_elements/selectBox/selectBox.tsx"],
+      "@ui/elements/toggleGroup": ["_ui/_elements/toggleGroup/toggleGroup.tsx"],
       "@ui/components/footer": ["_ui/_components/footer/footer.tsx"],
       "@ui/components/navbar": ["_ui/_components/navbar/navbar.tsx"],
       "@ui/components/navbarWrapper": ["_ui/_components/navbar/navbarWrapper.tsx"],
