@@ -11,7 +11,7 @@ import { query } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
-import ProjectListWrapper from './projectListWrapper';
+import ProjectListWrapper from '@ui/components/projectListWrapper';
 
 const RubriquePresentation = async () => {
     const { data } = await query<RubriquePresentationQuery>({
