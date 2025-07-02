@@ -82,24 +82,6 @@ const RUBRIQUE_PRESENTATION = gql(`
     }
 `);
 
-const LIST_PROJETS = gql(`
-    query ListProjets(
-            $where: [String!],
-            $rubriquesOrderBy: [String!],
-            $articlesInRubriqueOrderBy: [String!],
-            $pagination: Int = 10,
-            $page: Int = 1) {
-        rubriques(where: $where, orderby: $rubriquesOrderBy, pagination: $pagination, page: $page) {
-            pagination {
-                ...paginationFields
-            }
-            result {
-                ...listProjetsFields
-            }
-        }
-    }
-`);
-
 /**
  * The current implementation of the search endpoint doesn't give the option to pre-filter
  * which category (article, rubrique..) to search for. We are obligated to fetch all the categories
@@ -108,7 +90,14 @@ const LIST_PROJETS = gql(`
  * The filters are applied later, by the search hook function.
  */
 const SEARCH = gql(`
-    query Search($texte: String!, $generalOrderBy: [String!], $articlesInRubriqueOrderBy: [String!], $pagination: Int = 5000, $page: Int = 1, $where: String!) {
+    query Search(
+            $texte: String!, 
+            $generalOrderBy: [String!],
+            $articlesInRubriqueOrderBy: [String!], 
+            $pagination: Int = 5000, 
+            $page: Int = 1, 
+            $where: String!,
+            $whereMots: [String!]) {
         recherche(texte: $texte, orderby: $generalOrderBy, pagination: $pagination, page: $page, where: $where) {
             result {
                 ...on Rubrique {
@@ -139,12 +128,13 @@ const SEARCH = gql(`
  */
 const ALL_PROJECTS_AND_NESTED_COLLECTIONS = gql(`
     query AllProjectsAndNestedCollections(
-            $where: [String!],
+            $whereRubriques: [String!],
             $rubriquesOrderBy: [String!],
             $articlesInRubriqueOrderBy: [String!],
+            $whereMots: [String!],
             $pagination: Int = 5000,
             $page: Int = 1) {
-        rubriques(where: $where, orderby: $rubriquesOrderBy, pagination: $pagination, page: $page) {
+        rubriques(where: $whereRubriques, orderby: $rubriquesOrderBy, pagination: $pagination, page: $page) {
             pagination {
                 ...paginationFields
             }
@@ -152,7 +142,12 @@ const ALL_PROJECTS_AND_NESTED_COLLECTIONS = gql(`
                 ...listProjetsFields
             }
         }
+        mots(where: $whereMots, pagination: $pagination) {
+            result {
+                ...motFields
+            }
+        }
     }
 `);
 
-export { ARTICLE_AND_PROTOTYPE, RUBRIQUE_PRESENTATION, LIST_PROJETS, ARTICLE_BASIC, SERVICES_RUBRIQUE, SEARCH, ALL_PROJECTS_AND_NESTED_COLLECTIONS };
+export { ARTICLE_AND_PROTOTYPE, RUBRIQUE_PRESENTATION, ARTICLE_BASIC, SERVICES_RUBRIQUE, SEARCH, ALL_PROJECTS_AND_NESTED_COLLECTIONS };

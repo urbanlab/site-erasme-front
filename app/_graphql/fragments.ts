@@ -19,26 +19,6 @@ const ARTICLE_INFORMATION_FIELDS_FRAGMENT = gql(`
     }
 `);
 
-// const LIST_PROJETS_FIELDS_FRAGMENT = gql(`
-//     fragment listProjetsFields on Rubrique{
-//         id
-//         titre
-//         texte
-//         date
-//         articles(orderby: $articlesInRubriqueOrderBy) {
-//             ... on ArticlePagination {
-//                 pagination {
-//                     ...paginationFields
-//                 }
-//                 result {
-//                     ...articleInformationFields
-//                 }
-                
-//             }
-//         }
-//     }
-// `)
-
 const LIST_PROJETS_FIELDS_FRAGMENT = gql(`
     fragment listProjetsFields on Rubrique{
         id
@@ -53,9 +33,9 @@ const LIST_PROJETS_FIELDS_FRAGMENT = gql(`
                 result {
                     ...articleInformationFields
                 
-                    mots(pagination: $pagination) {
-                        ...on MotPagination {
-                            ...motsAndGroupMotsFromArticleFields
+                    mots(where: $whereMots, pagination: $pagination) {
+                        result {
+                            ...motFields
                         }
                     }
                 }
@@ -66,6 +46,12 @@ const LIST_PROJETS_FIELDS_FRAGMENT = gql(`
     }
 `)
 
+const MOT_FIELDS_FRAGMENT = gql(`
+    fragment motFields on Mot {
+        id
+        titre
+    }
+`)
 
 const MOTS_AND_GROUPE_MOTS_FROM_ARTICLE_FIELDS_FRAGMENT = gql(`
     fragment motsAndGroupMotsFromArticleFields on MotPagination {
@@ -98,4 +84,5 @@ export {
     MOTS_AND_GROUPE_MOTS_FROM_ARTICLE_FIELDS_FRAGMENT,
     DOCUMENTS_FROM_ARTICLE_FIELDS_FRAGMENT,
     LIST_PROJETS_FIELDS_FRAGMENT,
+    MOT_FIELDS_FRAGMENT,
 };

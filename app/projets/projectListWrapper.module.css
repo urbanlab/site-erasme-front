@@ -1,0 +1,90 @@
+.localVariables {
+    --gap: 2rem;
+}
+
+.mobileContainer {
+    display: grid;
+    gap: var(--gap);
+    grid-auto-rows: min-content;
+    grid-template-areas:
+        'totalItems totalItems'
+        'politiquesPubliquesFilter itemsPerPage'
+        'projectList projectList'
+        'pagination pagination';
+
+    .totalItems {
+        grid-area: totalItems;
+    }
+
+    .politiquesPubliquesFilter {
+        grid-area: politiquesPubliquesFilter;
+        justify-self: start;
+    }
+
+    .itemsPerPage {
+        grid-area: itemsPerPage;
+        justify-self: end;
+    }
+
+    .projectList {
+        grid-area: projectList;
+    }
+
+    .pagination {
+        grid-area: pagination;
+        justify-self: end;
+        align-self: start;
+        white-space: nowrap;
+    }
+}
+
+@media screen and (min-width: 90rem) {
+    .desktopContainer {
+        display: grid;
+        grid-template-columns: 2fr 5fr;
+        grid-template-areas: 'filtersContainer tableContainer';
+
+        .filtersContainer {
+            grid-area: filtersContainer;
+
+            .politiquesPubliquesFilter {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--gap);
+            }
+        }
+
+        .tableContainer {
+            grid-area: tableContainer;
+
+            display: grid;
+            gap: var(--gap);
+            grid-auto-rows: min-content;
+            grid-template-areas:
+                'totalItems itemsPerPage'
+                'projectList projectList'
+                'pagination pagination';
+
+            .totalItems {
+                grid-area: totalItems;
+            }
+
+            .itemsPerPage {
+                grid-area: itemsPerPage;
+                justify-self: end;
+                align-self: end;
+            }
+
+            .projectList {
+                grid-area: projectList;
+            }
+
+            .pagination {
+                grid-area: pagination;
+                justify-self: end;
+                align-self: start;
+            }
+        }
+    }
+}

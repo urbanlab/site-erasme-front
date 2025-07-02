@@ -2,15 +2,16 @@ import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-m
 import {
     AllProjectsAndNestedCollectionsQuery,
     ListProjetsFieldsFragmentDoc,
-    RubriquePresentationQuery
+    MotFieldsFragmentDoc,
+    RubriquePresentationQuery,
 } from '@graphql/__generated__/graphql';
 import { ALL_PROJECTS_AND_NESTED_COLLECTIONS, RUBRIQUE_PRESENTATION } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { query } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
-import RubriqueProjetsAccordion from '@ui/components/rubriqueProjetsAccordion';
 import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
+import ProjectListWrapper from './projectListWrapper';
 
 const RubriquePresentation = async () => {
     const { data } = await query<RubriquePresentationQuery>({
@@ -31,41 +32,32 @@ const RubriquePresentation = async () => {
     );
 };
 
-const ProjetsList = async () => {
-    // const { data } = await query<ListProjetsQuery>({
-    //     query: LIST_PROJETS,
-    //     variables: {
-    //         where: [`id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`],
-    //         rubriquesOrderBy: [`date_DESC`],
-    //         articlesInRubriqueOrderBy: [`date_DESC`],
-    //     },
-    // });
-
+export default async function Projets() {
     const { data } = await query<AllProjectsAndNestedCollectionsQuery>({
         query: ALL_PROJECTS_AND_NESTED_COLLECTIONS,
         variables: {
-            where: [`id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`],
+            whereRubriques: [`id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`],
             rubriquesOrderBy: [`date_DESC`],
             articlesInRubriqueOrderBy: [`date_DESC`],
+            whereMots: [`id_groupe=${process.env.SPIP_GROUPE_MOTS_POLITIQUES_PUBLIQUES_ID}`],
         },
     });
 
-    
-
-    const rubriquesFragment = getFragmentData(
+    const projectListFragment = getFragmentData(
         ListProjetsFieldsFragmentDoc,
         data?.rubriques?.result as FragmentType<typeof ListProjetsFieldsFragmentDoc>[]
     );
 
-    return <RubriqueProjetsAccordion projets={rubriquesFragment} />;
-};
+    const motsFragment = getFragmentData(
+        MotFieldsFragmentDoc,
+        data?.mots?.result as FragmentType<typeof MotFieldsFragmentDoc>[]
+    );
 
-export default async function Projets() {
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
             <RubriquePresentation />
 
-            <ProjetsList />
+            <ProjectListWrapper projects={projectListFragment} politiquesPubliquesMots={motsFragment} />
         </div>
     );
 }
