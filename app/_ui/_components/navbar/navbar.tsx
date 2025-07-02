@@ -38,12 +38,10 @@ const SearchFilter = ({
     selectedSearchFilter,
     handleSearchFilterChange,
     isDesktop,
-    portalContainer,
 }: {
     selectedSearchFilter: ControlledComponentValueType;
     handleSearchFilterChange: (searchFilter: ControlledComponentValueType) => void;
     isDesktop?: boolean;
-    portalContainer?: RefObject<HTMLDivElement | null>;
 }) => {
     return (
         <SelectBox
@@ -60,7 +58,6 @@ const SearchFilter = ({
             items={Object.values(searchFilterMap)}
             value={selectedSearchFilter}
             handleValueChange={handleSearchFilterChange}
-            portalContainer={portalContainer}
         />
     );
 };
@@ -240,7 +237,6 @@ const DesktopNavbarAndSearchMenu = ({
                             isDesktop
                             selectedSearchFilter={selectedSearchFilter}
                             handleSearchFilterChange={handleSearchFilterChange}
-                            portalContainer={mainDivRef}
                         />
 
                         <Button variant="ghost" onClick={handleSearchMode}>

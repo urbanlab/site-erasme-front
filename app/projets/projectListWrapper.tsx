@@ -59,6 +59,7 @@ const DesktopProjectListAndFilters = ({
                     value={itemsPerPage}
                     handleValueChange={handleItemsPerPageChange}
                     className={{ trigger: styles.itemsPerPage }}
+                    createPortal
                 />
                 <RubriqueProjetsAccordion
                     projets={paginatedProjects}
