@@ -1,6 +1,6 @@
 .input {
     border: none;
-    border-bottom: 1px solid var(--black);
+    border-bottom: 1px solid var(--color-secondary);
 
     font: inherit;
     line-height: 2rem;
