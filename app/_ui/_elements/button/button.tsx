@@ -1,8 +1,10 @@
 import styles from './button.module.css';
 
+export type ButtonVariantType = 'filled' | 'ghost' | 'text';
+
 type ButtonProps = {
     children: React.ReactNode;
-    variant: 'filled' | 'ghost' | 'text';
+    variant: ButtonVariantType;
     onClick?: () => void;
     className?: string;
     ref?: React.Ref<HTMLButtonElement>;
