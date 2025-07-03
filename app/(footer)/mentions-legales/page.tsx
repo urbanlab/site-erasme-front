@@ -1,13 +1,13 @@
 import { ArticleBasicQuery } from '@graphql/__generated__/graphql';
 import { ARTICLE_BASIC } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
-import { query } from '@services/apollo/apolloClient';
+import { getClient } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
 
 export default async function MentionsLegales() {
-    const { data } = await query<ArticleBasicQuery>({
+    const { data } = await getClient().query<ArticleBasicQuery>({
         query: ARTICLE_BASIC,
         variables: { id: parseInt(process.env.SPIP_ARTICLE_MENTIONS_LEGALES_ID ?? '') },
     });
