@@ -1,0 +1,31 @@
+.trigger {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    &[data-popup-open],
+    &[data-popup-closed] {
+        & .chevronIcon {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.hasFilterApplied {
+    background-color: var(--color-accent);
+}
+
+.popup {
+    background-color: var(--color-primary);
+
+    border-radius: var(--button-border-radius);
+    border: var(--button-border-width) solid var(--color-secondary);
+
+    padding: 0.5rem;
+}
+
+.chevronIcon {
+    height: 36px;
+    width: 36px;
+    transition: transform 0.15s ease-in-out;
+}
