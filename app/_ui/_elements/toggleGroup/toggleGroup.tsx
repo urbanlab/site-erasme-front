@@ -1,14 +1,21 @@
 import { ControlledComponentType, ControlledComponentValueType } from '@globals/types';
-import Button from '@ui/elements/button';
+import Button, { ButtonVariantType } from '@ui/elements/button';
 
 type ToggleGroupProps = {
     items: ControlledComponentType[];
     value: ControlledComponentValueType;
     handleValueChange: (value: ControlledComponentValueType) => void;
+    toggleButtonVariant?: ButtonVariantType;
     className?: string;
 };
 
-export default function ToggleGroup({ items, value, handleValueChange, className }: ToggleGroupProps) {
+export default function ToggleGroup({
+    items,
+    value,
+    handleValueChange,
+    toggleButtonVariant = 'ghost',
+    className,
+}: ToggleGroupProps) {
     const handleToggleClick = (clickedToggleValue: ControlledComponentValueType) => {
         return clickedToggleValue === value ? handleValueChange(null) : handleValueChange(clickedToggleValue);
     };
@@ -22,7 +29,7 @@ export default function ToggleGroup({ items, value, handleValueChange, className
                     return (
                         <Button
                             key={item.value}
-                            variant="ghost"
+                            variant={toggleButtonVariant}
                             onClick={() => handleToggleClick(item.value)}
                             {...(isActive && { 'data-selected': true })}
                             tabIndex={isActive ? 0 : -1}
