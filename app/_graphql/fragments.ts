@@ -18,6 +18,24 @@ const ARTICLE_INFORMATION_FIELDS_FRAGMENT = gql(`
         isprototype
     }
 `);
+const AUTEUR_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
+    fragment auteurBasicInformationFields on Auteur {
+        id
+        titre
+    }
+`);
+
+const AUTEUR_FULL_INFORMATION_FIELDS_FRAGMENT = gql(`
+    fragment auteurFullInformationFields on Auteur {
+        id
+        titre
+        logo
+        descriptif
+        email
+        auteur_compte_linkedin
+        auteur_compte_twitter
+    }
+`);
 
 const LIST_PROJETS_FIELDS_FRAGMENT = gql(`
     fragment listProjetsFields on Rubrique{
@@ -38,20 +56,24 @@ const LIST_PROJETS_FIELDS_FRAGMENT = gql(`
                             ...motFields
                         }
                     }
-                }
 
-                
+                    auteurs(where: $whereAuteurs, pagination: $pagination) {
+                        result {
+                            ...auteurBasicInformationFields
+                        }
+                    }
+                }
             }
         }
     }
-`)
+`);
 
 const MOT_FIELDS_FRAGMENT = gql(`
     fragment motFields on Mot {
         id
         titre
     }
-`)
+`);
 
 const MOTS_AND_GROUPE_MOTS_FROM_ARTICLE_FIELDS_FRAGMENT = gql(`
     fragment motsAndGroupMotsFromArticleFields on MotPagination {
@@ -85,4 +107,6 @@ export {
     DOCUMENTS_FROM_ARTICLE_FIELDS_FRAGMENT,
     LIST_PROJETS_FIELDS_FRAGMENT,
     MOT_FIELDS_FRAGMENT,
+    AUTEUR_BASIC_INFORMATION_FIELDS_FRAGMENT,
+    AUTEUR_FULL_INFORMATION_FIELDS_FRAGMENT,
 };

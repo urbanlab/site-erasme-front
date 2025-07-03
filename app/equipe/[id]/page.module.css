@@ -1,0 +1,87 @@
+.localVariables {
+    --gap-section: 2.625rem;
+    --gap-inside-section: 24px;
+}
+
+.mainContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: var(--gap-section);
+
+    margin-bottom: var(--gap-section);
+}
+
+.tagStyle {
+    background: transparent;
+
+    width: fit-content;
+
+    cursor: pointer;
+
+    padding: var(--button-top-bottom-padding) var(--button-left-right-padding);
+
+    font: inherit;
+    font-size: var(--button-font-size);
+    text-transform: lowercase;
+    color: var(--color-secondary);
+
+    border: var(--button-border-width) solid transparent;
+    border-color: var(--color-secondary);
+    border-radius: var(--button-border-radius);
+
+    &:hover {
+        background-color: var(--color-accent);
+    }
+    &:active {
+        background-color: var(--color-accent);
+    }
+}
+
+.presentationContainer {
+    display: grid;
+    gap: var(--gap-inside-section);
+
+    grid-template-columns: auto auto;
+    grid-template-areas:
+        'logo logo'
+        'title title'
+        'tag email'
+        'tag socialMedia';
+
+    & .logo {
+        grid-area: logo;
+    }
+    & .title {
+        grid-area: title;
+    }
+    & .tag {
+        grid-area: tag;
+        align-self: center;
+    }
+    & .email {
+        grid-area: email;
+    }
+    & .socialMedia {
+        grid-area: socialMedia;
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 5px;
+    }
+}
+
+@media screen and (min-width: 90rem) {
+    .localVariables {
+        --gap-section: 6.25rem;
+        --gap-inside-section: 24px;
+    }
+    .presentationContainer {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            '. logo'
+            'title logo'
+            'tag logo'
+            'email logo'
+            'socialMedia logo'
+            '. logo';
+    }
+}
