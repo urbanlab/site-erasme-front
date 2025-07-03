@@ -57,7 +57,7 @@ const LIST_PROJETS_FIELDS_FRAGMENT = gql(`
                         }
                     }
 
-                    auteurs(where: $whereAuteurs, pagination: $pagination) {
+                    auteurs(where: $whereAuteurs, pagination: $pagination) @include(if: $withAuteurs) {
                         result {
                             ...auteurBasicInformationFields
                         }

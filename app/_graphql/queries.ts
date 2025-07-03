@@ -98,6 +98,7 @@ const SEARCH = gql(`
             $page: Int = 1, 
             $where: String!,
             $whereMots: [String!],
+            $withAuteurs: Boolean = false,
             $whereAuteurs: [String!]) {
         recherche(texte: $texte, orderby: $generalOrderBy, pagination: $pagination, page: $page, where: $where) {
             result {
@@ -121,6 +122,9 @@ const SEARCH = gql(`
  * Hence, all the filtering will be done on the frontend side. For this, we need
  * to have the complete list of `projects`/`articles` and their associated `mots`
  * when reaching the page in order to be able to use the predefined filters.
+ * 
+ * If you want to include information from a specific author (typically for `equipe/[id]` page),
+ * make sure to set `$withAuteurs` to `true` and to pass an `$idAuteur` parameter as well. 
  *
  * To make sure all the items are included in the response, we use a high 'pagination' value.
  *
@@ -132,37 +136,9 @@ const ALL_PROJECTS_AND_NESTED_COLLECTIONS = gql(`
             $rubriquesOrderBy: [String!],
             $articlesInRubriqueOrderBy: [String!],
             $whereMots: [String!],
-            $whereAuteurs: [String!]
-            $pagination: Int = 5000,
-            $page: Int = 1) {
-        rubriques(where: $whereRubriques, orderby: $rubriquesOrderBy, pagination: $pagination, page: $page) {
-            pagination {
-                ...paginationFields
-            }
-            result {
-                ...listProjetsFields
-            }
-        }
-        mots(where: $whereMots, pagination: $pagination) {
-            result {
-                ...motFields
-            }
-        }
-    }
-`);
-
-/**
- * This query is similar to the 'AllProjectsAndNestedCollections' one, but with extra 
- * author information
- */
-const PAGE_AUTEUR = gql(`
-    query PageAuteur(
-            $whereRubriques: [String!],
-            $rubriquesOrderBy: [String!],
-            $articlesInRubriqueOrderBy: [String!],
-            $whereMots: [String!],
+            $withAuteurs: Boolean = false,
             $whereAuteurs: [String!],
-            $idAuteur: Int!
+            $idAuteur: Int = 0,
             $pagination: Int = 5000,
             $page: Int = 1) {
         rubriques(where: $whereRubriques, orderby: $rubriquesOrderBy, pagination: $pagination, page: $page) {
@@ -178,7 +154,7 @@ const PAGE_AUTEUR = gql(`
                 ...motFields
             }
         }
-        getAuteur(id: $idAuteur) {
+        getAuteur(id: $idAuteur) @include(if: $withAuteurs) {
             ...auteurFullInformationFields
         }
     }
@@ -211,5 +187,4 @@ export {
     SEARCH,
     ALL_PROJECTS_AND_NESTED_COLLECTIONS,
     ACTIVE_AUTHORS,
-    PAGE_AUTEUR,
 };

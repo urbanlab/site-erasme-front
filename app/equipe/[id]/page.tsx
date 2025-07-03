@@ -1,13 +1,13 @@
 import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
 import {
     ActiveAuthorsQuery,
+    AllProjectsAndNestedCollectionsQuery,
     AuteurFullInformationFieldsFragment,
     AuteurFullInformationFieldsFragmentDoc,
     ListProjetsFieldsFragmentDoc,
     MotFieldsFragmentDoc,
-    PageAuteurQuery,
 } from '@graphql/__generated__/graphql';
-import { ACTIVE_AUTHORS, PAGE_AUTEUR } from '@graphql/queries';
+import { ACTIVE_AUTHORS, ALL_PROJECTS_AND_NESTED_COLLECTIONS } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { getClient } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
@@ -15,7 +15,7 @@ import ProjectListWrapper from '@ui/components/projectListWrapper';
 import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
 
-//Pre-fetch during build time
+// Pre-fetch during build time
 export async function generateStaticParams() {
     const { data } = await getClient().query<ActiveAuthorsQuery>({
         query: ACTIVE_AUTHORS,
@@ -70,13 +70,14 @@ const AuthorPresentation = async ({
 export default async function Author({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
-    const { data } = await getClient().query<PageAuteurQuery>({
-        query: PAGE_AUTEUR,
+    const { data } = await getClient().query<AllProjectsAndNestedCollectionsQuery>({
+        query: ALL_PROJECTS_AND_NESTED_COLLECTIONS,
         variables: {
             whereRubriques: [`id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`],
             rubriquesOrderBy: [`date_DESC`],
             articlesInRubriqueOrderBy: [`date_DESC`],
             whereMots: [`id_groupe=${process.env.SPIP_GROUPE_MOTS_POLITIQUES_PUBLIQUES_ID}`],
+            withAuteurs: true,
             whereAuteurs: [`id_auteur=${id}`],
             idAuteur: parseInt(id ?? ''),
         },
