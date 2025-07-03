@@ -165,8 +165,14 @@ const ACTIVE_AUTHORS = gql(`
         $idRubriqueTrombinoscope: Int!
     ) {
         getRubrique(id: $idRubriqueTrombinoscope) {
+            id
+            titre
+            texte
+            logo
+
             articles(pagination: 100) {
                 result {
+                    id
                     auteurs {
                         result {
                             id

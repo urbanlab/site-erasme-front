@@ -1,0 +1,74 @@
+.localVariables {
+    --gap-section: 2.625rem;
+    --gap-inside-section: 24px;
+}
+
+.mainContainer {
+    display: grid;
+    row-gap: var(--gap-section);
+    margin-bottom: var(--gap-section);
+
+    grid-template-areas:
+        'logo'
+        'description'
+        'team'
+        'partners';
+
+    .logo {
+        grid-area: logo;
+    }
+
+    .description {
+        grid-area: description;
+    }
+
+    .team {
+        grid-area: team;
+    }
+}
+
+.sectionContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-inside-section);
+}
+
+.tagsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--gap-inside-section);
+}
+
+.tagStyle {
+    background: transparent;
+
+    width: fit-content;
+
+    cursor: pointer;
+
+    padding: var(--button-top-bottom-padding) var(--button-left-right-padding);
+
+    font: inherit;
+    font-size: var(--button-font-size);
+    text-transform: lowercase;
+    color: var(--color-secondary);
+
+    border: var(--button-border-width) solid transparent;
+    border-color: var(--color-secondary);
+    border-radius: var(--button-border-radius);
+
+    &:hover {
+        background-color: var(--color-accent);
+    }
+    &:active {
+        background-color: var(--color-accent);
+    }
+}
+
+@media screen and (min-width: 90rem) {
+    .sectionContainer {
+        display: grid;
+        grid-template-columns: 2fr 5fr;
+    }
+}
