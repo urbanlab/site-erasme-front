@@ -4,8 +4,6 @@
     width: fit-content;
 
     cursor: pointer;
-
-    padding: var(--padding);
     
     font: inherit;
     font-size: var(--button-font-size);
@@ -25,10 +23,10 @@
 }
 
 .small {
-    --padding: 0.625rem 1.25rem;
+    padding: 0.625rem 1.25rem;
 }
 
 .default {
-    --padding: var(--button-top-bottom-padding) var(--button-left-right-padding);
+    padding: var(--button-top-bottom-padding) var(--button-left-right-padding);
 }
 
