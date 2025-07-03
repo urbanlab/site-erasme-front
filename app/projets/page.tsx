@@ -7,14 +7,14 @@ import {
 } from '@graphql/__generated__/graphql';
 import { ALL_PROJECTS_AND_NESTED_COLLECTIONS, RUBRIQUE_PRESENTATION } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
-import { query } from '@services/apollo/apolloClient';
+import { getClient } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
+import ProjectListWrapper from '@ui/components/projectListWrapper';
 import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
-import ProjectListWrapper from '@ui/components/projectListWrapper';
 
 const RubriquePresentation = async () => {
-    const { data } = await query<RubriquePresentationQuery>({
+    const { data } = await getClient().query<RubriquePresentationQuery>({
         query: RUBRIQUE_PRESENTATION,
         variables: { id: parseInt(process.env.SPIP_RUBRIQUE_PROJETS_ID ?? '') },
     });
@@ -33,7 +33,7 @@ const RubriquePresentation = async () => {
 };
 
 export default async function Projets() {
-    const { data } = await query<AllProjectsAndNestedCollectionsQuery>({
+    const { data } = await getClient().query<AllProjectsAndNestedCollectionsQuery>({
         query: ALL_PROJECTS_AND_NESTED_COLLECTIONS,
         variables: {
             whereRubriques: [`id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`],

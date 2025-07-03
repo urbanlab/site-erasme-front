@@ -1,14 +1,14 @@
 import { ArticleBasicQuery, RubriquePresentationQuery } from '@graphql/__generated__/graphql';
 import { ARTICLE_BASIC, RUBRIQUE_PRESENTATION } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
-import { query } from '@services/apollo/apolloClient';
+import { getClient } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
 import { AddessesWrapper } from './clientComponents';
 import styles from './page.module.css';
 
 const ArticleSection = async ({ id, className }: { id: string; className?: string }) => {
-    const { data } = await query<ArticleBasicQuery>({
+    const { data } = await getClient().query<ArticleBasicQuery>({
         query: ARTICLE_BASIC,
         variables: { id: parseInt(id ?? '') },
     });
@@ -22,7 +22,7 @@ const ArticleSection = async ({ id, className }: { id: string; className?: strin
 };
 
 export default async function Contact() {
-    const { data } = await query<RubriquePresentationQuery>({
+    const { data } = await getClient().query<RubriquePresentationQuery>({
         query: RUBRIQUE_PRESENTATION,
         variables: { id: parseInt(process.env.SPIP_RUBRIQUE_CONTACT_ID ?? '') },
     });

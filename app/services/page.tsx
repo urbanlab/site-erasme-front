@@ -1,13 +1,13 @@
 import { ServicesRubriqueQuery } from '@graphql/__generated__/graphql';
 import { SERVICES_RUBRIQUE } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
-import { query } from '@services/apollo/apolloClient';
+import { getClient } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
 
 export default async function Services() {
-    const { data } = await query<ServicesRubriqueQuery>({
+    const { data } = await getClient().query<ServicesRubriqueQuery>({
         query: SERVICES_RUBRIQUE,
         variables: { id: parseInt(process.env.SPIP_RUBRIQUE_SERVICES_ID ?? '') },
     });

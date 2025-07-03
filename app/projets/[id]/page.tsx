@@ -5,7 +5,7 @@ import {
 } from '@graphql/__generated__/graphql';
 import { ARTICLE_AND_PROTOTYPE } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
-import { query } from '@services/apollo/apolloClient';
+import { getClient } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
 import Tag from '@ui/elements/tag';
@@ -53,7 +53,7 @@ const ArticleCommon = ({ data }: { data: ArticleAndPrototypeQuery }) => {
 export default async function Article({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
-    const { data } = await query<ArticleAndPrototypeQuery>({
+    const { data } = await getClient().query<ArticleAndPrototypeQuery>({
         query: ARTICLE_AND_PROTOTYPE,
         variables: { id: parseInt(id) },
     });
