@@ -8,9 +8,6 @@
 
     font-size: var(--button-font-size);
 
-    &:hover {
-        background-color: var(--color-accent);
-    }
     &:active {
         background-color: var(--color-accent);
     }
@@ -53,4 +50,11 @@
 
 .filled[data-popup-open] > img {
     filter: none;
+}
+
+/* Only for devices that can hover (not mobile)  */
+@media (hover: hover) {
+    .button:hover {
+        background-color: var(--color-accent);
+    }
 }
