@@ -39,7 +39,7 @@
         grid-area: authors;
         display: flex;
         flex-wrap: wrap;
-        column-gap: 5px;
+        column-gap: 8px;
     }
 }
 

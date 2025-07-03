@@ -1,8 +1,5 @@
 import { FragmentType, getFragmentData } from '@graphql/__generated__';
-import {
-    ArticleAndPrototypeQuery,
-    ArticleInformationFieldsFragmentDoc
-} from '@graphql/__generated__/graphql';
+import { ArticleAndPrototypeQuery, ArticleInformationFieldsFragmentDoc } from '@graphql/__generated__/graphql';
 import { ARTICLE_AND_PROTOTYPE } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { getClient } from '@services/apollo/apolloClient';
@@ -10,6 +7,7 @@ import RemoteHtml from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
 import Tag from '@ui/elements/tag';
 import { dateFormat } from '@utils/dateUtils';
+import Link from 'next/link';
 import ArticlePrototype from './articlePrototype';
 import styles from './page.module.css';
 
@@ -39,7 +37,11 @@ const ArticlePresentation = ({ data, isPrototype }: { data: ArticleAndPrototypeQ
             <ul className={styles.authors}>
                 {data.getArticle?.auteurs?.result && data.getArticle?.auteurs?.result?.length > 0 && <li>Par :</li>}
                 {data.getArticle?.auteurs?.result?.map(author => {
-                    return <li key={author?.id}>{author?.titre}</li>;
+                    return (
+                        <li key={author?.id} style={{textDecoration: 'underline'}}>
+                            <Link href={`/equipe/${author?.id}`}>{author?.titre}</Link>
+                        </li>
+                    );
                 })}
             </ul>
         </div>
