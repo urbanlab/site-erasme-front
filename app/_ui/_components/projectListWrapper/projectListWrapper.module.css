@@ -8,7 +8,7 @@
     grid-auto-rows: min-content;
     grid-template-areas:
         'totalItems totalItems'
-        'politiquesPubliquesFilter itemsPerPage'
+        'filters itemsPerPage'
         'projectList projectList'
         'pagination pagination';
 
@@ -16,8 +16,8 @@
         grid-area: totalItems;
     }
 
-    .politiquesPubliquesFilter {
-        grid-area: politiquesPubliquesFilter;
+    .filters {
+        grid-area: filters;
         justify-self: start;
     }
 
@@ -38,14 +38,26 @@
     }
 }
 
+.popupSeparator {
+    height: 1px;
+    background: var(--color-secondary);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.popupItems {
+    display: flex;
+    flex-direction: column;
+}
+
 @media screen and (min-width: 90rem) {
     .desktopContainer {
         display: grid;
         grid-template-columns: 2fr 5fr;
-        grid-template-areas: 'filtersContainer tableContainer';
+        grid-template-areas: 'motFiltersContainer tableContainer';
 
-        .filtersContainer {
-            grid-area: filtersContainer;
+        .motFiltersContainer {
+            grid-area: motFiltersContainer;
 
             .politiquesPubliquesFilter {
                 display: flex;
@@ -61,13 +73,21 @@
             display: grid;
             gap: var(--gap);
             grid-auto-rows: min-content;
+            grid-template-columns: repeat(3, 1fr);
             grid-template-areas:
-                'totalItems itemsPerPage'
-                'projectList projectList'
-                'pagination pagination';
+                'totalItems articleTypeFilter itemsPerPage'
+                'projectList projectList projectList'
+                'pagination pagination pagination';
 
             .totalItems {
                 grid-area: totalItems;
+            }
+
+            .articleTypeFilter {
+                justify-self: center;
+                grid-area: articleTypeFilter;
+                display: flex;
+                column-gap: var(--gap);
             }
 
             .itemsPerPage {

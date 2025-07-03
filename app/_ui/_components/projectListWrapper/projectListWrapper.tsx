@@ -1,8 +1,14 @@
 'use client';
 
+import { Separator } from '@base-ui-components/react';
 import { ControlledComponentType, ControlledComponentValueType } from '@globals/types';
 import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
-import { ListProjetsFieldsFragment, MotFieldsFragment, MotFieldsFragmentDoc } from '@graphql/__generated__/graphql';
+import {
+    ArticleInformationFieldsFragmentDoc,
+    ListProjetsFieldsFragment,
+    MotFieldsFragment,
+    MotFieldsFragmentDoc,
+} from '@graphql/__generated__/graphql';
 import { useIsDesktop } from '@hooks/useIsDesktop';
 import RubriqueProjetsAccordion from '@ui/components/rubriqueProjetsAccordion';
 import Pagination from '@ui/elements/pagination';
@@ -10,12 +16,20 @@ import SelectBox from '@ui/elements/selectBox';
 import ToggleGroup from '@ui/elements/toggleGroup';
 import { useState } from 'react';
 import styles from './projectListWrapper.module.css';
+import FilterPopover from '@ui/elements/filterPopover';
+
+type ProjectListFilterFunctionType = (projectList: ListProjetsFieldsFragment[]) => ListProjetsFieldsFragment[];
 
 const itemsPerPageOptions: ControlledComponentType[] = [
     { label: '10', value: 10 },
     { label: '20', value: 20 },
     { label: '30', value: 30 },
     { label: '40', value: 40 },
+];
+const articleTypeOptions: ControlledComponentType[] = [
+    { label: 'Tout', value: null },
+    { label: 'Article', value: '0' },
+    { label: 'Prototype', value: '1' },
 ];
 
 const DesktopProjectListAndFilters = ({
@@ -29,6 +43,9 @@ const DesktopProjectListAndFilters = ({
     politiquesPubliquesItems,
     politiquesPubliquesFilter,
     handlePolitiquesPubliquesFilterChange,
+    articleTypeItems,
+    articleTypeFilter,
+    handleArticleTypeFilter,
 }: {
     totalItems: number;
     itemsPerPage: ControlledComponentValueType;
@@ -40,10 +57,13 @@ const DesktopProjectListAndFilters = ({
     politiquesPubliquesItems: ControlledComponentType[];
     politiquesPubliquesFilter: ControlledComponentValueType;
     handlePolitiquesPubliquesFilterChange: (value: ControlledComponentValueType) => void;
+    articleTypeItems: ControlledComponentType[];
+    articleTypeFilter: ControlledComponentValueType;
+    handleArticleTypeFilter: (value: ControlledComponentValueType) => void;
 }) => {
     return (
         <div className={`${styles.desktopContainer} ${styles.localVariables}`}>
-            <div className={styles.filtersContainer}>
+            <div className={styles.motFiltersContainer}>
                 <ToggleGroup
                     items={politiquesPubliquesItems}
                     handleValueChange={handlePolitiquesPubliquesFilterChange}
@@ -54,6 +74,14 @@ const DesktopProjectListAndFilters = ({
 
             <div className={styles.tableContainer}>
                 <h2 className={styles.totalItems}>{`Total : ${totalItems}`}</h2>
+
+                <ToggleGroup
+                    items={articleTypeItems}
+                    handleValueChange={handleArticleTypeFilter}
+                    value={articleTypeFilter}
+                    className={styles.articleTypeFilter}
+                />
+
                 <SelectBox
                     items={itemsPerPageOptions}
                     value={itemsPerPage}
@@ -61,11 +89,13 @@ const DesktopProjectListAndFilters = ({
                     className={{ trigger: styles.itemsPerPage }}
                     createPortal
                 />
+                
                 <RubriqueProjetsAccordion
                     projets={paginatedProjects}
                     key={currentPage}
                     className={styles.projectList}
                 />
+
                 <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
@@ -88,6 +118,9 @@ const MobileProjectListAndFilters = ({
     politiquesPubliquesItems,
     politiquesPubliquesFilter,
     handlePolitiquesPubliquesFilterChange,
+    articleTypeItems,
+    articleTypeFilter,
+    handleArticleTypeFilter,
 }: {
     totalItems: number;
     itemsPerPage: ControlledComponentValueType;
@@ -99,23 +132,47 @@ const MobileProjectListAndFilters = ({
     politiquesPubliquesItems: ControlledComponentType[];
     politiquesPubliquesFilter: ControlledComponentValueType;
     handlePolitiquesPubliquesFilterChange: (filter: ControlledComponentValueType) => void;
+    articleTypeItems: ControlledComponentType[];
+    articleTypeFilter: ControlledComponentValueType;
+    handleArticleTypeFilter: (value: ControlledComponentValueType) => void;
 }) => {
     return (
         <div className={`${styles.mobileContainer} ${styles.localVariables}`}>
             <h2 className={styles.totalItems}>{`Total : ${totalItems}`}</h2>
-            <SelectBox
-                items={politiquesPubliquesItems}
-                value={politiquesPubliquesFilter}
-                handleValueChange={handlePolitiquesPubliquesFilterChange}
-                className={{ trigger: styles.politiquesPubliquesFilter }}
+
+            <FilterPopover
+                popupContent={
+                    <>
+                        <ToggleGroup
+                            items={articleTypeItems}
+                            handleValueChange={handleArticleTypeFilter}
+                            value={articleTypeFilter}
+                            toggleButtonVariant="text"
+                            className={styles.popupItems}
+                        />
+                        <Separator orientation="horizontal" className={styles.popupSeparator} />
+                        <ToggleGroup
+                            items={politiquesPubliquesItems}
+                            value={politiquesPubliquesFilter}
+                            handleValueChange={handlePolitiquesPubliquesFilterChange}
+                            toggleButtonVariant="text"
+                            className={styles.popupItems}
+                        />
+                    </>
+                }
+                hasFilterApplied={politiquesPubliquesFilter !== null || articleTypeFilter !== null}
+                className={{ trigger: styles.filters }}
             />
+
             <SelectBox
                 items={itemsPerPageOptions}
                 value={itemsPerPage}
                 handleValueChange={handleItemsPerPageChange}
                 className={{ trigger: styles.itemsPerPage }}
             />
+
             <RubriqueProjetsAccordion projets={paginatedProjects} key={currentPage} className={styles.projectList} />
+
             <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
@@ -137,6 +194,7 @@ export default function ProjectListWrapper({
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState<ControlledComponentValueType>(itemsPerPageOptions[0].value);
     const [politiquesPubliquesFilter, setPolitiquesPubliquesFilter] = useState<ControlledComponentValueType>(null);
+    const [articleTypeFilter, setArticleTypeFilter] = useState<ControlledComponentValueType>(null);
 
     const isDesktop: boolean = useIsDesktop();
 
@@ -155,10 +213,13 @@ export default function ProjectListWrapper({
         currentPage * ((itemsPerPage as number) ?? itemsPerPageFallback)
     );
 
-    const filterProjectsByArticleMotId = (motId: ControlledComponentValueType): ListProjetsFieldsFragment[] => {
+    const filterProjectsByArticleMotId = (
+        motId: ControlledComponentValueType,
+        baseProjectList: ListProjetsFieldsFragment[]
+    ): ListProjetsFieldsFragment[] => {
         return motId === null
-            ? projects
-            : projects
+            ? baseProjectList
+            : baseProjectList
                   .map(rubrique => {
                       const filteredArticles = rubrique?.articles?.result?.filter(article => {
                           const motsFromArticleFragment = getFragmentData(
@@ -181,6 +242,43 @@ export default function ProjectListWrapper({
                   .filter(rubrique => rubrique !== null);
     };
 
+    const filterProjectsByArticleType = (
+        articleType: ControlledComponentValueType,
+        baseProjectList: ListProjetsFieldsFragment[]
+    ): ListProjetsFieldsFragment[] => {
+        return articleType === null
+            ? baseProjectList
+            : baseProjectList
+                  .map(rubrique => {
+                      const articleInformationFragment = getFragmentData(
+                          ArticleInformationFieldsFragmentDoc,
+                          rubrique.articles?.result as FragmentType<typeof ArticleInformationFieldsFragmentDoc>[]
+                      );
+
+                      const filteredArticles = articleInformationFragment.filter(
+                          article => article.isprototype === articleType
+                      );
+
+                      if (filteredArticles?.length === 0) return null;
+
+                      return {
+                          ...rubrique,
+                          articles: {
+                              ...rubrique.articles,
+                              result: filteredArticles,
+                          },
+                      };
+                  })
+                  .filter(rubrique => rubrique !== null);
+    };
+
+    const applyMultipleFilters = (
+        projectListFilters: ProjectListFilterFunctionType[],
+        baseProjectList: ListProjetsFieldsFragment[] = projects
+    ): ListProjetsFieldsFragment[] => {
+        return projectListFilters.reduce((accumulator, filterFunction) => filterFunction(accumulator), baseProjectList);
+    };
+
     const handleItemsPerPageChange = (numberOfItems: ControlledComponentValueType) => {
         setCurrentPage(1);
         setItemsPerPage(numberOfItems ?? itemsPerPageFallback);
@@ -193,8 +291,23 @@ export default function ProjectListWrapper({
     const handlePolitiquesPubliquesFilterChange = (filter: ControlledComponentValueType) => {
         setCurrentPage(1);
         setPolitiquesPubliquesFilter(filter);
+        setFilteredProjects(
+            applyMultipleFilters([
+                projectList => filterProjectsByArticleMotId(filter, projectList),
+                projectList => filterProjectsByArticleType(articleTypeFilter, projectList),
+            ])
+        );
+    };
 
-        setFilteredProjects(filterProjectsByArticleMotId(filter));
+    const handleArticleTypeFilter = (filter: ControlledComponentValueType) => {
+        setCurrentPage(1);
+        setArticleTypeFilter(filter);
+        setFilteredProjects(
+            applyMultipleFilters([
+                projectList => filterProjectsByArticleMotId(politiquesPubliquesFilter, projectList),
+                projectList => filterProjectsByArticleType(filter, projectList),
+            ])
+        );
     };
 
     return (
@@ -211,6 +324,9 @@ export default function ProjectListWrapper({
                     politiquesPubliquesItems={politiquesPubliquesItems}
                     politiquesPubliquesFilter={politiquesPubliquesFilter}
                     handlePolitiquesPubliquesFilterChange={handlePolitiquesPubliquesFilterChange}
+                    articleTypeItems={articleTypeOptions}
+                    articleTypeFilter={articleTypeFilter}
+                    handleArticleTypeFilter={handleArticleTypeFilter}
                 />
             ) : (
                 <MobileProjectListAndFilters
@@ -224,6 +340,9 @@ export default function ProjectListWrapper({
                     politiquesPubliquesItems={politiquesPubliquesItems}
                     politiquesPubliquesFilter={politiquesPubliquesFilter}
                     handlePolitiquesPubliquesFilterChange={handlePolitiquesPubliquesFilterChange}
+                    articleTypeItems={articleTypeOptions}
+                    articleTypeFilter={articleTypeFilter}
+                    handleArticleTypeFilter={handleArticleTypeFilter}
                 />
             )}
         </>
