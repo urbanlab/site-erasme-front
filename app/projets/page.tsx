@@ -2,7 +2,7 @@ import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-m
 import {
     AllProjectsAndNestedCollectionsQuery,
     ListProjetsFieldsFragmentDoc,
-    MotFieldsFragmentDoc,
+    MotsAndGroupeMotsFieldsFragmentDoc,
     RubriquePresentationQuery,
 } from '@graphql/__generated__/graphql';
 import { ALL_PROJECTS_AND_NESTED_COLLECTIONS, RUBRIQUE_PRESENTATION } from '@graphql/queries';
@@ -49,8 +49,8 @@ export default async function Projets() {
     );
 
     const motsFragment = getFragmentData(
-        MotFieldsFragmentDoc,
-        data?.mots?.result as FragmentType<typeof MotFieldsFragmentDoc>[]
+        MotsAndGroupeMotsFieldsFragmentDoc,
+        data?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
     );
 
     return (

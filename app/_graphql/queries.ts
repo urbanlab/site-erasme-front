@@ -7,9 +7,7 @@ const SERVICES_RUBRIQUE = gql(`
             logo
             articles {
                 result {
-                    id
-                    titre
-                    texte
+                    ...articleFullInformationFields
                 }
             }
         }
@@ -19,10 +17,7 @@ const SERVICES_RUBRIQUE = gql(`
 const ARTICLE_BASIC = gql(`
     query ArticleBasic($id: Int!) {
         getArticle(id: $id) {
-            id
-            titre
-            texte
-            logo
+            ...articleFullInformationFields
         }
     }
 `);
@@ -30,37 +25,20 @@ const ARTICLE_BASIC = gql(`
 const ARTICLE_AND_PROTOTYPE = gql(`
     query ArticleAndPrototype($id: Int!) {
         getArticle(id: $id) {
-            ...articleInformationFields
+            ...articleFullInformationFields
             
-            logo
-            texte
-
-            isprototype
-            #Prototypes
-            description_title
-            description
-            description_title_second
-            description_second
-            chiffres_cles
-            description_lateral_title
-            description_lateral
-            developpement
-            # descr_tech_technique
+            ...prototypeInformationFields
 
             #We want to fetch all 'mots'
             mots(pagination: 100) {
-                ...motsAndGroupMotsFromArticleFields
-            }
-
-            #We want to fetch all 'documents' (images)
-            documents (pagination: 100) {
-                ...documentsFromArticleFields
+                result {
+                    ...motsAndGroupeMotsFields
+                }
             }
 
             auteurs {
                 result {
-                    id
-                    titre
+                    ...auteurBasicInformationFields
                 }  
             }
             
@@ -106,7 +84,7 @@ const SEARCH = gql(`
                     ...listProjetsFields
                 }
                 ...on Article {
-                    ...articleInformationFields
+                    ...articleBasicInformationFields
                 }
             }
         }
@@ -122,9 +100,9 @@ const SEARCH = gql(`
  * Hence, all the filtering will be done on the frontend side. For this, we need
  * to have the complete list of `projects`/`articles` and their associated `mots`
  * when reaching the page in order to be able to use the predefined filters.
- * 
+ *
  * If you want to include information from a specific author (typically for `equipe/[id]` page),
- * make sure to set `$withAuteurs` to `true` and to pass an `$idAuteur` parameter as well. 
+ * make sure to set `$withAuteurs` to `true` and to pass an `$idAuteur` parameter as well.
  *
  * To make sure all the items are included in the response, we use a high 'pagination' value.
  *
@@ -151,7 +129,7 @@ const ALL_PROJECTS_AND_NESTED_COLLECTIONS = gql(`
         }
         mots(where: $whereMots, pagination: $pagination) {
             result {
-                ...motFields
+                ...motsAndGroupeMotsFields
             }
         }
         getAuteur(id: $idAuteur) @include(if: $withAuteurs) {
@@ -185,6 +163,25 @@ const ACTIVE_AUTHORS = gql(`
     }
 `);
 
+const HOMEPAGE = gql(`
+    query Homepage(
+        $idMotActus: Int!,
+        $numberOfActus: Int = 4
+    ){
+        getMot(id: $idMotActus) {
+            id
+            articles(orderby: ["date_DESC"], pagination: $numberOfActus) {
+                result{
+                    id
+                    titre
+                    texte
+                    date
+                }
+            }
+        }
+    }
+`);
+
 export {
     ARTICLE_AND_PROTOTYPE,
     RUBRIQUE_PRESENTATION,
@@ -193,4 +190,5 @@ export {
     SEARCH,
     ALL_PROJECTS_AND_NESTED_COLLECTIONS,
     ACTIVE_AUTHORS,
+    HOMEPAGE,
 };

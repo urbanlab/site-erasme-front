@@ -1,4 +1,4 @@
-import { ArticleInformationFieldsFragment } from '@graphql/__generated__/graphql';
+import { ArticleFullInformationFieldsFragment } from '@graphql/__generated__/graphql';
 import Arrow from '@ui/elements/arrow';
 import Tag from '@ui/elements/tag';
 import { dateFormat } from '@utils/dateUtils';
@@ -10,7 +10,7 @@ export default function ArticleList({
     handleNavigation,
     isTagStyle = false,
 }: {
-    articles: ArticleInformationFieldsFragment[];
+    articles: ArticleFullInformationFieldsFragment[];
     handleNavigation?: () => void;
     isTagStyle?: boolean;
 }) {

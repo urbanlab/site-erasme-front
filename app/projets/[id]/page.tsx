@@ -1,5 +1,13 @@
 import { FragmentType, getFragmentData } from '@graphql/__generated__';
-import { ArticleAndPrototypeQuery, ArticleInformationFieldsFragmentDoc } from '@graphql/__generated__/graphql';
+import {
+    ArticleAndPrototypeQuery,
+    ArticleFullInformationFieldsFragment,
+    ArticleFullInformationFieldsFragmentDoc,
+    AuteurBasicInformationFieldsFragment,
+    AuteurBasicInformationFieldsFragmentDoc,
+    MotsAndGroupeMotsFieldsFragmentDoc,
+    PrototypeInformationFieldsFragmentDoc,
+} from '@graphql/__generated__/graphql';
 import { ARTICLE_AND_PROTOTYPE } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { getClient } from '@services/apollo/apolloClient';
@@ -17,28 +25,33 @@ export async function generateStaticParams() {
     return [{ id: '2125' }];
 }
 
-const ArticlePresentation = ({ data, isPrototype }: { data: ArticleAndPrototypeQuery; isPrototype: boolean }) => {
-    const articleInformationFieldsFragment = getFragmentData(
-        ArticleInformationFieldsFragmentDoc,
-        data.getArticle as FragmentType<typeof ArticleInformationFieldsFragmentDoc>
-    );
-
+const ArticlePresentation = ({
+    articleInformation,
+    logoRubriqueParent,
+    authors,
+    isPrototype,
+}: {
+    articleInformation: ArticleFullInformationFieldsFragment;
+    authors: AuteurBasicInformationFieldsFragment[];
+    isPrototype: boolean;
+    logoRubriqueParent: string | null | undefined;
+}) => {
     return (
         <div className={styles.presentationContainer}>
             <ShapedImage
-                src={data.getArticle?.logo ?? data.getArticle?.rubrique?.logo ?? heroImage}
+                src={articleInformation.logo ?? logoRubriqueParent ?? heroImage}
                 alt="logo de l'article"
                 maskShape="wide"
                 className={styles.logo}
             />
-            <h1 className={styles.title}>{articleInformationFieldsFragment.titre}</h1>
+            <h1 className={styles.title}>{articleInformation.titre}</h1>
             <Tag value={isPrototype ? 'prototype' : 'article'} className={styles.tag} />
-            <p className={styles.date}>{dateFormat(articleInformationFieldsFragment.date)}</p>
+            <p className={styles.date}>{dateFormat(articleInformation.date)}</p>
             <ul className={styles.authors}>
-                {data.getArticle?.auteurs?.result && data.getArticle?.auteurs?.result?.length > 0 && <li>Par :</li>}
-                {data.getArticle?.auteurs?.result?.map(author => {
+                {authors && authors.length > 0 && <li>Par :</li>}
+                {authors?.map(author => {
                     return (
-                        <li key={author?.id} style={{textDecoration: 'underline'}}>
+                        <li key={author?.id} style={{ textDecoration: 'underline' }}>
                             <Link href={`/equipe/${author?.id}`}>{author?.titre}</Link>
                         </li>
                     );
@@ -48,8 +61,8 @@ const ArticlePresentation = ({ data, isPrototype }: { data: ArticleAndPrototypeQ
     );
 };
 
-const ArticleCommon = ({ data }: { data: ArticleAndPrototypeQuery }) => {
-    return <>{data.getArticle?.texte && <RemoteHtml html={data.getArticle.texte} />} </>;
+const ArticleCommon = ({ articleInformation }: { articleInformation: ArticleFullInformationFieldsFragment }) => {
+    return <>{articleInformation.texte && <RemoteHtml html={articleInformation.texte} />} </>;
 };
 
 export default async function Article({ params }: { params: Promise<{ id: string }> }) {
@@ -60,15 +73,47 @@ export default async function Article({ params }: { params: Promise<{ id: string
         variables: { id: parseInt(id) },
     });
 
-    const isPrototype: boolean = data.getArticle?.isprototype === '1';
+    const articleInformationFieldsFragment = getFragmentData(
+        ArticleFullInformationFieldsFragmentDoc,
+        data.getArticle as FragmentType<typeof ArticleFullInformationFieldsFragmentDoc>
+    );
+
+    const prototypeInformationFieldsFragment = getFragmentData(
+        PrototypeInformationFieldsFragmentDoc,
+        data.getArticle as FragmentType<typeof PrototypeInformationFieldsFragmentDoc>
+    );
+
+    const authorsInformationFieldsFragment = getFragmentData(
+        AuteurBasicInformationFieldsFragmentDoc,
+        data.getArticle?.auteurs?.result as FragmentType<typeof AuteurBasicInformationFieldsFragmentDoc>[]
+    );
+
+    const motsAndGroupeMotsFieldsFragment = getFragmentData(
+        MotsAndGroupeMotsFieldsFragmentDoc,
+        data.getArticle?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
+    );
+
+    const isPrototype: boolean = articleInformationFieldsFragment.isprototype === '1';
 
     return (
         <>
             <div className={`${styles.mainContainer} ${styles.localVariables}`}>
-                <ArticlePresentation data={data} isPrototype={isPrototype} />
+                <ArticlePresentation
+                    articleInformation={articleInformationFieldsFragment}
+                    logoRubriqueParent={data.getArticle?.rubrique?.logo}
+                    isPrototype={isPrototype}
+                    authors={authorsInformationFieldsFragment}
+                />
 
                 <div className={styles.contentContainer}>
-                    {isPrototype ? <ArticlePrototype data={data} /> : <ArticleCommon data={data} />}
+                    {isPrototype ? (
+                        <ArticlePrototype
+                            prototypeInformation={prototypeInformationFieldsFragment}
+                            motsAndGroupeMots={motsAndGroupeMotsFieldsFragment}
+                        />
+                    ) : (
+                        <ArticleCommon articleInformation={articleInformationFieldsFragment} />
+                    )}
                 </div>
             </div>
         </>

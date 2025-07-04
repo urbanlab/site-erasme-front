@@ -4,19 +4,19 @@ import { Separator } from '@base-ui-components/react';
 import { ControlledComponentType, ControlledComponentValueType } from '@globals/types';
 import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
 import {
-    ArticleInformationFieldsFragmentDoc,
+    ArticleFullInformationFieldsFragmentDoc,
     ListProjetsFieldsFragment,
-    MotFieldsFragment,
-    MotFieldsFragmentDoc,
+    MotsAndGroupeMotsFieldsFragment,
+    MotsAndGroupeMotsFieldsFragmentDoc,
 } from '@graphql/__generated__/graphql';
 import { useIsDesktop } from '@hooks/useIsDesktop';
 import RubriqueProjetsAccordion from '@ui/components/rubriqueProjetsAccordion';
+import FilterPopover from '@ui/elements/filterPopover';
 import Pagination from '@ui/elements/pagination';
 import SelectBox from '@ui/elements/selectBox';
 import ToggleGroup from '@ui/elements/toggleGroup';
 import { useState } from 'react';
 import styles from './projectListWrapper.module.css';
-import FilterPopover from '@ui/elements/filterPopover';
 
 type ProjectListFilterFunctionType = (projectList: ListProjetsFieldsFragment[]) => ListProjetsFieldsFragment[];
 
@@ -89,7 +89,7 @@ const DesktopProjectListAndFilters = ({
                     className={{ trigger: styles.itemsPerPage }}
                     createPortal
                 />
-                
+
                 <RubriqueProjetsAccordion
                     projets={paginatedProjects}
                     key={currentPage}
@@ -188,7 +188,7 @@ export default function ProjectListWrapper({
     politiquesPubliquesMots,
 }: {
     projects: ListProjetsFieldsFragment[];
-    politiquesPubliquesMots: MotFieldsFragment[];
+    politiquesPubliquesMots: MotsAndGroupeMotsFieldsFragment[];
 }) {
     const [filteredProjects, setFilteredProjects] = useState(projects);
     const [currentPage, setCurrentPage] = useState(1);
@@ -223,8 +223,8 @@ export default function ProjectListWrapper({
                   .map(rubrique => {
                       const filteredArticles = rubrique?.articles?.result?.filter(article => {
                           const motsFromArticleFragment = getFragmentData(
-                              MotFieldsFragmentDoc,
-                              article?.mots?.result as FragmentType<typeof MotFieldsFragmentDoc>[]
+                              MotsAndGroupeMotsFieldsFragmentDoc,
+                              article?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
                           );
                           return motsFromArticleFragment.some(mot => mot?.id === motId);
                       });
@@ -251,8 +251,8 @@ export default function ProjectListWrapper({
             : baseProjectList
                   .map(rubrique => {
                       const articleInformationFragment = getFragmentData(
-                          ArticleInformationFieldsFragmentDoc,
-                          rubrique.articles?.result as FragmentType<typeof ArticleInformationFieldsFragmentDoc>[]
+                          ArticleFullInformationFieldsFragmentDoc,
+                          rubrique.articles?.result as FragmentType<typeof ArticleFullInformationFieldsFragmentDoc>[]
                       );
 
                       const filteredArticles = articleInformationFragment.filter(

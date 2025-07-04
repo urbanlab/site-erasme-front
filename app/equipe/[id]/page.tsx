@@ -5,7 +5,7 @@ import {
     AuteurFullInformationFieldsFragment,
     AuteurFullInformationFieldsFragmentDoc,
     ListProjetsFieldsFragmentDoc,
-    MotFieldsFragmentDoc,
+    MotsAndGroupeMotsFieldsFragmentDoc,
 } from '@graphql/__generated__/graphql';
 import { ACTIVE_AUTHORS, ALL_PROJECTS_AND_NESTED_COLLECTIONS } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
@@ -107,8 +107,8 @@ export default async function Author({ params }: { params: Promise<{ id: string 
         .filter(rubrique => rubrique !== null);
 
     const motsFragment = getFragmentData(
-        MotFieldsFragmentDoc,
-        data?.mots?.result as FragmentType<typeof MotFieldsFragmentDoc>[]
+        MotsAndGroupeMotsFieldsFragmentDoc,
+        data?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
     );
 
     const auteurInformationFragment = getFragmentData(

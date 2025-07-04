@@ -3,17 +3,17 @@
 import { useSuspenseQuery } from '@apollo/client/react/hooks/useSuspenseQuery';
 import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
 import {
-    ArticleInformationFieldsFragment,
-    ArticleInformationFieldsFragmentDoc,
+    ArticleBasicInformationFieldsFragment,
+    ArticleBasicInformationFieldsFragmentDoc,
     ListProjetsFieldsFragment,
     ListProjetsFieldsFragmentDoc,
-    SearchQuery,
+    SearchQuery
 } from '@graphql/__generated__/graphql';
 import { SEARCH } from '@graphql/queries';
 import { useEffect, useState } from 'react';
 
 type SearchResults = {
-    articles: ArticleInformationFieldsFragment[];
+    articles: ArticleBasicInformationFieldsFragment[];
     rubriques: ListProjetsFieldsFragment[];
 };
 
@@ -31,9 +31,9 @@ export function useSearchResults({ searchInput }: { searchInput: string }) {
     useEffect(() => {
         const searchQuery = () => {
             const articles = getFragmentData(
-                ArticleInformationFieldsFragmentDoc,
+                ArticleBasicInformationFieldsFragmentDoc,
                 data.recherche?.result?.filter(item => item?.__typename === 'Article') as FragmentType<
-                    typeof ArticleInformationFieldsFragmentDoc
+                    typeof ArticleBasicInformationFieldsFragmentDoc
                 >[]
             );
 

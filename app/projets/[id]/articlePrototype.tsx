@@ -1,4 +1,4 @@
-import { ArticleAndPrototypeQuery, MotsAndGroupMotsFromArticleFieldsFragment } from '@graphql/__generated__/graphql';
+import { MotsAndGroupeMotsFieldsFragment, PrototypeInformationFieldsFragment } from '@graphql/__generated__/graphql';
 import RemoteHtml from '@services/remoteHtml';
 import styles from './articlePrototype.module.css';
 import { DevelopmentAndTimelineSectionsWrapper } from './clientComponents';
@@ -90,10 +90,10 @@ const KeyMetrics = ({ keyMetrics }: { keyMetrics: string }) => {
 };
 
 const InfoCardWrapper = ({
-    data,
+    motsAndGroupeMots,
     cardsSectionObject,
 }: {
-    data: ArticleAndPrototypeQuery;
+    motsAndGroupeMots: MotsAndGroupeMotsFieldsFragment[];
     cardsSectionObject: {
         title: string;
         groupeMotsId: string;
@@ -107,10 +107,10 @@ const InfoCardWrapper = ({
                         key={index}
                         title={card.title}
                         items={
-                            (data?.getArticle?.mots &&
+                            (motsAndGroupeMots &&
                                 getMotsFromGroupeMots({
                                     groupeMotsId: card.groupeMotsId,
-                                    allMots: data?.getArticle?.mots,
+                                    allMots: motsAndGroupeMots,
                                 })) ?? ['']
                         }
                     />
@@ -137,11 +137,11 @@ const getMotsFromGroupeMots = ({
     allMots,
     groupeMotsId,
 }: {
-    allMots?: MotsAndGroupMotsFromArticleFieldsFragment;
+    allMots?: MotsAndGroupeMotsFieldsFragment[];
     groupeMotsId: string;
 }): string[] => {
     return (
-        allMots?.result
+        allMots
             ?.filter(mot => parseInt(mot?.groupe?.id ?? '') === parseInt(groupeMotsId))
             .map(mot => mot?.titre ?? '') ?? ['']
     );
@@ -172,36 +172,44 @@ const parseKeyMetricsData = (data: string): { value: string; description: string
     });
 };
 
-export default function ArticlePrototype({ data, className }: { data: ArticleAndPrototypeQuery; className?: string }) {
+export default function ArticlePrototype({
+    prototypeInformation,
+    motsAndGroupeMots,
+    className,
+}: {
+    prototypeInformation: PrototypeInformationFieldsFragment;
+    motsAndGroupeMots: MotsAndGroupeMotsFieldsFragment[];
+    className?: string;
+}) {
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables} ${className}`}>
             <DescriptionSection
-                title={data.getArticle?.description_title ?? ''}
-                content={data?.getArticle?.description ?? ''}
+                title={prototypeInformation.description_title ?? ''}
+                content={prototypeInformation.description ?? ''}
             />
 
             <DevelopmentAndTimelineSectionsWrapper
                 developmentSection={
                     <DescriptionSection
-                        title={data.getArticle?.description_title_second ?? ''}
-                        content={data?.getArticle?.description_second ?? ''}
+                        title={prototypeInformation.description_title_second ?? ''}
+                        content={prototypeInformation.description_second ?? ''}
                     />
                 }
-                timelineSection={<DevelopmentTimeline timeline={data.getArticle?.developpement ?? ''} />}
+                timelineSection={<DevelopmentTimeline timeline={prototypeInformation.developpement ?? ''} />}
             />
 
-            <InfoCardWrapper data={data} cardsSectionObject={prototypeCards} />
+            <InfoCardWrapper motsAndGroupeMots={motsAndGroupeMots} cardsSectionObject={prototypeCards} />
 
             <DescriptionSection
-                title={data.getArticle?.description_lateral_title ?? ''}
-                content={data?.getArticle?.description_lateral ?? ''}
+                title={prototypeInformation.description_lateral_title ?? ''}
+                content={prototypeInformation.description_lateral ?? ''}
             />
 
-            {data.getArticle?.chiffres_cles && <KeyMetrics keyMetrics={data.getArticle.chiffres_cles} />}
+            {prototypeInformation.chiffres_cles && <KeyMetrics keyMetrics={prototypeInformation.chiffres_cles} />}
 
             {/* <ImageSlider images={data.getArticle?.documents}></ImageSlider> */}
 
-            <InfoCardWrapper data={data} cardsSectionObject={ecosystemeCards} />
+            <InfoCardWrapper motsAndGroupeMots={motsAndGroupeMots} cardsSectionObject={ecosystemeCards} />
 
             <p></p>
         </div>

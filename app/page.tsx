@@ -5,6 +5,9 @@ import ShapedImage from '@ui/components/shapedImage';
 import Tag from '@ui/elements/tag';
 import Link from 'next/link';
 import styles from './page.module.css';
+import { getClient } from '@services/apollo/apolloClient';
+import { HOMEPAGE } from '@graphql/queries';
+import { HomepageQuery } from '@graphql/__generated__/graphql';
 
 const pageTexts = {
     presentationSection: {
@@ -25,11 +28,7 @@ const pageTexts = {
     },
     servicesSection: {
         title: 'Services',
-        tags: [
-            'Inspirer',
-            'Explorer',
-            'Accélérer'
-        ],
+        tags: ['Inspirer', 'Explorer', 'Accélérer'],
     },
     missionSection: {
         title: 'Mission',
@@ -164,7 +163,16 @@ const MissionsSection = () => {
     );
 };
 
-export default function Home() {
+export default async function Home() {
+    const { data } = await getClient().query<HomepageQuery>({
+        query: HOMEPAGE,
+        variables: {
+            idMotActus: parseInt(process.env.SPIP_MOT_ACTUS_ID ?? ''),
+        },
+    });
+
+    //TODO: end implementation of the homepage
+
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
             <PresentationSection />
