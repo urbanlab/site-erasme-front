@@ -52,6 +52,11 @@
     filter: none;
 }
 
+.filter {
+    background: var(--color-primary);
+    color: var(--color-secondary);
+}
+
 /* Only for devices that can hover (not mobile)  */
 @media (hover: hover) {
     .button:hover {

@@ -13,7 +13,7 @@ export default function ToggleGroup({
     items,
     value,
     handleValueChange,
-    toggleButtonVariant = 'ghost',
+    toggleButtonVariant = 'filter',
     className,
 }: ToggleGroupProps) {
     const handleToggleClick = (clickedToggleValue: ControlledComponentValueType) => {

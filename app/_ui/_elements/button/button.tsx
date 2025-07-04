@@ -1,6 +1,6 @@
 import styles from './button.module.css';
 
-export type ButtonVariantType = 'filled' | 'ghost' | 'text';
+export type ButtonVariantType = 'filled' | 'ghost' | 'text' | 'filter';
 
 type ButtonProps = {
     children: React.ReactNode;
