@@ -5,11 +5,4 @@
     transform: var(--orientation);
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
-
-}
-
-.arrow:hover {
-    transform: var(--hover-orientation);
-    transition: all 0.2s ease-in-out;
-    filter: drop-shadow(-3px 0 var(--color-accent));
 }
