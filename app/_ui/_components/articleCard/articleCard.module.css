@@ -1,0 +1,54 @@
+.card {
+    border: 2px solid var(--color-secondary);
+    border-radius: 1.25rem;
+
+    cursor: pointer;
+
+    padding: 30px;
+    row-gap: 1.5625rem;
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+        'title arrow'
+        'date date'
+        'body body';
+
+    .title {
+        grid-area: title;
+    }
+
+    .arrow {
+        grid-area: arrow;
+    }
+
+    .date {
+        grid-area: date;
+    }
+
+    .body {
+        grid-area: body;
+    }
+
+    &:hover {
+        .arrow {
+            transform: rotate(0deg);
+            filter: drop-shadow(-3px 0 var(--color-accent));
+        }
+    }
+}
+
+.filled {
+    background: var(--color-primary);
+    color: var(--color-secondary);
+}
+
+.ghost {
+    background: transparent;
+    color: var(--color-secondary);
+
+    &:hover {
+        background: var(--color-secondary);
+        color: var(--color-primary);
+    }
+}

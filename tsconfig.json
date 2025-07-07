@@ -36,7 +36,7 @@
       "@ui/components/navbar": ["_ui/_components/navbar/navbar.tsx"],
       "@ui/components/navbarWrapper": ["_ui/_components/navbar/navbarWrapper.tsx"],
       "@ui/components/shapedImage": ["_ui/_components/shapedImage/shapedImage.tsx"],
-      "@ui/components/card": ["_ui/_components/card/card.tsx"],
+      "@ui/components/articleCard": ["_ui/_components/articleCard/articleCard.tsx"],
       "@ui/components/imageCard": ["_ui/_components/imageCard/imageCard.tsx"],
       "@ui/components/rubriqueProjetsAccordion": ["_ui/_components/rubriqueProjetsAccordion/rubriqueProjetsAccordion.tsx"],
       "@ui/components/articleList": ["_ui/_components/articleList/articleList.tsx"],
