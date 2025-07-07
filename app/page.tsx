@@ -41,29 +41,6 @@ const pageTexts = {
     },
 };
 
-const cardsContent = [
-    {
-        title: 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
-        date: '07/12/2021',
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
-    },
-    {
-        title: 'Eadipisicing elit. Quisquam, voluptatum.',
-        date: '07/12/2021',
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
-    },
-    {
-        title: 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
-        date: '07/12/2021',
-        body: 'Lorem ipsum dolor sit amet conseipsum dolor sit amet consecteturipsum dolor sit amet consecteturipsum dolor sit amet consecteturipsum dolor sit amet consecteturipsum dolor sit amet consecteturipsum dolor sit amet consecteturctetur adipisicing elit. Quisquam, voluptatum.',
-    },
-    {
-        title: 'E voluptatum.',
-        date: '07/11/2021',
-        body: 'Lorem ipsum dolo, voluptatum.',
-    },
-];
-
 const imageCardsContent = [
     {
         title: 'DATAGORA',
