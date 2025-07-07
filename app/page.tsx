@@ -5,9 +5,9 @@ import ShapedImage from '@ui/components/shapedImage';
 import Tag from '@ui/elements/tag';
 import Link from 'next/link';
 import styles from './page.module.css';
-import { getClient } from '@services/apollo/apolloClient';
-import { HOMEPAGE } from '@graphql/queries';
-import { HomepageQuery } from '@graphql/__generated__/graphql';
+// import { getClient } from '@services/apollo/apolloClient';
+// import { HOMEPAGE } from '@graphql/queries';
+// import { HomepageQuery } from '@graphql/__generated__/graphql';
 
 const pageTexts = {
     presentationSection: {
@@ -164,12 +164,12 @@ const MissionsSection = () => {
 };
 
 export default async function Home() {
-    const { data } = await getClient().query<HomepageQuery>({
-        query: HOMEPAGE,
-        variables: {
-            idMotActus: parseInt(process.env.SPIP_MOT_ACTUS_ID ?? ''),
-        },
-    });
+    // const { data } = await getClient().query<HomepageQuery>({
+    //     query: HOMEPAGE,
+    //     variables: {
+    //         idMotActus: parseInt(process.env.SPIP_MOT_ACTUS_ID ?? ''),
+    //     },
+    // });
 
     //TODO: end implementation of the homepage
 

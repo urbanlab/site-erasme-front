@@ -1,5 +1,6 @@
-import { ArticleBasicQuery, RubriquePresentationQuery } from '@graphql/__generated__/graphql';
-import { ARTICLE_BASIC, RUBRIQUE_PRESENTATION } from '@graphql/queries';
+import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
+import { ArticleFullInformationFieldsFragmentDoc } from '@graphql/__generated__/graphql';
+import { ARTICLE, RUBRIQUE_PRESENTATION } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { getClient } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
@@ -8,21 +9,26 @@ import { AddessesWrapper } from './clientComponents';
 import styles from './page.module.css';
 
 const ArticleSection = async ({ id, className }: { id: string; className?: string }) => {
-    const { data } = await getClient().query<ArticleBasicQuery>({
-        query: ARTICLE_BASIC,
+    const { data } = await getClient().query({
+        query: ARTICLE,
         variables: { id: parseInt(id ?? '') },
     });
 
+    const article = getFragmentData(
+        ArticleFullInformationFieldsFragmentDoc,
+        data.getArticle as FragmentType<typeof ArticleFullInformationFieldsFragmentDoc>
+    );
+
     return (
         <div className={className}>
-            <h2>{data.getArticle?.titre}</h2>
-            {data.getArticle?.texte && <RemoteHtml html={data.getArticle.texte} />}
+            <h2>{article.titre}</h2>
+            {article.texte && <RemoteHtml html={article.texte} />}
         </div>
     );
 };
 
 export default async function Contact() {
-    const { data } = await getClient().query<RubriquePresentationQuery>({
+    const { data } = await getClient().query({
         query: RUBRIQUE_PRESENTATION,
         variables: { id: parseInt(process.env.SPIP_RUBRIQUE_CONTACT_ID ?? '') },
     });

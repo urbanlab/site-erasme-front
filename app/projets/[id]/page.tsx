@@ -1,6 +1,5 @@
 import { FragmentType, getFragmentData } from '@graphql/__generated__';
 import {
-    ArticleAndPrototypeQuery,
     ArticleFullInformationFieldsFragment,
     ArticleFullInformationFieldsFragmentDoc,
     AuteurBasicInformationFieldsFragment,
@@ -68,7 +67,7 @@ const ArticleCommon = ({ articleInformation }: { articleInformation: ArticleFull
 export default async function Article({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
-    const { data } = await getClient().query<ArticleAndPrototypeQuery>({
+    const { data } = await getClient().query({
         query: ARTICLE_AND_PROTOTYPE,
         variables: { id: parseInt(id) },
     });

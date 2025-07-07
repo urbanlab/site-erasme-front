@@ -1,5 +1,9 @@
-import { ServicesRubriqueQuery } from '@graphql/__generated__/graphql';
-import { SERVICES_RUBRIQUE } from '@graphql/queries';
+import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
+import {
+    ArticleFullInformationFieldsFragmentDoc,
+    RubriqueInformationFieldsFragmentDoc,
+} from '@graphql/__generated__/graphql';
+import { DYNAMIC_PAGE } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { getClient } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
@@ -7,10 +11,20 @@ import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
 
 export default async function Services() {
-    const { data } = await getClient().query<ServicesRubriqueQuery>({
-        query: SERVICES_RUBRIQUE,
+    const { data } = await getClient().query({
+        query: DYNAMIC_PAGE,
         variables: { id: parseInt(process.env.SPIP_RUBRIQUE_SERVICES_ID ?? '') },
     });
+
+    const rubrique = getFragmentData(
+        RubriqueInformationFieldsFragmentDoc,
+        data.getRubrique as FragmentType<typeof RubriqueInformationFieldsFragmentDoc>
+    );
+
+    const articles = getFragmentData(
+        ArticleFullInformationFieldsFragmentDoc,
+        data.getRubrique?.articles?.result as FragmentType<typeof ArticleFullInformationFieldsFragmentDoc>[]
+    );
 
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
@@ -18,10 +32,10 @@ export default async function Services() {
                 className={styles.logo}
                 alt="logo rubrique"
                 maskShape="wide"
-                src={data.getRubrique?.logo ?? heroImage}
+                src={rubrique.logo ?? heroImage}
             />
             <ul className={styles.servicesContainer}>
-                {data.getRubrique?.articles?.result?.map(service => {
+                {articles.map(service => {
                     return (
                         <li
                             key={service?.id}

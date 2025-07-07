@@ -10,6 +10,15 @@ const PAGINATION_FIELDS_FRAGMENT = gql(`
     }
 `);
 
+const RUBRIQUE_INFORMATION_FIELDS_FRAGMENT = gql(`
+    fragment rubriqueInformationFields on Rubrique {
+        id
+        titre
+        texte
+        logo
+    }
+`);
+
 const ARTICLE_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
     fragment articleBasicInformationFields on Article {
         id
@@ -75,7 +84,7 @@ const LIST_PROJETS_FIELDS_FRAGMENT = gql(`
                     ...paginationFields
                 }
                 result {
-                    ...articleFullInformationFields
+                    ...articleBasicInformationFields
                 
                     mots(where: $whereMots, pagination: $pagination) {
                         result {
@@ -107,6 +116,7 @@ const MOTS_AND_GROUPE_MOTS_FIELDS_FRAGMENT = gql(`
 
 export {
     PAGINATION_FIELDS_FRAGMENT,
+    RUBRIQUE_INFORMATION_FIELDS_FRAGMENT,
     ARTICLE_BASIC_INFORMATION_FIELDS_FRAGMENT,
     ARTICLE_FULL_INFORMATION_FIELDS_FRAGMENT,
     PROTOTYPE_INFORMATION_FIELDS_FRAGMENT,

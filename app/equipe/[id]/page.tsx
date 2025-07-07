@@ -1,7 +1,5 @@
 import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
 import {
-    ActiveAuthorsQuery,
-    AllProjectsAndNestedCollectionsQuery,
     AuteurFullInformationFieldsFragment,
     AuteurFullInformationFieldsFragmentDoc,
     ListProjetsFieldsFragmentDoc,
@@ -17,7 +15,7 @@ import styles from './page.module.css';
 
 // Pre-fetch during build time
 export async function generateStaticParams() {
-    const { data } = await getClient().query<ActiveAuthorsQuery>({
+    const { data } = await getClient().query({
         query: ACTIVE_AUTHORS,
         variables: { idRubriqueTrombinoscope: parseInt(process.env.SPIP_RUBRIQUE_TROMBINOSCOPE ?? '') },
     });
@@ -70,7 +68,7 @@ const AuthorPresentation = async ({
 export default async function Author({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
-    const { data } = await getClient().query<AllProjectsAndNestedCollectionsQuery>({
+    const { data } = await getClient().query({
         query: ALL_PROJECTS_AND_NESTED_COLLECTIONS,
         variables: {
             whereRubriques: [`id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`],

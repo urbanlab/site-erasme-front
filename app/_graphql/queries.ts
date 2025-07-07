@@ -14,8 +14,8 @@ const SERVICES_RUBRIQUE = gql(`
     }
 `);
 
-const ARTICLE_BASIC = gql(`
-    query ArticleBasic($id: Int!) {
+const ARTICLE = gql(`
+    query Article($id: Int!) {
         getArticle(id: $id) {
             ...articleFullInformationFields
         }
@@ -60,6 +60,20 @@ const RUBRIQUE_PRESENTATION = gql(`
     }
 `);
 
+const DYNAMIC_PAGE = gql(`
+    query DynamicPage($id: Int!) {
+        getRubrique(id: $id) {
+            ...rubriqueInformationFields
+
+            articles(pagination: 100) {
+                result {
+                    ...articleFullInformationFields
+                }
+            }
+        }
+    }
+`);
+
 /**
  * The current implementation of the search endpoint doesn't give the option to pre-filter
  * which category (article, rubrique..) to search for. We are obligated to fetch all the categories
@@ -88,7 +102,8 @@ const SEARCH = gql(`
                 }
             }
         }
-    }`);
+    }
+`);
 
 /**
  * This is a workaround for the current graphql SPIP endpoint.
@@ -185,10 +200,11 @@ const HOMEPAGE = gql(`
 export {
     ARTICLE_AND_PROTOTYPE,
     RUBRIQUE_PRESENTATION,
-    ARTICLE_BASIC,
+    ARTICLE,
     SERVICES_RUBRIQUE,
     SEARCH,
     ALL_PROJECTS_AND_NESTED_COLLECTIONS,
     ACTIVE_AUTHORS,
     HOMEPAGE,
+    DYNAMIC_PAGE,
 };

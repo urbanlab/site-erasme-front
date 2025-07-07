@@ -32,7 +32,7 @@ const TeamSection = ({ data }: { data: ActiveAuthorsQuery }) => {
 };
 
 export default async function Equipe() {
-    const { data } = await getClient().query<ActiveAuthorsQuery>({
+    const { data } = await getClient().query({
         query: ACTIVE_AUTHORS,
         variables: { idRubriqueTrombinoscope: parseInt(process.env.SPIP_RUBRIQUE_TROMBINOSCOPE ?? '') },
     });
