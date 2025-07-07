@@ -1,13 +1,17 @@
+import { FragmentType, getFragmentData } from '@graphql/__generated__';
+import {
+    ArticleFullInformationFieldsFragment,
+    ArticleFullInformationFieldsFragmentDoc,
+} from '@graphql/__generated__/graphql';
+import { HOMEPAGE } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
-import Card from '@ui/components/card';
+import { getClient } from '@services/apollo/apolloClient';
+import ArticleCard from '@ui/components/articleCard';
 import ImageCard from '@ui/components/imageCard';
 import ShapedImage from '@ui/components/shapedImage';
 import Tag from '@ui/elements/tag';
 import Link from 'next/link';
 import styles from './page.module.css';
-// import { getClient } from '@services/apollo/apolloClient';
-// import { HOMEPAGE } from '@graphql/queries';
-// import { HomepageQuery } from '@graphql/__generated__/graphql';
 
 const pageTexts = {
     presentationSection: {
@@ -95,31 +99,32 @@ const PresentationSection = () => {
     );
 };
 
-const EnCeMomentSection = () => {
+const EnCeMomentSection = ({ articles }: { articles: ArticleFullInformationFieldsFragment[] }) => {
     return (
         <div className={styles.currentTopicsContainer}>
             <h2>{pageTexts.currentTopicsSection.title}</h2>
             <div className={styles.cardsContainer}>
                 <div className={styles.spotlightCardsContainer}>
-                    {cardsContent.map((card, index) => (
-                        <Card
-                            className={styles.card}
+                    {articles.map(article => (
+                        <ArticleCard
+                            article={article}
                             variant="filled"
-                            title={card.title}
-                            date={card.date}
-                            body={card.body}
-                            key={index}
+                            className={styles.card}
+                            textLength={130}
+                            key={article.id}
                         />
                     ))}
                 </div>
                 <div className={styles.archivesContainer}>
-                    <Card
+                    <ArticleCard article={articles[0]} variant="ghost" textLength={200} className={styles.card} />
+
+                    {/* <ArticleCard
                         className={styles.card}
                         variant="ghost"
                         title="lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum."
                         date="07/12/2021"
                         body="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum."
-                    />
+                    /> */}
                 </div>
             </div>
         </div>
@@ -164,12 +169,17 @@ const MissionsSection = () => {
 };
 
 export default async function Home() {
-    // const { data } = await getClient().query<HomepageQuery>({
-    //     query: HOMEPAGE,
-    //     variables: {
-    //         idMotActus: parseInt(process.env.SPIP_MOT_ACTUS_ID ?? ''),
-    //     },
-    // });
+    const { data } = await getClient().query({
+        query: HOMEPAGE,
+        variables: {
+            idMotActus: parseInt(process.env.SPIP_MOT_ACTUS_ID ?? ''),
+        },
+    });
+
+    const enCeMomentArticles = getFragmentData(
+        ArticleFullInformationFieldsFragmentDoc,
+        data.getMot?.articles?.result as FragmentType<typeof ArticleFullInformationFieldsFragmentDoc>[]
+    );
 
     //TODO: end implementation of the homepage
 
@@ -177,7 +187,7 @@ export default async function Home() {
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
             <PresentationSection />
 
-            <EnCeMomentSection />
+            <EnCeMomentSection articles={enCeMomentArticles} />
 
             {/* ACCOMPLISHMENTS (Réalisations) SECTION */}
 

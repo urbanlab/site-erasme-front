@@ -187,10 +187,7 @@ const HOMEPAGE = gql(`
             id
             articles(orderby: ["date_DESC"], pagination: $numberOfActus) {
                 result{
-                    id
-                    titre
-                    texte
-                    date
+                    ...articleFullInformationFields
                 }
             }
         }
