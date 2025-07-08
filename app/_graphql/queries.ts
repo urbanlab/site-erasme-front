@@ -191,6 +191,11 @@ const HOMEPAGE = gql(`
                 }
             }
         }
+        articles(pagination: 5000) {
+            result {
+                id
+            }
+        }
     }
 `);
 

@@ -10,6 +10,7 @@ import ArticleCard from '@ui/components/articleCard';
 import ImageCard from '@ui/components/imageCard';
 import ShapedImage from '@ui/components/shapedImage';
 import Tag from '@ui/elements/tag';
+import { ArchiveArticleCard } from 'clientComponents';
 import Link from 'next/link';
 import styles from './page.module.css';
 
@@ -76,7 +77,15 @@ const PresentationSection = () => {
     );
 };
 
-const EnCeMomentSection = ({ articles }: { articles: ArticleFullInformationFieldsFragment[] }) => {
+const EnCeMomentSection = ({
+    articles,
+    archiveArticleIdList,
+}: {
+    articles: ArticleFullInformationFieldsFragment[];
+    archiveArticleIdList: string[];
+}) => {
+    const textLength: number = 130;
+
     return (
         <div className={styles.currentTopicsContainer}>
             <h2>{pageTexts.currentTopicsSection.title}</h2>
@@ -85,24 +94,18 @@ const EnCeMomentSection = ({ articles }: { articles: ArticleFullInformationField
                     {articles.map(article => (
                         <ArticleCard
                             article={article}
-                            variant="filled"
-                            className={styles.card}
-                            textLength={130}
+                            variant="spotlight"
+                            className={styles.cardSizing}
+                            textLength={textLength}
                             key={article.id}
                         />
                     ))}
                 </div>
-                <div className={styles.archivesContainer}>
-                    <ArticleCard article={articles[0]} variant="ghost" textLength={200} className={styles.card} />
-
-                    {/* <ArticleCard
-                        className={styles.card}
-                        variant="ghost"
-                        title="lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum."
-                        date="07/12/2021"
-                        body="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum."
-                    /> */}
-                </div>
+                <ArchiveArticleCard
+                    articleIdList={archiveArticleIdList}
+                    textLength={textLength}
+                    className={styles.archivesContainer}
+                />
             </div>
         </div>
     );
@@ -158,13 +161,16 @@ export default async function Home() {
         data.getMot?.articles?.result as FragmentType<typeof ArticleFullInformationFieldsFragmentDoc>[]
     );
 
+    // Get a list of existing articles IDs for the archive section
+    const archiveArticleIdList: string[] = data.articles?.result?.map(article => article?.id ?? '') ?? [];
+
     //TODO: end implementation of the homepage
 
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
             <PresentationSection />
 
-            <EnCeMomentSection articles={enCeMomentArticles} />
+            <EnCeMomentSection articles={enCeMomentArticles} archiveArticleIdList={archiveArticleIdList} />
 
             {/* ACCOMPLISHMENTS (Réalisations) SECTION */}
 

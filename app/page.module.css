@@ -54,7 +54,7 @@
     }
 }
 
-.card {
+.cardSizing {
     min-width: 19.5rem;
     flex: 1;
     /* TODO: make width with clamp ? */
@@ -62,6 +62,33 @@
 
 .archivesContainer {
     align-self: center;
+    display: grid;
+    grid-template-columns: auto 24px 1fr;
+    grid-template-areas:
+        'button intersection card'
+        'title intersection card';
+
+    > .title {
+        grid-area: title;
+        writing-mode: sideways-lr;
+        align-content: center;
+    }
+    > .button {
+        grid-area: button-start / button-start / intersection-start / intersection-end;
+
+        :hover {
+            color: var(--color-accent);
+        }
+    }
+    > .card {
+        grid-area: intersection-start / intersection-start / card-end / card-end;
+    }
+
+    .loadIcon {
+        height: 67px;
+        width: auto;
+        color: var(--color-primary);
+    }
 }
 
 .programsContainer {
@@ -157,8 +184,35 @@
             '1st-most-recent 2nd-most-recent'
             '3rd-most-recent 4th-most-recent';
 
-        & > .card {
+        & > .cardSizing {
             margin: 0;
+        }
+    }
+
+    .archivesContainer {
+        grid-template-columns: unset;
+        grid-template-rows: auto auto 24px auto;
+        grid-template-areas:
+            'title'
+            'card'
+            'intersection'
+            'button';
+
+        > .title {
+            grid-area: title;
+            writing-mode: unset;
+            justify-self: center;
+            margin-bottom: var(--gap-inside-section);
+        }
+        > .card {
+            grid-area: card-start / card-start / intersection-end / intersection-end;
+        }
+        > .button {
+            grid-area: intersection-start / intersection-start / button-end / button-end;
+        }
+
+        .loadIcon {
+            height: 150px;
         }
     }
 

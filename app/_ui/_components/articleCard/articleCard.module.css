@@ -29,6 +29,11 @@
     .body {
         grid-area: body;
     }
+}
+
+.spotlight {
+    background: var(--color-primary);
+    color: var(--color-secondary);
 
     &:hover {
         .arrow {
@@ -38,17 +43,16 @@
     }
 }
 
-.filled {
-    background: var(--color-primary);
-    color: var(--color-secondary);
-}
-
-.ghost {
+.archive {
     background: transparent;
     color: var(--color-secondary);
 
     &:hover {
         background: var(--color-secondary);
         color: var(--color-primary);
+
+        .arrow {
+            color: var(--color-accent);
+        }
     }
 }
