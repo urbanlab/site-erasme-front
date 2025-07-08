@@ -182,6 +182,7 @@ const HOMEPAGE = gql(`
     query Homepage(
         $idMotActus: Int!,
         $numberOfActus: Int = 4
+        $idRubriqueServices: Int!
     ){
         getMot(id: $idMotActus) {
             id
@@ -194,6 +195,14 @@ const HOMEPAGE = gql(`
         articles(pagination: 5000) {
             result {
                 id
+            }
+        }
+        getRubrique(id: $idRubriqueServices) {
+            id
+            articles {
+                result {
+                    ...articleBasicInformationFields
+                }
             }
         }
     }

@@ -1,5 +1,7 @@
 import { FragmentType, getFragmentData } from '@graphql/__generated__';
 import {
+    ArticleBasicInformationFieldsFragment,
+    ArticleBasicInformationFieldsFragmentDoc,
     ArticleFullInformationFieldsFragment,
     ArticleFullInformationFieldsFragmentDoc,
 } from '@graphql/__generated__/graphql';
@@ -124,14 +126,14 @@ const ProgrammesSection = () => {
     );
 };
 
-const ServicesSection = () => {
+const ServicesSection = ({ articles }: { articles: ArticleBasicInformationFieldsFragment[] }) => {
     return (
         <div className={styles.servicesContainer}>
             <h2>{pageTexts.servicesSection.title}</h2>
             <div className={styles.tagsContainer}>
-                {pageTexts.servicesSection.tags.map((tag, index) => (
-                    <Link key={index} href={`/services#${tag}`}>
-                        <Tag value={tag} />
+                {articles.map(article => (
+                    <Link key={article.id} href={`/services#${article.titre}`}>
+                        <Tag value={article.titre ?? ''} />
                     </Link>
                 ))}
             </div>
@@ -153,12 +155,18 @@ export default async function Home() {
         query: HOMEPAGE,
         variables: {
             idMotActus: parseInt(process.env.SPIP_MOT_ACTUS_ID ?? ''),
+            idRubriqueServices: parseInt(process.env.SPIP_RUBRIQUE_SERVICES_ID ?? ''),
         },
     });
 
     const enCeMomentArticles = getFragmentData(
         ArticleFullInformationFieldsFragmentDoc,
         data.getMot?.articles?.result as FragmentType<typeof ArticleFullInformationFieldsFragmentDoc>[]
+    );
+
+    const servicesArticles = getFragmentData(
+        ArticleBasicInformationFieldsFragmentDoc,
+        data.getRubrique?.articles?.result as FragmentType<typeof ArticleBasicInformationFieldsFragmentDoc>[]
     );
 
     // Get a list of existing articles IDs for the archive section
@@ -176,7 +184,7 @@ export default async function Home() {
 
             <ProgrammesSection />
 
-            <ServicesSection />
+            <ServicesSection articles={servicesArticles} />
 
             <MissionsSection />
         </div>
