@@ -8,14 +8,19 @@
 
     font-size: var(--button-font-size);
 
-    &:active {
+    &:active:not(.no-style) {
         background-color: var(--color-accent);
     }
 }
-.button[data-popup-open],
-.button[data-selected] {
+.button[data-popup-open]:not(.no-style),
+.button[data-selected]:not(.no-style) {
     background-color: var(--color-accent);
     border-color: var(--color-secondary);
+}
+
+.no-style {
+    background-color: transparent;
+    padding: unset;
 }
 
 .ghost {
@@ -59,7 +64,7 @@
 
 /* Only for devices that can hover (not mobile)  */
 @media (hover: hover) {
-    .button:hover {
+    .button:hover:not(.no-style) {
         background-color: var(--color-accent);
     }
 }
