@@ -20,4 +20,10 @@
         text-decoration: underline;
         cursor: pointer;
     }
+
+    pre,
+    code {
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
 }
