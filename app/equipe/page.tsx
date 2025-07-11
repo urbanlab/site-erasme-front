@@ -56,7 +56,7 @@ const PartnersSection = async () => {
                         <Link
                             key={motFragment.id}
                             className={styles.tagStyle}
-                            href={`/partenaires/${motFragment.id}`}
+                            href={`/mot-cle/${motFragment.id}`}
                         >
                             {motFragment.titre}
                         </Link>

@@ -32,25 +32,25 @@ export async function generateStaticParams() {
     });
 }
 
-const PartnerPresentation = async ({
-    partnerInformation,
+const KeywordPresentation = async ({
+    keywordInformation,
 }: {
-    partnerInformation: MotBasicInformationFieldsFragment;
+    keywordInformation: MotBasicInformationFieldsFragment;
 }) => {
     return (
         <div className={styles.presentationContainer}>
             <ShapedImage
-                src={partnerInformation.logo ?? heroImage}
+                src={keywordInformation.logo ?? heroImage}
                 alt="photo du partenaire"
                 maskShape="wide"
                 className={styles.logo}
             />
-            <h1 className={styles.title}>{partnerInformation.titre}</h1>
+            <h1 className={styles.title}>{keywordInformation.titre}</h1>
         </div>
     );
 };
 
-export default async function Partner({ params }: { params: Promise<{ id: string }> }) {
+export default async function Keyword({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
     const { data } = await getClient().query({
@@ -70,7 +70,7 @@ export default async function Partner({ params }: { params: Promise<{ id: string
         data?.rubriques?.result as FragmentType<typeof ListProjetsFieldsFragmentDoc>[]
     );
 
-    const projectListFromPartner = projectListFragment
+    const projectListFilteredWithKeyword = projectListFragment
         .map(rubrique => {
             const filteredArticles = rubrique?.articles?.result?.filter(article => {
                 const motsFromArticleFragment = getFragmentData(
@@ -98,16 +98,16 @@ export default async function Partner({ params }: { params: Promise<{ id: string
         data?.getGroupe_mots?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
     );
 
-    const partnerInformationFragment = getFragmentData(
+    const motInformationFragment = getFragmentData(
         MotBasicInformationFieldsFragmentDoc,
         data?.getMot as FragmentType<typeof MotBasicInformationFieldsFragmentDoc>
     );
 
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
-            <PartnerPresentation partnerInformation={partnerInformationFragment} />
+            <KeywordPresentation keywordInformation={motInformationFragment} />
 
-            <ProjectListWrapper projects={projectListFromPartner} politiquesPubliquesMots={motsFragment} />
+            <ProjectListWrapper projects={projectListFilteredWithKeyword} politiquesPubliquesMots={motsFragment} />
         </div>
     );
 }
