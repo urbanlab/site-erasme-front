@@ -25,6 +25,10 @@
     .team {
         grid-area: team;
     }
+
+    .parterns {
+        grid-area: parterns;
+    }
 }
 
 .sectionContainer {

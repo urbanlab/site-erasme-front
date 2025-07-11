@@ -1,5 +1,6 @@
-import { ActiveAuthorsQuery } from '@graphql/__generated__/graphql';
-import { ACTIVE_AUTHORS } from '@graphql/queries';
+import { FragmentType, getFragmentData } from '@graphql/__generated__';
+import { MotsAndGroupeMotsFieldsFragmentDoc } from '@graphql/__generated__/graphql';
+import { ACTIVE_AUTHORS, MOTS_FROM_GROUPE_MOTS, RUBRIQUE_PRESENTATION } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { getClient } from '@services/apollo/apolloClient';
 import RemoteHtml from '@services/remoteHtml';
@@ -13,7 +14,12 @@ const pageTexts = {
     partnersSection: 'Nos partenaires',
 };
 
-const TeamSection = ({ data }: { data: ActiveAuthorsQuery }) => {
+const TeamSection = async () => {
+    const { data } = await getClient().query({
+        query: ACTIVE_AUTHORS,
+        variables: { idRubriqueTrombinoscope: parseInt(process.env.SPIP_RUBRIQUE_TROMBINOSCOPE ?? '') },
+    });
+
     return (
         <div className={`${styles.team} ${styles.sectionContainer}`}>
             <h2>{pageTexts.teamSection}</h2>
@@ -31,10 +37,40 @@ const TeamSection = ({ data }: { data: ActiveAuthorsQuery }) => {
     );
 };
 
+const PartnersSection = async () => {
+    const { data } = await getClient().query({
+        query: MOTS_FROM_GROUPE_MOTS,
+        variables: { idGroupeMots: parseInt(process.env.SPIP_GROUPE_MOTS_PARTENAIRES_ID ?? '') },
+    });
+
+    return (
+        <div className={`${styles.partners} ${styles.sectionContainer}`}>
+            <h2>{pageTexts.partnersSection}</h2>
+            <div className={styles.tagsContainer}>
+                {data.getGroupe_mots?.mots?.result?.map(mot => {
+                    const motFragment = getFragmentData(
+                        MotsAndGroupeMotsFieldsFragmentDoc,
+                        mot as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>
+                    );
+                    return (
+                        <Link
+                            key={motFragment.id}
+                            className={styles.tagStyle}
+                            href={`/partenaires/${motFragment.id}`}
+                        >
+                            {motFragment.titre}
+                        </Link>
+                    );
+                })}
+            </div>
+        </div>
+    );
+};
+
 export default async function Equipe() {
     const { data } = await getClient().query({
-        query: ACTIVE_AUTHORS,
-        variables: { idRubriqueTrombinoscope: parseInt(process.env.SPIP_RUBRIQUE_TROMBINOSCOPE ?? '') },
+        query: RUBRIQUE_PRESENTATION,
+        variables: { id: parseInt(process.env.SPIP_RUBRIQUE_TROMBINOSCOPE ?? '') },
     });
 
     return (
@@ -51,7 +87,8 @@ export default async function Equipe() {
                 </h5>
             )}
 
-            <TeamSection data={data} />
+            <TeamSection />
+            <PartnersSection />
         </div>
     );
 }

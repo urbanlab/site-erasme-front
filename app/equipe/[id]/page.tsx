@@ -74,7 +74,7 @@ export default async function Author({ params }: { params: Promise<{ id: string 
             whereRubriques: [`id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`],
             rubriquesOrderBy: [`date_DESC`],
             articlesInRubriqueOrderBy: [`date_DESC`],
-            whereMots: [`id_groupe=${process.env.SPIP_GROUPE_MOTS_POLITIQUES_PUBLIQUES_ID}`],
+            idGroupeMotsFilterPolitiquesPubliques: parseInt(process.env.SPIP_GROUPE_MOTS_POLITIQUES_PUBLIQUES_ID ?? ''),
             withAuteurs: true,
             whereAuteurs: [`id_auteur=${id}`],
             idAuteur: parseInt(id ?? ''),
@@ -106,7 +106,7 @@ export default async function Author({ params }: { params: Promise<{ id: string 
 
     const motsFragment = getFragmentData(
         MotsAndGroupeMotsFieldsFragmentDoc,
-        data?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
+        data?.getGroupe_mots?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
     );
 
     const auteurInformationFragment = getFragmentData(

@@ -34,7 +34,7 @@ export default async function Projets() {
             whereRubriques: [`id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`],
             rubriquesOrderBy: [`date_DESC`],
             articlesInRubriqueOrderBy: [`date_DESC`],
-            whereMots: [`id_groupe=${process.env.SPIP_GROUPE_MOTS_POLITIQUES_PUBLIQUES_ID}`],
+            idGroupeMotsFilterPolitiquesPubliques: parseInt(process.env.SPIP_GROUPE_MOTS_POLITIQUES_PUBLIQUES_ID ?? ''),
         },
     });
 
@@ -45,7 +45,7 @@ export default async function Projets() {
 
     const motsFragment = getFragmentData(
         MotsAndGroupeMotsFieldsFragmentDoc,
-        data?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
+        data?.getGroupe_mots?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
     );
 
     return (

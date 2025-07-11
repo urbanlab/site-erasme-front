@@ -89,7 +89,6 @@ const SEARCH = gql(`
             $pagination: Int = 5000, 
             $page: Int = 1, 
             $where: String!,
-            $whereMots: [String!],
             $withAuteurs: Boolean = false,
             $whereAuteurs: [String!]) {
         recherche(texte: $texte, orderby: $generalOrderBy, pagination: $pagination, page: $page, where: $where) {
@@ -128,12 +127,14 @@ const ALL_PROJECTS_AND_NESTED_COLLECTIONS = gql(`
             $whereRubriques: [String!],
             $rubriquesOrderBy: [String!],
             $articlesInRubriqueOrderBy: [String!],
-            $whereMots: [String!],
+            $idGroupeMotsFilterPolitiquesPubliques: Int!,
             $withAuteurs: Boolean = false,
             $whereAuteurs: [String!],
             $idAuteur: Int = 0,
             $pagination: Int = 5000,
-            $page: Int = 1) {
+            $page: Int = 1
+            $withPartenaires: Boolean = false,
+            $idPartenaire: Int = 0) {
         rubriques(where: $whereRubriques, orderby: $rubriquesOrderBy, pagination: $pagination, page: $page) {
             pagination {
                 ...paginationFields
@@ -142,13 +143,21 @@ const ALL_PROJECTS_AND_NESTED_COLLECTIONS = gql(`
                 ...listProjetsFields
             }
         }
-        mots(where: $whereMots, pagination: $pagination) {
-            result {
-                ...motsAndGroupeMotsFields
+
+        getGroupe_mots(id: $idGroupeMotsFilterPolitiquesPubliques){
+            id
+            titre
+            mots (pagination: $pagination) {
+                result {
+                    ...motsAndGroupeMotsFields
+                }
             }
         }
         getAuteur(id: $idAuteur) @include(if: $withAuteurs) {
             ...auteurFullInformationFields
+        }
+        getMot(id: $idPartenaire) @include(if: $withPartenaires){
+            ...motBasicInformationFields
         }
     }
 `);
@@ -177,6 +186,23 @@ const ACTIVE_AUTHORS = gql(`
         }
     }
 `);
+
+const MOTS_FROM_GROUPE_MOTS = gql(`
+    query MotsFromGroupeMots(
+        $idGroupeMots: Int!
+    ){
+        getGroupe_mots(id: $idGroupeMots){
+            id
+            titre
+
+            mots(pagination: 500) {
+                result {
+                    ...motsAndGroupeMotsFields
+                }
+            }
+        }
+    }
+`)
 
 const HOMEPAGE = gql(`
     query Homepage(
@@ -218,4 +244,5 @@ export {
     ACTIVE_AUTHORS,
     HOMEPAGE,
     DYNAMIC_PAGE,
+    MOTS_FROM_GROUPE_MOTS,
 };
