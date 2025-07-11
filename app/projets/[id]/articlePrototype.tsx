@@ -2,34 +2,41 @@ import { MotsAndGroupeMotsFieldsFragment, PrototypeInformationFieldsFragment } f
 import RemoteHtml from '@services/remoteHtml';
 import styles from './articlePrototype.module.css';
 import { DevelopmentAndTimelineSectionsWrapper } from './clientComponents';
+import Link from 'next/link';
 // import ImageSlider from '@ui/components/imageSlider';
 
 const prototypeCards = [
     {
         title: 'METHODO',
         groupeMotsId: process.env.SPIP_GROUPE_MOTS_METHODOLOGIES_DE_DEVELOPPEMENT_ID ?? '',
+        hasLink: true,
     },
     {
         title: 'USAGES',
         groupeMotsId: process.env.SPIP_GROUPE_MOTS_USAGES_ID ?? '',
+        hasLink: false,
     },
     {
         title: 'TECHNO',
         groupeMotsId: process.env.SPIP_GROUPE_MOTS_TECHNOLOGIES_ID ?? '',
+        hasLink: false,
     },
 ];
 const ecosystemeCards = [
     {
         title: 'PARTENAIRES',
         groupeMotsId: process.env.SPIP_GROUPE_MOTS_PARTENAIRES_ID ?? '',
+        hasLink: true,
     },
     {
         title: 'UTILISATEURS',
         groupeMotsId: process.env.SPIP_GROUPE_MOTS_UTILISATEURS_ID ?? '',
+        hasLink: false,
     },
     {
         title: 'ENTREPRISES',
         groupeMotsId: process.env.SPIP_GROUPE_MOTS_ENTREPRISES_ID ?? '',
+        hasLink: false,
     },
 ];
 
@@ -97,6 +104,7 @@ const InfoCardWrapper = ({
     cardsSectionObject: {
         title: string;
         groupeMotsId: string;
+        hasLink: boolean;
     }[];
 }) => {
     return (
@@ -107,11 +115,13 @@ const InfoCardWrapper = ({
                         key={index}
                         title={card.title}
                         items={
-                            (motsAndGroupeMots &&
-                                getMotsFromGroupeMots({
+                            (motsAndGroupeMots && {
+                                mots: getMotsFromGroupeMots({
                                     groupeMotsId: card.groupeMotsId,
                                     allMots: motsAndGroupeMots,
-                                })) ?? ['']
+                                }),
+                                hasLink: card.hasLink,
+                            }) ?? ['']
                         }
                     />
                 );
@@ -120,13 +130,27 @@ const InfoCardWrapper = ({
     );
 };
 
-const InfoCard = ({ title, items }: { title: string; items: string[] }) => {
+const InfoCard = ({
+    title,
+    items,
+}: {
+    title: string;
+    items: { mots: MotsAndGroupeMotsFieldsFragment[]; hasLink: boolean };
+}) => {
     return (
         <div className={styles.infoCard}>
             <h4 className={styles.infoCardTitle}>{title}</h4>
             <ul>
-                {items.map((item, index) => {
-                    return <li key={index}>{item}</li>;
+                {items.mots.map(mot => {
+                    return items.hasLink ? (
+                        <li key={mot.id}>
+                            <Link key={mot.id} href={`/mot-cle/${mot.id}`}>
+                                {mot.titre}
+                            </Link>
+                        </li>
+                    ) : (
+                        <li key={mot.id}>{mot.titre}</li>
+                    );
                 })}
             </ul>
         </div>
@@ -137,14 +161,10 @@ const getMotsFromGroupeMots = ({
     allMots,
     groupeMotsId,
 }: {
-    allMots?: MotsAndGroupeMotsFieldsFragment[];
+    allMots: MotsAndGroupeMotsFieldsFragment[];
     groupeMotsId: string;
-}): string[] => {
-    return (
-        allMots
-            ?.filter(mot => parseInt(mot?.groupe?.id ?? '') === parseInt(groupeMotsId))
-            .map(mot => mot?.titre ?? '') ?? ['']
-    );
+}): MotsAndGroupeMotsFieldsFragment[] => {
+    return allMots.filter(mot => parseInt(mot?.groupe?.id ?? '') === parseInt(groupeMotsId));
 };
 
 const parseTimelineData = (data: string): { year: string; description: string; isHighlighted: boolean }[] => {

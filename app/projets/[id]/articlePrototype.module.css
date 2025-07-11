@@ -37,6 +37,9 @@
         & li {
             list-style: disc inside;
         }
+        & a {
+            text-decoration: underline;
+        }
     }
 }
 
@@ -82,7 +85,7 @@
     .keyMetricItem {
         display: flex;
         align-items: center;
-        
+
         margin-bottom: var(--bottom-margin-info-card-title);
     }
 
