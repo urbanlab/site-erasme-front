@@ -10,19 +10,13 @@ import {
 import { ARTICLE_AND_PROTOTYPE } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { getClient } from '@services/apollo/apolloClient';
-import RemoteHtml from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
 import Tag from '@ui/elements/tag';
 import { dateFormat } from '@utils/dateUtils';
 import Link from 'next/link';
+import ArticleCommon from './articleCommon';
 import ArticlePrototype from './articlePrototype';
 import styles from './page.module.css';
-
-//Pre-fetch some articles during build time
-export async function generateStaticParams() {
-    //TODO: implement logic
-    return [{ id: '2125' }];
-}
 
 const ArticlePresentation = ({
     articleInformation,
@@ -58,10 +52,6 @@ const ArticlePresentation = ({
             </ul>
         </div>
     );
-};
-
-const ArticleCommon = ({ articleInformation }: { articleInformation: ArticleFullInformationFieldsFragment }) => {
-    return <>{articleInformation.texte && <RemoteHtml html={articleInformation.texte} />} </>;
 };
 
 export default async function Article({ params }: { params: Promise<{ id: string }> }) {

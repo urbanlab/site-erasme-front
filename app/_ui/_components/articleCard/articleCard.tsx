@@ -1,7 +1,7 @@
 'use client';
 
 import { ArticleFullInformationFieldsFragment } from '@graphql/__generated__/graphql';
-import RemoteHtml from '@services/remoteHtml';
+import { RemoteHtmlRawText } from '@services/remoteHtml';
 import Arrow from '@ui/elements/arrow';
 import { dateFormat } from '@utils/dateUtils';
 import Link from 'next/link';
@@ -25,7 +25,7 @@ export default function ArticleCard({ article, variant, textLength, className }:
             />
             {article?.date && <p className={styles.date}>{dateFormat(article.date)}</p>}
             {article?.texte && (
-                <RemoteHtml html={article.texte} returnOnlyText textReturnLength={textLength} className={styles.body} />
+                <RemoteHtmlRawText html={article.texte} textReturnLength={textLength} className={styles.body} />
             )}
         </Link>
     );

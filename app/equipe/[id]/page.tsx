@@ -8,7 +8,7 @@ import {
 import { ACTIVE_AUTHORS, ALL_PROJECTS_AND_NESTED_COLLECTIONS } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { getClient } from '@services/apollo/apolloClient';
-import RemoteHtml from '@services/remoteHtml';
+import { RemoteHtmlRawText } from '@services/remoteHtml';
 import ProjectListWrapper from '@ui/components/projectListWrapper';
 import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
@@ -43,7 +43,10 @@ const AuthorPresentation = async ({
                 className={styles.logo}
             />
             <h1 className={styles.title}>{authorInformation.titre}</h1>
-            <RemoteHtml html={authorInformation.descriptif ?? ''} className={`${styles.tag} ${styles.tagStyle} `} />
+            <RemoteHtmlRawText
+                html={authorInformation.descriptif ?? ''}
+                className={`${styles.tag} ${styles.tagStyle} `}
+            />
             <p className={styles.email}>{authorInformation.email ?? ''}</p>
             <ul className={styles.socialMedia}>
                 {authorInformation.auteur_compte_linkedin && (

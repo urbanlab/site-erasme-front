@@ -1,10 +1,11 @@
 import '@globals/styles.css';
+import { ApolloWrapper } from '@services/apollo/apolloWrapper';
+import CookieConsentManager from '@services/cookieConsent/cookieConsentManager';
 import Footer from '@ui/components/footer';
 import NavbarWrapper from '@ui/components/navbarWrapper';
 import type { Metadata } from 'next';
 import { K2D } from 'next/font/google';
 import styles from './layout.module.css';
-import { ApolloWrapper } from '@services/apollo/apolloWrapper';
 
 export const metadata: Metadata = {
     title: 'ERASME',
@@ -24,6 +25,8 @@ export default function RootLayout({
     return (
         <html lang="fr" className={k2d.className}>
             <body className={styles.bodyWrapper}>
+                <CookieConsentManager />
+                
                 <ApolloWrapper>
                     <NavbarWrapper />
                     <div className={styles.contentContainer}>{children}</div>

@@ -6,7 +6,7 @@ import {
 import { DYNAMIC_PAGE } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { getClient } from '@services/apollo/apolloClient';
-import RemoteHtml from '@services/remoteHtml';
+import { RemoteHtml } from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
 

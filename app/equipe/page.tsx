@@ -3,7 +3,7 @@ import { MotsAndGroupeMotsFieldsFragmentDoc } from '@graphql/__generated__/graph
 import { ACTIVE_AUTHORS, MOTS_FROM_GROUPE_MOTS, RUBRIQUE_PRESENTATION } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { getClient } from '@services/apollo/apolloClient';
-import RemoteHtml from '@services/remoteHtml';
+import { RemoteHtml } from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
 import Link from 'next/link';
 import styles from './page.module.css';
@@ -53,11 +53,7 @@ const PartnersSection = async () => {
                         mot as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>
                     );
                     return (
-                        <Link
-                            key={motFragment.id}
-                            className={styles.tagStyle}
-                            href={`/mot-cle/${motFragment.id}`}
-                        >
+                        <Link key={motFragment.id} className={styles.tagStyle} href={`/mot-cle/${motFragment.id}`}>
                             {motFragment.titre}
                         </Link>
                     );

@@ -1,10 +1,7 @@
 import { Accordion } from '@base-ui-components/react/accordion';
 import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
-import {
-    ArticleBasicInformationFieldsFragmentDoc,
-    ListProjetsFieldsFragment
-} from '@graphql/__generated__/graphql';
-import RemoteHtml from '@services/remoteHtml';
+import { ArticleBasicInformationFieldsFragmentDoc, ListProjetsFieldsFragment } from '@graphql/__generated__/graphql';
+import { RemoteHtml } from '@services/remoteHtml';
 import ArticleList from '@ui/components/articleList';
 import Arrow from '@ui/elements/arrow';
 import styles from './rubriqueProjetsAccordion.module.css';

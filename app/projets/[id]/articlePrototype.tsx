@@ -1,5 +1,5 @@
 import { MotsAndGroupeMotsFieldsFragment, PrototypeInformationFieldsFragment } from '@graphql/__generated__/graphql';
-import RemoteHtml from '@services/remoteHtml';
+import { RemoteHtml } from '@services/remoteHtml';
 import styles from './articlePrototype.module.css';
 import { DevelopmentAndTimelineSectionsWrapper } from './clientComponents';
 import Link from 'next/link';
