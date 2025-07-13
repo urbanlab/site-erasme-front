@@ -9,7 +9,7 @@ const prototypeCards = [
     {
         title: 'METHODO',
         groupeMotsId: process.env.SPIP_GROUPE_MOTS_METHODOLOGIES_DE_DEVELOPPEMENT_ID ?? '',
-        hasLink: true,
+        hasLink: false,
     },
     {
         title: 'USAGES',
@@ -31,12 +31,12 @@ const ecosystemeCards = [
     {
         title: 'UTILISATEURS',
         groupeMotsId: process.env.SPIP_GROUPE_MOTS_UTILISATEURS_ID ?? '',
-        hasLink: false,
+        hasLink: true,
     },
     {
         title: 'ENTREPRISES',
         groupeMotsId: process.env.SPIP_GROUPE_MOTS_ENTREPRISES_ID ?? '',
-        hasLink: false,
+        hasLink: true,
     },
 ];
 

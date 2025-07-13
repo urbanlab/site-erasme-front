@@ -99,6 +99,9 @@ const SEARCH = gql(`
                 ...on Article {
                     ...articleBasicInformationFields
                 }
+                ...on Document {
+                    ...documentBasicInformationFields
+                }
             }
         }
     }

@@ -80,6 +80,14 @@ const MOT_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
     }
 `);
 
+const DOCUMENT_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
+    fragment documentBasicInformationFields on Document {
+        id
+        titre
+        media
+    }
+`);
+
 const LIST_PROJETS_FIELDS_FRAGMENT = gql(`
     fragment listProjetsFields on Rubrique{
         id
@@ -133,4 +141,5 @@ export {
     AUTEUR_BASIC_INFORMATION_FIELDS_FRAGMENT,
     AUTEUR_FULL_INFORMATION_FIELDS_FRAGMENT,
     MOT_BASIC_INFORMATION_FIELDS_FRAGMENT,
+    DOCUMENT_BASIC_INFORMATION_FIELDS_FRAGMENT,
 };
