@@ -11,7 +11,16 @@ type InputFieldProps = {
     required?: boolean;
 } & React.HTMLAttributes<HTMLElement>;
 
-export default function InputField({ type, name, value, placeholder, className, ref, required = false, ...inheritedProps }: InputFieldProps) {
+export default function InputField({
+    type,
+    name,
+    value,
+    placeholder,
+    className,
+    ref,
+    required = false,
+    ...inheritedProps
+}: InputFieldProps) {
     return (
         <Input
             type={type}
@@ -22,6 +31,7 @@ export default function InputField({ type, name, value, placeholder, className, 
             ref={ref}
             {...inheritedProps}
             required={required}
+            autoComplete="off"
         />
     );
 }
