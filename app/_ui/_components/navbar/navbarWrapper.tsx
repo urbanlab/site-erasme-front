@@ -15,13 +15,14 @@ export default function NavbarWrapper() {
 
     const isDesktop = useIsDesktop();
 
+    const handleSearchInputChange = (input: string) => {
+        setSearchInput(input);
+    };
+
     const handleSearchFormSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        const formData = new FormData(event?.currentTarget);
-        const inputValue = formData.get('searchInput') as string;
-
-        setSearchInput(inputValue);
+        setSearchInput(searchInput);
         setShowSearchResults(true);
     };
 
@@ -53,6 +54,7 @@ export default function NavbarWrapper() {
                     setIsSearchMode(previousSearchMode => !previousSearchMode);
                     setShowSearchResults(false);
                 }}
+                handleSearchInputChange={handleSearchInputChange}
                 handleSearchFormSubmit={handleSearchFormSubmit}
                 handleNavigation={() => setIsSearchMode(false)}
                 handleSearchFilterChange={handleSearchFilterChange}
