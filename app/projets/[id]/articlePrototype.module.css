@@ -105,6 +105,14 @@
     margin-bottom: 1.875rem;
 }
 
+.linkStyle {
+    text-decoration: underline;
+
+    &:hover {
+        background: var(--color-accent);
+    }
+}
+
 @media screen and (min-width: 90rem) {
     .localVariables {
         --bottom-margin-info-card-title: 1.875rem;

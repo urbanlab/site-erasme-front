@@ -45,7 +45,7 @@ const ArticlePresentation = ({
                 {authors && authors.length > 0 && <li>Par :</li>}
                 {authors?.map(author => {
                     return (
-                        <li key={author?.id} style={{ textDecoration: 'underline' }}>
+                        <li key={author?.id} className={styles.linkStyle}>
                             <Link href={`/equipe/${author?.id}`}>{author?.titre}</Link>
                         </li>
                     );

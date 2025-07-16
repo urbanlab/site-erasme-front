@@ -26,6 +26,14 @@
     border-radius: var(--button-border-radius);
 }
 
+.linkStyle {
+    text-decoration: underline;
+    
+    &:hover {
+        background: var(--color-accent);
+    }
+}
+
 .presentationContainer {
     display: grid;
     gap: var(--gap-inside-section);

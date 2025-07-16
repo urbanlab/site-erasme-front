@@ -43,6 +43,14 @@
     gap: 24px;
 }
 
+.linkStyle {
+    text-decoration: underline;
+    
+    &:hover {
+        background: var(--color-accent);
+    }
+}
+
 @media screen and (min-width: 90rem) {
     .localVariables {
         --gap-section: 6.25rem;

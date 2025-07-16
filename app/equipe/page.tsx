@@ -61,11 +61,7 @@ const PartnersSection = async () => {
                     );
 
                     return (
-                        <Link
-                            key={motFragment.id}
-                            href={`/mot-cle/${motFragment.id}`}
-                            style={{ textDecoration: 'underline' }}
-                        >
+                        <Link key={motFragment.id} href={`/mot-cle/${motFragment.id}`} className={styles.linkStyle}>
                             {motFragment.titre}
                         </Link>
                     );

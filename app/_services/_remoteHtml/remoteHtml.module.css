@@ -17,8 +17,14 @@
     }
 
     a {
-        text-decoration: underline;
         cursor: pointer;
+
+        &:not(figure a) {
+            text-decoration: underline;
+            &:hover {
+                background: var(--color-accent);
+            }
+        }
     }
 
     pre,

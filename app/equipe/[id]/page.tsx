@@ -55,7 +55,7 @@ const AuthorPresentation = async ({
                         <Link
                             href={authorInformation.auteur_compte_linkedin}
                             target="_blank"
-                            style={{ textDecoration: 'underline' }}
+                            className={styles.linkStyle}
                         >
                             LinkedIn
                         </Link>
@@ -66,7 +66,7 @@ const AuthorPresentation = async ({
                         <Link
                             href={authorInformation.auteur_compte_twitter}
                             target="_blank"
-                            style={{ textDecoration: 'underline' }}
+                            className={styles.linkStyle}
                         >
                             Twitter
                         </Link>
