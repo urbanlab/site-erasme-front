@@ -4,8 +4,6 @@ import styles from './inputField.module.css';
 type InputFieldProps = {
     type: 'text' | 'email' | 'password';
     name: string;
-    value: string;
-    handleValueChange: (value: string) => void;
     placeholder?: string;
     className?: string;
     ref?: React.Ref<HTMLInputElement>;
@@ -15,8 +13,6 @@ type InputFieldProps = {
 export default function InputField({
     type,
     name,
-    value,
-    handleValueChange,
     placeholder,
     className,
     ref,
@@ -27,8 +23,6 @@ export default function InputField({
         <Input
             type={type}
             name={name}
-            value={value}
-            onValueChange={handleValueChange}
             placeholder={placeholder}
             autoComplete="off"
             spellCheck="false"
