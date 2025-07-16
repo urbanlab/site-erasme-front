@@ -7,6 +7,7 @@ import {
 } from '@graphql/__generated__/graphql';
 import { HOMEPAGE } from '@graphql/queries';
 import cubeShapedIcon from '@public/cube-shaped-icon.svg';
+import doubleArrowShapedIcon from '@public/double-arrow-shaped-icon.svg';
 import heroImage from '@public/hero-img.svg';
 import xShapedIcon from '@public/x-shaped-icon.svg';
 import { getClient } from '@services/apollo/apolloClient';
@@ -154,8 +155,9 @@ const ServicesSection = ({ articles }: { articles: ArticleBasicInformationFields
 const MissionsSection = () => {
     return (
         <div className={styles.missionContainer}>
-            <h2>{pageTexts.missionSection.title}</h2>
-            <p>{pageTexts.missionSection.description}</p>
+            <h2 className={styles.title}>{pageTexts.missionSection.title}</h2>
+            <p className={styles.description}>{pageTexts.missionSection.description}</p>
+            <Image alt="" src={doubleArrowShapedIcon} className={`${styles.desktopDisplayOnly} ${styles.icon}`} />
         </div>
     );
 };

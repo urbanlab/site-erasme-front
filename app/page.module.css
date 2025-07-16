@@ -269,6 +269,29 @@
         }
     }
 
+    .missionContainer {
+        grid-template-areas:
+            'title icon'
+            'description icon';
+
+        .title {
+            grid-area: title;
+        }
+
+        .description {
+            grid-area: description;
+        }
+
+        .icon {
+            grid-area: icon;
+        }
+
+        > img {
+            width: 200px;
+            height: auto;
+        }
+    }
+
     .desktopDisplayOnly {
         display: unset;
     }
