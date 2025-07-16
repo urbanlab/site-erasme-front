@@ -72,7 +72,7 @@ const imageCardsContent = [
 const PresentationSection = () => {
     return (
         <div className={styles.presentationContainer}>
-            <ShapedImage src={heroImage} alt="Logo Erasme" maskShape="wide" className={styles.presentationImage} />
+            <ShapedImage src={heroImage} alt="" maskShape="wide" className={styles.presentationImage} />
             <div className={styles.presentationTextContainer}>
                 <h1>{pageTexts.presentationSection.title}</h1>
                 <h5>{pageTexts.presentationSection.description}</h5>

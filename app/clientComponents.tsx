@@ -165,6 +165,7 @@ const ArchiveArticleCard = ({
                 className={styles.button}
                 variant="no-style"
                 onClick={() => getArticle({ variables: { id: getRandomArticleIdFromList() } })}
+                aria-label='charger un nouvel article des archives'
             >
                 <LoadArchiveIcon className={styles.loadIcon} />
             </Button>

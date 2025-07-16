@@ -72,13 +72,13 @@ const SearchForm = ({
 }) => {
     return (
         <Form onSubmit={handleSearchFormSubmit} style={{ display: 'contents' }}>
-            <Field.Root style={{ display: 'contents' }}>
+            <Field.Root name='searchInput' style={{ display: 'contents' }}>
                 <InputField
                     type="text"
                     name="searchInput"
+                    aria-label='texte pour la recherche'
                     autoFocus
                     required
-
                     ref={searchInputRef}
                     className={styles.searchInput}
                 />
