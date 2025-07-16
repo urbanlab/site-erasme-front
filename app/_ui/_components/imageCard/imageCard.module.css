@@ -12,6 +12,12 @@
     border-radius: var(--border-radius);
     overflow: hidden;
     cursor: pointer;
+
+    filter: grayscale(1);
+
+    &:hover {
+        filter: unset;
+    }
 }
 
 .backgroundImage {
@@ -72,5 +78,3 @@
     align-items: center;
     padding: 0 25px;
 }
-
-

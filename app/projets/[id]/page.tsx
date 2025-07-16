@@ -12,6 +12,7 @@ import heroImage from '@public/hero-img.svg';
 import { getClient } from '@services/apollo/apolloClient';
 import ShapedImage from '@ui/components/shapedImage';
 import Tag from '@ui/elements/tag';
+import ToTopButton from '@ui/elements/toTopButton';
 import { dateFormat } from '@utils/dateUtils';
 import Link from 'next/link';
 import ArticleCommon from './articleCommon';
@@ -104,6 +105,7 @@ export default async function Article({ params }: { params: Promise<{ id: string
                         <ArticleCommon articleInformation={articleInformationFieldsFragment} />
                     )}
                 </div>
+                <ToTopButton className={styles.toTopButton} />
             </div>
         </>
     );

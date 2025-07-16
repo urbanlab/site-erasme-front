@@ -33,7 +33,7 @@
 
 @media screen and (min-width: 90rem) {
     .localVariables {
-        --padding-top-bottom: 1.375rem;
+        --padding-top-bottom: 1rem;
     }
 
     .mainContainer {
@@ -58,6 +58,10 @@
 
                 & .tag {
                     background: var(--color-accent);
+                }
+
+                & .arrow {
+                    filter: drop-shadow(-3px 0 var(--color-accent));
                 }
             }
         }

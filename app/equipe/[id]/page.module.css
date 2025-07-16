@@ -7,16 +7,12 @@
     display: grid;
     grid-template-columns: 1fr;
     row-gap: var(--gap-section);
-
-    margin-bottom: var(--gap-section);
 }
 
 .tagStyle {
     background: transparent;
 
     width: fit-content;
-
-    cursor: pointer;
 
     padding: var(--button-top-bottom-padding) var(--button-left-right-padding);
 
@@ -28,13 +24,6 @@
     border: var(--button-border-width) solid transparent;
     border-color: var(--color-secondary);
     border-radius: var(--button-border-radius);
-
-    &:hover {
-        background-color: var(--color-accent);
-    }
-    &:active {
-        background-color: var(--color-accent);
-    }
 }
 
 .presentationContainer {
@@ -56,7 +45,7 @@
     }
     & .tag {
         grid-area: tag;
-        align-self: center;
+        align-self: start;
     }
     & .email {
         grid-area: email;
@@ -64,15 +53,16 @@
     & .socialMedia {
         grid-area: socialMedia;
         display: flex;
+        flex-direction: column;
         flex-wrap: wrap;
-        column-gap: 5px;
+        gap: 5px;
     }
 }
 
 @media screen and (min-width: 90rem) {
     .localVariables {
         --gap-section: 6.25rem;
-        --gap-inside-section: 24px;
+        --gap-inside-section: 60px;
     }
     .presentationContainer {
         grid-template-columns: 1fr 1fr;

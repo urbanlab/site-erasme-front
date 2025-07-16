@@ -5,6 +5,7 @@ import heroImage from '@public/hero-img.svg';
 import { getClient } from '@services/apollo/apolloClient';
 import { RemoteHtml } from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
+import LinkButton from '@ui/elements/linkButton';
 import Link from 'next/link';
 import styles from './page.module.css';
 
@@ -27,9 +28,9 @@ const TeamSection = async () => {
                 {data.getRubrique?.articles?.result?.map(article => {
                     const author = article?.auteurs?.result?.at(0);
                     return (
-                        <Link className={styles.tagStyle} key={article?.id} href={`/equipe/${author?.id}`}>
+                        <LinkButton href={`/equipe/${author?.id}`} variant="ghost" key={article?.id}>
                             {author?.titre}
-                        </Link>
+                        </LinkButton>
                     );
                 })}
             </div>
@@ -43,17 +44,28 @@ const PartnersSection = async () => {
         variables: { idGroupeMots: parseInt(process.env.SPIP_GROUPE_MOTS_PARTENAIRES_ID ?? '') },
     });
 
+    const partnerListFragment = getFragmentData(
+        MotsAndGroupeMotsFieldsFragmentDoc,
+        data?.getGroupe_mots?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
+    );
+    const sortedPartnerList = partnerListFragment.slice().sort((a, b) => a.titre?.localeCompare(b.titre ?? '') ?? -1);
+
     return (
         <div className={`${styles.partners} ${styles.sectionContainer}`}>
             <h2>{pageTexts.partnersSection}</h2>
             <div className={styles.tagsContainer}>
-                {data.getGroupe_mots?.mots?.result?.map(mot => {
+                {sortedPartnerList.map(mot => {
                     const motFragment = getFragmentData(
                         MotsAndGroupeMotsFieldsFragmentDoc,
                         mot as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>
                     );
+
                     return (
-                        <Link key={motFragment.id} className={styles.tagStyle} href={`/mot-cle/${motFragment.id}`}>
+                        <Link
+                            key={motFragment.id}
+                            href={`/mot-cle/${motFragment.id}`}
+                            style={{ textDecoration: 'underline' }}
+                        >
                             {motFragment.titre}
                         </Link>
                     );

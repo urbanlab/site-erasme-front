@@ -29,25 +29,25 @@ export default function SearchResults({
 
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables} ${className}`}>
-            {isDesktop && <h3 className={styles.searchInput}>{`RECHERCHE: ${searchInput.toUpperCase()}`}</h3>}
+            {isDesktop && <h3 className={styles.searchInput}>{`RECHERCHE : ${searchInput.toUpperCase()}`}</h3>}
 
             {shouldDisplay(searchFilterMap.article.value) && articles && articles.length > 0 && (
                 <div>
-                    <h4 className={styles.sectionTitle}>{`ARTICLES: ${articles.length}`}</h4>
+                    <h4 className={styles.sectionTitle}>{`ARTICLES : ${articles.length}`}</h4>
                     <ArticleList articles={articles} handleNavigation={handleNavigation} />
                 </div>
             )}
 
             {shouldDisplay(searchFilterMap.rubrique.value) && rubriques && rubriques.length > 0 && (
                 <div>
-                    <h4 className={styles.sectionTitle}>{`RUBRIQUES: ${rubriques.length}`}</h4>
+                    <h4 className={styles.sectionTitle}>{`RUBRIQUES : ${rubriques.length}`}</h4>
                     <RubriqueProjetsAccordion projets={rubriques} handleNavigation={handleNavigation} />
                 </div>
             )}
 
             {shouldDisplay(searchFilterMap.document.value) && documents && documents.length > 0 && (
                 <div>
-                    <h4 className={styles.sectionTitle}>{`DOCUMENTS: ${documents.length}`}</h4>
+                    <h4 className={styles.sectionTitle}>{`DOCUMENTS : ${documents.length}`}</h4>
                     <ul>
                         {documents.map(item => (
                             <li key={item.id}>{item.titre}</li>
@@ -58,7 +58,7 @@ export default function SearchResults({
 
             {shouldDisplay(searchFilterMap.image.value) && images && images.length > 0 && (
                 <div>
-                    <h4 className={styles.sectionTitle}>{`IMAGES: ${images.length}`}</h4>
+                    <h4 className={styles.sectionTitle}>{`IMAGES : ${images.length}`}</h4>
                     <ul>
                         {images.map(item => (
                             <li key={item.id}>{item.titre}</li>

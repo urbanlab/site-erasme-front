@@ -23,6 +23,8 @@
       "@public/*": ["../public/*"],
       "@globals/*": ["_globals/*"],
       "@ui/elements/button": ["_ui/_elements/button/button.tsx"],
+      "@ui/elements/linkButton": ["_ui/_elements/button/linkButton.tsx"],
+      "@ui/elements/toTopButton": ["_ui/_elements/button/toTopButton.tsx"],
       "@ui/elements/backdrop": ["_ui/_elements/backdrop/backdrop.tsx"],
       "@ui/elements/inputField": ["_ui/_elements/inputField/inputField.tsx"],
       "@ui/elements/arrow": ["_ui/_elements/arrow/arrow.tsx"],

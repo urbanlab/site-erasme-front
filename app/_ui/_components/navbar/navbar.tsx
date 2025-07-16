@@ -10,6 +10,7 @@ import searchIcon from '@public/search-icon.svg';
 import Backdrop from '@ui/elements/backdrop';
 import Button from '@ui/elements/button';
 import InputField from '@ui/elements/inputField';
+import LinkButton from '@ui/elements/linkButton';
 import Loader from '@ui/elements/loader';
 import SelectBox from '@ui/elements/selectBox';
 import { searchFilterMap } from '@utils/searchUtils';
@@ -118,11 +119,9 @@ const MobileNavbarAndSearchMenu = ({
 }) => {
     return (
         <div className={styles.smallScreenContainer}>
-            <Link href="/contact">
-                <Button variant="text">
-                    <Image src={emailIcon} alt="contact"></Image>
-                </Button>
-            </Link>
+            <LinkButton href="/contact" variant="text">
+                <Image src={emailIcon} alt="contact"></Image>
+            </LinkButton>
 
             {/* SEARCH MENU */}
             <Popover.Root modal={true} open={isSearchMode} onOpenChange={handleSearchMode}>
@@ -201,9 +200,9 @@ const MobileNavbarAndSearchMenu = ({
                                 <Menu.Item
                                     key={index}
                                     render={
-                                        <Link href={link.href}>
-                                            <Button variant="text">{link.label}</Button>
-                                        </Link>
+                                        <LinkButton href={link.href} variant="text">
+                                            {link.label}
+                                        </LinkButton>
                                     }
                                 />
                             ))}
@@ -301,9 +300,9 @@ const DesktopNavbarAndSearchMenu = ({
                 <>
                     <div className={styles.mainNavigationContainer}>
                         {headerLinks.map((link, index) => (
-                            <Link href={link.href} key={index} onNavigate={handleNavigation}>
-                                <Button variant="text">{link.label}</Button>
-                            </Link>
+                            <LinkButton href={link.href} key={index} onNavigate={handleNavigation} variant="text">
+                                {link.label}
+                            </LinkButton>
                         ))}
                     </div>
 
@@ -312,9 +311,9 @@ const DesktopNavbarAndSearchMenu = ({
                             <Image src={searchIcon} alt="activer mode recherche"></Image>
                         </Button>
 
-                        <Link href="/contact" onNavigate={handleNavigation}>
-                            <Button variant="filled">CONTACT</Button>
-                        </Link>
+                        <LinkButton href="/contact" onNavigate={handleNavigation} variant="filled">
+                            CONTACT
+                        </LinkButton>
                     </div>
                 </>
             )}

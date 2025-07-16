@@ -1,4 +1,7 @@
 .button {
+    display: grid;
+    place-content: center;
+    
     font: inherit;
     border: var(--button-border-width) solid transparent;
 
@@ -44,7 +47,6 @@
 
     &:hover {
         color: var(--color-secondary);
-        border-color: var(--color-secondary);
     }
 
     &:hover > img,

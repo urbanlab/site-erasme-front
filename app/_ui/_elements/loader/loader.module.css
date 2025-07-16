@@ -28,7 +28,7 @@
   border-color: var(--color-secondary);
   border-radius: 4px;
   
-  animation: loading 1.5s infinite ease-in-out;
+  animation: loading 3s infinite ease-in-out;
 }
 
 @keyframes loading {

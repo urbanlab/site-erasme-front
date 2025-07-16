@@ -7,7 +7,6 @@
     display: grid;
     grid-template-columns: 1fr;
     row-gap: var(--gap-section);
-    margin-bottom: var(--gap-section);
 }
 
 .presentationContainer {
@@ -18,7 +17,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        row-gap: calc(var(--gap-inside-section) / 2);
+        row-gap: var(--gap-inside-section);
     }
 }
 
@@ -43,14 +42,14 @@
     gap: 10px;
     overflow-x: scroll;
     scrollbar-width: none;
-    margin-left: calc(var(--padding-main) * -1);
-    margin-right: calc(var(--padding-main) * -1);
+    margin-left: calc(var(--padding-sides-main) * -1);
+    margin-right: calc(var(--padding-sides-main) * -1);
 
     & > :first-child {
-        margin-left: var(--padding-main);
+        margin-left: var(--padding-sides-main);
     }
     & > :last-child {
-        margin-right: var(--padding-main);
+        margin-right: var(--padding-sides-main);
     }
 }
 
@@ -103,14 +102,14 @@
     overflow-x: scroll;
     scrollbar-width: none;
 
-    margin-left: calc(var(--padding-main) * -1);
-    margin-right: calc(var(--padding-main) * -1);
+    margin-left: calc(var(--padding-sides-main) * -1);
+    margin-right: calc(var(--padding-sides-main) * -1);
 
     & > :first-child {
-        margin-left: var(--padding-main);
+        margin-left: var(--padding-sides-main);
     }
     & > :last-child {
-        margin-right: var(--padding-main);
+        margin-right: var(--padding-sides-main);
     }
 
     & > .imageCard {
@@ -129,17 +128,23 @@
 
     background: var(--color-primary);
 
-    margin-left: calc(var(--padding-main) * -1);
-    margin-right: calc(var(--padding-main) * -1);
-    padding: var(--gap-inside-section) var(--padding-main);
+    margin-left: calc(var(--padding-sides-main) * -1);
+    margin-right: calc(var(--padding-sides-main) * -1);
+    padding: var(--gap-inside-section) var(--padding-sides-main);
 
-    & > .tagsContainer {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: var(--gap-inside-section);
+    .tagIconWrapper {
+        display: grid;
+        grid-template-areas: 'tagsContainer';
 
-        margin-bottom: var(--gap-inside-section);
+        .tagsContainer {
+            grid-area: tagsContainer;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--gap-inside-section);
+
+            margin-bottom: var(--gap-inside-section);
+        }
     }
 }
 
@@ -152,6 +157,10 @@
         letter-spacing: 0.05rem;
         font-weight: var(--font-weight-medium);
     }
+}
+
+.desktopDisplayOnly {
+    display: none;
 }
 
 @media screen and (min-width: 90rem) {
@@ -218,5 +227,28 @@
 
     .currentTopicsContainer > h2 {
         text-align: start;
+    }
+
+    .servicesContainer {
+        .tagIconWrapper {
+            grid-template-columns: auto 1fr auto;
+            grid-template-areas: 'first-icon tagsContainer second-icon';
+
+            .tagsContainer {
+                grid-area: tagsContainer;
+            }
+
+            .firstIcon {
+                grid-area: first-icon;
+            }
+
+            .secondIcon {
+                grid-area: second-icon;
+            }
+        }
+    }
+
+    .desktopDisplayOnly {
+        display: unset;
     }
 }

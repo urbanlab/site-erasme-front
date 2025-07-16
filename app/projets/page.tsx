@@ -3,7 +3,7 @@ import { ListProjetsFieldsFragmentDoc, MotsAndGroupeMotsFieldsFragmentDoc } from
 import { ALL_PROJECTS_AND_NESTED_COLLECTIONS, RUBRIQUE_PRESENTATION } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { getClient } from '@services/apollo/apolloClient';
-import { RemoteHtml } from '@services/remoteHtml';
+import { RemoteHtmlRawText } from '@services/remoteHtml';
 import ProjectListWrapper from '@ui/components/projectListWrapper';
 import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
@@ -20,7 +20,7 @@ const RubriquePresentation = async () => {
             <h1 className={styles.title}>{data?.getRubrique?.titre}</h1>
             {data?.getRubrique?.texte && (
                 <h5 className={styles.description}>
-                    <RemoteHtml html={data.getRubrique.texte} />
+                    <RemoteHtmlRawText html={data.getRubrique.texte} removeInnerHtmlTags={true} />
                 </h5>
             )}
         </div>

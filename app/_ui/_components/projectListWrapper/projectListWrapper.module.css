@@ -53,58 +53,50 @@
 @media screen and (min-width: 90rem) {
     .desktopContainer {
         display: grid;
-        grid-template-columns: 2fr 5fr;
-        grid-template-areas: 'motFiltersContainer tableContainer';
+        gap: var(--gap);
+        grid-auto-rows: min-content;
+        grid-template-columns: 1fr repeat(3, 1fr);
+        grid-template-areas:
+            '. totalItems articleTypeFilter itemsPerPage'
+            'motFiltersContainer projectList projectList projectList'
+            'motFiltersContainer pagination pagination pagination';
+
+        .totalItems {
+            grid-area: totalItems;
+        }
+
+        .articleTypeFilter {
+            justify-self: center;
+            grid-area: articleTypeFilter;
+            display: flex;
+            column-gap: var(--gap);
+        }
+
+        .itemsPerPage {
+            grid-area: itemsPerPage;
+            justify-self: end;
+            align-self: end;
+        }
 
         .motFiltersContainer {
             grid-area: motFiltersContainer;
-
-            .politiquesPubliquesFilter {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: var(--gap);
-            }
         }
 
-        .tableContainer {
-            grid-area: tableContainer;
+        .projectList {
+            grid-area: projectList;
+        }
 
-            display: grid;
+        .pagination {
+            grid-area: pagination;
+            justify-self: end;
+            align-self: start;
+        }
+
+        .politiquesPubliquesFilter {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
             gap: var(--gap);
-            grid-auto-rows: min-content;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-areas:
-                'totalItems articleTypeFilter itemsPerPage'
-                'projectList projectList projectList'
-                'pagination pagination pagination';
-
-            .totalItems {
-                grid-area: totalItems;
-            }
-
-            .articleTypeFilter {
-                justify-self: center;
-                grid-area: articleTypeFilter;
-                display: flex;
-                column-gap: var(--gap);
-            }
-
-            .itemsPerPage {
-                grid-area: itemsPerPage;
-                justify-self: end;
-                align-self: end;
-            }
-
-            .projectList {
-                grid-area: projectList;
-            }
-
-            .pagination {
-                grid-area: pagination;
-                justify-self: end;
-                align-self: start;
-            }
         }
     }
 }

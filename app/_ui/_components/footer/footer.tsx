@@ -16,14 +16,6 @@ const footerLinks = [
         href: '/contact',
     },
     {
-        label: 'ACCÈS',
-        href: '/acces',
-    },
-    {
-        label: 'PLAN DU SITE',
-        href: '/plan-du-site',
-    },
-    {
         label: 'MENTIONS LÉGALES',
         href: '/mentions-legales',
     },
@@ -70,6 +62,12 @@ const socialMediaLinks = [
     },
 ];
 
+const metropoleLyonLink = {
+    href: 'https://www.grandlyon.com/',
+    icon: metropoleLyonLogo,
+    alt: 'Logo Métropole de Lyon',
+};
+
 export default function Footer() {
     return (
         <footer className={`${styles.mainFlexContainer} ${styles.localVariables}`}>
@@ -88,13 +86,19 @@ export default function Footer() {
             <div className={styles.rightSideFlexContainer}>
                 <div className={styles.logoFlexContainer}>
                     <Image src={erasmeLogo} alt="Logo Erasme" className={styles.erasmeLogo} />
-                    <Image src={metropoleLyonLogo} alt="Logo Métropole de Lyon" className={styles.metropoleLyonLogo} />
+                    <Link href={metropoleLyonLink.href} target="_blank">
+                        <Image
+                            src={metropoleLyonLink.icon}
+                            alt={metropoleLyonLink.alt}
+                            className={styles.metropoleLyonLogo}
+                        />
+                    </Link>
                 </div>
                 <ul className={styles.socialMediaFlexContainer}>
                     {socialMediaLinks.map(socialMedia => {
                         return (
                             <li key={socialMedia.label}>
-                                <Link href={socialMedia.href}>
+                                <Link href={socialMedia.href} target="_blank">
                                     <Image src={socialMedia.icon} alt={socialMedia.alt} />
                                 </Link>
                             </li>

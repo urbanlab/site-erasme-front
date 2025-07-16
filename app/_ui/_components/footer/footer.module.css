@@ -14,7 +14,7 @@
     justify-content: space-between;
     align-items: flex-end;
 
-    padding: 3rem var(--padding-main) 1.5rem var(--padding-main);
+    padding: 3rem var(--padding-sides-main) 1.5rem var(--padding-sides-main);
 
     color: var(--white);
     background-color: var(--black);
@@ -28,6 +28,7 @@
     display: flex;
     flex-direction: column;
     row-gap: var(--gap-default);
+    align-self: center;
 }
 
 .footerLink:hover {
@@ -93,7 +94,7 @@
     }
 
     .mainFlexContainer {
-        padding: 5.625rem var(--padding-main) 1.5rem var(--padding-main);
+        padding: 5.625rem var(--padding-sides-main) 1.5rem var(--padding-sides-main);
     }
 
     .conditionalDisplay {

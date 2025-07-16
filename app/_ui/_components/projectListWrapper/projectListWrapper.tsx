@@ -63,6 +63,9 @@ const DesktopProjectListAndFilters = ({
 }) => {
     return (
         <div className={`${styles.desktopContainer} ${styles.localVariables}`}>
+
+            <h2 className={styles.totalItems}>{`Total : ${totalItems}`}</h2>
+
             <div className={styles.motFiltersContainer}>
                 <ToggleGroup
                     items={politiquesPubliquesItems}
@@ -71,38 +74,30 @@ const DesktopProjectListAndFilters = ({
                     className={styles.politiquesPubliquesFilter}
                 />
             </div>
+            
+            <ToggleGroup
+                items={articleTypeItems}
+                handleValueChange={handleArticleTypeFilter}
+                value={articleTypeFilter}
+                className={styles.articleTypeFilter}
+            />
 
-            <div className={styles.tableContainer}>
-                <h2 className={styles.totalItems}>{`Total : ${totalItems}`}</h2>
+            <SelectBox
+                items={itemsPerPageOptions}
+                value={itemsPerPage}
+                handleValueChange={handleItemsPerPageChange}
+                className={{ trigger: styles.itemsPerPage }}
+                createPortal
+            />
 
-                <ToggleGroup
-                    items={articleTypeItems}
-                    handleValueChange={handleArticleTypeFilter}
-                    value={articleTypeFilter}
-                    className={styles.articleTypeFilter}
-                />
+            <RubriqueProjetsAccordion projets={paginatedProjects} key={currentPage} className={styles.projectList} />
 
-                <SelectBox
-                    items={itemsPerPageOptions}
-                    value={itemsPerPage}
-                    handleValueChange={handleItemsPerPageChange}
-                    className={{ trigger: styles.itemsPerPage }}
-                    createPortal
-                />
-
-                <RubriqueProjetsAccordion
-                    projets={paginatedProjects}
-                    key={currentPage}
-                    className={styles.projectList}
-                />
-
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={handlePageChange}
-                    className={styles.pagination}
-                />
-            </div>
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+                className={styles.pagination}
+            />
         </div>
     );
 };

@@ -11,6 +11,7 @@ import { getClient } from '@services/apollo/apolloClient';
 import { RemoteHtmlRawText } from '@services/remoteHtml';
 import ProjectListWrapper from '@ui/components/projectListWrapper';
 import ShapedImage from '@ui/components/shapedImage';
+import Link from 'next/link';
 import styles from './page.module.css';
 
 // Pre-fetch during build time
@@ -51,16 +52,24 @@ const AuthorPresentation = async ({
             <ul className={styles.socialMedia}>
                 {authorInformation.auteur_compte_linkedin && (
                     <li>
-                        <a href={authorInformation.auteur_compte_linkedin} target="_blank">
+                        <Link
+                            href={authorInformation.auteur_compte_linkedin}
+                            target="_blank"
+                            style={{ textDecoration: 'underline' }}
+                        >
                             LinkedIn
-                        </a>
+                        </Link>
                     </li>
                 )}
                 {authorInformation.auteur_compte_twitter && (
                     <li>
-                        <a href={authorInformation.auteur_compte_twitter} target="_blank">
+                        <Link
+                            href={authorInformation.auteur_compte_twitter}
+                            target="_blank"
+                            style={{ textDecoration: 'underline' }}
+                        >
                             Twitter
-                        </a>
+                        </Link>
                     </li>
                 )}
             </ul>

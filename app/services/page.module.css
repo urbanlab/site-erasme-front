@@ -8,7 +8,6 @@
         'logo'
         'servicesContainer';
     gap: var(--gap-section);
-    margin-bottom: var(--gap-section);
 
     & .logo {
         grid-area: logo;

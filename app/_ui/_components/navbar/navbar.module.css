@@ -11,7 +11,7 @@
 
     --button-icon-size: 1.25rem;
 
-    --overlay-padding: var(--padding-main);
+    --overlay-padding: var(--padding-sides-main);
 }
 
 .zIndex {
@@ -79,7 +79,8 @@
     display: flex;
     gap: 0.25rem;
 
-    & > button {
+    & > button,
+    & > a {
         min-height: 2.75rem;
         min-width: 2.75rem;
         padding: 0;
@@ -133,11 +134,11 @@
 @media screen and (min-width: 90rem) {
     .localVariables {
         --border-radius: 1.875rem;
-        --navbar-padding-top-bottom: 1.875rem;
+        --navbar-padding-top-bottom: 1.5rem;
         --navbar-padding-left-right: 1.5rem;
 
-        --margin-top: 3.125rem;
-        --margin: var(--margin-top) var(--padding-main) 0 var(--padding-main);
+        --margin-top: 1.5rem;
+        --margin: var(--margin-top) var(--padding-sides-main) 0 var(--padding-sides-main);
 
         --height-logo-erasme: 3.1875rem;
         --button-icon-size: 1.3rem;

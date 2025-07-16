@@ -29,6 +29,12 @@
     .body {
         grid-area: body;
     }
+
+    &:hover {
+        .arrow {
+            color: var(--color-accent);
+        }
+    }
 }
 
 .spotlight {
@@ -36,10 +42,8 @@
     color: var(--color-secondary);
 
     &:hover {
-        .arrow {
-            transform: rotate(0deg);
-            filter: drop-shadow(-3px 0 var(--color-accent));
-        }
+        background: var(--color-secondary);
+        color: var(--color-primary);
     }
 }
 
@@ -50,9 +54,5 @@
     &:hover {
         background: var(--color-secondary);
         color: var(--color-primary);
-
-        .arrow {
-            color: var(--color-accent);
-        }
     }
 }
