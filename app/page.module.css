@@ -231,11 +231,27 @@
 
     .servicesContainer {
         .tagIconWrapper {
+            padding-left: var(--gap-section);
+            padding-right: var(--gap-section);
+            margin-top: calc(var(--gap-inside-section) * -1);
+
+            column-gap: var(--gap-inside-section);
+
             grid-template-columns: auto 1fr auto;
-            grid-template-areas: 'first-icon tagsContainer second-icon';
+            grid-template-rows: calc(var(--gap-inside-section) * 2) auto calc(var(--gap-inside-section) * 2);
+            grid-template-areas:
+                '. . second-icon'
+                'first-icon tagsContainer second-icon'
+                'first-icon . .';
 
             .tagsContainer {
                 grid-area: tagsContainer;
+                align-content: center;
+                margin-bottom: unset;
+
+                .serviceTag {
+                    font-size: 1.5rem;
+                }
             }
 
             .firstIcon {
@@ -244,6 +260,11 @@
 
             .secondIcon {
                 grid-area: second-icon;
+            }
+
+            > img {
+                width: 200px;
+                height: auto;
             }
         }
     }

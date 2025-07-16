@@ -6,14 +6,16 @@ import {
     ArticleFullInformationFieldsFragmentDoc,
 } from '@graphql/__generated__/graphql';
 import { HOMEPAGE } from '@graphql/queries';
+import cubeShapedIcon from '@public/cube-shaped-icon.svg';
 import heroImage from '@public/hero-img.svg';
+import xShapedIcon from '@public/x-shaped-icon.svg';
 import { getClient } from '@services/apollo/apolloClient';
 import ArticleCard from '@ui/components/articleCard';
 import ImageCard from '@ui/components/imageCard';
 import ShapedImage from '@ui/components/shapedImage';
-import Tag from '@ui/elements/tag';
+import LinkButton from '@ui/elements/linkButton';
 import { ArchiveArticleCard } from 'clientComponents';
-import Link from 'next/link';
+import Image from 'next/image';
 import styles from './page.module.css';
 
 const pageTexts = {
@@ -35,7 +37,6 @@ const pageTexts = {
     },
     servicesSection: {
         title: 'Services',
-        tags: ['Inspirer', 'Explorer', 'Accélérer'],
     },
     missionSection: {
         title: 'Mission',
@@ -130,12 +131,21 @@ const ServicesSection = ({ articles }: { articles: ArticleBasicInformationFields
     return (
         <div className={styles.servicesContainer}>
             <h2>{pageTexts.servicesSection.title}</h2>
-            <div className={styles.tagsContainer}>
-                {articles.map(article => (
-                    <Link key={article.id} href={`/services#${article.titre}`}>
-                        <Tag value={article.titre ?? ''} />
-                    </Link>
-                ))}
+            <div className={styles.tagIconWrapper}>
+                <Image src={xShapedIcon} alt="" className={`${styles.desktopDisplayOnly} ${styles.firstIcon}`} />
+                <div className={styles.tagsContainer}>
+                    {articles.map(article => (
+                        <LinkButton
+                            key={article.id}
+                            href={`/services#${article.titre}`}
+                            variant="ghost"
+                            className={styles.serviceTag}
+                        >
+                            {article.titre}
+                        </LinkButton>
+                    ))}
+                </div>
+                <Image src={cubeShapedIcon} alt="" className={`${styles.desktopDisplayOnly} ${styles.secondIcon}`} />
             </div>
         </div>
     );
