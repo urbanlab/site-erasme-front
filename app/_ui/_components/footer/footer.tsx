@@ -20,10 +20,6 @@ const footerLinks = [
         href: '/mentions-legales',
     },
     {
-        label: 'COOKIES',
-        href: '/cookies',
-    },
-    {
         label: 'ACCESSIBILITÉ',
         href: '/accessibilite',
     },
@@ -81,6 +77,15 @@ export default function Footer() {
                         </li>
                     );
                 })}
+                <li key="cookie">
+                    <a
+                        className={styles.footerLink}
+                        href=""
+                        data-cc="show-preferencesModal"
+                    >
+                        COOKIES
+                    </a>
+                </li>
             </ul>
             <Image className={styles.conditionalDisplay} src={humanIcon} alt="" />
             <div className={styles.rightSideFlexContainer}>

@@ -72,7 +72,7 @@ const checkThirdPartyCookies = (html: string, allowedThirdPartyServices: string[
             return match;
         }
 
-        return `<div data-service="${service}">Vous devez accepter les cookies du service ${service} pour voir ce contenu. Rechargez cette page après avoir accepté.</div>`;
+        return `<div data-service="${service}">Vous devez accepter les cookies du service <i>${service}</i> pour voir ce contenu. Rechargez cette page après avoir accepté.</div>`;
     });
 };
 
