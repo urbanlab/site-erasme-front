@@ -25,7 +25,8 @@
         align-items: center;
     }
 
-    &[data-popup-open] {
+    &[data-popup-open],
+    &.isFiltered {
         background-color: var(--color-accent);
         border-color: var(--color-secondary);
 

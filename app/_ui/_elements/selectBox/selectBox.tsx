@@ -41,7 +41,9 @@ export default function SelectBox({
 }: SelectBoxProps) {
     return (
         <Select.Root modal={false} value={value} items={items} onValueChange={handleValueChange}>
-            <Select.Trigger className={`${styles.trigger} ${className?.trigger}`}>
+            <Select.Trigger
+                className={`${styles.trigger} ${className?.trigger} ${value !== null ? styles.isFiltered : ''}`}
+            >
                 <Select.Value />
                 <Select.Icon>
                     <Image src={chevronIcon} className={styles.chevronIcon} alt="chevron" />
