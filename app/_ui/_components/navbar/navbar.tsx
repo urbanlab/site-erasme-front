@@ -67,12 +67,14 @@ const SearchFilter = ({
 const SearchForm = ({
     handleSearchFormSubmit,
     searchInputRef,
+    searchFormRef,
 }: {
     handleSearchFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
     searchInputRef?: RefObject<HTMLInputElement | null>;
+    searchFormRef?: RefObject<HTMLFormElement | null>;
 }) => {
     return (
-        <Form onSubmit={handleSearchFormSubmit} style={{ display: 'contents' }}>
+        <Form onSubmit={handleSearchFormSubmit} ref={searchFormRef} style={{ display: 'contents' }}>
             <Field.Root name="searchInput" style={{ display: 'contents' }}>
                 <InputField
                     type="text"
@@ -89,6 +91,38 @@ const SearchForm = ({
                 Rechercher
             </Button>
         </Form>
+    );
+};
+
+const SearchSuggestions = ({
+    searchSuggestions,
+    handleSelectSearchSuggestion,
+    handleRemoveSearchSuggestion,
+}: {
+    searchSuggestions: string[];
+    handleSelectSearchSuggestion: (selectedSuggestion: string) => void;
+    handleRemoveSearchSuggestion: (suggestionToRemove: string) => void;
+}) => {
+    return (
+        <ul>
+            {searchSuggestions?.map((suggestion, index) => {
+                return (
+                    <li key={index} style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Button variant="text" onClick={() => handleSelectSearchSuggestion(suggestion)}>
+                            {suggestion}
+                        </Button>
+                        <Button
+                            aria-label="supprimer suggestion de la liste"
+                            type="reset"
+                            variant="no-style"
+                            onClick={() => handleRemoveSearchSuggestion(suggestion)}
+                        >
+                            x
+                        </Button>
+                    </li>
+                );
+            })}
+        </ul>
     );
 };
 
@@ -215,31 +249,51 @@ const DesktopNavbarAndSearchMenu = ({
     searchInput,
     selectedSearchFilter,
     showSearchResults,
+    searchSuggestions,
     handleSearchMode,
     handleSearchFormSubmit,
-    handleSearchFilterChange,
     handleNavigation,
+    handleSearchFilterChange,
+    handleRemoveSearchSuggestion,
     mainDivRef,
 }: {
     isSearchMode: boolean;
     searchInput: string;
     selectedSearchFilter: ControlledComponentValueType;
     showSearchResults: boolean;
+    searchSuggestions: string[];
     handleSearchMode: () => void;
     handleSearchFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
-    handleSearchFilterChange: (searchFilter: ControlledComponentValueType) => void;
     handleNavigation: () => void;
+    handleSearchFilterChange: (searchFilter: ControlledComponentValueType) => void;
+    handleRemoveSearchSuggestion: (suggestionToRemove: string) => void;
     mainDivRef: RefObject<HTMLDivElement | null>;
 }) => {
     const searchInputRef = useRef<HTMLInputElement>(null);
+    const searchFormRef = useRef<HTMLFormElement>(null);
     const pathname = usePathname();
+
+    const handleSelectSearchSuggestion = (selectedSuggestion: string) => {
+        if (searchInputRef.current) {
+            searchInputRef.current.value = selectedSuggestion;
+        }
+
+        if (searchFormRef.current) {
+            //this will automatically invoke `handleSearchFormSubmit`
+            searchFormRef.current.requestSubmit();
+        }
+    };
 
     return (
         <div className={styles.bigScreenContainer}>
             {isSearchMode ? (
                 <>
                     <div className={styles.searchMenuContainer}>
-                        <SearchForm handleSearchFormSubmit={handleSearchFormSubmit} searchInputRef={searchInputRef} />
+                        <SearchForm
+                            handleSearchFormSubmit={handleSearchFormSubmit}
+                            searchInputRef={searchInputRef}
+                            searchFormRef={searchFormRef}
+                        />
 
                         <SearchFilter
                             isDesktop
@@ -271,14 +325,18 @@ const DesktopNavbarAndSearchMenu = ({
                                 </Popover.Portal>
                             </Popover.Root>
                         ) : (
-                            <Popover.Root open={!showSearchResults}>
+                            <Popover.Root open={!showSearchResults && searchSuggestions.length > 0}>
                                 <Popover.Portal>
                                     <Popover.Positioner anchor={searchInputRef} align="start" side="bottom">
                                         <Popover.Popup
                                             className={`${styles.overlayContainer} ${styles.localVariables} ${styles.verticalOffset}`}
                                             initialFocus={searchInputRef}
                                         >
-                                            TODO: IMPLEMENT SEARCH SUGGESTIONS
+                                            <SearchSuggestions
+                                                searchSuggestions={searchSuggestions}
+                                                handleSelectSearchSuggestion={handleSelectSearchSuggestion}
+                                                handleRemoveSearchSuggestion={handleRemoveSearchSuggestion}
+                                            />
                                         </Popover.Popup>
                                     </Popover.Positioner>
                                 </Popover.Portal>
@@ -323,10 +381,12 @@ type NavbarProps = {
     searchInput: string;
     selectedSearchFilter: ControlledComponentValueType;
     showSearchResults: boolean;
+    searchSuggestions: string[];
     handleSearchMode: () => void;
     handleSearchFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
-    handleSearchFilterChange: (searchFilter: ControlledComponentValueType) => void;
     handleNavigation: () => void;
+    handleSearchFilterChange: (searchFilter: ControlledComponentValueType) => void;
+    handleRemoveSearchSuggestion: (suggestionToRemove: string) => void;
 };
 
 export default function Navbar({
@@ -335,10 +395,12 @@ export default function Navbar({
     searchInput,
     selectedSearchFilter,
     showSearchResults,
+    searchSuggestions,
     handleSearchMode,
+    handleNavigation,
     handleSearchFormSubmit,
     handleSearchFilterChange,
-    handleNavigation,
+    handleRemoveSearchSuggestion,
 }: NavbarProps) {
     /**
      * TODO:
@@ -364,10 +426,12 @@ export default function Navbar({
                         searchInput={searchInput}
                         selectedSearchFilter={selectedSearchFilter}
                         showSearchResults={showSearchResults}
+                        searchSuggestions={searchSuggestions}
                         handleSearchMode={handleSearchMode}
                         handleSearchFormSubmit={handleSearchFormSubmit}
-                        handleSearchFilterChange={handleSearchFilterChange}
                         handleNavigation={handleNavigation}
+                        handleSearchFilterChange={handleSearchFilterChange}
+                        handleRemoveSearchSuggestion={handleRemoveSearchSuggestion}
                         mainDivRef={mainDivRef}
                     />
                 ) : (

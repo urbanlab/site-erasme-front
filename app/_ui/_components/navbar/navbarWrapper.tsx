@@ -3,15 +3,26 @@
 import { ControlledComponentValueType } from '@globals/types';
 import { useIsDesktop } from '@hooks/useIsDesktop';
 import Backdrop from '@ui/elements/backdrop';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Navbar from './navbar';
+import {
+    addSuggestionToList,
+    getSearchSuggestionsFromLocalStorage,
+    removeSuggestionFromList,
+} from '@utils/searchUtils';
 
 export default function NavbarWrapper() {
     const [isSearchMode, setIsSearchMode] = useState(false);
     const [showSearchResults, setShowSearchResults] = useState(false);
     const [searchInput, setSearchInput] = useState('');
     const [selectedSearchFilter, setSelectedSearchFilter] = useState<ControlledComponentValueType>(null);
+    const [searchSuggestions, setSearchSuggestions] = useState<string[]>([]);
+
+    //Only initialize the state after the first render to avoid hydration errors
+    useEffect(() => {
+        setSearchSuggestions(getSearchSuggestionsFromLocalStorage());
+    }, []);
 
     const isDesktop = useIsDesktop();
 
@@ -22,7 +33,12 @@ export default function NavbarWrapper() {
         const inputValue = formData.get('searchInput') as string;
 
         setSearchInput(inputValue);
+        setSearchSuggestions(addSuggestionToList(inputValue));
         setShowSearchResults(true);
+    };
+
+    const handleRemoveSearchSuggestion = (suggestion: string) => {
+        setSearchSuggestions(removeSuggestionFromList(suggestion));
     };
 
     const handleSearchFilterChange = (searchFilter: ControlledComponentValueType) => {
@@ -49,6 +65,7 @@ export default function NavbarWrapper() {
                 searchInput={searchInput}
                 selectedSearchFilter={selectedSearchFilter}
                 showSearchResults={showSearchResults}
+                searchSuggestions={searchSuggestions}
                 handleSearchMode={() => {
                     setIsSearchMode(previousSearchMode => !previousSearchMode);
                     setShowSearchResults(false);
@@ -56,6 +73,7 @@ export default function NavbarWrapper() {
                 handleSearchFormSubmit={handleSearchFormSubmit}
                 handleNavigation={() => setIsSearchMode(false)}
                 handleSearchFilterChange={handleSearchFilterChange}
+                handleRemoveSearchSuggestion={handleRemoveSearchSuggestion}
             />
 
             {isDesktop &&
