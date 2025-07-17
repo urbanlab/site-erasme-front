@@ -7,7 +7,7 @@ export default function useCookieAllowedServices() {
     const [allowedServices, setAllowedServices] = useState<string[]>([]);
 
     useEffect(() => {
-        setAllowedServices(CookieConsent.getUserPreferences().acceptedServices['analytics']);
+        setAllowedServices(CookieConsent.getUserPreferences().acceptedServices['thirdParty']);
 
         return () => {};
     }, []);

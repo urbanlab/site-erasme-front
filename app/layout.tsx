@@ -1,6 +1,6 @@
 import '@globals/styles.css';
 import { ApolloWrapper } from '@services/apollo/apolloWrapper';
-import CookieConsentManager from '@services/cookieConsent/cookieConsentManager';
+import { CookieConsentManager } from '@services/cookieConsent/cookieConsentManager';
 import Footer from '@ui/components/footer';
 import NavbarWrapper from '@ui/components/navbarWrapper';
 import type { Metadata } from 'next';
@@ -26,7 +26,7 @@ export default function RootLayout({
         <html lang="fr" className={k2d.className}>
             <body className={styles.bodyWrapper}>
                 <CookieConsentManager />
-                
+
                 <ApolloWrapper>
                     <NavbarWrapper />
                     <div className={styles.contentContainer}>{children}</div>

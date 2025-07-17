@@ -1,5 +1,6 @@
 import DOMPurify from 'isomorphic-dompurify';
 import styles from './remoteHtml.module.css';
+import { getServiceName } from '@services/cookieConsent/cookieConsentManager';
 
 /**
  * Remove `<br>` inside tag openings like `<div ... <br> ...>`
@@ -51,18 +52,7 @@ const checkThirdPartyCookies = (html: string, allowedThirdPartyServices: string[
         let service = '';
 
         try {
-            const url = new URL(src);
-            const host = url.hostname;
-
-            if (host.includes('youtube.com') || host.includes('youtu.be')) {
-                service = 'youtube';
-            } else if (host.includes('vimeo.com')) {
-                service = 'vimeo';
-                // } else if (host.includes('dailymotion.com')) {
-                //     service = 'dailymotion';
-            } else {
-                service = host.split('.').slice(-2, -1)[0]; // fallback: take the domain
-            }
+            service = getServiceName(src);
         } catch {
             return fallbackDetection; // If URL parsing fails, returns fallback html
         }
