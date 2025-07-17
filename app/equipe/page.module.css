@@ -45,10 +45,14 @@
 
 .linkStyle {
     text-decoration: underline;
-    
+
     &:hover {
         background: var(--color-accent);
     }
+}
+
+.alignLineHeight {
+    line-height: 0.8;
 }
 
 @media screen and (min-width: 90rem) {

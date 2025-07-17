@@ -32,6 +32,7 @@
 
                 & .title {
                     grid-area: title;
+                    line-height: 0.9;
                 }
                 & .content {
                     grid-area: content;

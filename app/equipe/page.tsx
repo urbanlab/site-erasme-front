@@ -23,7 +23,7 @@ const TeamSection = async () => {
 
     return (
         <div className={`${styles.team} ${styles.sectionContainer}`}>
-            <h2>{pageTexts.teamSection}</h2>
+            <h2 className={styles.alignLineHeight}>{pageTexts.teamSection}</h2>
             <div className={styles.tagsContainer}>
                 {data.getRubrique?.articles?.result?.map(article => {
                     const author = article?.auteurs?.result?.at(0);
@@ -52,7 +52,7 @@ const PartnersSection = async () => {
 
     return (
         <div className={`${styles.partners} ${styles.sectionContainer}`}>
-            <h2>{pageTexts.partnersSection}</h2>
+            <h2 className={styles.alignLineHeight}>{pageTexts.partnersSection}</h2>
             <div className={styles.tagsContainer}>
                 {sortedPartnerList.map(mot => {
                     const motFragment = getFragmentData(
