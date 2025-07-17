@@ -1,0 +1,31 @@
+.localVariables {
+    --gap-section: 2.625rem;
+}
+
+.mainContainer {
+    display: grid;
+    grid-template-areas:
+        'logo'
+        'title'
+        'content';
+    gap: var(--gap-section);
+
+    & .logo {
+        grid-area: logo;
+    }
+    & .title {
+        grid-area: title;
+    }
+    & .content {
+        grid-area: content;
+    }
+}
+
+@media screen and (min-width: 90rem) {
+    /* .mainContainer {
+        grid-template-columns: 1fr 2fr;
+        grid-template-areas:
+            'logo logo'
+            'title content';
+    } */
+}
