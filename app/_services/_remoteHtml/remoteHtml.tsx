@@ -2,11 +2,32 @@ import DOMPurify from 'isomorphic-dompurify';
 import styles from './remoteHtml.module.css';
 import { getServiceName } from '@services/cookieConsent/cookieConsentManager';
 
+type HtmlCleaner = (html: string) => string;
+
 /**
- * Remove `<br>` inside tag openings like `<div ... <br> ...>`
+ * Remove `<br>` inside tag openings like `<div ... <br> ...>`.
  * */
-const cleanMalformedTags = (input: string): string => {
+const removeBreaklinesInsideTagOpenings = (input: string): string => {
     return input.replace(/<([a-z]+)([^>]*?)<br[^>]*>([^>]*)>/gi, '<$1$2$3');
+};
+
+/**
+ * Remove `<br>` inside <figure> tags.
+ * */
+const removeBreaklinesInsideFigureTags = (input: string): string => {
+    return input.replace(/<figure[^>]*>[\s\S]*?<\/figure>/gi, match => {
+        return match.replace(/<br\s*\/?>/gi, '');
+    });
+};
+
+const cleanMalformedTags = (input: string): string => {
+    const cleaners: HtmlCleaner[] = [
+        removeBreaklinesInsideTagOpenings,
+        removeBreaklinesInsideFigureTags,
+        // add more here if needed
+    ];
+
+    return cleaners.reduce((html, cleaner) => cleaner(html), input);
 };
 
 /**
