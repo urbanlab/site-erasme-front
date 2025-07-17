@@ -60,9 +60,15 @@ const getServiceName = (url: string): string => {
     return service;
 };
 
+/**
+ * Configures cookie consent interfaces.
+ * If something changes, make sure to increase the revision number.
+ */
 const CookieConsentManager = () => {
     useEffect(() => {
         CookieConsent.run({
+            revision: 0,
+
             cookie: {
                 name: 'cc_cookie',
                 expiresAfterDays: 365,
