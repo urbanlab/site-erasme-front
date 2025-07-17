@@ -31,12 +31,12 @@ const ecosystemeCards = [
     {
         title: 'UTILISATEURS',
         groupeMotsId: process.env.SPIP_GROUPE_MOTS_UTILISATEURS_ID ?? '',
-        hasLink: true,
+        hasLink: false,
     },
     {
         title: 'ENTREPRISES',
         groupeMotsId: process.env.SPIP_GROUPE_MOTS_ENTREPRISES_ID ?? '',
-        hasLink: true,
+        hasLink: false,
     },
 ];
 
