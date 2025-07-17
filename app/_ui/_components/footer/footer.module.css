@@ -31,7 +31,8 @@
     align-self: end;
 }
 
-.footerLink:hover {
+.footerLink:hover,
+.isActivePage {
     color: var(--color-accent);
 }
 

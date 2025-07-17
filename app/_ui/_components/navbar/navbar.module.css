@@ -131,6 +131,11 @@
     }
 }
 
+.isActivePage {
+    background-color: var(--color-accent);
+    border-color: var(--color-secondary);
+}
+
 @media screen and (min-width: 90rem) {
     .localVariables {
         --border-radius: 1.875rem;

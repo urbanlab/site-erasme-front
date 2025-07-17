@@ -16,6 +16,7 @@ import SelectBox from '@ui/elements/selectBox';
 import { searchFilterMap } from '@utils/searchUtils';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { FormEvent, RefObject, Suspense, useRef } from 'react';
 import styles from './navbar.module.css';
 import SearchResults from './searchResults';
@@ -72,11 +73,11 @@ const SearchForm = ({
 }) => {
     return (
         <Form onSubmit={handleSearchFormSubmit} style={{ display: 'contents' }}>
-            <Field.Root name='searchInput' style={{ display: 'contents' }}>
+            <Field.Root name="searchInput" style={{ display: 'contents' }}>
                 <InputField
                     type="text"
                     name="searchInput"
-                    aria-label='texte pour la recherche'
+                    aria-label="texte pour la recherche"
                     autoFocus
                     required
                     ref={searchInputRef}
@@ -110,6 +111,8 @@ const MobileNavbarAndSearchMenu = ({
     handleSearchFilterChange: (searchFilter: ControlledComponentValueType) => void;
     mainDivRef: RefObject<HTMLDivElement | null>;
 }) => {
+    const pathname = usePathname();
+
     return (
         <div className={styles.smallScreenContainer}>
             <LinkButton href="/contact" variant="text">
@@ -139,9 +142,7 @@ const MobileNavbarAndSearchMenu = ({
                                 }
                             />
 
-                            <SearchForm
-                                handleSearchFormSubmit={handleSearchFormSubmit}
-                            />
+                            <SearchForm handleSearchFormSubmit={handleSearchFormSubmit} />
 
                             <SearchFilter
                                 selectedSearchFilter={selectedSearchFilter}
@@ -191,7 +192,11 @@ const MobileNavbarAndSearchMenu = ({
                                 <Menu.Item
                                     key={index}
                                     render={
-                                        <LinkButton href={link.href} variant="text">
+                                        <LinkButton
+                                            href={link.href}
+                                            variant="text"
+                                            className={pathname === link.href ? styles.isActivePage : ''}
+                                        >
                                             {link.label}
                                         </LinkButton>
                                     }
@@ -227,16 +232,14 @@ const DesktopNavbarAndSearchMenu = ({
     mainDivRef: RefObject<HTMLDivElement | null>;
 }) => {
     const searchInputRef = useRef<HTMLInputElement>(null);
+    const pathname = usePathname();
 
     return (
         <div className={styles.bigScreenContainer}>
             {isSearchMode ? (
                 <>
                     <div className={styles.searchMenuContainer}>
-                        <SearchForm
-                            handleSearchFormSubmit={handleSearchFormSubmit}
-                            searchInputRef={searchInputRef}
-                        />
+                        <SearchForm handleSearchFormSubmit={handleSearchFormSubmit} searchInputRef={searchInputRef} />
 
                         <SearchFilter
                             isDesktop
@@ -287,7 +290,13 @@ const DesktopNavbarAndSearchMenu = ({
                 <>
                     <div className={styles.mainNavigationContainer}>
                         {headerLinks.map((link, index) => (
-                            <LinkButton href={link.href} key={index} onNavigate={handleNavigation} variant="text">
+                            <LinkButton
+                                href={link.href}
+                                key={index}
+                                onNavigate={handleNavigation}
+                                variant="text"
+                                className={pathname === link.href ? styles.isActivePage : ''}
+                            >
                                 {link.label}
                             </LinkButton>
                         ))}

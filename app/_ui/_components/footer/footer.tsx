@@ -1,14 +1,17 @@
-import styles from './footer.module.css';
-import erasmeLogo from '@public/erasme-logo.svg';
-import metropoleLyonLogo from '@public/metropole_lyon-logo.svg';
-import youtubeIcon from '@public/youtube-icon.svg';
-import linkedinIcon from '@public/linkedin-icon.svg';
+'use client';
+
 import blueskyIcon from '@public/bluesky-icon.svg';
-import mastodonIcon from '@public/mastodon-icon.svg';
+import erasmeLogo from '@public/erasme-logo.svg';
 import flickrIcon from '@public/flickr-icon.svg';
 import humanIcon from '@public/human-icon.svg';
+import linkedinIcon from '@public/linkedin-icon.svg';
+import mastodonIcon from '@public/mastodon-icon.svg';
+import metropoleLyonLogo from '@public/metropole_lyon-logo.svg';
+import youtubeIcon from '@public/youtube-icon.svg';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import styles from './footer.module.css';
 
 const footerLinks = [
     {
@@ -65,24 +68,25 @@ const metropoleLyonLink = {
 };
 
 export default function Footer() {
+    const pathname = usePathname();
+
     return (
         <footer className={`${styles.mainFlexContainer} ${styles.localVariables}`}>
             <ul className={styles.leftSideFlexContainer}>
                 {footerLinks.map(link => {
                     return (
                         <li key={link.label}>
-                            <Link className={styles.footerLink} href={link.href}>
+                            <Link
+                                className={`${styles.footerLink} ${pathname === link.href ? styles.isActivePage : ''}`}
+                                href={link.href}
+                            >
                                 {link.label}
                             </Link>
                         </li>
                     );
                 })}
                 <li key="cookie">
-                    <a
-                        className={styles.footerLink}
-                        href=""
-                        data-cc="show-preferencesModal"
-                    >
+                    <a className={styles.footerLink} href="" data-cc="show-preferencesModal">
                         COOKIES
                     </a>
                 </li>
