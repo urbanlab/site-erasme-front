@@ -13,7 +13,7 @@
     --font-size-title: 1.125rem
 }
 
-.imageContainer {
+.cardWrapper {
     display: grid;
     grid-template-rows: 1fr;
     position: relative;
@@ -25,7 +25,7 @@
     z-index: 1;
 }
 
-.imageCardWrapper {
+.cardTexts {
     display: grid;
     grid-template-rows: var(--padding-top) auto minmax(12rem, 1fr) auto var(--padding-bottom);
     grid-template-columns: 1fr auto var(--padding-right);
@@ -69,7 +69,7 @@
 
 }
 
-.coverImage {
+.cardImage {
     object-fit: cover;
     overflow: hidden;
     border-radius: var(--border-radius);
@@ -98,9 +98,9 @@
 
     }
 
-    .imageContainer {
+    .cardWrapper {
         &:hover {
-            .imageCardWrapper {
+            .cardTexts {
                 grid-template-columns: var(--padding-left) 1fr minmax(0, 0.25fr) var(--padding-right);
                 grid-template-areas:
                     '  .        .               .        .'
@@ -117,21 +117,21 @@
                     font-weight: var(--font-weight-medium);
 
                     background-color: var(--color-accent);
-
                 }
 
                 .onHoverOnly {
                     display: unset;
                 }
 
+
             }
 
-            .coverImage {
+            .cardImage {
                 filter: unset;
             }
         }
 
-        .coverImage {
+        .cardImage {
             filter: grayscale(1);
         }
     }

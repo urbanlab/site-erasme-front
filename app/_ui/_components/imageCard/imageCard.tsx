@@ -19,16 +19,16 @@ export default function ImageCard({ title, image, className }: ImageCardProps) {
             }}
         >
             <div
-                className={styles.imageContainer}
+                className={styles.cardWrapper}
             >
                 <Image
                     src={image}
                     fill
                     alt=''
                     sizes="(max-width: 90rem) 66vw, 100vw"
-                    className={styles.coverImage}
+                    className={styles.cardImage}
                 />
-                <div className={styles.imageCardWrapper}>
+                <div className={styles.cardTexts}>
                     <span className={`${styles.title} ${styles.overlay}`}>{title}</span>
 
                     <div className={`${styles.savoirPlus} ${styles.overlay}`}>
