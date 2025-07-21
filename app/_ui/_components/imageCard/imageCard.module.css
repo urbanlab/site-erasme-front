@@ -1,80 +1,139 @@
 .localVariables {
     --border-radius: 1.25rem;
-    --grid-row-title: 2;
-    --grid-row-arrow: 11;
+
+    --padding-top: 30px;
+    --padding-bottom: 16px;
+    --padding-left: 8px;
+    --padding-right: 16px;
+
+    --padding-arrow: 10px;
+
+    --padding-title: 4.5px var(--padding-left);
+
+    --font-size-title: 1.125rem
 }
 
-.imageCard {
+.imageContainer {
     display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    grid-template-rows: repeat(12, minmax(0, 1fr));
+    grid-template-rows: 1fr;
+    position: relative;
 
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    cursor: pointer;
-
-    filter: grayscale(1);
-
-    &:hover {
-        filter: unset;
-    }
 }
 
-.backgroundImage {
-    grid-column: 1 / -1;
-    grid-row: 1 / -1;
-    object-fit: cover;
-}
 
-.titleContainer {
-    grid-column: 1 / 9;
-    grid-row: var(--grid-row-title);
+.overlay {
     z-index: 1;
-    background-color: var(--color-primary);
-
-    border-top-right-radius: var(--border-radius);
-    border-bottom-right-radius: var(--border-radius);
-
-    margin: -0.5rem 0;
 }
 
-.title {
-    grid-column: 2 / 9;
-    grid-row: var(--grid-row-title);
-    z-index: 2;
-    align-self: center;
+.imageCardWrapper {
+    display: grid;
+    grid-template-rows: var(--padding-top) auto minmax(12rem, 1fr) auto var(--padding-bottom);
+    grid-template-columns: 1fr auto var(--padding-right);
+    grid-template-areas:
+        '  .        .         .'
+        'title      .         .'
+        '  .        .         .'
+        '  .    savoirPlus    .'
+        '  .        .         .';
+
+
+    .title {
+        grid-area: title;
+
+        overflow-x: hidden;
+        text-wrap: nowrap;
+        text-overflow: ellipsis;
+
+        font-size: var(--font-size-title);
+        font-weight: var(--font-weight-semi-bold);
+
+        padding: var(--padding-title);
+
+        background-color: var(--color-primary);
+
+        border-top-right-radius: var(--border-radius);
+        border-bottom-right-radius: var(--border-radius);
+    }
+
+    .savoirPlus {
+        grid-area: savoirPlus;
+
+        background-color: var(--color-primary);
+
+        border-radius: var(--border-radius);
+
+        align-content: center;
+
+        padding: var(--padding-arrow);
+    }
+
 }
 
-.arrowContainer {
+.coverImage {
+    object-fit: cover;
+    overflow: hidden;
     border-radius: var(--border-radius);
-    grid-row: var(--grid-row-arrow);
-    margin: -0.25rem 0;
-    z-index: 2;
 }
 
-.arrowContainerNoHover {
-    grid-column: 10 / 12;
-
-    background-color: var(--color-primary);
-
-    align-content: center;
-    justify-items: center;
-}
-
-.arrowContainerOnHover {
+.onHoverOnly {
     display: none;
 }
 
-.imageCard:hover > .arrowContainerNoHover {
-    display: none;
-}
 
-.imageCard:hover > .arrowContainerOnHover {
-    grid-column: 2 / 12;
-    background-color: var(--tonic);
+@media screen and (min-width: 90rem) {
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 25px;
+    .localVariables {
+        --border-radius: 1.25rem;
+
+        --padding-top: 80px;
+        --padding-bottom: 30px;
+        --padding-left: 20px;
+        --padding-right: 25px;
+
+        --padding-arrow: 26px 40px;
+
+        --padding-title: 22px var(--padding-left);
+
+        --font-size-title: 1.75rem;
+
+    }
+
+    .imageContainer {
+        &:hover {
+            .imageCardWrapper {
+                grid-template-columns: var(--padding-left) 1fr minmax(0, 0.25fr) var(--padding-right);
+                grid-template-areas:
+                    '  .        .               .        .'
+                    'title    title             .        .'
+                    '  .        .               .        .'
+                    '  .     savoirPlus    savoirPlus    .'
+                    '  .        .               .        .';
+
+                .savoirPlus {
+                    display: flex;
+                    justify-content: space-between;
+
+                    font-size: 1.5rem;
+                    font-weight: var(--font-weight-medium);
+
+                    background-color: var(--color-accent);
+
+                }
+
+                .onHoverOnly {
+                    display: unset;
+                }
+
+            }
+
+            .coverImage {
+                filter: unset;
+            }
+        }
+
+        .coverImage {
+            filter: grayscale(1);
+        }
+    }
+
 }

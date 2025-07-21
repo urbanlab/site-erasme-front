@@ -58,15 +58,10 @@ const imageCardsContent = [
         link: 'https://google.com',
     },
     {
-        title: 'BIEN VIVRE',
+        title: 'CCN',
         image: heroImage,
         link: 'https://google.com',
-    },
-    {
-        title: 'MÉDIATION',
-        image: heroImage,
-        link: 'https://google.com',
-    },
+    }
 ];
 
 const PresentationSection = () => {

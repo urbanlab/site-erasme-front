@@ -116,7 +116,6 @@
         flex: 1;
 
         min-width: 19.5rem;
-        min-height: 28rem;
 
         transition: flex-grow 0.2s ease;
     }
