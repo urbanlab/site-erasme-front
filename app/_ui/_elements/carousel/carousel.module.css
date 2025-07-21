@@ -1,0 +1,73 @@
+.localVariables {
+    --border-radius-images: 10px;
+    --border-radius-commands: 7px;
+
+    --min-height: 200px;
+
+    --margin-commands: 15px 11px;
+}
+
+.imagesWrapper {
+    position: relative;
+
+    display: grid;
+    grid-template-rows: 1fr;
+
+    min-height: var(--min-height);
+
+    .image {
+        object-fit: cover;
+        overflow: hidden;
+
+        border-radius: var(--border-radius-images);
+
+    }
+
+    .commandsWrapper {
+        place-self: end;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-width: 150px;
+
+        column-gap: 5px;
+
+        border-radius: var(--border-radius-commands);
+
+        margin: var(--margin-commands);
+
+        background-color: var(--color-primary);
+
+        transform: translateZ(0);
+
+
+        .previousImage {
+            >img {
+                rotate: -90deg;
+            }
+        }
+
+        .nextImage {
+            >img {
+                rotate: 90deg;
+            }
+        }
+    }
+}
+
+.overlay {
+    z-index: 1;
+}
+
+
+@media screen and (min-width: 90rem) {
+    .localVariables {
+        --border-radius-images: 30px;
+        --border-radius-commands: 20px;
+
+        --min-height: 500px;
+
+        --margin-commands: 40px 33px;
+    }
+}
