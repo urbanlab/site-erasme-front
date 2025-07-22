@@ -64,7 +64,7 @@ const addSuggestionToList = (input: string): string[] => {
     //Only add input to array if not present yet. The item is added at the beginning
     const updatedSuggestions = suggestions.includes(input) ? suggestions : [input, ...suggestions];
 
-    //Keep 5 items maximum. Remove the older item if needed
+    //Keep 5 items maximum. Remove the oldest item if needed
     const latestSuggestions = updatedSuggestions.slice(0, 5)
 
     localStorage.setItem(searchSuggestionsKey, JSON.stringify(latestSuggestions));

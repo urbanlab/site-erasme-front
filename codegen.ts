@@ -3,7 +3,7 @@ import './loadEnvConfig';
 
 const config: CodegenConfig = {
     schema: {
-        [`${process.env.BACKEND_BASE_URL}/${process.env.GRAPHQL_ENDPOINT}`]: {
+        [`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/${process.env.GRAPHQL_ENDPOINT}`]: {
             headers: {
                 'X-Auth-Token': process.env.GRAPHQL_TOKEN ?? '',
             },

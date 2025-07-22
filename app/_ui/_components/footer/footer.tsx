@@ -73,6 +73,11 @@ export default function Footer() {
     return (
         <footer className={`${styles.mainFlexContainer} ${styles.localVariables}`}>
             <ul className={styles.leftSideFlexContainer}>
+                <li key="cookie">
+                    <a className={styles.footerLink} href="" data-cc="show-preferencesModal">
+                        COOKIES
+                    </a>
+                </li>
                 {footerLinks.map(link => {
                     return (
                         <li key={link.label}>
@@ -85,9 +90,9 @@ export default function Footer() {
                         </li>
                     );
                 })}
-                <li key="cookie">
-                    <a className={styles.footerLink} href="" data-cc="show-preferencesModal">
-                        COOKIES
+                <li key="se-connecter">
+                    <a href={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/ecrire`} target='_blank' className={styles.footerLink}>
+                        SE CONNECTER
                     </a>
                 </li>
             </ul>

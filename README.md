@@ -55,7 +55,7 @@ The shapedImage component uses an svg mask. If a new mask is added, make sure th
 ## Apollo Client
 
 ### Backend endpoint
-! If you are running the backend in local (localhost) and you want to build a **docker** image for the frontend (that will query the local backend graphql endpoint), you need to define the BACKEND_BASE_URL variable in .env file with your internal network IP address (`192.168.*.*`). `localhost` WON'T WORK WITH APOLLO CLIENT.
+! If you are running the backend in local (localhost) and you want to build a **docker** image for the frontend (that will query the local backend graphql endpoint), you need to define the NEXT_PUBLIC_BACKEND_BASE_URL variable in .env file with your internal network IP address (`192.168.*.*`). `localhost` WON'T WORK WITH APOLLO CLIENT.
 On Linux, You can find your IP address using the following command in the terminal:
 
 ```bash
@@ -64,7 +64,7 @@ ip -4 addr show | grep -oP '(?<=inet\s)192\.168\.\d+\.\d+'
 
 Note that you will also need to add `build-arg` for all the environment variables on the docker command.
 
-HOWEVER, If you do **not** use docker (i.e you use turbopack to run the application in local), you must use `localhost` for the BACKEND_BASE_URL variable in .env
+HOWEVER, If you do **not** use docker (i.e you use turbopack to run the application in local), you must use `localhost` for the NEXT_PUBLIC_BACKEND_BASE_URL variable in .env
 
 ### Configuration
 This application has both server and client side requests to the backend. Server side requests are configured in `apolloClient.tsx` file, while client side requests are configured in `apolloWrapper.tsx` file. 
@@ -75,6 +75,12 @@ To prevent CORS problems and to enhance security (caching the graphql token on b
 # DevOps
 
 To add a new environment variable:
+
+If an environment variable is used directly in client-side components (without proxy), it must be prefixed with `NEXT_PUBLIC_`.
+For example, the `NEXT_PUBLIC_BACKEND_BASE_URL` is required by the footer.
+
+Note that this is an exception. Most variables do **not** need the `NEXT+PUBLIC_` prefix, since a proxy is configured and most API calls are handled by server components only. As a result, these variables remain server-side and do not need to be exposed to the browser.
+
 ## For local development 
 Simply add the new variable in the .env local file
     - Do not forget to update `.env.example` file as well
@@ -95,9 +101,7 @@ Simply add the new variable in the .env local file
   - Do not forget to update all the concerned environments
   - /!\ You must have admin rights for the repository
 
-- Some variables must be available for the server during runtime (typically: `BACKEND_BASE_URL`, `GRAPHQL_ENDPOINT` and `GRAPHQL_TOKEN`). For these, in addition to the other steps, you must update them on kubernetes' (Rancher) --> *Environment Variables* on the frontend Deployment. 
-  - nb: since there is a proxy configured, there is no need to expose these variables to the browser (i.e **no** need to prefix them with `NEXT_PUBLIC`)
-
+- Most of the variables must also be available for the server or browser during runtime (mainly for fetch/refetch reasons). For these, in addition to the other steps, you must update them on kubernetes' (Rancher) --> *Environment Variables* on the frontend Deployment. 
 
 ---
 ## Usefull vscode extensions
