@@ -21,6 +21,11 @@
 
         border-radius: var(--border-radius-images);
 
+        transition: opacity 1s ease-in-out;
+    }
+
+    .imageTransition {
+        opacity: 0.2;
     }
 
     .commandsWrapper {
@@ -36,21 +41,27 @@
         border-radius: var(--border-radius-commands);
 
         margin: var(--margin-commands);
+        padding: 5px;
 
         background-color: var(--color-primary);
 
         transform: translateZ(0);
 
-
         .previousImage {
-            >img {
+            > img {
                 rotate: -90deg;
             }
         }
 
         .nextImage {
-            >img {
+            > img {
                 rotate: 90deg;
+            }
+        }
+
+        > button {
+            &:hover {
+                background-color: var(--color-background);
             }
         }
     }
@@ -59,7 +70,6 @@
 .overlay {
     z-index: 1;
 }
-
 
 @media screen and (min-width: 90rem) {
     .localVariables {
