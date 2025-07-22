@@ -12,7 +12,10 @@ export default function NavigateBackButton() {
 
     const isDesktop = useIsDesktop();
 
+    // Do not render on mobile
     if (!isDesktop) return;
+
+    // Do not render on homepage
     if (pathname == '/') return;
 
     return (

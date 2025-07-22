@@ -1,11 +1,14 @@
 .navigateBack {
     justify-self: start;
-    align-items: center;
+    align-items: start;
     flex-wrap: nowrap;
     column-gap: 8px;
 
     margin-left: var(--padding-sides-main);
-    margin-top: var(--margin-top-main);
+
+    /* Place the button inside the navbar margin */
+    margin-top: calc(var(--margin-top-main)/2 * -1);
+    /* Remove extra margin created by the button */
     margin-bottom: calc(var(--margin-top-main) * -1);
 
     .linkStyle {
