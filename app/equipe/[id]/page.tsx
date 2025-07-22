@@ -86,7 +86,7 @@ export default async function Author({ params }: { params: Promise<{ id: string 
             whereRubriques: [`id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`],
             rubriquesOrderBy: [`date_DESC`],
             articlesInRubriqueOrderBy: [`date_DESC`],
-            idGroupeMotsFilterPolitiquesPubliques: parseInt(process.env.SPIP_GROUPE_MOTS_POLITIQUES_PUBLIQUES_ID ?? ''),
+            idGroupeMotsForFilter: parseInt(process.env.SPIP_GROUPE_MOTS_POLITIQUES_PUBLIQUES_ID ?? ''),
             withAuteurs: true,
             whereAuteurs: [`id_auteur=${id}`],
             idAuteur: parseInt(id ?? ''),
@@ -116,7 +116,7 @@ export default async function Author({ params }: { params: Promise<{ id: string 
         })
         .filter(rubrique => rubrique !== null);
 
-    const motsFragment = getFragmentData(
+    const motsAndGroupeMotsFragment = getFragmentData(
         MotsAndGroupeMotsFieldsFragmentDoc,
         data?.getGroupe_mots?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
     );
@@ -130,7 +130,7 @@ export default async function Author({ params }: { params: Promise<{ id: string 
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
             <AuthorPresentation authorInformation={auteurInformationFragment} />
 
-            <ProjectListWrapper projects={projectListFromAuthor} politiquesPubliquesMots={motsFragment} />
+            <ProjectListWrapper projects={projectListFromAuthor} groupeMotsForFilter={motsAndGroupeMotsFragment} />
         </div>
     );
 }

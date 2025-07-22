@@ -130,7 +130,7 @@ const ALL_PROJECTS_AND_NESTED_COLLECTIONS = gql(`
             $whereRubriques: [String!],
             $rubriquesOrderBy: [String!],
             $articlesInRubriqueOrderBy: [String!],
-            $idGroupeMotsFilterPolitiquesPubliques: Int!,
+            $idGroupeMotsForFilter: Int!,
             $withAuteurs: Boolean = false,
             $whereAuteurs: [String!],
             $idAuteur: Int = 0,
@@ -147,7 +147,7 @@ const ALL_PROJECTS_AND_NESTED_COLLECTIONS = gql(`
             }
         }
 
-        getGroupe_mots(id: $idGroupeMotsFilterPolitiquesPubliques){
+        getGroupe_mots(id: $idGroupeMotsForFilter){
             id
             titre
             mots (pagination: $pagination) {

@@ -180,10 +180,10 @@ const MobileProjectListAndFilters = ({
 
 export default function ProjectListWrapper({
     projects,
-    politiquesPubliquesMots,
+    groupeMotsForFilter,
 }: {
     projects: ListProjetsFieldsFragment[];
-    politiquesPubliquesMots: MotsAndGroupeMotsFieldsFragment[];
+    groupeMotsForFilter: MotsAndGroupeMotsFieldsFragment[];
 }) {
     const [filteredProjects, setFilteredProjects] = useState(projects);
     const [currentPage, setCurrentPage] = useState(1);
@@ -195,7 +195,7 @@ export default function ProjectListWrapper({
 
     const politiquesPubliquesItems: ControlledComponentType[] = [
         { label: 'Tout', value: null } as ControlledComponentType,
-        ...politiquesPubliquesMots.map(mot => {
+        ...groupeMotsForFilter.map(mot => {
             return { label: mot.titre, value: mot.id } as ControlledComponentType;
         }),
     ];

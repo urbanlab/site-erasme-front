@@ -34,7 +34,7 @@ export default async function Projets() {
             whereRubriques: [`id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`],
             rubriquesOrderBy: [`date_DESC`],
             articlesInRubriqueOrderBy: [`date_DESC`],
-            idGroupeMotsFilterPolitiquesPubliques: parseInt(process.env.SPIP_GROUPE_MOTS_POLITIQUES_PUBLIQUES_ID ?? ''),
+            idGroupeMotsForFilter: parseInt(process.env.SPIP_GROUPE_MOTS_POLITIQUES_PUBLIQUES_ID ?? ''),
         },
     });
 
@@ -43,7 +43,7 @@ export default async function Projets() {
         data?.rubriques?.result as FragmentType<typeof ListProjetsFieldsFragmentDoc>[]
     );
 
-    const motsFragment = getFragmentData(
+    const motsAndGroupeMotsFragment = getFragmentData(
         MotsAndGroupeMotsFieldsFragmentDoc,
         data?.getGroupe_mots?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
     );
@@ -52,7 +52,7 @@ export default async function Projets() {
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
             <RubriquePresentation />
 
-            <ProjectListWrapper projects={projectListFragment} politiquesPubliquesMots={motsFragment} />
+            <ProjectListWrapper projects={projectListFragment} groupeMotsForFilter={motsAndGroupeMotsFragment} />
         </div>
     );
 }
