@@ -57,11 +57,14 @@
 
 .archivesContainer {
     align-self: center;
+    justify-self: center;
     display: grid;
     grid-template-columns: auto 24px 1fr;
     grid-template-areas:
         'button intersection card'
         'title intersection card';
+
+    max-width: 25rem;
 
     > .title {
         grid-area: title;
@@ -169,7 +172,7 @@
             min-height: 600px;
         }
 
-        & .presentationTextContainer{
+        & .presentationTextContainer {
             align-self: start;
             padding-top: 1.5rem;
         }
@@ -206,6 +209,8 @@
             'card'
             'intersection'
             'button';
+
+        max-width: unset;
 
         > .title {
             grid-area: title;
