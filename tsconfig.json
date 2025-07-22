@@ -45,6 +45,7 @@
       "@ui/components/articleList": ["_ui/_components/articleList/articleList.tsx"],
       "@ui/components/imageSlider": ["_ui/_components/imageSlider/imageSlider.tsx"],
       "@ui/components/projectListWrapper": ["_ui/_components/projectListWrapper/projectListWrapper.tsx"],
+      "@ui/components/navigateBack": ["_ui/_components/navigateBack/navigateBack.tsx"],
       "@graphql/*": ["_graphql/*"],
       "@services/remoteHtml": ["_services/_remoteHtml/remoteHtml.tsx"],
       "@services/apollo/*": ["_services/_apollo/*"],

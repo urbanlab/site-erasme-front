@@ -3,6 +3,7 @@ import { ApolloWrapper } from '@services/apollo/apolloWrapper';
 import { CookieConsentManager } from '@services/cookieConsent/cookieConsentManager';
 import Footer from '@ui/components/footer';
 import NavbarWrapper from '@ui/components/navbarWrapper';
+import NavigateBack from '@ui/components/navigateBack';
 import type { Metadata } from 'next';
 import { K2D } from 'next/font/google';
 import styles from './layout.module.css';
@@ -29,6 +30,7 @@ export default function RootLayout({
 
                 <ApolloWrapper>
                     <NavbarWrapper />
+                    <NavigateBack />
                     <div className={styles.contentContainer}>{children}</div>
                     <Footer />
                 </ApolloWrapper>
