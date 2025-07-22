@@ -80,7 +80,7 @@
 }
 
 
-@media screen and (min-width: 90rem) {
+@media screen and (min-width: 80rem) {
 
     .localVariables {
         --border-radius: 1.25rem;

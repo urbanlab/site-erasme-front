@@ -162,7 +162,7 @@
     display: none;
 }
 
-@media screen and (min-width: 90rem) {
+@media screen and (min-width: 80rem) {
     .presentationContainer {
         display: grid;
         grid-template-columns: 1fr 2fr;

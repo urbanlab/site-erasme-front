@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
  * mostly for accessibility concerns, avoiding double rendering on screen readers.
  */
 
-const desktopBreakpoint = '90rem';
+const desktopBreakpoint = '80rem';
 
 export function useIsDesktop() {
     const [isDesktop, setIsDesktop] = useState(false);

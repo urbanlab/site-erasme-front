@@ -12,7 +12,7 @@
     }
 }
 
-@media screen and (min-width: 90rem) {
+@media screen and (min-width: 80rem) {
     .localVariables {
         --row-gap-sections: 3.125rem;
     }

@@ -87,7 +87,7 @@
     font-size: 0.875rem;
 }
 
-@media screen and (min-width: 90rem) {
+@media screen and (min-width: 80rem) {
     .localVariables {
         --gap-default: 1.875rem;
         --height-logo-erasme: 3.5rem;

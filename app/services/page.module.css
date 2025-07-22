@@ -19,7 +19,7 @@
     }
 }
 
-@media screen and (min-width: 90rem) {
+@media screen and (min-width: 80rem) {
     .mainContainer {
         & .servicesContainer {
             gap: calc(2 * var(--gap-section));

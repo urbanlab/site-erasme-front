@@ -71,7 +71,7 @@
     z-index: 1;
 }
 
-@media screen and (min-width: 90rem) {
+@media screen and (min-width: 80rem) {
     .localVariables {
         --border-radius-images: 30px;
         --border-radius-commands: 20px;

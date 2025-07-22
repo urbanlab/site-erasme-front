@@ -50,7 +50,7 @@
     flex-direction: column;
 }
 
-@media screen and (min-width: 90rem) {
+@media screen and (min-width: 80rem) {
     .desktopContainer {
         display: grid;
         gap: var(--gap);
@@ -70,6 +70,7 @@
             grid-area: articleTypeFilter;
             display: flex;
             column-gap: var(--gap);
+            text-wrap: nowrap;
         }
 
         .itemsPerPage {

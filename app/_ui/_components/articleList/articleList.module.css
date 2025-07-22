@@ -31,7 +31,7 @@
     display: none;
 }
 
-@media screen and (min-width: 90rem) {
+@media screen and (min-width: 80rem) {
     .localVariables {
         --padding-top-bottom: 1rem;
     }

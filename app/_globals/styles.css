@@ -134,14 +134,14 @@ img {
 }
 
 /* Standard Desktop */
-@media screen and (min-width: 90rem) {
+@media screen and (min-width: 80rem) {
     :root {
         --font-size-default-body: 1.125rem;
         --line-height-default-body: 1.5;
 
         --font-size-section-description: 2rem;
 
-        --font-size-h1: 3.5rem;
+        --font-size-h1: 3.25rem;
         --font-size-h2: 3rem;
         --font-size-h3: 2.25rem;
         --font-size-h4: 1.5rem;
