@@ -71,7 +71,7 @@ export default function Footer() {
     const pathname = usePathname();
 
     return (
-        <footer className={`${styles.mainFlexContainer} ${styles.localVariables}`}>
+        <footer className={`${styles.mainContainer} ${styles.localVariables}`}>
             <ul className={styles.leftSideFlexContainer}>
                 <li key="cookie">
                     <a className={styles.footerLink} href="" data-cc="show-preferencesModal">

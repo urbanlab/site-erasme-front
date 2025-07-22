@@ -2,25 +2,26 @@
     --gap-default: 0.75rem;
     --height-logo-erasme: 2.4rem;
     --height-logo-metropole-lyon: 4.1875rem;
+    --padding: 3rem var(--padding-sides-main);
 }
 
 .conditionalDisplay {
     display: none;
 }
 
-.mainFlexContainer {
+.mainContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
 
-    padding: 3rem var(--padding-sides-main) 1.5rem var(--padding-sides-main);
+    padding: var(--padding);
 
     color: var(--white);
     background-color: var(--black);
 }
 
-.mainFlexContainer img {
+.mainContainer img {
     filter: var(--svg-filter-black-to-white);
 }
 
@@ -69,6 +70,7 @@
     flex-wrap: wrap;
     justify-content: flex-end;
     gap: var(--gap-default);
+    margin-bottom: calc(2 * var(--gap-default));
 }
 
 .socialMediaFlexContainer img {
@@ -92,10 +94,8 @@
         --gap-default: 1.875rem;
         --height-logo-erasme: 3.5rem;
         --height-logo-metropole-lyon: 5.625rem;
-    }
 
-    .mainFlexContainer {
-        padding: 5.625rem var(--padding-sides-main) 1.5rem var(--padding-sides-main);
+        --padding: 5.625rem var(--padding-sides-main);
     }
 
     .conditionalDisplay {
