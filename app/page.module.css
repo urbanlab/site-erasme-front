@@ -26,10 +26,6 @@
     gap: var(--gap-inside-section);
 
     margin-top: calc(var(--gap-section) * -0.5);
-
-    & > h2 {
-        text-align: end;
-    }
 }
 
 .cardsContainer {
@@ -227,10 +223,6 @@
         .loadIcon {
             height: 150px;
         }
-    }
-
-    .currentTopicsContainer > h2 {
-        text-align: start;
     }
 
     .servicesContainer {
