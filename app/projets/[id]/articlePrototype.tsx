@@ -49,7 +49,9 @@ const DescriptionSection = ({ title, content }: { title: string; content: string
     return (
         <div>
             <h2>{title}</h2>
-            <RemoteHtml html={content} />
+            <>
+                <RemoteHtml html={content} />
+            </>
         </div>
     );
 };
