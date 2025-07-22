@@ -50,6 +50,20 @@ const PROTOTYPE_INFORMATION_FIELDS_FRAGMENT = gql(`
         description_lateral_title
         description_lateral
         developpement
+        description_title_third
+        description_third
+        descr_tech_technique
+        descr_tech_devices
+        descr_tech_framework
+        descr_tech_depot
+        descr_tech_licence
+
+        #Get all images
+        documents(pagination: 100, where:"media=image") {
+            result {
+                ...documentFullInformationFields
+            }
+        }
     }
 `);
 
@@ -85,6 +99,17 @@ const DOCUMENT_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
         id
         titre
         media
+    }
+`);
+
+const DOCUMENT_FULL_INFORMATION_FIELDS_FRAGMENT = gql(`
+    fragment documentFullInformationFields on Document {
+        id
+        media
+        fichier
+        largeur
+        hauteur
+        alt
     }
 `);
 
@@ -142,4 +167,5 @@ export {
     AUTEUR_FULL_INFORMATION_FIELDS_FRAGMENT,
     MOT_BASIC_INFORMATION_FIELDS_FRAGMENT,
     DOCUMENT_BASIC_INFORMATION_FIELDS_FRAGMENT,
+    DOCUMENT_FULL_INFORMATION_FIELDS_FRAGMENT,
 };

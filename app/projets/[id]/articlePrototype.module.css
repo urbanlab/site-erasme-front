@@ -6,6 +6,8 @@
     --margin-bottom-section-title: 1rem;
 
     --gap-section: 2rem;
+
+    --gap-list-items: 1.25rem;
 }
 
 .mainContainer {
@@ -16,6 +18,11 @@
     h4 {
         margin-bottom: var(--margin-bottom-section-title);
     }
+}
+
+.twoColumnsContainerWrapper {
+    display: grid;
+    gap: var(--gap-section);
 }
 
 .infoCardContainer {
@@ -101,8 +108,20 @@
 .tabsList {
     display: flex;
     justify-content: center;
-    gap: 1.25rem;
+    gap: var(--gap-list-items);
     margin-bottom: 1.875rem;
+}
+
+.desciptifTechniqueContainer {
+    & ul {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-list-items);
+    }
+    & li {
+        list-style-type: disc;
+        list-style-position: inside;
+    }
 }
 
 .linkStyle {
@@ -122,6 +141,12 @@
         --margin-bottom-section-title: 2.5rem;
 
         --gap-section: 4.375rem;
+    }
+
+    .twoColumnsContainerWrapper {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
     }
 
     .infoCardContainer {

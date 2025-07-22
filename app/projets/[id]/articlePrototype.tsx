@@ -1,9 +1,14 @@
-import { MotsAndGroupeMotsFieldsFragment, PrototypeInformationFieldsFragment } from '@graphql/__generated__/graphql';
+import { FragmentType, getFragmentData } from '@graphql/__generated__';
+import {
+    DocumentFullInformationFieldsFragmentDoc,
+    MotsAndGroupeMotsFieldsFragment,
+    PrototypeInformationFieldsFragment,
+} from '@graphql/__generated__/graphql';
 import { RemoteHtml } from '@services/remoteHtml';
+import Carousel from '@ui/elements/carousel';
+import Link from 'next/link';
 import styles from './articlePrototype.module.css';
 import { DevelopmentAndTimelineSectionsWrapper } from './clientComponents';
-import Link from 'next/link';
-// import ImageSlider from '@ui/components/imageSlider';
 
 const prototypeCards = [
     {
@@ -157,6 +162,58 @@ const InfoCard = ({
     );
 };
 
+const DescriptifTechniqueSection = ({
+    typeTechnique,
+    devices,
+    framework,
+    depot,
+    licence,
+}: {
+    typeTechnique: string;
+    devices: string;
+    framework: string;
+    depot: string;
+    licence: string;
+}) => {
+    return (
+        <div className={styles.desciptifTechniqueContainer}>
+            <h2>Descriptif technique</h2>
+            <ul>
+                {typeTechnique && (
+                    <li>
+                        <b>Type technique : </b>
+                        {typeTechnique}
+                    </li>
+                )}
+                {devices && (
+                    <li>
+                        <b>Devices / Compatibilité :</b>
+                        {devices}
+                    </li>
+                )}
+                {framework && (
+                    <li>
+                        <b>Framework : </b>
+                        {framework}
+                    </li>
+                )}
+                {depot && (
+                    <li>
+                        <b>Dépot : </b>
+                        {depot}
+                    </li>
+                )}
+                {licence && (
+                    <li>
+                        <b>Licence : </b>
+                        {licence}
+                    </li>
+                )}
+            </ul>
+        </div>
+    );
+};
+
 const getMotsFromGroupeMots = ({
     allMots,
     groupeMotsId,
@@ -201,6 +258,11 @@ export default function ArticlePrototype({
     motsAndGroupeMots: MotsAndGroupeMotsFieldsFragment[];
     className?: string;
 }) {
+    const imagesFromPrototype = getFragmentData(
+        DocumentFullInformationFieldsFragmentDoc,
+        prototypeInformation?.documents?.result as FragmentType<typeof DocumentFullInformationFieldsFragmentDoc>[]
+    );
+
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables} ${className}`}>
             <DescriptionSection
@@ -225,13 +287,34 @@ export default function ArticlePrototype({
                 content={prototypeInformation.description_lateral ?? ''}
             />
 
-            {prototypeInformation.chiffres_cles && <KeyMetrics keyMetrics={prototypeInformation.chiffres_cles} />}
+            <div className={styles.twoColumnsContainerWrapper}>
+                {prototypeInformation.chiffres_cles && <KeyMetrics keyMetrics={prototypeInformation.chiffres_cles} />}
 
-            {/* <ImageSlider images={data.getArticle?.documents}></ImageSlider> */}
+                {imagesFromPrototype.length > 0 && <Carousel images={imagesFromPrototype} />}
+            </div>
 
             <InfoCardWrapper motsAndGroupeMots={motsAndGroupeMots} cardsSectionObject={ecosystemeCards} />
 
-            <p></p>
+            {prototypeInformation.description_title_third && (
+                <DescriptionSection
+                    title={prototypeInformation.description_title_third ?? ''}
+                    content={prototypeInformation.description_third ?? ''}
+                />
+            )}
+
+            {(prototypeInformation.descr_tech_technique ||
+                prototypeInformation.descr_tech_devices ||
+                prototypeInformation.descr_tech_framework ||
+                prototypeInformation.descr_tech_depot ||
+                prototypeInformation.descr_tech_licence) && (
+                <DescriptifTechniqueSection
+                    typeTechnique={prototypeInformation.descr_tech_technique ?? ''}
+                    devices={prototypeInformation.descr_tech_devices ?? ''}
+                    framework={prototypeInformation.descr_tech_framework ?? ''}
+                    depot={prototypeInformation.descr_tech_depot ?? ''}
+                    licence={prototypeInformation.descr_tech_licence ?? ''}
+                />
+            )}
         </div>
     );
 }
