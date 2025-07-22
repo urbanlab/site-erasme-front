@@ -170,7 +170,12 @@
         & .presentationImage {
             grid-column: 2;
             grid-row: 1;
-            min-height: 700px;
+            min-height: 600px;
+        }
+
+        & .presentationTextContainer{
+            align-self: start;
+            padding-top: 1.5rem;
         }
     }
 
