@@ -6,7 +6,8 @@
     }
 
     iframe,
-    img {
+    img,
+    figure {
         max-width: 100%;
     }
 
