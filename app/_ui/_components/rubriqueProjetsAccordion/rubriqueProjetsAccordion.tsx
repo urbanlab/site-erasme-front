@@ -5,6 +5,8 @@ import { RemoteHtml } from '@services/remoteHtml';
 import ArticleList from '@ui/components/articleList';
 import Arrow from '@ui/elements/arrow';
 import styles from './rubriqueProjetsAccordion.module.css';
+import chevronIcon from '@public/chevron-up-icon.svg';
+import Image from 'next/image';
 
 export default function RubriqueProjetsAccordion({
     projets,
@@ -27,9 +29,7 @@ export default function RubriqueProjetsAccordion({
                     <Accordion.Item key={rubrique.id} className={styles.item}>
                         <Accordion.Trigger className={styles.trigger}>
                             <div className={styles.title}>{rubrique?.titre}</div>
-                            <div className={`${styles.conditionalDisplay} ${styles.desktopFields}`}>
-                                <Arrow className={styles.arrow} orientation="northeast" size={28} />
-                            </div>
+                            <Image src={chevronIcon} alt="" className={styles.arrow} />
                         </Accordion.Trigger>
                         <Accordion.Panel className={styles.panel}>
                             {rubrique?.texte && <RemoteHtml html={rubrique.texte} />}

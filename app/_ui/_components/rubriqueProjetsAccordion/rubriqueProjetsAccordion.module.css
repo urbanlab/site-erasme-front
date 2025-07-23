@@ -2,9 +2,16 @@
     --padding-top-bottom: 0.625rem;
     --padding-left-right: 0.625rem;
 
+    --column-gap: 30px;
+
     --panel-padding: 1.25rem 1.25rem 3.125rem 1.25rem;
     --panel-border-radius: 15px;
     --panel-row-gap: 1.875rem;
+}
+
+.arrow {
+    transform: rotate(180deg);
+    transition: transform 0.2s ease-in-out;
 }
 
 .accordion {
@@ -31,7 +38,8 @@
 
     & .trigger {
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr auto;
+        column-gap: var(--column-gap);
         align-items: center;
 
         padding: var(--padding-top-bottom) var(--padding-left-right);
@@ -57,6 +65,11 @@
             & .title {
                 font-weight: var(--font-weight-bold);
             }
+
+            & .arrow {
+                transform: rotate(0deg);
+                filter: drop-shadow(0 3px var(--color-accent));
+            }
         }
     }
 
@@ -74,10 +87,6 @@
     }
 }
 
-.conditionalDisplay {
-    display: none;
-}
-
 @media screen and (min-width: 80rem) {
     .localVariables {
         --padding-top-bottom: 1rem;
@@ -89,15 +98,6 @@
 
     .accordion {
         & .trigger {
-            grid-template-columns: 1.2fr auto;
-            column-gap: 30px;
-
-            & .desktopFields {
-                display: grid;
-                grid-template-columns: auto;
-                align-items: center;
-            }
-
             &:hover {
                 & .title {
                     font-weight: var(--font-weight-bold);
@@ -106,20 +106,9 @@
                 background: var(--color-primary);
 
                 .arrow {
-                    filter: drop-shadow(-3px 0 var(--color-accent));
-                }
-            }
-
-            &[data-panel-open] {
-                & .arrow {
-                    transform: rotate(90deg);
-                    filter: drop-shadow(-3px 0 var(--color-accent));
+                    filter: drop-shadow(0 3px var(--color-accent));
                 }
             }
         }
-    }
-
-    .conditionalDisplay {
-        display: unset;
     }
 }
