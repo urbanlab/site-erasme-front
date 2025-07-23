@@ -63,6 +63,7 @@
 
         .totalItems {
             grid-area: totalItems;
+            align-content: center;
         }
 
         .articleTypeFilter {

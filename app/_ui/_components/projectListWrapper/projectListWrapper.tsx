@@ -32,6 +32,10 @@ const articleTypeOptions: ControlledComponentType[] = [
     { label: 'Prototype', value: '1' },
 ];
 
+const pageTexts = {
+    totalResults: 'Projets :',
+};
+
 const DesktopProjectListAndFilters = ({
     totalItems,
     itemsPerPage,
@@ -63,8 +67,7 @@ const DesktopProjectListAndFilters = ({
 }) => {
     return (
         <div className={`${styles.desktopContainer} ${styles.localVariables}`}>
-
-            <h2 className={styles.totalItems}>{`Total : ${totalItems}`}</h2>
+            <h3 className={styles.totalItems}>{`${pageTexts.totalResults} ${totalItems}`}</h3>
 
             <div className={styles.motFiltersContainer}>
                 <ToggleGroup
@@ -74,7 +77,7 @@ const DesktopProjectListAndFilters = ({
                     className={styles.politiquesPubliquesFilter}
                 />
             </div>
-            
+
             <ToggleGroup
                 items={articleTypeItems}
                 handleValueChange={handleArticleTypeFilter}
@@ -133,7 +136,7 @@ const MobileProjectListAndFilters = ({
 }) => {
     return (
         <div className={`${styles.mobileContainer} ${styles.localVariables}`}>
-            <h2 className={styles.totalItems}>{`Total : ${totalItems}`}</h2>
+            <h2 className={styles.totalItems}>{`${pageTexts.totalResults} ${totalItems}`}</h2>
 
             <FilterPopover
                 popupContent={
