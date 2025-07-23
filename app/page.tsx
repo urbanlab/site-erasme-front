@@ -9,6 +9,9 @@ import { HOMEPAGE } from '@graphql/queries';
 import cubeShapedIcon from '@public/cube-shaped-icon.svg';
 import doubleArrowShapedIcon from '@public/double-arrow-shaped-icon.svg';
 import heroImage from '@public/hero-img.svg';
+import ccnLogo from '@public/programme-ccn.png';
+import datagoraLogo from '@public/programme-datagora.png';
+import incubationLogo from '@public/programme-incubation.jpg';
 import xShapedIcon from '@public/x-shaped-icon.svg';
 import { getClient } from '@services/apollo/apolloClient';
 import ArticleCard from '@ui/components/articleCard';
@@ -34,7 +37,6 @@ const pageTexts = {
     },
     ProgramsSection: {
         title: 'Programmes',
-        tags: ['DATAGORA', 'INCUBATION', 'BIEN VIVRE', 'MÉDIATION'],
     },
     servicesSection: {
         title: 'Services',
@@ -49,19 +51,22 @@ const pageTexts = {
 const imageCardsContent = [
     {
         title: 'DATAGORA',
-        image: heroImage,
-        link: 'https://google.com',
+        image: datagoraLogo,
+        link: 'https://datagora.erasme.org/',
+        isInternalLink: false,
     },
     {
         title: 'INCUBATION',
-        image: heroImage,
-        link: 'https://google.com',
+        image: incubationLogo,
+        link: '/projets',
+        isInternalLink: true,
     },
     {
         title: 'CCN',
-        image: heroImage,
-        link: 'https://google.com',
-    }
+        image: ccnLogo,
+        link: 'https://classeculturellenumerique.org/',
+        isInternalLink: false,
+    },
 ];
 
 const PresentationSection = () => {
@@ -116,7 +121,14 @@ const ProgrammesSection = () => {
             <h2>{pageTexts.ProgramsSection.title}</h2>
             <div className={styles.imageCardsContainer}>
                 {imageCardsContent.map((card, index) => (
-                    <ImageCard className={styles.imageCard} title={card.title} image={card.image} key={index} />
+                    <ImageCard
+                        className={styles.imageCard}
+                        title={card.title}
+                        image={card.image.src}
+                        link={card.link}
+                        isInternalLink={card.isInternalLink}
+                        key={index}
+                    />
                 ))}
             </div>
         </div>
