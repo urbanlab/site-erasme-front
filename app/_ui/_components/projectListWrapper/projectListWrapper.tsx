@@ -89,6 +89,7 @@ const DesktopProjectListAndFilters = ({
                 items={itemsPerPageOptions}
                 value={itemsPerPage}
                 handleValueChange={handleItemsPerPageChange}
+                changeTriggerColorWhenFiltered={false}
                 className={{ trigger: styles.itemsPerPage }}
                 createPortal
             />
@@ -166,7 +167,9 @@ const MobileProjectListAndFilters = ({
                 items={itemsPerPageOptions}
                 value={itemsPerPage}
                 handleValueChange={handleItemsPerPageChange}
+                changeTriggerColorWhenFiltered={false}
                 className={{ trigger: styles.itemsPerPage }}
+                createPortal
             />
 
             <RubriqueProjetsAccordion projets={paginatedProjects} key={currentPage} className={styles.projectList} />
