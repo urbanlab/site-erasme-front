@@ -17,7 +17,7 @@ export default function FilterPopover({ popupContent, hasFilterApplied, classNam
                 className={`${className?.trigger} ${hasFilterApplied ? styles.hasFilterApplied : ''}`}
                 render={
                     <Button variant="ghost" className={styles.trigger}>
-                        Filters <Image src={chevronIcon} className={styles.chevronIcon} alt="chevron" />
+                        Filtres <Image src={chevronIcon} className={styles.chevronIcon} alt="chevron" />
                     </Button>
                 }
             />
