@@ -16,7 +16,7 @@
 
 .accordion {
     & * {
-        font: inherit;
+        font: unset;
     }
 
     & .item {

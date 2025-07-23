@@ -1,12 +1,11 @@
 import { Accordion } from '@base-ui-components/react/accordion';
 import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
 import { ArticleBasicInformationFieldsFragmentDoc, ListProjetsFieldsFragment } from '@graphql/__generated__/graphql';
+import chevronIcon from '@public/chevron-up-icon.svg';
 import { RemoteHtml } from '@services/remoteHtml';
 import ArticleList from '@ui/components/articleList';
-import Arrow from '@ui/elements/arrow';
-import styles from './rubriqueProjetsAccordion.module.css';
-import chevronIcon from '@public/chevron-up-icon.svg';
 import Image from 'next/image';
+import styles from './rubriqueProjetsAccordion.module.css';
 
 export default function RubriqueProjetsAccordion({
     projets,
