@@ -1,8 +1,11 @@
 .localVariables {
-    --gap-default: 0.75rem;
+    --gap-inside-section: 0.75rem;
+    --gap-section: 2rem;
     --height-logo-erasme: 2.4rem;
     --height-logo-metropole-lyon: 4.1875rem;
     --padding: 3rem var(--padding-sides-main);
+
+    --height-social-media-icon: 2.5rem;
 }
 
 .conditionalDisplay {
@@ -11,25 +14,32 @@
 
 .mainContainer {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
+    flex-direction: column;
+    place-content: center;
+    gap: var(--gap-section);
 
     padding: var(--padding);
 
-    color: var(--white);
-    background-color: var(--black);
+    color: var(--color-primary);
+    background-color: var(--color-secondary);
+
+    & img {
+        filter: var(--svg-filter-black-to-white);
+    }
 }
 
-.mainContainer img {
-    filter: var(--svg-filter-black-to-white);
-}
-
-.leftSideFlexContainer {
+.secondaryContainer {
     display: flex;
     flex-direction: column;
-    row-gap: var(--gap-default);
-    align-self: end;
+    row-gap: var(--gap-inside-section);
+
+    &.internalLinks {
+        align-items: center;
+    }
+
+    &.externalLinks {
+        align-items: center;
+    }
 }
 
 .footerLink:hover,
@@ -37,65 +47,66 @@
     color: var(--color-accent);
 }
 
-.rightSideFlexContainer {
+.logosContainer {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
+    row-gap: var(--gap-section);
+    margin-bottom: var(--gap-inside-section);
+
+    & img {
+        width: auto;
+        filter: var(--svg-filter-black-to-white);
+    }
+
+    .erasmeLogo {
+        height: var(--height-logo-erasme);
+    }
+
+    .metropoleLyonLogo {
+        height: var(--height-logo-metropole-lyon);
+    }
 }
 
-.logoFlexContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    row-gap: calc(2 * var(--gap-default));
-    margin-bottom: calc(2 * var(--gap-default));
-}
-
-.logoFlexContainer img {
-    width: auto;
-    filter: var(--svg-filter-black-to-white);
-}
-
-.erasmeLogo {
-    height: var(--height-logo-erasme);
-}
-
-.metropoleLyonLogo {
-    height: var(--height-logo-metropole-lyon);
-}
-
-.socialMediaFlexContainer {
+.socialMediaContainer {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: flex-end;
-    gap: var(--gap-default);
-    margin-bottom: calc(2 * var(--gap-default));
-}
+    gap: var(--gap-inside-section);
+    /* margin-bottom: var(--gap-inside-section); */
 
-.socialMediaFlexContainer img {
-    --socialMediaIconSize: 2.5rem;
+    & img {
+        height: var(--height-social-media-icon);
+        width: var(--height-social-media-icon);
 
-    width: var(--socialMediaIconSize);
-    height: var(--socialMediaIconSize);
-}
-
-.socialMediaFlexContainer img:hover {
-    filter: var(--svg-filter-black-to-tonic);
+        &:hover {
+            filter: var(--svg-filter-black-to-tonic);
+        }
+    }
 }
 
 .copyrights {
-    align-self: flex-end;
     font-size: 0.875rem;
 }
 
 @media screen and (min-width: 80rem) {
     .localVariables {
-        --gap-default: 1.875rem;
+        --gap-inside-section: 1.875rem;
+        --gap-section: 3.75rem;
         --height-logo-erasme: 3.5rem;
         --height-logo-metropole-lyon: 5.625rem;
 
         --padding: 5.625rem var(--padding-sides-main);
+
+        --height-social-media-icon: 3.125rem;
+    }
+
+    .mainContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
     }
 
     .conditionalDisplay {
@@ -104,15 +115,14 @@
         height: auto;
     }
 
-    .leftSideFlexContainer {
-        align-self: center;
-    }
+    .secondaryContainer {
+        &.internalLinks {
+            align-items: start;
+            align-self: center;
+        }
 
-    .socialMediaFlexContainer img {
-        --socialMediaIconSize: 3.125rem;
-    }
-
-    .copyrights {
-        font-size: 0.875rem;
+        &.externalLinks {
+            align-items: end;
+        }
     }
 }

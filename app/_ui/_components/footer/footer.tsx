@@ -72,7 +72,7 @@ export default function Footer() {
 
     return (
         <footer className={`${styles.mainContainer} ${styles.localVariables}`}>
-            <ul className={styles.leftSideFlexContainer}>
+            <ul className={`${styles.secondaryContainer} ${styles.internalLinks}`}>
                 <li key="cookie">
                     <a className={styles.footerLink} href="" data-cc="show-preferencesModal">
                         COOKIES
@@ -97,8 +97,8 @@ export default function Footer() {
                 </li>
             </ul>
             <Image className={styles.conditionalDisplay} src={humanIcon} alt="" />
-            <div className={styles.rightSideFlexContainer}>
-                <div className={styles.logoFlexContainer}>
+            <div className={`${styles.secondaryContainer} ${styles.externalLinks}`}>
+                <div className={styles.logosContainer}>
                     <Image src={erasmeLogo} alt="Logo Erasme" className={styles.erasmeLogo} />
                     <Link href={metropoleLyonLink.href} target="_blank">
                         <Image
@@ -108,7 +108,7 @@ export default function Footer() {
                         />
                     </Link>
                 </div>
-                <ul className={styles.socialMediaFlexContainer}>
+                <ul className={styles.socialMediaContainer}>
                     {socialMediaLinks.map(socialMedia => {
                         return (
                             <li key={socialMedia.label}>
