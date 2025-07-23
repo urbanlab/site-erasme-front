@@ -20,10 +20,20 @@ const removeBreaklinesInsideFigureTags = (input: string): string => {
     });
 };
 
+/**
+ * Make sure to deal with html-like string instead of raw text.
+ * This is needed to apply formatting to the content.
+ */
+const wrapContentInPTagIfNotAlreadyWrapped = (input: string): string => {
+    const isWrappedInSinglePTag = /^<p(\s[^>]*)?>[\s\S]*<\/p>$/i.test(input);
+    return isWrappedInSinglePTag ? input : `<p>${input}</p>`;
+};
+
 const cleanMalformedTags = (input: string): string => {
     const cleaners: HtmlCleaner[] = [
         removeBreaklinesInsideTagOpenings,
         removeBreaklinesInsideFigureTags,
+        wrapContentInPTagIfNotAlreadyWrapped,
         // add more here if needed
     ];
 
