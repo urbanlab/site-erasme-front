@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react';
 
 type SearchResults = {
     articles: ArticleBasicInformationFieldsFragment[];
-    rubriques: ListProjetsFieldsFragment[];
+    projets: ListProjetsFieldsFragment[];
     documents: DocumentBasicInformationFieldsFragment[];
     images: DocumentBasicInformationFieldsFragment[];
 };
@@ -24,7 +24,7 @@ type SearchResults = {
 export function useSearchResults({ searchInput }: { searchInput: string }) {
     const [searchResults, setSearchResults] = useState<SearchResults>({
         articles: [],
-        rubriques: [],
+        projets: [],
         documents: [],
         images: [],
     });
@@ -46,7 +46,7 @@ export function useSearchResults({ searchInput }: { searchInput: string }) {
                 >[]
             );
 
-            const rubriques = getFragmentData(
+            const projets = getFragmentData(
                 ListProjetsFieldsFragmentDoc,
                 data.recherche?.result?.filter(item => item?.__typename === 'Rubrique') as FragmentType<
                     typeof ListProjetsFieldsFragmentDoc
@@ -62,7 +62,7 @@ export function useSearchResults({ searchInput }: { searchInput: string }) {
             const documents = documentsFragment.filter(item => item.media === 'file');
             const images = documentsFragment.filter(item => item.media === 'image');
 
-            setSearchResults({ articles: articles, rubriques: rubriques, documents: documents, images: images });
+            setSearchResults({ articles: articles, projets: projets, documents: documents, images: images });
         };
 
         searchQuery();

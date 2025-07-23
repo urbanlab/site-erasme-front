@@ -11,9 +11,9 @@ const searchFilterMap: Record<string, ControlledComponentType> = {
         label: 'Article',
         value: 'Article',
     },
-    rubrique: {
-        label: 'Rubrique',
-        value: 'Rubrique',
+    projet: {
+        label: 'Projet',
+        value: 'Projet',
     },
     image: {
         label: 'Image',

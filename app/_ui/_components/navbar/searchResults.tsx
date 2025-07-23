@@ -21,7 +21,7 @@ export default function SearchResults({
 }) {
     const isDesktop = useIsDesktop();
 
-    const { articles, rubriques, documents, images } = useSearchResults({ searchInput: searchInput });
+    const { articles, projets, documents, images } = useSearchResults({ searchInput: searchInput });
 
     const shouldDisplay = (filter: ControlledComponentValueType): boolean => {
         return searchFilter === searchFilterMap.tout.value || searchFilter === filter;
@@ -38,10 +38,10 @@ export default function SearchResults({
                 </div>
             )}
 
-            {shouldDisplay(searchFilterMap.rubrique.value) && rubriques && rubriques.length > 0 && (
+            {shouldDisplay(searchFilterMap.projet.value) && projets && projets.length > 0 && (
                 <div>
-                    <h4 className={styles.sectionTitle}>{`RUBRIQUES : ${rubriques.length}`}</h4>
-                    <RubriqueProjetsAccordion projets={rubriques} handleNavigation={handleNavigation} />
+                    <h4 className={styles.sectionTitle}>{`PROJETS : ${projets.length}`}</h4>
+                    <RubriqueProjetsAccordion projets={projets} handleNavigation={handleNavigation} />
                 </div>
             )}
 
