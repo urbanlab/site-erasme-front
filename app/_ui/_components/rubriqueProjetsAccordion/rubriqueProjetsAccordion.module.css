@@ -15,10 +15,6 @@
 }
 
 .accordion {
-    & * {
-        font: unset;
-    }
-
     & .item {
         width: 100%;
         border-top: 1px solid var(--color-secondary);
@@ -43,6 +39,9 @@
         align-items: center;
 
         padding: var(--padding-top-bottom) var(--padding-left-right);
+
+        font: inherit;
+        color: var(--color-secondary);
 
         background: transparent;
 

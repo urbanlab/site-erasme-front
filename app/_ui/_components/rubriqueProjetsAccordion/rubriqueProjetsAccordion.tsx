@@ -27,7 +27,7 @@ export default function RubriqueProjetsAccordion({
                 return (
                     <Accordion.Item key={rubrique.id} className={styles.item}>
                         <Accordion.Trigger className={styles.trigger}>
-                            <div className={styles.title}>{rubrique?.titre}</div>
+                            <p className={styles.title}>{rubrique?.titre}</p>
                             <Image src={chevronIcon} alt="" className={styles.arrow} />
                         </Accordion.Trigger>
                         <Accordion.Panel className={styles.panel}>
