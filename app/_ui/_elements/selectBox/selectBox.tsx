@@ -24,10 +24,14 @@ const SelectPositionerAndPopup = ({
     );
 };
 
+/**
+ * Set `createPortal` to `true` to deal with overlay issues, if needed.
+ */
 type SelectBoxProps = {
     items: ControlledComponentType[];
     value: ControlledComponentValueType;
     handleValueChange: (value: ControlledComponentValueType) => void;
+    changeTriggerColorWhenFiltered?: boolean;
     className?: { trigger?: string; popup?: string };
     createPortal?: boolean;
 };
@@ -36,13 +40,14 @@ export default function SelectBox({
     items,
     value,
     handleValueChange,
+    changeTriggerColorWhenFiltered = true,
     className,
     createPortal = false,
 }: SelectBoxProps) {
     return (
         <Select.Root modal={false} value={value} items={items} onValueChange={handleValueChange}>
             <Select.Trigger
-                className={`${styles.trigger} ${className?.trigger} ${value !== null ? styles.isFiltered : ''}`}
+                className={`${styles.trigger} ${className?.trigger} ${changeTriggerColorWhenFiltered && value !== null ? styles.isFiltered : ''}`}
             >
                 <Select.Value />
                 <Select.Icon>
