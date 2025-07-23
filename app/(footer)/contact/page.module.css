@@ -64,4 +64,14 @@
                 'laclasse reseauxSociaux';
         }
     }
+
+    .desktopWrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--gap-section);
+    }
+
+    .twoColumnContainer {
+        column-count: 2;
+    }
 }

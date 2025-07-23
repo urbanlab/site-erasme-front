@@ -8,7 +8,13 @@ import ShapedImage from '@ui/components/shapedImage';
 import { AddessesWrapper } from './clientComponents';
 import styles from './page.module.css';
 
-const ArticleSection = async ({ id, className }: { id: string; className?: string }) => {
+const ArticleSection = async ({
+    id,
+    className,
+}: {
+    id: string;
+    className?: { container?: string; title?: string; content?: string };
+}) => {
     const { data } = await getClient().query({
         query: ARTICLE,
         variables: { id: parseInt(id ?? '') },
@@ -20,9 +26,9 @@ const ArticleSection = async ({ id, className }: { id: string; className?: strin
     );
 
     return (
-        <div className={className}>
-            <h2>{article.titre}</h2>
-            {article.texte && <RemoteHtml html={article.texte} />}
+        <div className={className?.container}>
+            <h2 className={className?.title}>{article.titre}</h2>
+            {article.texte && <RemoteHtml className={className?.content} html={article.texte} />}
         </div>
     );
 };
@@ -45,7 +51,7 @@ export default async function Contact() {
             <div className={styles.contentContainer}>
                 <ArticleSection
                     id={process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_NOUS_JOINDRE_ID ?? ''}
-                    className={styles.nousRejoindre}
+                    className={{ container: styles.nousRejoindre }}
                 />
 
                 <AddessesWrapper
@@ -62,12 +68,12 @@ export default async function Contact() {
 
                 <ArticleSection
                     id={process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_LACLASSE_ID ?? ''}
-                    className={styles.laclasse}
+                    className={{ container: styles.laclasse }}
                 />
 
                 <ArticleSection
                     id={process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_RESEAUX_SOCIAUX_ID ?? ''}
-                    className={styles.reseauxSociaux}
+                    className={{ container: styles.reseauxSociaux }}
                 />
             </div>
         </div>
