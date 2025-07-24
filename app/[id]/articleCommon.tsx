@@ -10,7 +10,7 @@ export default function ArticleCommon({
     articleInformation: ArticleFullInformationFieldsFragment;
 }) {
     const allowedServices = useCookieAllowedServices();
-    
+
     return (
         <>
             {articleInformation.texte && (

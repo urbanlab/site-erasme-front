@@ -49,9 +49,7 @@ const DescriptionSection = ({ title, content }: { title: string; content: string
     return (
         <div>
             <h2>{title}</h2>
-            <>
-                <RemoteHtml html={content} />
-            </>
+            <RemoteHtml html={content} />
         </div>
     );
 };
@@ -232,7 +230,7 @@ const parseTimelineData = (data: string): { year: string; description: string; i
     return lines.map(line => {
         const isHighlighted = line.startsWith('>');
         const cleanLine = isHighlighted ? line.substring(1).trim() : line.trim();
-        const [description, year] = cleanLine.split(':').map(part => part.trim());
+        const [year, description] = cleanLine.split(':').map(part => part.trim());
         return { year, description, isHighlighted };
     });
 };

@@ -22,6 +22,14 @@ const ARTICLE = gql(`
     }
 `);
 
+const RUBRIQUE = gql(`
+    query Rubrique($id: Int!) {
+        getRubrique(id: $id) {
+            ...rubriqueFullInformationFields
+        }
+    }
+`);
+
 const ARTICLE_AND_PROTOTYPE = gql(`
     query ArticleAndPrototype($id: Int!) {
         getArticle(id: $id) {
@@ -63,7 +71,7 @@ const RUBRIQUE_PRESENTATION = gql(`
 const DYNAMIC_PAGE = gql(`
     query DynamicPage($id: Int!) {
         getRubrique(id: $id) {
-            ...rubriqueInformationFields
+            ...rubriqueBasicInformationFields
 
             articles(pagination: 100) {
                 result {
@@ -205,7 +213,7 @@ const MOTS_FROM_GROUPE_MOTS = gql(`
             }
         }
     }
-`)
+`);
 
 const HOMEPAGE = gql(`
     query Homepage(
@@ -240,6 +248,7 @@ const HOMEPAGE = gql(`
 export {
     ARTICLE_AND_PROTOTYPE,
     RUBRIQUE_PRESENTATION,
+    RUBRIQUE,
     ARTICLE,
     SERVICES_RUBRIQUE,
     SEARCH,

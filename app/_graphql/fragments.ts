@@ -10,12 +10,25 @@ const PAGINATION_FIELDS_FRAGMENT = gql(`
     }
 `);
 
-const RUBRIQUE_INFORMATION_FIELDS_FRAGMENT = gql(`
-    fragment rubriqueInformationFields on Rubrique {
+const RUBRIQUE_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
+    fragment rubriqueBasicInformationFields on Rubrique {
         id
         titre
         texte
         logo
+    }
+`);
+
+const RUBRIQUE_FULL_INFORMATION_FIELDS_FRAGMENT = gql(`
+    fragment rubriqueFullInformationFields on Rubrique {
+        ...rubriqueBasicInformationFields
+
+        #Get all articles from rubrique
+        articles(pagination: 500) {
+            result {
+                ...articleBasicInformationFields
+            }
+        }
     }
 `);
 
@@ -157,7 +170,8 @@ const MOTS_AND_GROUPE_MOTS_FIELDS_FRAGMENT = gql(`
 
 export {
     PAGINATION_FIELDS_FRAGMENT,
-    RUBRIQUE_INFORMATION_FIELDS_FRAGMENT,
+    RUBRIQUE_BASIC_INFORMATION_FIELDS_FRAGMENT,
+    RUBRIQUE_FULL_INFORMATION_FIELDS_FRAGMENT,
     ARTICLE_BASIC_INFORMATION_FIELDS_FRAGMENT,
     ARTICLE_FULL_INFORMATION_FIELDS_FRAGMENT,
     PROTOTYPE_INFORMATION_FIELDS_FRAGMENT,

@@ -13,12 +13,11 @@
     display: grid;
     gap: var(--gap-inside-section);
 
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr;
     grid-template-areas:
-        'logo logo'
-        'title title'
-        'tag date'
-        'tag authors';
+        'logo'
+        'title'
+        'description';
 
     & .logo {
         grid-area: logo;
@@ -26,31 +25,8 @@
     & .title {
         grid-area: title;
     }
-    & .tag {
-        grid-area: tag;
-        align-self: center;
-    }
-    & .date {
-        grid-area: date;
-    }
-    & .authors {
-        grid-area: authors;
-        display: flex;
-        flex-wrap: wrap;
-        column-gap: 8px;
-    }
-}
-
-.toTopButton {
-    align-self: center;
-    justify-self: center;
-}
-
-.linkStyle {
-    text-decoration: underline;
-
-    &:hover {
-        background: var(--color-accent);
+    & .description {
+        grid-area: description;
     }
 }
 
@@ -59,19 +35,13 @@
         --gap-section: 6.25rem;
         --gap-inside-section: 60px;
     }
+
     .presentationContainer {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 2fr;
         grid-template-areas:
             '. logo'
             'title logo'
-            'tag logo'
-            'date logo'
-            'authors logo'
+            'description logo'
             '. logo';
-    }
-
-    .contentContainer {
-        padding-left: 14.375rem;
-        padding-right: 14.375rem;
     }
 }

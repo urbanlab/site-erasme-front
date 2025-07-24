@@ -23,7 +23,7 @@ export default function ArticleList({
                     return (
                         <li key={article?.id}>
                             <Link
-                                href={`/projets/${article?.id}`}
+                                href={`/${article?.id}`}
                                 className={styles.item}
                                 onNavigate={handleNavigation}
                             >
