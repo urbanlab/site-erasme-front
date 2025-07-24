@@ -18,7 +18,7 @@ import styles from './page.module.css';
 export async function generateStaticParams() {
     const { data } = await getClient().query({
         query: ACTIVE_AUTHORS,
-        variables: { idRubriqueEquipe: parseInt(process.env.SPIP_RUBRIQUE_EQUIPE ?? '') },
+        variables: { idRubriqueEquipe: parseInt(process.env.SPIP_RUBRIQUE_EQUIPE_ID ?? '') },
     });
 
     // Assuming that each article from 'Equipe' has only 1 author

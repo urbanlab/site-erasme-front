@@ -18,7 +18,7 @@ import styles from './page.module.css';
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-    return [{ id: process.env.SPIP_RUBRIQUE_INCUBATION }, { id: process.env.SPIP_RUBRIQUE_CCN }];
+    return [{ id: process.env.SPIP_RUBRIQUE_PROJETS_INCUBATION_ID }, { id: process.env.SPIP_RUBRIQUE_PROJETS_CCN_ID }];
 }
 
 const RubriquePresentation = ({ logo, title }: { logo: string; title: string }) => {

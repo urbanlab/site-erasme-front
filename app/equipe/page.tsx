@@ -18,7 +18,7 @@ const pageTexts = {
 const TeamSection = async () => {
     const { data } = await getClient().query({
         query: ACTIVE_AUTHORS,
-        variables: { idRubriqueEquipe: parseInt(process.env.SPIP_RUBRIQUE_EQUIPE ?? '') },
+        variables: { idRubriqueEquipe: parseInt(process.env.SPIP_RUBRIQUE_EQUIPE_ID ?? '') },
     });
 
     return (
@@ -74,7 +74,7 @@ const PartnersSection = async () => {
 export default async function Equipe() {
     const { data } = await getClient().query({
         query: RUBRIQUE_PRESENTATION,
-        variables: { id: parseInt(process.env.SPIP_RUBRIQUE_EQUIPE ?? '') },
+        variables: { id: parseInt(process.env.SPIP_RUBRIQUE_EQUIPE_ID ?? '') },
     });
 
     return (
