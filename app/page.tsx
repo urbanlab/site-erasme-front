@@ -58,14 +58,14 @@ const imageCardsContent = [
     {
         title: 'INCUBATION',
         image: incubationLogo,
-        link: '/projets',
+        link: `/projets/${process.env.SPIP_RUBRIQUE_INCUBATION}`,
         isInternalLink: true,
     },
     {
         title: 'CCN',
         image: ccnLogo,
-        link: 'https://classeculturellenumerique.org/',
-        isInternalLink: false,
+        link: `/projets/${process.env.SPIP_RUBRIQUE_CCN}`,
+        isInternalLink: true,
     },
 ];
 

@@ -12,6 +12,15 @@ import ArticleList from '@ui/components/articleList';
 import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
 
+/**
+ * Do not generate pages other than the ones defined in `generateStaticParams`
+ */
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+    return [{ id: process.env.SPIP_RUBRIQUE_INCUBATION }, { id: process.env.SPIP_RUBRIQUE_CCN }];
+}
+
 const RubriquePresentation = ({ logo, title }: { logo: string; title: string }) => {
     return (
         <div className={styles.presentationContainer}>
