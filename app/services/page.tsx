@@ -1,7 +1,7 @@
 import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
 import {
     ArticleFullInformationFieldsFragmentDoc,
-    RubriqueInformationFieldsFragmentDoc,
+    RubriqueBasicInformationFieldsFragmentDoc,
 } from '@graphql/__generated__/graphql';
 import { DYNAMIC_PAGE } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
@@ -17,8 +17,8 @@ export default async function Services() {
     });
 
     const rubrique = getFragmentData(
-        RubriqueInformationFieldsFragmentDoc,
-        data.getRubrique as FragmentType<typeof RubriqueInformationFieldsFragmentDoc>
+        RubriqueBasicInformationFieldsFragmentDoc,
+        data.getRubrique as FragmentType<typeof RubriqueBasicInformationFieldsFragmentDoc>
     );
 
     const articles = getFragmentData(
