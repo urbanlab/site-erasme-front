@@ -175,9 +175,9 @@ const ALL_PROJECTS_AND_NESTED_COLLECTIONS = gql(`
 
 const ACTIVE_AUTHORS = gql(`
     query ActiveAuthors(
-        $idRubriqueTrombinoscope: Int!
+        $idRubriqueEquipe: Int!
     ) {
-        getRubrique(id: $idRubriqueTrombinoscope) {
+        getRubrique(id: $idRubriqueEquipe) {
             id
             titre
             texte

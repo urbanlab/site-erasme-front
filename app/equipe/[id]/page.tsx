@@ -18,10 +18,10 @@ import styles from './page.module.css';
 export async function generateStaticParams() {
     const { data } = await getClient().query({
         query: ACTIVE_AUTHORS,
-        variables: { idRubriqueTrombinoscope: parseInt(process.env.SPIP_RUBRIQUE_TROMBINOSCOPE ?? '') },
+        variables: { idRubriqueEquipe: parseInt(process.env.SPIP_RUBRIQUE_EQUIPE ?? '') },
     });
 
-    // Assuming that each article from 'Trombinoscope' has only 1 author
+    // Assuming that each article from 'Equipe' has only 1 author
     const activeAuthors =
         data.getRubrique?.articles?.result?.map(article => {
             return { id: article?.auteurs?.result?.at(0)?.id ?? '' };
