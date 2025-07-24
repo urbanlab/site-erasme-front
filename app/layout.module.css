@@ -2,10 +2,30 @@
     min-height: 100vh; /* fallback */
     min-height: 100dvh;
     display: grid;
-    grid-template-rows: auto 1fr auto;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+        'navbar'
+        'navigateBack'
+        'content'
+        'footer';
+}
+
+.navbar {
+    grid-area: navbar;
+}
+
+.navigateBack {
+    grid-area: navigateBack;
+}
+
+.footer {
+    grid-area: footer;
 }
 
 .contentContainer {
+    grid-area: content;
     padding-left: var(--padding-sides-main);
     padding-right: var(--padding-sides-main);
 

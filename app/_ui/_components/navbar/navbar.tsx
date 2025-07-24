@@ -387,6 +387,7 @@ type NavbarProps = {
     handleNavigation: () => void;
     handleSearchFilterChange: (searchFilter: ControlledComponentValueType) => void;
     handleRemoveSearchSuggestion: (suggestionToRemove: string) => void;
+    className?: string;
 };
 
 export default function Navbar({
@@ -401,6 +402,7 @@ export default function Navbar({
     handleSearchFormSubmit,
     handleSearchFilterChange,
     handleRemoveSearchSuggestion,
+    className,
 }: NavbarProps) {
     /**
      * TODO:
@@ -414,7 +416,7 @@ export default function Navbar({
         <>
             <header
                 ref={mainDivRef}
-                className={`${styles.mainContainer} ${styles.positioning} ${styles.zIndex} ${styles.localVariables}`}
+                className={`${styles.mainContainer} ${styles.positioning} ${styles.zIndex} ${styles.localVariables} ${className}`}
             >
                 <Link href="/" onNavigate={handleNavigation}>
                     <Image src={erasmeLogo} alt="Logo Erasme" className={styles.erasmeLogo} />

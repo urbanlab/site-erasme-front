@@ -67,11 +67,11 @@ const metropoleLyonLink = {
     alt: 'Logo Métropole de Lyon',
 };
 
-export default function Footer() {
+export default function Footer({className}: {className?: string}) {
     const pathname = usePathname();
 
     return (
-        <footer className={`${styles.mainContainer} ${styles.localVariables}`}>
+        <footer className={`${styles.mainContainer} ${styles.localVariables} ${className}`}>
             <ul className={`${styles.secondaryContainer} ${styles.internalLinks}`}>
                 <li key="cookie">
                     <a className={styles.footerLink} href="" data-cc="show-preferencesModal">

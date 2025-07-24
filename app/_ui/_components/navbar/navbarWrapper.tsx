@@ -12,7 +12,7 @@ import {
     removeSuggestionFromList,
 } from '@utils/searchUtils';
 
-export default function NavbarWrapper() {
+export default function NavbarWrapper({className}: {className?: string}) {
     const [isSearchMode, setIsSearchMode] = useState(false);
     const [showSearchResults, setShowSearchResults] = useState(false);
     const [searchInput, setSearchInput] = useState('');
@@ -74,6 +74,7 @@ export default function NavbarWrapper() {
                 handleNavigation={() => setIsSearchMode(false)}
                 handleSearchFilterChange={handleSearchFilterChange}
                 handleRemoveSearchSuggestion={handleRemoveSearchSuggestion}
+                className={className}
             />
 
             {isDesktop &&

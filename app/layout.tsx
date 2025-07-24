@@ -29,10 +29,10 @@ export default function RootLayout({
                 <CookieConsentManager />
 
                 <ApolloWrapper>
-                    <NavbarWrapper />
-                    <NavigateBack />
+                    <NavbarWrapper className={styles.navbar} />
+                    <NavigateBack className={styles.navigateBack} />
                     <div className={styles.contentContainer}>{children}</div>
-                    <Footer />
+                    <Footer className={styles.footer}/>
                 </ApolloWrapper>
             </body>
         </html>
