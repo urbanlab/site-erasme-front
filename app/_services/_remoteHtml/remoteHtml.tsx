@@ -123,7 +123,7 @@ const RemoteHtmlWithIframesAndCookieConsentManagement = ({
 
     forceLinksToOpenInNewTab();
 
-    const sanitizedHtml = DOMPurify.sanitize(cleanedHtml, { ADD_TAGS: ['iframe'] });
+    const sanitizedHtml = DOMPurify.sanitize(cleanedHtml, { ADD_TAGS: ['iframe'], FORBID_ATTR: ['style'] });
 
     const cookieSafeHtml = checkThirdPartyCookies(sanitizedHtml, allowedThirdPartyServices);
 
@@ -147,7 +147,7 @@ const RemoteHtml = ({ html, className }: { html: string; className?: string }) =
 
     forceLinksToOpenInNewTab();
 
-    const sanitizedHtml = DOMPurify.sanitize(cleanedHtml, { FORBID_TAGS: ['iframe'] });
+    const sanitizedHtml = DOMPurify.sanitize(cleanedHtml, { FORBID_TAGS: ['iframe'], FORBID_ATTR: ['style'] });
 
     return <div className={`${styles.remoteHtml} ${className}`} dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />;
 };

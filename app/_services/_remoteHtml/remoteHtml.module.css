@@ -5,18 +5,17 @@
         font-weight: var(--font-weight-default-body);
     }
 
+    figure,
     iframe,
     img,
-    figure {
-        max-width: 100%;
-    }
-
-    figure,
-    iframe {
+    video {
         display: flex;
         flex-direction: column;
         justify-self: center;
         align-items: center;
+
+        max-width: 100%;
+        height: auto;
     }
 
     a {
