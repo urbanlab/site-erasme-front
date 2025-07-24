@@ -45,10 +45,10 @@ const ecosystemeCards = [
     },
 ];
 
-const DescriptionSection = ({ title, content }: { title: string; content: string }) => {
+const DescriptionSection = ({ title, content }: { title?: string; content: string }) => {
     return (
         <div>
-            <h2>{title}</h2>
+            {title && <h2>{title}</h2>}
             <RemoteHtml html={content} />
         </div>
     );

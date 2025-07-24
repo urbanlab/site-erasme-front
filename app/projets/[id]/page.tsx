@@ -1,37 +1,31 @@
 import { FragmentType, getFragmentData } from '@graphql/__generated__';
 import {
     ArticleBasicInformationFieldsFragmentDoc,
-    RubriqueBasicInformationFieldsFragment,
     RubriqueBasicInformationFieldsFragmentDoc,
     RubriqueFullInformationFieldsFragmentDoc,
 } from '@graphql/__generated__/graphql';
 import { RUBRIQUE } from '@graphql/queries';
 import heroImage from '@public/hero-img.svg';
 import { getClient } from '@services/apollo/apolloClient';
-import { RemoteHtmlRawText } from '@services/remoteHtml';
+import { RemoteHtml } from '@services/remoteHtml';
 import ArticleList from '@ui/components/articleList';
 import ShapedImage from '@ui/components/shapedImage';
 import styles from './page.module.css';
 
-const RubriquePresentation = ({
-    rubriqueInformation,
-}: {
-    rubriqueInformation: RubriqueBasicInformationFieldsFragment;
-}) => {
+const RubriquePresentation = ({ logo, title }: { logo: string; title: string }) => {
     return (
         <div className={styles.presentationContainer}>
-            <ShapedImage
-                src={rubriqueInformation?.logo ?? heroImage}
-                alt=""
-                maskShape="wide"
-                className={styles.logo}
-            />
-            <h1 className={styles.title}>{rubriqueInformation?.titre}</h1>
-            {rubriqueInformation?.texte && (
-                <h5 className={styles.description}>
-                    <RemoteHtmlRawText html={rubriqueInformation.texte} removeInnerHtmlTags={true} />
-                </h5>
-            )}
+            <ShapedImage src={logo ?? heroImage} alt="" maskShape="wide" className={styles.logo} />
+            <h1 className={styles.title}>{title}</h1>
+        </div>
+    );
+};
+
+const DescriptionSection = ({ content, title }: { content: string; title?: string }) => {
+    return (
+        <div>
+            {title && <h2>{title}</h2>}
+            <RemoteHtml html={content} />
         </div>
     );
 };
@@ -63,7 +57,12 @@ export default async function Projet({ params }: { params: Promise<{ id: string 
 
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
-            <RubriquePresentation rubriqueInformation={rubriqueInformationFragment} />
+            <RubriquePresentation
+                logo={rubriqueInformationFragment.logo ?? ''}
+                title={rubriqueInformationFragment.titre ?? ''}
+            />
+
+            <DescriptionSection content={rubriqueInformationFragment.texte ?? ''} />
 
             <ArticleList articles={articlesFromProjet} />
         </div>
