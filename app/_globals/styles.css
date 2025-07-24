@@ -109,6 +109,12 @@ li {
     margin: 0;
 }
 
+li {
+    font-size: var(--font-size-default-body);
+    line-height: var(--line-height-default-body);
+    font-weight: var(--font-weight-default-body);
+}
+
 a {
     color: inherit;
     text-decoration: none;
