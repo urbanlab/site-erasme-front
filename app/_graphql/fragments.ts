@@ -50,6 +50,12 @@ const ARTICLE_FULL_INFORMATION_FIELDS_FRAGMENT = gql(`
         logo
         date
         isprototype
+
+        documents(pagination: 100, where:"media=image") {
+            result {
+                ...documentFullInformationFields
+            }
+        }
     }
 `);
 
