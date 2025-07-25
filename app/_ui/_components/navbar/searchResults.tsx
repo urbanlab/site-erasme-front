@@ -4,7 +4,7 @@ import { ControlledComponentValueType } from '@globals/types';
 import { useIsDesktop } from '@hooks/useIsDesktop';
 import { useSearchResults } from '@hooks/useSearchResults';
 import ArticleList from '@ui/components/articleList';
-import RubriqueProjetsAccordion from '@ui/components/rubriqueProjetsAccordion';
+import ProjectList from '@ui/components/projectList';
 import { searchFilterMap } from '@utils/searchUtils';
 import styles from './searchResults.module.css';
 
@@ -41,7 +41,7 @@ export default function SearchResults({
             {shouldDisplay(searchFilterMap.projet.value) && projets && projets.length > 0 && (
                 <div>
                     <h4 className={styles.sectionTitle}>{`PROJETS : ${projets.length}`}</h4>
-                    <RubriqueProjetsAccordion projets={projets} handleNavigation={handleNavigation} />
+                    <ProjectList projets={projets} handleNavigation={handleNavigation} />
                 </div>
             )}
 
@@ -50,7 +50,7 @@ export default function SearchResults({
                     <h4 className={styles.sectionTitle}>{`DOCUMENTS : ${documents.length}`}</h4>
                     <ul>
                         {documents.map(item => (
-                            <li key={item.id}>{item.titre}</li>
+                            <li key={item.id}>{item.titre === '' ? 'Document' : item.titre}</li>
                         ))}
                     </ul>
                 </div>
@@ -61,7 +61,7 @@ export default function SearchResults({
                     <h4 className={styles.sectionTitle}>{`IMAGES : ${images.length}`}</h4>
                     <ul>
                         {images.map(item => (
-                            <li key={item.id}>{item.titre}</li>
+                            <li key={item.id}>{item.titre === '' ? 'Image' : item.titre}</li>
                         ))}
                     </ul>
                 </div>

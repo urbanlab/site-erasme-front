@@ -5,9 +5,9 @@ import chevronIcon from '@public/chevron-up-icon.svg';
 import { RemoteHtml } from '@services/remoteHtml';
 import ArticleList from '@ui/components/articleList';
 import Image from 'next/image';
-import styles from './rubriqueProjetsAccordion.module.css';
+import styles from './projectList.module.css';
 
-export default function RubriqueProjetsAccordion({
+export default function ProjectList({
     projets,
     handleNavigation,
     className,

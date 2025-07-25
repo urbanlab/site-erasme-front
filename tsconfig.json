@@ -41,7 +41,7 @@
       "@ui/components/shapedImage": ["_ui/_components/shapedImage/shapedImage.tsx"],
       "@ui/components/articleCard": ["_ui/_components/articleCard/articleCard.tsx"],
       "@ui/components/imageCard": ["_ui/_components/imageCard/imageCard.tsx"],
-      "@ui/components/rubriqueProjetsAccordion": ["_ui/_components/rubriqueProjetsAccordion/rubriqueProjetsAccordion.tsx"],
+      "@ui/components/projectList": ["_ui/_components/projectList/projectList.tsx"],
       "@ui/components/articleList": ["_ui/_components/articleList/articleList.tsx"],
       "@ui/components/imageSlider": ["_ui/_components/imageSlider/imageSlider.tsx"],
       "@ui/components/projectListWrapper": ["_ui/_components/projectListWrapper/projectListWrapper.tsx"],

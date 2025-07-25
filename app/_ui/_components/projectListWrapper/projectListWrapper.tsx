@@ -10,7 +10,7 @@ import {
     MotsAndGroupeMotsFieldsFragmentDoc,
 } from '@graphql/__generated__/graphql';
 import { useIsDesktop } from '@hooks/useIsDesktop';
-import RubriqueProjetsAccordion from '@ui/components/rubriqueProjetsAccordion';
+import ProjectList from '@ui/components/projectList';
 import FilterPopover from '@ui/elements/filterPopover';
 import Pagination from '@ui/elements/pagination';
 import SelectBox from '@ui/elements/selectBox';
@@ -94,7 +94,7 @@ const DesktopProjectListAndFilters = ({
                 createPortal
             />
 
-            <RubriqueProjetsAccordion projets={paginatedProjects} key={currentPage} className={styles.projectList} />
+            <ProjectList projets={paginatedProjects} key={currentPage} className={styles.projectList} />
 
             <Pagination
                 currentPage={currentPage}
@@ -172,7 +172,7 @@ const MobileProjectListAndFilters = ({
                 createPortal
             />
 
-            <RubriqueProjetsAccordion projets={paginatedProjects} key={currentPage} className={styles.projectList} />
+            <ProjectList projets={paginatedProjects} key={currentPage} className={styles.projectList} />
 
             <Pagination
                 currentPage={currentPage}
