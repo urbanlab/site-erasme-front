@@ -44,9 +44,9 @@ const DesktopProjectListAndFilters = ({
     currentPage,
     totalPages,
     handlePageChange,
-    politiquesPubliquesItems,
-    politiquesPubliquesFilter,
-    handlePolitiquesPubliquesFilterChange,
+    groupeMotsItems,
+    groupeMotsFilter,
+    handleGroupeMotsFilterChange,
     articleTypeItems,
     articleTypeFilter,
     handleArticleTypeFilter,
@@ -58,9 +58,9 @@ const DesktopProjectListAndFilters = ({
     currentPage: number;
     totalPages: number;
     handlePageChange: (page: number) => void;
-    politiquesPubliquesItems: ControlledComponentType[];
-    politiquesPubliquesFilter: ControlledComponentValueType;
-    handlePolitiquesPubliquesFilterChange: (value: ControlledComponentValueType) => void;
+    groupeMotsItems: ControlledComponentType[];
+    groupeMotsFilter: ControlledComponentValueType;
+    handleGroupeMotsFilterChange: (value: ControlledComponentValueType) => void;
     articleTypeItems: ControlledComponentType[];
     articleTypeFilter: ControlledComponentValueType;
     handleArticleTypeFilter: (value: ControlledComponentValueType) => void;
@@ -71,10 +71,10 @@ const DesktopProjectListAndFilters = ({
 
             <div className={styles.motFiltersContainer}>
                 <ToggleGroup
-                    items={politiquesPubliquesItems}
-                    handleValueChange={handlePolitiquesPubliquesFilterChange}
-                    value={politiquesPubliquesFilter}
-                    className={styles.politiquesPubliquesFilter}
+                    items={groupeMotsItems}
+                    handleValueChange={handleGroupeMotsFilterChange}
+                    value={groupeMotsFilter}
+                    className={styles.groupeMotsFilter}
                 />
             </div>
 
@@ -114,9 +114,9 @@ const MobileProjectListAndFilters = ({
     currentPage,
     totalPages,
     handlePageChange,
-    politiquesPubliquesItems,
-    politiquesPubliquesFilter,
-    handlePolitiquesPubliquesFilterChange,
+    groupeMotsItems,
+    groupeMotsFilter,
+    handleGroupeMotsFilterChange,
     articleTypeItems,
     articleTypeFilter,
     handleArticleTypeFilter,
@@ -128,9 +128,9 @@ const MobileProjectListAndFilters = ({
     currentPage: number;
     totalPages: number;
     handlePageChange: (page: number) => void;
-    politiquesPubliquesItems: ControlledComponentType[];
-    politiquesPubliquesFilter: ControlledComponentValueType;
-    handlePolitiquesPubliquesFilterChange: (filter: ControlledComponentValueType) => void;
+    groupeMotsItems: ControlledComponentType[];
+    groupeMotsFilter: ControlledComponentValueType;
+    handleGroupeMotsFilterChange: (filter: ControlledComponentValueType) => void;
     articleTypeItems: ControlledComponentType[];
     articleTypeFilter: ControlledComponentValueType;
     handleArticleTypeFilter: (value: ControlledComponentValueType) => void;
@@ -151,15 +151,15 @@ const MobileProjectListAndFilters = ({
                         />
                         <Separator orientation="horizontal" className={styles.popupSeparator} />
                         <ToggleGroup
-                            items={politiquesPubliquesItems}
-                            value={politiquesPubliquesFilter}
-                            handleValueChange={handlePolitiquesPubliquesFilterChange}
+                            items={groupeMotsItems}
+                            value={groupeMotsFilter}
+                            handleValueChange={handleGroupeMotsFilterChange}
                             toggleButtonVariant="text"
                             className={styles.popupItems}
                         />
                     </>
                 }
-                hasFilterApplied={politiquesPubliquesFilter !== null || articleTypeFilter !== null}
+                hasFilterApplied={groupeMotsFilter !== null || articleTypeFilter !== null}
                 className={{ trigger: styles.filters }}
             />
 
@@ -194,12 +194,12 @@ export default function ProjectListWrapper({
     const [filteredProjects, setFilteredProjects] = useState(projects);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState<ControlledComponentValueType>(itemsPerPageOptions[0].value);
-    const [politiquesPubliquesFilter, setPolitiquesPubliquesFilter] = useState<ControlledComponentValueType>(null);
+    const [groupeMotsFilter, setGroupeMotsFilter] = useState<ControlledComponentValueType>(null);
     const [articleTypeFilter, setArticleTypeFilter] = useState<ControlledComponentValueType>(null);
 
     const isDesktop: boolean = useIsDesktop();
 
-    const politiquesPubliquesItems: ControlledComponentType[] = [
+    const groupeMotsItems: ControlledComponentType[] = [
         { label: 'Tout', value: null } as ControlledComponentType,
         ...groupeMotsForFilter.map(mot => {
             return { label: mot.titre, value: mot.id } as ControlledComponentType;
@@ -289,9 +289,9 @@ export default function ProjectListWrapper({
         setCurrentPage(page);
     };
 
-    const handlePolitiquesPubliquesFilterChange = (filter: ControlledComponentValueType) => {
+    const handleGroupeMotsFilterChange = (filter: ControlledComponentValueType) => {
         setCurrentPage(1);
-        setPolitiquesPubliquesFilter(filter);
+        setGroupeMotsFilter(filter);
         setFilteredProjects(
             applyMultipleFilters([
                 projectList => filterProjectsByArticleMotId(filter, projectList),
@@ -305,7 +305,7 @@ export default function ProjectListWrapper({
         setArticleTypeFilter(filter);
         setFilteredProjects(
             applyMultipleFilters([
-                projectList => filterProjectsByArticleMotId(politiquesPubliquesFilter, projectList),
+                projectList => filterProjectsByArticleMotId(groupeMotsFilter, projectList),
                 projectList => filterProjectsByArticleType(filter, projectList),
             ])
         );
@@ -322,9 +322,9 @@ export default function ProjectListWrapper({
                     currentPage={currentPage}
                     totalPages={totalPages}
                     handlePageChange={handlePageChange}
-                    politiquesPubliquesItems={politiquesPubliquesItems}
-                    politiquesPubliquesFilter={politiquesPubliquesFilter}
-                    handlePolitiquesPubliquesFilterChange={handlePolitiquesPubliquesFilterChange}
+                    groupeMotsItems={groupeMotsItems}
+                    groupeMotsFilter={groupeMotsFilter}
+                    handleGroupeMotsFilterChange={handleGroupeMotsFilterChange}
                     articleTypeItems={articleTypeOptions}
                     articleTypeFilter={articleTypeFilter}
                     handleArticleTypeFilter={handleArticleTypeFilter}
@@ -338,9 +338,9 @@ export default function ProjectListWrapper({
                     currentPage={currentPage}
                     totalPages={totalPages}
                     handlePageChange={handlePageChange}
-                    politiquesPubliquesItems={politiquesPubliquesItems}
-                    politiquesPubliquesFilter={politiquesPubliquesFilter}
-                    handlePolitiquesPubliquesFilterChange={handlePolitiquesPubliquesFilterChange}
+                    groupeMotsItems={groupeMotsItems}
+                    groupeMotsFilter={groupeMotsFilter}
+                    handleGroupeMotsFilterChange={handleGroupeMotsFilterChange}
                     articleTypeItems={articleTypeOptions}
                     articleTypeFilter={articleTypeFilter}
                     handleArticleTypeFilter={handleArticleTypeFilter}

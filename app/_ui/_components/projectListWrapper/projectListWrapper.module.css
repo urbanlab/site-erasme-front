@@ -94,7 +94,7 @@
             align-self: start;
         }
 
-        .politiquesPubliquesFilter {
+        .groupeMotsFilter {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
