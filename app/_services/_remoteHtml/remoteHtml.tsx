@@ -178,7 +178,7 @@ const RemoteHtmlRawText = ({
 
     const sanitizedHtml = DOMPurify.sanitize(cleanedHtml, {
         ALLOWED_ATTR: [],
-        ALLOWED_TAGS: ['p'],
+        ALLOWED_TAGS: ['#text'],
     });
 
     const slicedHtml = textReturnLength === -1 ? sanitizedHtml : `${sanitizedHtml.slice(0, textReturnLength)}...`;
