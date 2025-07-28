@@ -4,8 +4,9 @@ import styles from './page.module.css';
 import { getRubriqueWithArticles } from '@data/queries';
 
 export default async function Services() {
-    const { rubrique, articlesFullInformation: articles } = await getRubriqueWithArticles(
+    const { rubriqueBasicInformation: rubrique, articlesFullInformation: articles } = await getRubriqueWithArticles(
         parseInt(process.env.SPIP_RUBRIQUE_SERVICES_ID ?? ''),
+        false,
         true
     );
 

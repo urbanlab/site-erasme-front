@@ -13,7 +13,7 @@ const RubriquePresentation = ({ logo, title }: { logo: string; title: string }) 
 
 const DescriptionSection = ({ content, title }: { content: string; title?: string }) => {
     return (
-        <div>
+        <div className={styles.descriptionSection}>
             {title && <h2>{title}</h2>}
             <RemoteHtml html={content} />
         </div>

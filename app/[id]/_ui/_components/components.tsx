@@ -7,13 +7,15 @@ import {
     PrototypeInformationFieldsFragment,
 } from '@services/graphql/__generated__/graphql';
 import { RemoteHtml } from '@services/remoteHtml';
-import ShapedImage from '@ui/components/shapedImage';
 import Carousel from '@ui/client-components/carousel';
+import { ChiffresCles } from '@ui/components/chiffresCles';
+import ShapedImage from '@ui/components/shapedImage';
 import Tag from '@ui/components/tag';
-import { dateFormat } from '@utils/dateUtils';
+import { Timeline } from '@ui/components/timeline';
+import { dateFormat } from '@utils';
 import Link from 'next/link';
 import { ecosystemeCards, prototypeCards } from '../../_data/pageTexts';
-import { getMotsFromGroupeMots, parseChiffresClesData, parseTimelineData } from '../../_utils/utils';
+import { getMotsFromGroupeMots } from '../../_utils';
 import { DevelopmentAndTimelineSectionsWrapper } from '../_client-components/client-components';
 import styles from './components.module.css';
 
@@ -81,7 +83,7 @@ const ArticlePrototype = ({
                         content={prototypeInformation.description_second ?? ''}
                     />
                 }
-                timelineSection={<DevelopmentTimeline timeline={prototypeInformation.developpement ?? ''} />}
+                timelineSection={<Timeline timeline={prototypeInformation.developpement ?? ''} />}
             />
 
             <InfoCardWrapper motsAndGroupeMots={motsAndGroupeMots} cardsSectionObject={prototypeCards} />
@@ -93,7 +95,7 @@ const ArticlePrototype = ({
 
             <div className={styles.twoColumnsContainerWrapper}>
                 {prototypeInformation.chiffres_cles && (
-                    <ChiffresCles chiffresCles={prototypeInformation.chiffres_cles} />
+                    <ChiffresCles title="Chiffres clés" chiffresCles={prototypeInformation.chiffres_cles} />
                 )}
 
                 {imagesFromPrototype.length > 0 && <Carousel images={imagesFromPrototype} />}
@@ -131,53 +133,6 @@ const DescriptionSection = ({ title, content }: { title?: string; content: strin
             {title && <h2>{title}</h2>}
             <RemoteHtml html={content} />
         </div>
-    );
-};
-
-const DevelopmentTimeline = ({ timeline }: { timeline: string }) => {
-    const parsedTimeline = parseTimelineData(timeline);
-
-    return (
-        <ul className={styles.timelineContainer}>
-            {parsedTimeline.map((timelineItem, index) => {
-                return (
-                    <li key={index} className={styles.timelineItem}>
-                        <div className={timelineItem.isHighlighted ? styles.highlighted : ''}>
-                            <p className={styles.itemYear}>{timelineItem.year}</p>
-                            <p className={styles.itemDescription}>{timelineItem.description}</p>
-                        </div>
-                        <svg
-                            className={styles.itemSeparator}
-                            width="24"
-                            height="80"
-                            viewBox="0 0 24 80"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <rect x="10.5" width="3" height="80" fill="black" />
-                            <circle cx="12" cy="5" r="5" fill="black" />
-                        </svg>
-                    </li>
-                );
-            })}
-        </ul>
-    );
-};
-
-const ChiffresCles = ({ chiffresCles }: { chiffresCles: string }) => {
-    const parsedChiffresCles = parseChiffresClesData(chiffresCles);
-    return (
-        <ul className={styles.keyMetricsContainer}>
-            <h2>Chiffres clé</h2> {/* TODO: remove magic string */}
-            {parsedChiffresCles.map((chiffreCle, index) => {
-                return (
-                    <li key={index} className={styles.keyMetricItem}>
-                        <p className={styles.keyMetricValue}>{chiffreCle.value}</p>
-                        <p>{chiffreCle.description}</p>
-                    </li>
-                );
-            })}
-        </ul>
     );
 };
 

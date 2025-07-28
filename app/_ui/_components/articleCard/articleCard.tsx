@@ -1,7 +1,7 @@
 import { ArticleFullInformationFieldsFragment } from '@services/graphql/__generated__/graphql';
 import { RemoteHtmlRawText } from '@services/remoteHtml';
 import Arrow from '@ui/components/arrow';
-import { dateFormat } from '@utils/dateUtils';
+import { dateFormat } from '@utils';
 import Link from 'next/link';
 import styles from './articleCard.module.css';
 

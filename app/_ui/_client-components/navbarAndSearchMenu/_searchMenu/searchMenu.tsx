@@ -11,11 +11,11 @@ import Button from '@ui/components/button';
 import InputField from '@ui/components/inputField';
 import Loader from '@ui/components/loader';
 import SelectBox from '@ui/components/selectBox';
-import { searchFilterMap } from '@utils/searchUtils';
 import Image from 'next/image';
 import { FormEvent, RefObject, Suspense, useRef } from 'react';
 import navbarStyles from '../_navbar/navbar.module.css';
 import SearchResults from '../_searchResults/searchResults';
+import { searchFilterMap } from '../_utils/searchUtils';
 import styles from './searchMenu.module.css';
 
 const SearchFilter = ({

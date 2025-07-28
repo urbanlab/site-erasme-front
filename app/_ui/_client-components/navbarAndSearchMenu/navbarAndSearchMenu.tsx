@@ -7,7 +7,7 @@ import {
     addSuggestionToList,
     getSearchSuggestionsFromLocalStorage,
     removeSuggestionFromList,
-} from '@utils/searchUtils';
+} from '_ui/_client-components/navbarAndSearchMenu/_utils/searchUtils';
 import { FormEvent, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Navbar from './_navbar/navbar';

@@ -19,6 +19,31 @@ const RUBRIQUE_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
     }
 `);
 
+const RUBRIQUE_FULL_INFORMATION_FIELDS_FRAGMENT = gql(`
+    fragment rubriqueFullInformationFields on Rubrique {
+        id
+        titre
+        texte
+        logo
+
+        titre_section_supplementaire_1
+        texte_section_supplementaire_1
+        titre_section_supplementaire_2
+        texte_section_supplementaire_2
+        titre_section_stades_dev
+        texte_section_stades_dev
+        data_section_stades_dev
+        titre_section_chiffres_cles
+        texte_section_chiffres_cles
+
+        documents(pagination: 100, where:"media=image") {
+            result {
+                ...documentFullInformationFields
+            }
+        }
+    }
+`);
+
 const ARTICLE_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
     fragment articleBasicInformationFields on Article {
         id
@@ -174,4 +199,5 @@ export {
     PAGINATION_FIELDS_FRAGMENT,
     PROTOTYPE_INFORMATION_FIELDS_FRAGMENT,
     RUBRIQUE_BASIC_INFORMATION_FIELDS_FRAGMENT,
+    RUBRIQUE_FULL_INFORMATION_FIELDS_FRAGMENT,
 };

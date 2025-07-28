@@ -1,0 +1,35 @@
+.timelineContainer {
+    display: grid;
+    grid-auto-rows: max-content;
+    justify-content: center;
+    text-align: center;
+    gap: 1.875rem;
+
+    .timelineItem {
+        & > div {
+            margin-bottom: 1.875rem;
+        }
+
+        .highlighted {
+            background: var(--color-accent);
+            padding: 1.875rem;
+            border-radius: 1.25rem;
+        }
+        .itemYear {
+            font-family: inherit;
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-bold);
+
+            margin-bottom: 5px;
+        }
+        .itemDescription {
+            font-family: inherit;
+            font-size: 1.25rem;
+            font-weight: var(--font-weight-medium);
+        }
+
+        &:last-child > .itemSeparator {
+            display: none;
+        }
+    }
+}

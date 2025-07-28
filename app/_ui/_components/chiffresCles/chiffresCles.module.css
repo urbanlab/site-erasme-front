@@ -1,0 +1,29 @@
+.localVariables {
+    --gap: 0.625rem;
+}
+
+.chiffresClesContainer {
+    display: grid;
+    gap: var(--gap);
+
+    .chiffreCleItem {
+        display: flex;
+        align-items: center;
+    }
+
+    .chiffreCleValue {
+        background: var(--color-primary);
+        padding: 0.625rem 1rem;
+        border-radius: 20px;
+        margin-right: 0.625rem;
+        font-weight: var(--font-weight-bold);
+
+        text-wrap: nowrap;
+    }
+}
+
+@media screen and (min-width: 80rem) {
+    .localVariables {
+        --gap: 1.875rem;
+    }
+}

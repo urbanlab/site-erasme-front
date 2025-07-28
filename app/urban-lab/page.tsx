@@ -5,8 +5,9 @@ import { ArticleSection, RubriquePresentation } from './_ui/_components/componen
 import styles from './page.module.css';
 
 export default async function UrbanLab() {
-    const { rubrique, articlesFullInformation: articles } = await getRubriqueWithArticles(
+    const { rubriqueBasicInformation: rubrique, articlesFullInformation: articles } = await getRubriqueWithArticles(
         parseInt(process.env.SPIP_RUBRIQUE_URBANLAB_ID ?? ''),
+        false,
         true
     );
 

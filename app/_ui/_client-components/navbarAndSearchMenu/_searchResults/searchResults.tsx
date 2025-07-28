@@ -5,7 +5,7 @@ import { useIsDesktop } from '@hooks/useIsDesktop';
 import { useSearchResults } from '@hooks/useSearchResults';
 import ArticleList from '@ui/components/articleList';
 import ProjectList from '@ui/components/projectList';
-import { searchFilterMap } from '@utils/searchUtils';
+import { searchFilterMap } from '../_utils/searchUtils';
 import styles from './searchResults.module.css';
 
 export default function SearchResults({

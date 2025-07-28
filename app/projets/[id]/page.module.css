@@ -3,3 +3,24 @@
     grid-template-columns: 1fr;
     row-gap: var(--gap-section);
 }
+
+.stadesDevContainer {
+    display: grid;
+    gap: var(--gap-inside-section)
+}
+
+@media screen and (min-width: 80rem) {
+    .sectionsWrapper{
+        display: grid;
+        grid-auto-flow: column;
+
+        .carousel {
+            max-height: 500px;
+            align-self: center;
+        }
+    }
+
+    .chiffresClesContainer {
+        column-count: 2;
+    }
+}

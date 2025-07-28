@@ -12,7 +12,6 @@ export default async function Home() {
     const { presentationErasmeArticle, missionArticle, enCeMomentArticles, archiveArticleIdList, servicesArticles } =
         await getHomepage();
 
-    //TODO: end implementation of the homepage
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
             <PresentationSection

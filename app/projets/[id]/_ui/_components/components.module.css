@@ -19,6 +19,11 @@
     }
 }
 
+.descriptionSection {
+    display: grid;
+    gap: var(--gap-inside-section);
+}
+
 @media screen and (min-width: 80rem) {
     .presentationContainer {
         grid-template-columns: 1fr 2fr;

@@ -37,9 +37,13 @@ const ARTICLE_AND_PROTOTYPE = gql(`
 `);
 
 const RUBRIQUE_PRESENTATION = gql(`
-    query RubriquePresentation($id: Int!) {
+    query RubriquePresentation(
+            $id: Int!,
+            $withRubriqueFullInformation: Boolean! = false
+        ) {
         getRubrique(id: $id) {
-            ...rubriqueBasicInformationFields
+            ...rubriqueBasicInformationFields @skip(if: $withRubriqueFullInformation) 
+            ...rubriqueFullInformationFields @include(if: $withRubriqueFullInformation)
         }
     }
 `);
@@ -47,15 +51,17 @@ const RUBRIQUE_PRESENTATION = gql(`
 const RUBRIQUE_WITH_ARTICLES = gql(`
     query RubriqueWithArticles(
             $id: Int!,
-            $articleFullInformation: Boolean! = false
+            $withArticleFullInformation: Boolean! = false,
+            $withRubriqueFullInformation: Boolean! = false,
         ) {
         getRubrique(id: $id) {
-            ...rubriqueBasicInformationFields
+            ...rubriqueBasicInformationFields @skip(if: $withRubriqueFullInformation) 
+            ...rubriqueFullInformationFields @include(if: $withRubriqueFullInformation)
 
-            articles(pagination: 500) {
+            articles(pagination: 500, orderby: ["date_DESC"]) {
                 result {
-                    ...articleFullInformationFields @include(if: $articleFullInformation)
-                    ...articleBasicInformationFields @skip(if: $articleFullInformation)
+                    ...articleBasicInformationFields @skip(if: $withArticleFullInformation)
+                    ...articleFullInformationFields @include(if: $withArticleFullInformation)
                 }
             }
         }

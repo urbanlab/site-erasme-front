@@ -9,6 +9,7 @@ import {
     MotsAndGroupeMotsFieldsFragmentDoc,
     PrototypeInformationFieldsFragmentDoc,
     RubriqueBasicInformationFieldsFragmentDoc,
+    RubriqueFullInformationFieldsFragmentDoc,
 } from '@services/graphql/__generated__/graphql';
 import {
     ACTIVE_AUTHORS,
@@ -24,15 +25,28 @@ import {
 } from '@services/graphql/queries';
 import { getClient } from '@services/apollo/apolloClient';
 
-const getRubriqueWithArticles = async (id: number, articleFullInformation: boolean = false) => {
+const getRubriqueWithArticles = async (
+    id: number,
+    withRubriqueFullInformation: boolean = false,
+    withArticleFullInformation: boolean = false
+) => {
     const { data } = await getClient().query({
         query: RUBRIQUE_WITH_ARTICLES,
-        variables: { id: id, articleFullInformation: articleFullInformation },
+        variables: {
+            id: id,
+            withRubriqueFullInformation: withRubriqueFullInformation,
+            withArticleFullInformation: withArticleFullInformation,
+        },
     });
 
-    const rubrique = getFragmentData(
+    const rubriqueBasicInformation = getFragmentData(
         RubriqueBasicInformationFieldsFragmentDoc,
         data.getRubrique as FragmentType<typeof RubriqueBasicInformationFieldsFragmentDoc>
+    );
+
+    const rubriqueFullInformation = getFragmentData(
+        RubriqueFullInformationFieldsFragmentDoc,
+        data.getRubrique as FragmentType<typeof RubriqueFullInformationFieldsFragmentDoc>
     );
 
     const articlesFullInformation =
@@ -47,7 +61,7 @@ const getRubriqueWithArticles = async (id: number, articleFullInformation: boole
             data.getRubrique?.articles?.result as FragmentType<typeof ArticleBasicInformationFieldsFragmentDoc>[]
         ) ?? [];
 
-    return { rubrique, articlesBasicInformation, articlesFullInformation };
+    return { rubriqueBasicInformation, rubriqueFullInformation, articlesBasicInformation, articlesFullInformation };
 };
 
 const getArticle = async (id: number) => {
@@ -64,18 +78,23 @@ const getArticle = async (id: number) => {
     return { article };
 };
 
-const getRubrique = async (id: number) => {
+const getRubrique = async (id: number, withRubriqueFullInformation: boolean = false) => {
     const { data } = await getClient().query({
         query: RUBRIQUE_PRESENTATION,
-        variables: { id: id },
+        variables: { id: id, withRubriqueFullInformation: withRubriqueFullInformation },
     });
 
-    const rubrique = getFragmentData(
+    const rubriqueBasicInformation = getFragmentData(
         RubriqueBasicInformationFieldsFragmentDoc,
         data.getRubrique as FragmentType<typeof RubriqueBasicInformationFieldsFragmentDoc>
     );
 
-    return { rubrique };
+    const rubriqueFullInformation = getFragmentData(
+        RubriqueFullInformationFieldsFragmentDoc,
+        data.getRubrique as FragmentType<typeof RubriqueFullInformationFieldsFragmentDoc>
+    );
+
+    return { rubriqueBasicInformation, rubriqueFullInformation };
 };
 
 const getAuteur = async (id: number) => {

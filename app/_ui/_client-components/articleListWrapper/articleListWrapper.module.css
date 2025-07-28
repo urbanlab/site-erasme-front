@@ -1,0 +1,35 @@
+.localVariables {
+    --gap: 2rem;
+}
+
+.mainContainer {
+    display: grid;
+    gap: var(--gap);
+    grid-auto-rows: min-content;
+    grid-template-areas:
+        'title itemsPerPage'
+        'articleList articleList'
+        'pagination pagination';
+
+    .title {
+        grid-area: title;
+        justify-self: start;
+        align-self: center;
+    }
+
+    .itemsPerPage {
+        grid-area: itemsPerPage;
+        justify-self: end;
+    }
+
+    .articleList {
+        grid-area: articleList;
+    }
+
+    .pagination {
+        grid-area: pagination;
+        justify-self: end;
+        align-self: start;
+        white-space: nowrap;
+    }
+}

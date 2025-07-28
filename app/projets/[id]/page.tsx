@@ -1,7 +1,13 @@
 import { getRubriqueWithArticles } from '@data/queries';
+import { FragmentType, getFragmentData } from '@services/graphql/__generated__';
+import { DocumentFullInformationFieldsFragmentDoc } from '@services/graphql/__generated__/graphql';
+import Carousel from '@ui/client-components/carousel';
 import ArticleList from '@ui/components/articleList';
+import { ChiffresCles } from '@ui/components/chiffresCles';
+import { Timeline } from '@ui/components/timeline';
 import { DescriptionSection, RubriquePresentation } from './_ui/_components/components';
 import styles from './page.module.css';
+import ArticleListWrapper from '@ui/client-components/articleListWrapper';
 
 /**
  * Do not generate pages other than the ones defined in `generateStaticParams`
@@ -15,7 +21,16 @@ export async function generateStaticParams() {
 export default async function Projet({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
-    const { rubrique: projet, articlesBasicInformation: articles } = await getRubriqueWithArticles(parseInt(id));
+    const { rubriqueFullInformation: projet, articlesBasicInformation: articles } = await getRubriqueWithArticles(
+        parseInt(id),
+        true,
+        false
+    );
+
+    const imagesFromProjet = getFragmentData(
+        DocumentFullInformationFieldsFragmentDoc,
+        projet.documents?.result as FragmentType<typeof DocumentFullInformationFieldsFragmentDoc>[]
+    );
 
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
@@ -23,7 +38,42 @@ export default async function Projet({ params }: { params: Promise<{ id: string 
 
             <DescriptionSection content={projet.texte ?? ''} />
 
-            <ArticleList articles={articles} />
+            {projet.titre_section_supplementaire_1 && projet.texte_section_supplementaire_1 && (
+                <DescriptionSection
+                    title={projet.titre_section_supplementaire_1 ?? ''}
+                    content={projet.texte_section_supplementaire_1 ?? ''}
+                />
+            )}
+
+            {/* <ArticleList articles={articles} /> */}
+
+            <ArticleListWrapper articles={articles}  />
+
+            {projet.titre_section_supplementaire_2 && projet.texte_section_supplementaire_2 && (
+                <DescriptionSection
+                    title={projet.titre_section_supplementaire_2 ?? ''}
+                    content={projet.texte_section_supplementaire_2 ?? ''}
+                />
+            )}
+
+            <div className={styles.sectionsWrapper}>
+                <div className={styles.stadesDevContainer}>
+                    <DescriptionSection
+                        title={projet.titre_section_stades_dev ?? ''}
+                        content={projet.texte_section_stades_dev ?? ''}
+                    />
+                    {projet.data_section_stades_dev && <Timeline timeline={projet.data_section_stades_dev} />}
+                </div>
+
+                {imagesFromProjet && imagesFromProjet.length > 0 && <Carousel images={imagesFromProjet} className={styles.carousel} />}
+            </div>
+
+            <ChiffresCles
+                title={projet.titre_section_chiffres_cles ?? ''}
+                chiffresCles={projet.texte_section_chiffres_cles ?? ''}
+                splitBy=":"
+                className={styles.chiffresClesContainer}
+            />
         </div>
     );
 }

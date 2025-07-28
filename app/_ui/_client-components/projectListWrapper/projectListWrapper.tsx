@@ -2,6 +2,7 @@
 
 import { Separator } from '@base-ui-components/react';
 import { ControlledComponentType, ControlledComponentValueType } from '@globals/types';
+import { useIsDesktop } from '@hooks/useIsDesktop';
 import { FragmentType, getFragmentData } from '@services/graphql/__generated__/fragment-masking';
 import {
     ArticleFullInformationFieldsFragmentDoc,
@@ -9,23 +10,17 @@ import {
     MotsAndGroupeMotsFieldsFragment,
     MotsAndGroupeMotsFieldsFragmentDoc,
 } from '@services/graphql/__generated__/graphql';
-import { useIsDesktop } from '@hooks/useIsDesktop';
-import ProjectList from '@ui/components/projectList';
 import FilterPopover from '@ui/components/filterPopover';
 import Pagination from '@ui/components/pagination';
+import ProjectList from '@ui/components/projectList';
 import SelectBox from '@ui/components/selectBox';
 import ToggleGroup from '@ui/components/toggleGroup';
+import { itemsPerPageOptions } from '@utils';
 import { useState } from 'react';
 import styles from './projectListWrapper.module.css';
 
 type ProjectListFilterFunctionType = (projectList: ListProjetsFieldsFragment[]) => ListProjetsFieldsFragment[];
 
-const itemsPerPageOptions: ControlledComponentType[] = [
-    { label: '10', value: 10 },
-    { label: '20', value: 20 },
-    { label: '30', value: 30 },
-    { label: '40', value: 40 },
-];
 const articleTypeOptions: ControlledComponentType[] = [
     { label: 'Tout', value: null },
     { label: 'Article', value: '0' },
