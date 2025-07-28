@@ -195,8 +195,22 @@ const getHomepage = async () => {
         variables: {
             idMotActus: parseInt(process.env.SPIP_MOT_ACTUS_ID ?? ''),
             idRubriqueServices: parseInt(process.env.SPIP_RUBRIQUE_SERVICES_ID ?? ''),
+            idArticleMission: parseInt(process.env.SPIP_RUBRIQUE_HOMEPAGE_ARTICLE_MISSION_ID ?? ''),
+            idArticlePresentationErasme: parseInt(
+                process.env.SPIP_RUBRIQUE_HOMEPAGE_ARTICLE_PRESENTATION_ERASME_ID ?? ''
+            ),
         },
     });
+
+    const presentationErasmeArticle = getFragmentData(
+        ArticleFullInformationFieldsFragmentDoc,
+        data.presentationErasme as FragmentType<typeof ArticleFullInformationFieldsFragmentDoc>
+    );
+
+    const missionArticle = getFragmentData(
+        ArticleFullInformationFieldsFragmentDoc,
+        data.mission as FragmentType<typeof ArticleFullInformationFieldsFragmentDoc>
+    );
 
     const enCeMomentArticles = getFragmentData(
         ArticleFullInformationFieldsFragmentDoc,
@@ -211,7 +225,7 @@ const getHomepage = async () => {
     // Get a list of existing articles IDs for the archive section
     const archiveArticleIdList: string[] = data.articles?.result?.map(article => article?.id ?? '') ?? [];
 
-    return { enCeMomentArticles, servicesArticles, archiveArticleIdList };
+    return { presentationErasmeArticle, missionArticle, enCeMomentArticles, servicesArticles, archiveArticleIdList };
 };
 
 export {

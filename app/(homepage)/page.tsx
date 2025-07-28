@@ -9,12 +9,17 @@ import {
 import styles from './page.module.css';
 
 export default async function Home() {
-    const { enCeMomentArticles, archiveArticleIdList, servicesArticles } = await getHomepage();
+    const { presentationErasmeArticle, missionArticle, enCeMomentArticles, archiveArticleIdList, servicesArticles } =
+        await getHomepage();
 
     //TODO: end implementation of the homepage
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
-            <PresentationSection />
+            <PresentationSection
+                title={presentationErasmeArticle.titre ?? ''}
+                description={presentationErasmeArticle.texte ?? ''}
+                logo={presentationErasmeArticle.logo ?? ''}
+            />
 
             <EnCeMomentSection articles={enCeMomentArticles} archiveArticleIdList={archiveArticleIdList} />
 
@@ -22,7 +27,7 @@ export default async function Home() {
 
             <ServicesSection articles={servicesArticles} />
 
-            <MissionsSection />
+            <MissionsSection article={missionArticle} />
         </div>
     );
 }

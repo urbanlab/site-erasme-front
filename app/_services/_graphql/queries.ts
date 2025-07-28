@@ -193,8 +193,10 @@ const GROUPE_MOTS_WITH_MOTS = gql(`
 const HOMEPAGE = gql(`
     query Homepage(
         $idMotActus: Int!,
-        $numberOfActus: Int = 4
-        $idRubriqueServices: Int!
+        $numberOfActus: Int = 4,
+        $idRubriqueServices: Int!,
+        $idArticleMission: Int!,
+        $idArticlePresentationErasme: Int!,
     ){
         getMot(id: $idMotActus) {
             id
@@ -216,6 +218,12 @@ const HOMEPAGE = gql(`
                     ...articleBasicInformationFields
                 }
             }
+        }
+        mission: getArticle(id: $idArticleMission) {
+            ...articleFullInformationFields
+        }
+        presentationErasme: getArticle(id: $idArticlePresentationErasme) {
+            ...articleFullInformationFields
         }
     }
 `);

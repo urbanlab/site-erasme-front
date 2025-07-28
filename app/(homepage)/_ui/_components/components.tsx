@@ -1,37 +1,37 @@
+import cubeShapedIcon from '@public/cube-shaped-icon.svg';
+import doubleArrowShapedIcon from '@public/double-arrow-shaped-icon.svg';
+import xShapedIcon from '@public/x-shaped-icon.svg';
 import {
     ArticleBasicInformationFieldsFragment,
     ArticleFullInformationFieldsFragment,
 } from '@services/graphql/__generated__/graphql';
-import cubeShapedIcon from '@public/cube-shaped-icon.svg';
-import doubleArrowShapedIcon from '@public/double-arrow-shaped-icon.svg';
-import heroImage from '@public/hero-img.svg';
-import xShapedIcon from '@public/x-shaped-icon.svg';
+import { RemoteHtml, RemoteHtmlRawText } from '@services/remoteHtml';
 import ArticleCard from '@ui/components/articleCard';
 import ImageCard from '@ui/components/imageCard';
-import ShapedImage from '@ui/components/shapedImage';
 import LinkButton from '@ui/components/linkButton';
+import ShapedImage from '@ui/components/shapedImage';
 import Image from 'next/image';
 import { imageCardsContent, pageTexts } from '../../_data/pageTexts';
 import { ArchiveArticleCard } from '../_client-components/client-components';
 import styles from './components.module.css';
 
-const MissionsSection = () => {
+const MissionsSection = ({ article }: { article: ArticleFullInformationFieldsFragment }) => {
     return (
         <div className={styles.missionContainer}>
-            <h2 className={styles.title}>{pageTexts.missionSection.title}</h2>
-            <p className={styles.description}>{pageTexts.missionSection.description}</p>
+            <h2 className={styles.title}>{article.titre}</h2>
+            <RemoteHtml html={article.texte ?? ''} />
             <Image alt="" src={doubleArrowShapedIcon} className={`${styles.desktopDisplayOnly} ${styles.icon}`} />
         </div>
     );
 };
 
-const PresentationSection = () => {
+const PresentationSection = ({ title, description, logo }: { title: string; description: string; logo: string }) => {
     return (
         <div className={styles.presentationContainer}>
-            <ShapedImage src={heroImage} alt="" maskShape="wide" className={styles.presentationImage} />
+            <ShapedImage src={logo ?? ''} alt="" maskShape="wide" className={styles.presentationImage} />
             <div className={styles.presentationTextContainer}>
-                <h1>{pageTexts.presentationSection.title}</h1>
-                <h5>{pageTexts.presentationSection.description}</h5>
+                <h1>{title}</h1>
+                <RemoteHtmlRawText html={description ?? ''} className={styles.description} />
             </div>
         </div>
     );
