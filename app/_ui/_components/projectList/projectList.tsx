@@ -1,6 +1,6 @@
 import { Accordion } from '@base-ui-components/react/accordion';
-import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
-import { ArticleBasicInformationFieldsFragmentDoc, ListProjetsFieldsFragment } from '@graphql/__generated__/graphql';
+import { FragmentType, getFragmentData } from '@services/graphql/__generated__/fragment-masking';
+import { ArticleBasicInformationFieldsFragmentDoc, ListProjetsFieldsFragment } from '@services/graphql/__generated__/graphql';
 import chevronIcon from '@public/chevron-up-icon.svg';
 import { RemoteHtml } from '@services/remoteHtml';
 import ArticleList from '@ui/components/articleList';

@@ -3,6 +3,7 @@ import maskNarrow from '@public/mask-narrow.svg';
 import maskWide from '@public/mask-wide.svg';
 import Image from 'next/image';
 import styles from './shapedImage.module.css';
+import fallbackImage from '@public/hero-img.svg';
 
 type MaskShapeType = 'narrow' | 'wide' | 'corner';
 
@@ -40,7 +41,7 @@ export default function ShapedImage({ src, alt, maskShape, className, ref, ...in
                 }}
             >
                 <Image
-                    src={src}
+                    src={(src !== '' ? src : fallbackImage) ?? fallbackImage}
                     fill
                     alt={alt}
                     sizes="(max-width: 90rem) 66vw, 100vw"

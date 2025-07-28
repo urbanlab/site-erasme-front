@@ -2,13 +2,13 @@
 
 import { Separator } from '@base-ui-components/react';
 import { ControlledComponentType, ControlledComponentValueType } from '@globals/types';
-import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
+import { FragmentType, getFragmentData } from '@services/graphql/__generated__/fragment-masking';
 import {
     ArticleFullInformationFieldsFragmentDoc,
     ListProjetsFieldsFragment,
     MotsAndGroupeMotsFieldsFragment,
     MotsAndGroupeMotsFieldsFragmentDoc,
-} from '@graphql/__generated__/graphql';
+} from '@services/graphql/__generated__/graphql';
 import { useIsDesktop } from '@hooks/useIsDesktop';
 import ProjectList from '@ui/components/projectList';
 import FilterPopover from '@ui/elements/filterPopover';

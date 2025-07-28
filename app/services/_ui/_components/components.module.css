@@ -1,0 +1,25 @@
+.servicesContainer {
+    display: grid;
+    gap: var(--gap-section);
+}
+
+@media screen and (min-width: 80rem) {
+    .servicesContainer {
+        gap: calc(2 * var(--gap-section));
+
+        & .service {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            grid-template-areas: 'title content';
+            gap: var(--gap-section);
+
+            & .title {
+                grid-area: title;
+                line-height: 0.9;
+            }
+            & .content {
+                grid-area: content;
+            }
+        }
+    }
+}

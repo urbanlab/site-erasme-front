@@ -1,58 +1,22 @@
-import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
-import { ListProjetsFieldsFragmentDoc, MotsAndGroupeMotsFieldsFragmentDoc } from '@graphql/__generated__/graphql';
-import { ALL_PROJECTS_AND_NESTED_COLLECTIONS, RUBRIQUE_PRESENTATION } from '@graphql/queries';
-import heroImage from '@public/hero-img.svg';
-import { getClient } from '@services/apollo/apolloClient';
-import { RemoteHtmlRawText } from '@services/remoteHtml';
+import { getAllProjets, getGroupeMotsWithMots, getRubrique } from '@data/queries';
 import ProjectListWrapper from '@ui/components/projectListWrapper';
-import ShapedImage from '@ui/components/shapedImage';
+import { RubriquePresentation } from './_ui/_components/components';
 import styles from './page.module.css';
 
-const RubriquePresentation = async () => {
-    const { data } = await getClient().query({
-        query: RUBRIQUE_PRESENTATION,
-        variables: { id: parseInt(process.env.SPIP_RUBRIQUE_PROJETS_ID ?? '') },
-    });
-
-    return (
-        <div className={styles.presentationContainer}>
-            <ShapedImage src={data.getRubrique?.logo ?? heroImage} alt="" maskShape="narrow" className={styles.logo} />
-            <h1 className={styles.title}>{data?.getRubrique?.titre}</h1>
-            {data?.getRubrique?.texte && (
-                <h5 className={styles.description}>
-                    <RemoteHtmlRawText html={data.getRubrique.texte} removeInnerHtmlTags={true} />
-                </h5>
-            )}
-        </div>
-    );
-};
-
 export default async function Projets() {
-    const { data } = await getClient().query({
-        query: ALL_PROJECTS_AND_NESTED_COLLECTIONS,
-        variables: {
-            whereRubriques: [`id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`],
-            rubriquesOrderBy: [`date_DESC`],
-            articlesInRubriqueOrderBy: [`date_DESC`],
-            idGroupeMotsForFilter: parseInt(process.env.SPIP_GROUPE_MOTS_POLITIQUES_PUBLIQUES_ID ?? ''),
-        },
-    });
+    const { rubrique } = await getRubrique(parseInt(process.env.SPIP_RUBRIQUE_PROJETS_ID ?? ''));
 
-    const projectListFragment = getFragmentData(
-        ListProjetsFieldsFragmentDoc,
-        data?.rubriques?.result as FragmentType<typeof ListProjetsFieldsFragmentDoc>[]
-    );
+    const { projets } = await getAllProjets();
 
-    const motsAndGroupeMotsFragment = getFragmentData(
-        MotsAndGroupeMotsFieldsFragmentDoc,
-        data?.getGroupe_mots?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
+    const { groupeMotsWithMots: groupeMotsPolitiquesPubliques } = await getGroupeMotsWithMots(
+        parseInt(process.env.SPIP_GROUPE_MOTS_POLITIQUES_PUBLIQUES_ID ?? '')
     );
 
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
-            <RubriquePresentation />
+            <RubriquePresentation rubrique={rubrique} />
 
-            <ProjectListWrapper projects={projectListFragment} groupeMotsForFilter={motsAndGroupeMotsFragment} />
+            <ProjectListWrapper projects={projets} groupeMotsForFilter={groupeMotsPolitiquesPubliques} />
         </div>
     );
 }

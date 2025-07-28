@@ -1,15 +1,8 @@
-import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
-import {
-    ListProjetsFieldsFragmentDoc,
-    MotBasicInformationFieldsFragment,
-    MotBasicInformationFieldsFragmentDoc,
-    MotsAndGroupeMotsFieldsFragmentDoc,
-} from '@graphql/__generated__/graphql';
-import { ALL_PROJECTS_AND_NESTED_COLLECTIONS, MOTS_FROM_GROUPE_MOTS } from '@graphql/queries';
-import heroImage from '@public/hero-img.svg';
-import { getClient } from '@services/apollo/apolloClient';
+import { getAllProjets, getGroupeMotsWithMots, getMot } from '@data/queries';
+import { FragmentType, getFragmentData } from '@services/graphql/__generated__/fragment-masking';
+import { MotsAndGroupeMotsFieldsFragmentDoc } from '@services/graphql/__generated__/graphql';
 import ProjectListWrapper from '@ui/components/projectListWrapper';
-import ShapedImage from '@ui/components/shapedImage';
+import { MotClePresentation } from './_ui/_components/components';
 import styles from './page.module.css';
 
 /**
@@ -17,62 +10,28 @@ import styles from './page.module.css';
  * Get all `mots` from the giving `groupe_mot`
  */
 export async function generateStaticParams() {
-    const { data } = await getClient().query({
-        query: MOTS_FROM_GROUPE_MOTS,
-        variables: { idGroupeMots: parseInt(process.env.SPIP_GROUPE_MOTS_PARTENAIRES_ID ?? '') },
-    });
-
-    const motFragment = getFragmentData(
-        MotsAndGroupeMotsFieldsFragmentDoc,
-        data.getGroupe_mots?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
+    const { groupeMotsWithMots } = await getGroupeMotsWithMots(
+        parseInt(process.env.SPIP_GROUPE_MOTS_PARTENAIRES_ID ?? '')
     );
 
-    return motFragment.map(mot => {
+    return groupeMotsWithMots.map(mot => {
         return { id: mot.id ?? '' };
     });
 }
 
-const KeywordPresentation = async ({
-    keywordInformation,
-}: {
-    keywordInformation: MotBasicInformationFieldsFragment;
-}) => {
-    return (
-        <div className={styles.presentationContainer}>
-            <ShapedImage
-                src={keywordInformation.logo ?? heroImage}
-                alt="photo du partenaire"
-                maskShape="wide"
-                className={styles.logo}
-            />
-            <h1 className={styles.title}>{keywordInformation.titre}</h1>
-        </div>
-    );
-};
-
-export default async function Keyword({ params }: { params: Promise<{ id: string }> }) {
+export default async function MotCleItem({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
-    const { data } = await getClient().query({
-        query: ALL_PROJECTS_AND_NESTED_COLLECTIONS,
-        variables: {
-            whereRubriques: [`id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`],
-            rubriquesOrderBy: [`date_DESC`],
-            articlesInRubriqueOrderBy: [`date_DESC`],
-            idGroupeMotsForFilter: parseInt(process.env.SPIP_GROUPE_MOTS_POLITIQUES_PUBLIQUES_ID ?? ''),
-            withPartenaires: true,
-            idPartenaire: parseInt(id ?? ''),
-        },
-    });
+    const { mot } = await getMot(parseInt(id));
 
-    const projectListFragment = getFragmentData(
-        ListProjetsFieldsFragmentDoc,
-        data?.rubriques?.result as FragmentType<typeof ListProjetsFieldsFragmentDoc>[]
+    const { groupeMotsWithMots } = await getGroupeMotsWithMots(
+        parseInt(process.env.SPIP_GROUPE_MOTS_POLITIQUES_PUBLIQUES_ID ?? '')
     );
+    const { projets } = await getAllProjets(true);
 
-    const projectListFilteredWithKeyword = projectListFragment
-        .map(rubrique => {
-            const filteredArticles = rubrique?.articles?.result?.filter(article => {
+    const projetsFilteredWithMotCle = projets
+        .map(projet => {
+            const filteredArticles = projet?.articles?.result?.filter(article => {
                 const motsFromArticleFragment = getFragmentData(
                     MotsAndGroupeMotsFieldsFragmentDoc,
                     article?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
@@ -84,30 +43,20 @@ export default async function Keyword({ params }: { params: Promise<{ id: string
             if (filteredArticles?.length === 0) return null;
 
             return {
-                ...rubrique,
+                ...projet,
                 articles: {
-                    ...rubrique.articles,
+                    ...projet.articles,
                     result: filteredArticles,
                 },
             };
         })
-        .filter(rubrique => rubrique !== null);
-
-    const motsAndGroupeMotsFragment = getFragmentData(
-        MotsAndGroupeMotsFieldsFragmentDoc,
-        data?.getGroupe_mots?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
-    );
-
-    const motInformationFragment = getFragmentData(
-        MotBasicInformationFieldsFragmentDoc,
-        data?.getMot as FragmentType<typeof MotBasicInformationFieldsFragmentDoc>
-    );
+        .filter(projet => projet !== null);
 
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
-            <KeywordPresentation keywordInformation={motInformationFragment} />
+            <MotClePresentation keywordInformation={mot} />
 
-            <ProjectListWrapper projects={projectListFilteredWithKeyword} groupeMotsForFilter={motsAndGroupeMotsFragment} />
+            <ProjectListWrapper projects={projetsFilteredWithMotCle} groupeMotsForFilter={groupeMotsWithMots} />
         </div>
     );
 }

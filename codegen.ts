@@ -11,7 +11,7 @@ const config: CodegenConfig = {
     },
     documents: ['**/queries.ts', '**/fragments.ts'],
     generates: {
-        'app/_graphql/__generated__/': {
+        'app/_services/_graphql/__generated__/': {
             preset: 'client',
             presetConfig: {
                 //Changes the default tag from graphql to gql

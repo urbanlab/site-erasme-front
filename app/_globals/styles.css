@@ -43,6 +43,9 @@
     --button-left-right-padding: 1.25rem;
     --button-border-radius: 1.25rem;
     --button-border-width: 2px;
+
+    --gap-section: 2.625rem;
+    --gap-inside-section: 24px;
 }
 
 * {
@@ -155,5 +158,8 @@ img {
         --padding-sides-main: 80px;
         --margin-top-main: 50px;
         --margin-bottom-main: 100px;
+
+        --gap-section: 6.25rem;
+        --gap-inside-section: 60px;
     }
 }

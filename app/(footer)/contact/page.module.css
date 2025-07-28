@@ -1,6 +1,4 @@
 .localVariables {
-    --gap-section: 2.625rem;
-
     --margin-bottom-section-title: 1rem;
 }
 
@@ -42,12 +40,7 @@
     }
 }
 
-.tabsList {
-    display: flex;
-    justify-content: center;
-    gap: 1.25rem;
-    margin-bottom: 1.875rem;
-}
+
 
 @media screen and (min-width: 80rem) {
     .localVariables {
@@ -63,15 +56,5 @@
                 'wrapper wrapper'
                 'laclasse reseauxSociaux';
         }
-    }
-
-    .desktopWrapper {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: var(--gap-section);
-    }
-
-    .twoColumnContainer {
-        column-count: 2;
     }
 }

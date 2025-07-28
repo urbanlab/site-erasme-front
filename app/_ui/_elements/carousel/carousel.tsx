@@ -5,7 +5,7 @@ import Button from '@ui/elements/button';
 import Image from 'next/image';
 import { useState } from 'react';
 import styles from './carousel.module.css';
-import { DocumentFullInformationFieldsFragment } from '@graphql/__generated__/graphql';
+import { DocumentFullInformationFieldsFragment } from '@services/graphql/__generated__/graphql';
 
 export default function Carousel({
     images,

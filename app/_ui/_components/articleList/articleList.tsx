@@ -1,4 +1,4 @@
-import { ArticleBasicInformationFieldsFragment } from '@graphql/__generated__/graphql';
+import { ArticleBasicInformationFieldsFragment } from '@services/graphql/__generated__/graphql';
 import Arrow from '@ui/elements/arrow';
 import Tag from '@ui/elements/tag';
 import { dateFormat } from '@utils/dateUtils';

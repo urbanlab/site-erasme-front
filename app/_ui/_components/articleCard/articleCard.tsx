@@ -1,6 +1,6 @@
 'use client';
 
-import { ArticleFullInformationFieldsFragment } from '@graphql/__generated__/graphql';
+import { ArticleFullInformationFieldsFragment } from '@services/graphql/__generated__/graphql';
 import { RemoteHtmlRawText } from '@services/remoteHtml';
 import Arrow from '@ui/elements/arrow';
 import { dateFormat } from '@utils/dateUtils';

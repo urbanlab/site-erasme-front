@@ -22,6 +22,7 @@
     "paths": {
       "@public/*": ["../public/*"],
       "@globals/*": ["_globals/*"],
+      "@data/queries": ["_data/queries.tsx"],
       "@ui/elements/button": ["_ui/_elements/button/button.tsx"],
       "@ui/elements/linkButton": ["_ui/_elements/button/linkButton.tsx"],
       "@ui/elements/toTopButton": ["_ui/_elements/button/toTopButton.tsx"],
@@ -46,7 +47,7 @@
       "@ui/components/imageSlider": ["_ui/_components/imageSlider/imageSlider.tsx"],
       "@ui/components/projectListWrapper": ["_ui/_components/projectListWrapper/projectListWrapper.tsx"],
       "@ui/components/navigateBack": ["_ui/_components/navigateBack/navigateBack.tsx"],
-      "@graphql/*": ["_graphql/*"],
+      "@services/graphql/*": ["_services/_graphql/*"],
       "@services/remoteHtml": ["_services/_remoteHtml/remoteHtml.tsx"],
       "@services/apollo/*": ["_services/_apollo/*"],
       "@services/cookieConsent/*": ["_services/_cookieConsent/*"],

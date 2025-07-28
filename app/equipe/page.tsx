@@ -1,98 +1,30 @@
-import { FragmentType, getFragmentData } from '@graphql/__generated__';
-import { MotsAndGroupeMotsFieldsFragmentDoc } from '@graphql/__generated__/graphql';
-import { ACTIVE_AUTHORS, MOTS_FROM_GROUPE_MOTS, RUBRIQUE_PRESENTATION } from '@graphql/queries';
-import heroImage from '@public/hero-img.svg';
-import { getClient } from '@services/apollo/apolloClient';
+import { getActiveAuteurs, getGroupeMotsWithMots, getRubrique } from '@data/queries';
 import { RemoteHtml } from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
-import LinkButton from '@ui/elements/linkButton';
-import Link from 'next/link';
+import { CollaborateursSection, PartenairesSection } from './_ui/_components/components';
 import styles from './page.module.css';
 
-const pageTexts = {
-    descriptionSection: `L'équipe`,
-    teamSection: 'Les contributeurs',
-    partnersSection: 'Nos partenaires',
-};
-
-const TeamSection = async () => {
-    const { data } = await getClient().query({
-        query: ACTIVE_AUTHORS,
-        variables: { idRubriqueEquipe: parseInt(process.env.SPIP_RUBRIQUE_EQUIPE_ID ?? '') },
-    });
-
-    return (
-        <div className={`${styles.team} ${styles.sectionContainer}`}>
-            <h2 className={styles.alignLineHeight}>{pageTexts.teamSection}</h2>
-            <div className={styles.tagsContainer}>
-                {data.getRubrique?.articles?.result?.map(article => {
-                    const author = article?.auteurs?.result?.at(0);
-                    return (
-                        <LinkButton href={`/equipe/${author?.id}`} variant="ghost" key={article?.id}>
-                            {author?.titre}
-                        </LinkButton>
-                    );
-                })}
-            </div>
-        </div>
-    );
-};
-
-const PartnersSection = async () => {
-    const { data } = await getClient().query({
-        query: MOTS_FROM_GROUPE_MOTS,
-        variables: { idGroupeMots: parseInt(process.env.SPIP_GROUPE_MOTS_PARTENAIRES_ID ?? '') },
-    });
-
-    const partnerListFragment = getFragmentData(
-        MotsAndGroupeMotsFieldsFragmentDoc,
-        data?.getGroupe_mots?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
-    );
-    const sortedPartnerList = partnerListFragment.slice().sort((a, b) => a.titre?.localeCompare(b.titre ?? '') ?? -1);
-
-    return (
-        <div className={`${styles.partners} ${styles.sectionContainer}`}>
-            <h2 className={styles.alignLineHeight}>{pageTexts.partnersSection}</h2>
-            <div className={styles.tagsContainer}>
-                {sortedPartnerList.map(mot => {
-                    const motFragment = getFragmentData(
-                        MotsAndGroupeMotsFieldsFragmentDoc,
-                        mot as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>
-                    );
-
-                    return (
-                        <Link key={motFragment.id} href={`/mot-cle/${motFragment.id}`} className={styles.linkStyle}>
-                            {motFragment.titre}
-                        </Link>
-                    );
-                })}
-            </div>
-        </div>
-    );
-};
-
 export default async function Equipe() {
-    const { data } = await getClient().query({
-        query: RUBRIQUE_PRESENTATION,
-        variables: { id: parseInt(process.env.SPIP_RUBRIQUE_EQUIPE_ID ?? '') },
-    });
+    const { rubrique } = await getRubrique(parseInt(process.env.SPIP_RUBRIQUE_EQUIPE_ID ?? ''));
+
+    const { groupeMotsWithMots } = await getGroupeMotsWithMots(
+        parseInt(process.env.SPIP_GROUPE_MOTS_PARTENAIRES_ID ?? '')
+    );
+
+    const { activeAuteurs } = await getActiveAuteurs();
 
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
-            <ShapedImage
-                className={styles.logo}
-                alt="logo page"
-                maskShape="wide"
-                src={data.getRubrique?.logo ?? heroImage}
-            />
-            {data?.getRubrique?.texte && (
+            <ShapedImage className={styles.logo} alt="logo page" maskShape="wide" src={rubrique?.logo ?? ''} />
+
+            {rubrique?.texte && (
                 <h5 className={styles.description}>
-                    <RemoteHtml html={data.getRubrique.texte} />
+                    <RemoteHtml html={rubrique?.texte} />
                 </h5>
             )}
 
-            <TeamSection />
-            <PartnersSection />
+            <CollaborateursSection activeAuteurs={activeAuteurs} className={styles.team} />
+            <PartenairesSection partenaires={groupeMotsWithMots} className={styles.partners} />
         </div>
     );
 }

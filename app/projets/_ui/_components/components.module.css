@@ -1,0 +1,31 @@
+.presentationContainer {
+    display: grid;
+    gap: var(--gap-inside-section);
+
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        'logo'
+        'title'
+        'description';
+
+    & .logo {
+        grid-area: logo;
+    }
+    & .title {
+        grid-area: title;
+    }
+    & .description {
+        grid-area: description;
+    }
+}
+
+@media screen and (min-width: 80rem) {
+    .presentationContainer {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            '. logo'
+            'title logo'
+            'description logo'
+            '. logo';
+    }
+}

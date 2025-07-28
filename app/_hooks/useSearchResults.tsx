@@ -1,7 +1,7 @@
 'use client';
 
 import { useSuspenseQuery } from '@apollo/client/react/hooks/useSuspenseQuery';
-import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
+import { FragmentType, getFragmentData } from '@services/graphql/__generated__/fragment-masking';
 import {
     ArticleBasicInformationFieldsFragment,
     ArticleBasicInformationFieldsFragmentDoc,
@@ -10,8 +10,8 @@ import {
     ListProjetsFieldsFragment,
     ListProjetsFieldsFragmentDoc,
     SearchQuery,
-} from '@graphql/__generated__/graphql';
-import { SEARCH } from '@graphql/queries';
+} from '@services/graphql/__generated__/graphql';
+import { SEARCH } from '@services/graphql/queries';
 import { useEffect, useState } from 'react';
 
 type SearchResults = {

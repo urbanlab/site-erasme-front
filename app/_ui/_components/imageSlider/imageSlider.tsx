@@ -1,6 +1,6 @@
 // 'use client';
 
-// import { DocumentsFromArticleFieldsFragment } from '@graphql/__generated__/graphql';
+// import { DocumentsFromArticleFieldsFragment } from '@services/graphql/__generated__/graphql';
 // import Image from 'next/image';
 // import { useState } from 'react';
 // import styles from './imageSlider.module.css';

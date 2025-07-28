@@ -1,10 +1,32 @@
 'use client';
 
 import { Tabs } from '@base-ui-components/react/tabs';
+import { ArticleFullInformationFieldsFragment } from '@services/graphql/__generated__/graphql';
+import useCookieAllowedServices from '@hooks/useCookieAllowedServices';
 import { useIsDesktop } from '@hooks/useIsDesktop';
+import { RemoteHtmlWithIframesAndCookieConsentManagement } from '@services/remoteHtml';
 import Button from '@ui/elements/button';
 import { JSX } from 'react';
-import styles from './articlePrototype.module.css';
+import styles from './client-components.module.css'
+
+export default function ArticleCommon({
+    articleInformation,
+}: {
+    articleInformation: ArticleFullInformationFieldsFragment;
+}) {
+    const allowedServices = useCookieAllowedServices();
+
+    return (
+        <>
+            {articleInformation.texte && (
+                <RemoteHtmlWithIframesAndCookieConsentManagement
+                    html={articleInformation.texte}
+                    allowedThirdPartyServices={allowedServices}
+                />
+            )}
+        </>
+    );
+}
 
 const DevelopmentAndTimelineSectionsWrapper = ({
     developmentSection,
@@ -42,4 +64,4 @@ const DevelopmentAndTimelineSectionsWrapper = ({
     }
 };
 
-export { DevelopmentAndTimelineSectionsWrapper };
+export { DevelopmentAndTimelineSectionsWrapper, ArticleCommon };

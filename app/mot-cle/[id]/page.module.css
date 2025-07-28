@@ -1,41 +1,5 @@
-.localVariables {
-    --gap-section: 2.625rem;
-    --gap-inside-section: 24px;
-}
-
 .mainContainer {
     display: grid;
     grid-template-columns: 1fr;
     row-gap: var(--gap-section);
-}
-
-.presentationContainer {
-    display: grid;
-    gap: var(--gap-inside-section);
-
-    grid-template-areas:
-        'logo'
-        'title';
-
-    & .logo {
-        grid-area: logo;
-    }
-    & .title {
-        grid-area: title;
-    }
-}
-
-@media screen and (min-width: 80rem) {
-    .localVariables {
-        --gap-section: 6.25rem;
-        --gap-inside-section: 60px;
-    }
-    
-    .presentationContainer {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas:
-            '. logo'
-            'title logo'
-            '. logo';
-    }
 }

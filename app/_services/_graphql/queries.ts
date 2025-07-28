@@ -1,31 +1,10 @@
 import { gql } from './__generated__';
 import './fragments';
 
-const SERVICES_RUBRIQUE = gql(`
-    query ServicesRubrique($id: Int!) {
-        getRubrique(id: $id) {
-            logo
-            articles {
-                result {
-                    ...articleFullInformationFields
-                }
-            }
-        }
-    }
-`);
-
 const ARTICLE = gql(`
     query Article($id: Int!) {
         getArticle(id: $id) {
             ...articleFullInformationFields
-        }
-    }
-`);
-
-const RUBRIQUE = gql(`
-    query Rubrique($id: Int!) {
-        getRubrique(id: $id) {
-            ...rubriqueFullInformationFields
         }
     }
 `);
@@ -60,24 +39,41 @@ const ARTICLE_AND_PROTOTYPE = gql(`
 const RUBRIQUE_PRESENTATION = gql(`
     query RubriquePresentation($id: Int!) {
         getRubrique(id: $id) {
-            id
-            titre
-            texte
-            logo
+            ...rubriqueBasicInformationFields
         }
     }
 `);
 
-const DYNAMIC_PAGE = gql(`
-    query DynamicPage($id: Int!) {
+const RUBRIQUE_WITH_ARTICLES = gql(`
+    query RubriqueWithArticles(
+            $id: Int!,
+            $articleFullInformation: Boolean! = false
+        ) {
         getRubrique(id: $id) {
             ...rubriqueBasicInformationFields
 
-            articles(pagination: 100) {
+            articles(pagination: 500) {
                 result {
-                    ...articleFullInformationFields
+                    ...articleFullInformationFields @include(if: $articleFullInformation)
+                    ...articleBasicInformationFields @skip(if: $articleFullInformation)
                 }
             }
+        }
+    }
+`);
+
+const MOT = gql(`
+    query Mot($id: Int!) {
+        getMot(id: $id) {
+            ...motBasicInformationFields
+        }
+    }
+`);
+
+const AUTEUR = gql(`
+    query Auteur($id: Int!) {
+        getAuteur(id: $id) {
+            ...auteurFullInformationFields
         }
     }
 `);
@@ -138,14 +134,10 @@ const ALL_PROJECTS_AND_NESTED_COLLECTIONS = gql(`
             $whereRubriques: [String!],
             $rubriquesOrderBy: [String!],
             $articlesInRubriqueOrderBy: [String!],
-            $idGroupeMotsForFilter: Int!,
             $withAuteurs: Boolean = false,
-            $whereAuteurs: [String!],
-            $idAuteur: Int = 0,
             $pagination: Int = 5000,
             $page: Int = 1
-            $withPartenaires: Boolean = false,
-            $idPartenaire: Int = 0) {
+        ) {
         rubriques(where: $whereRubriques, orderby: $rubriquesOrderBy, pagination: $pagination, page: $page) {
             pagination {
                 ...paginationFields
@@ -153,22 +145,6 @@ const ALL_PROJECTS_AND_NESTED_COLLECTIONS = gql(`
             result {
                 ...listProjetsFields
             }
-        }
-
-        getGroupe_mots(id: $idGroupeMotsForFilter){
-            id
-            titre
-            mots (pagination: $pagination) {
-                result {
-                    ...motsAndGroupeMotsFields
-                }
-            }
-        }
-        getAuteur(id: $idAuteur) @include(if: $withAuteurs) {
-            ...auteurFullInformationFields
-        }
-        getMot(id: $idPartenaire) @include(if: $withPartenaires){
-            ...motBasicInformationFields
         }
     }
 `);
@@ -188,8 +164,7 @@ const ACTIVE_AUTHORS = gql(`
                     id
                     auteurs {
                         result {
-                            id
-                            titre
+                            ...auteurBasicInformationFields
                         }
                     }
                 }
@@ -198,7 +173,7 @@ const ACTIVE_AUTHORS = gql(`
     }
 `);
 
-const MOTS_FROM_GROUPE_MOTS = gql(`
+const GROUPE_MOTS_WITH_MOTS = gql(`
     query MotsFromGroupeMots(
         $idGroupeMots: Int!
     ){
@@ -246,15 +221,15 @@ const HOMEPAGE = gql(`
 `);
 
 export {
-    ARTICLE_AND_PROTOTYPE,
-    RUBRIQUE_PRESENTATION,
-    RUBRIQUE,
-    ARTICLE,
-    SERVICES_RUBRIQUE,
-    SEARCH,
-    ALL_PROJECTS_AND_NESTED_COLLECTIONS,
     ACTIVE_AUTHORS,
+    ALL_PROJECTS_AND_NESTED_COLLECTIONS,
+    ARTICLE,
+    ARTICLE_AND_PROTOTYPE,
+    AUTEUR,
+    GROUPE_MOTS_WITH_MOTS,
     HOMEPAGE,
-    DYNAMIC_PAGE,
-    MOTS_FROM_GROUPE_MOTS,
+    MOT,
+    RUBRIQUE_PRESENTATION,
+    RUBRIQUE_WITH_ARTICLES,
+    SEARCH,
 };

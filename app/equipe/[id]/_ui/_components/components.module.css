@@ -1,0 +1,70 @@
+.tagStyle {
+    background: transparent;
+
+    width: fit-content;
+
+    padding: var(--button-top-bottom-padding) var(--button-left-right-padding);
+
+    font: inherit;
+    font-size: var(--button-font-size);
+    text-transform: lowercase;
+    color: var(--color-secondary);
+
+    border: var(--button-border-width) solid transparent;
+    border-color: var(--color-secondary);
+    border-radius: var(--button-border-radius);
+}
+
+.linkStyle {
+    text-decoration: underline;
+
+    &:hover {
+        background: var(--color-accent);
+    }
+}
+
+.presentationContainer {
+    display: grid;
+    gap: var(--gap-inside-section);
+
+    grid-template-columns: auto auto;
+    grid-template-areas:
+        'logo logo'
+        'title title'
+        'tag email'
+        'tag socialMedia';
+
+    & .logo {
+        grid-area: logo;
+    }
+    & .title {
+        grid-area: title;
+    }
+    & .tag {
+        grid-area: tag;
+        align-self: start;
+    }
+    & .email {
+        grid-area: email;
+    }
+    & .socialMedia {
+        grid-area: socialMedia;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+}
+
+@media screen and (min-width: 80rem) {
+    .presentationContainer {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            '. logo'
+            'title logo'
+            'tag logo'
+            'email logo'
+            'socialMedia logo'
+            '. logo';
+    }
+}

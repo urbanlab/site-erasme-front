@@ -19,19 +19,6 @@ const RUBRIQUE_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
     }
 `);
 
-const RUBRIQUE_FULL_INFORMATION_FIELDS_FRAGMENT = gql(`
-    fragment rubriqueFullInformationFields on Rubrique {
-        ...rubriqueBasicInformationFields
-
-        #Get all articles from rubrique
-        articles(pagination: 500) {
-            result {
-                ...articleBasicInformationFields
-            }
-        }
-    }
-`);
-
 const ARTICLE_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
     fragment articleBasicInformationFields on Article {
         id
@@ -152,7 +139,7 @@ const LIST_PROJETS_FIELDS_FRAGMENT = gql(`
                         }
                     }
 
-                    auteurs(where: $whereAuteurs, pagination: $pagination) @include(if: $withAuteurs) {
+                    auteurs(pagination: $pagination) @include(if: $withAuteurs) {
                         result {
                             ...auteurBasicInformationFields
                         }
@@ -175,17 +162,16 @@ const MOTS_AND_GROUPE_MOTS_FIELDS_FRAGMENT = gql(`
 `);
 
 export {
-    PAGINATION_FIELDS_FRAGMENT,
-    RUBRIQUE_BASIC_INFORMATION_FIELDS_FRAGMENT,
-    RUBRIQUE_FULL_INFORMATION_FIELDS_FRAGMENT,
     ARTICLE_BASIC_INFORMATION_FIELDS_FRAGMENT,
     ARTICLE_FULL_INFORMATION_FIELDS_FRAGMENT,
-    PROTOTYPE_INFORMATION_FIELDS_FRAGMENT,
-    MOTS_AND_GROUPE_MOTS_FIELDS_FRAGMENT,
-    LIST_PROJETS_FIELDS_FRAGMENT,
     AUTEUR_BASIC_INFORMATION_FIELDS_FRAGMENT,
     AUTEUR_FULL_INFORMATION_FIELDS_FRAGMENT,
-    MOT_BASIC_INFORMATION_FIELDS_FRAGMENT,
     DOCUMENT_BASIC_INFORMATION_FIELDS_FRAGMENT,
     DOCUMENT_FULL_INFORMATION_FIELDS_FRAGMENT,
+    LIST_PROJETS_FIELDS_FRAGMENT,
+    MOT_BASIC_INFORMATION_FIELDS_FRAGMENT,
+    MOTS_AND_GROUPE_MOTS_FIELDS_FRAGMENT,
+    PAGINATION_FIELDS_FRAGMENT,
+    PROTOTYPE_INFORMATION_FIELDS_FRAGMENT,
+    RUBRIQUE_BASIC_INFORMATION_FIELDS_FRAGMENT,
 };

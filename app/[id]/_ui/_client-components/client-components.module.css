@@ -1,0 +1,8 @@
+.tabsList {
+    display: flex;
+    justify-content: center;
+    gap: var(--gap-list-items);
+    margin-bottom: 1.875rem;
+}
+
+

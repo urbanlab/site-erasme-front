@@ -1,0 +1,19 @@
+.tabsList {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-bottom: 1.875rem;
+}
+
+
+@media screen and (min-width: 80rem) {
+    .desktopWrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--gap-section);
+    }
+
+    .twoColumnContainer {
+        column-count: 2;
+    }
+}

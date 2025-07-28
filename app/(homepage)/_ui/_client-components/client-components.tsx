@@ -1,12 +1,12 @@
 'use client';
 
 import { useLazyQuery } from '@apollo/client/react/hooks/useLazyQuery';
-import { FragmentType, getFragmentData } from '@graphql/__generated__';
-import { ArticleFullInformationFieldsFragmentDoc } from '@graphql/__generated__/graphql';
-import { ARTICLE } from '@graphql/queries';
+import { FragmentType, getFragmentData } from '@services/graphql/__generated__';
+import { ArticleFullInformationFieldsFragmentDoc } from '@services/graphql/__generated__/graphql';
+import { ARTICLE } from '@services/graphql/queries';
 import ArticleCard from '@ui/components/articleCard';
 import Button from '@ui/elements/button';
-import styles from 'page.module.css';
+import styles from './client-components.module.css';
 import { useCallback, useEffect } from 'react';
 
 const LoadArchiveIcon = ({ className }: { className: string }) => (
@@ -158,14 +158,14 @@ const ArchiveArticleCard = ({
     );
 
     return (
-        <div className={className}>
+        <div className={`${styles.archivesContainer} ${className}`}>
             <h2 className={styles.title}>Archives</h2>
             <ArticleCard article={article} variant="archive" textLength={textLength} className={styles.card} />
             <Button
                 className={styles.button}
                 variant="no-style"
                 onClick={() => getArticle({ variables: { id: getRandomArticleIdFromList() } })}
-                aria-label='charger un nouvel article des archives'
+                aria-label="charger un nouvel article des archives"
             >
                 <LoadArchiveIcon className={styles.loadIcon} />
             </Button>

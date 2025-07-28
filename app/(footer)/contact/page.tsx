@@ -1,80 +1,44 @@
-import { FragmentType, getFragmentData } from '@graphql/__generated__/fragment-masking';
-import { ArticleFullInformationFieldsFragmentDoc } from '@graphql/__generated__/graphql';
-import { ARTICLE, RUBRIQUE_PRESENTATION } from '@graphql/queries';
-import heroImage from '@public/hero-img.svg';
-import { getClient } from '@services/apollo/apolloClient';
-import { RemoteHtml } from '@services/remoteHtml';
+import { getArticle, getRubrique } from '@data/queries';
 import ShapedImage from '@ui/components/shapedImage';
-import { AddessesWrapper } from './clientComponents';
+import { AddessesWrapper } from './_ui/_client-components/client-components';
+import { ArticleSection } from './_ui/_components/components';
 import styles from './page.module.css';
 
-const ArticleSection = async ({
-    id,
-    className,
-}: {
-    id: string;
-    className?: { container?: string; title?: string; content?: string };
-}) => {
-    const { data } = await getClient().query({
-        query: ARTICLE,
-        variables: { id: parseInt(id ?? '') },
-    });
-
-    const article = getFragmentData(
-        ArticleFullInformationFieldsFragmentDoc,
-        data.getArticle as FragmentType<typeof ArticleFullInformationFieldsFragmentDoc>
-    );
-
-    return (
-        <div className={className?.container}>
-            <h2 className={className?.title}>{article.titre}</h2>
-            {article.texte && <RemoteHtml className={className?.content} html={article.texte} />}
-        </div>
-    );
-};
-
 export default async function Contact() {
-    const { data } = await getClient().query({
-        query: RUBRIQUE_PRESENTATION,
-        variables: { id: parseInt(process.env.SPIP_RUBRIQUE_CONTACT_ID ?? '') },
-    });
+    const { rubrique } = await getRubrique(parseInt(process.env.SPIP_RUBRIQUE_CONTACT_ID ?? ''));
+
+    const { article: articleNousJoindre } = await getArticle(
+        parseInt(process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_NOUS_JOINDRE_ID ?? '')
+    );
+    const { article: articleBureauxAdministratifs } = await getArticle(
+        parseInt(process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_BUREAUX_ADMINISTRATIFS_ID ?? '')
+    );
+    const { article: articleUrbanLab } = await getArticle(
+        parseInt(process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_URBAN_LAB_ID ?? '')
+    );
+    const { article: articleLaClasse } = await getArticle(
+        parseInt(process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_LACLASSE_ID ?? '')
+    );
+    const { article: articleReseauxSociaux } = await getArticle(
+        parseInt(process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_RESEAUX_SOCIAUX_ID ?? '')
+    );
 
     return (
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
-            <ShapedImage
-                className={styles.logo}
-                alt="logo rubrique"
-                maskShape="wide"
-                src={data.getRubrique?.logo ?? heroImage}
-            />
+            <ShapedImage className={styles.logo} alt="logo rubrique" maskShape="wide" src={rubrique.logo ?? ''} />
 
             <div className={styles.contentContainer}>
-                <ArticleSection
-                    id={process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_NOUS_JOINDRE_ID ?? ''}
-                    className={{ container: styles.nousRejoindre }}
-                />
+                <ArticleSection article={articleNousJoindre} className={{ container: styles.nousRejoindre }} />
 
                 <AddessesWrapper
-                    bureauxAdministratifsSection={
-                        <ArticleSection
-                            id={process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_BUREAUX_ADMINISTRATIFS_ID ?? ''}
-                        />
-                    }
-                    urbanLabSection={
-                        <ArticleSection id={process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_URBAN_LAB_ID ?? ''} />
-                    }
+                    bureauxAdministratifsSection={<ArticleSection article={articleBureauxAdministratifs} />}
+                    urbanLabSection={<ArticleSection article={articleUrbanLab} />}
                     className={styles.wrapper}
                 />
 
-                <ArticleSection
-                    id={process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_LACLASSE_ID ?? ''}
-                    className={{ container: styles.laclasse }}
-                />
+                <ArticleSection article={articleLaClasse} className={{ container: styles.laclasse }} />
 
-                <ArticleSection
-                    id={process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_RESEAUX_SOCIAUX_ID ?? ''}
-                    className={{ container: styles.reseauxSociaux }}
-                />
+                <ArticleSection article={articleReseauxSociaux} className={{ container: styles.reseauxSociaux }} />
             </div>
         </div>
     );
