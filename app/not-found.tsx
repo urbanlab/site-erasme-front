@@ -8,9 +8,9 @@ export default function NotFound() {
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
             <ShapedImage src={notFoundImage.src} alt="" maskShape="narrow" className={styles.logo} />
             <h1 className={styles.title}>Erreur 404</h1>
-            <h5 className={styles.description}>
+            <p className={styles.description}>
                 Oups, nous n’avons pas encore produit le contenu que vous recherchez...
-            </h5>
+            </p>
             <LinkButton href="/" variant="ghost" className={styles.button}>
                 Accueil
             </LinkButton>

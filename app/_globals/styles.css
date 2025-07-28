@@ -74,12 +74,6 @@ p {
     font-weight: var(--font-weight-default-body);
 }
 
-h5 {
-    font-size: var(--font-size-section-description);
-    line-height: var(--line-height-section-description);
-    font-weight: var(--font-weight-section-description);
-}
-
 h1,
 h2,
 h3,

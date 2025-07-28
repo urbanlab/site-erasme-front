@@ -17,11 +17,7 @@ export default async function Equipe() {
         <div className={`${styles.mainContainer} ${styles.localVariables}`}>
             <ShapedImage className={styles.logo} alt="logo page" maskShape="wide" src={rubrique?.logo ?? ''} />
 
-            {rubrique?.texte && (
-                <h5 className={styles.description}>
-                    <RemoteHtml html={rubrique?.texte} />
-                </h5>
-            )}
+            {rubrique?.texte && <RemoteHtml html={rubrique?.texte} className={styles.description} />}
 
             <CollaborateursSection activeAuteurs={activeAuteurs} className={styles.team} />
             <PartenairesSection partenaires={groupeMotsWithMots} className={styles.partners} />
