@@ -8,11 +8,7 @@ const RubriquePresentation = ({ rubrique }: { rubrique: RubriqueBasicInformation
         <div className={styles.presentationContainer}>
             <ShapedImage src={rubrique.logo ?? ''} alt="" maskShape="narrow" className={styles.logo} />
             <h1 className={styles.title}>{rubrique.titre}</h1>
-            {rubrique.texte && (
-                <h5 className={styles.description}>
-                    <RemoteHtmlRawText html={rubrique.texte} removeInnerHtmlTags={true} />
-                </h5>
-            )}
+            {rubrique.texte && <RemoteHtmlRawText html={rubrique.texte} className={styles.description} />}
         </div>
     );
 };

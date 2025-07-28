@@ -155,13 +155,12 @@ const RemoteHtml = ({ html, className }: { html: string; className?: string }) =
 /**
  * Renders sanitized remote HTML as plain text, removing all images, iframes, and styling tags.
  * Only `<p>` tags are allowed, and all attributes are stripped for maximum safety.
- * The output is truncated to the specified textReturnLength.
+ * The output is optionally truncated to the specified textReturnLength.
  *
  * This component is safe for both client and server rendering, and does not trigger any cookie or tracking concerns.
  *
  * @param html - The raw HTML string to sanitize and render.
  * @param textReturnLength - If defined, the maximum number of characters to display from the sanitized HTML.
- * @param removeInnerHtmlTags Optional parameter to return only text inside div, without inner `<p>` tags. Default is false.
  * @param className - Optional CSS class to apply to the container div.
  *
  * @returns A `<div>` containing the sanitized and (optionally) truncated HTML.
@@ -169,19 +168,17 @@ const RemoteHtml = ({ html, className }: { html: string; className?: string }) =
 const RemoteHtmlRawText = ({
     html,
     textReturnLength = -1,
-    removeInnerHtmlTags = false,
     className,
 }: {
     html: string;
     textReturnLength?: number;
-    removeInnerHtmlTags?: boolean;
     className?: string;
 }) => {
     const cleanedHtml = cleanMalformedTags(html);
 
     const sanitizedHtml = DOMPurify.sanitize(cleanedHtml, {
         ALLOWED_ATTR: [],
-        ALLOWED_TAGS: removeInnerHtmlTags ? ['#text'] : ['p'],
+        ALLOWED_TAGS: ['p'],
     });
 
     const slicedHtml = textReturnLength === -1 ? sanitizedHtml : `${sanitizedHtml.slice(0, textReturnLength)}...`;

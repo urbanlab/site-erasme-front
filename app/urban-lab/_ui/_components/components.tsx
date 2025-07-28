@@ -19,11 +19,7 @@ const RubriquePresentation = ({
         <div className={`${styles.presentationContainer} ${className}`}>
             <ShapedImage src={logo ? logo : ''} alt="" maskShape="wide" className={styles.logo} />
             <h1 className={styles.title}>{title}</h1>
-            {description && (
-                <h5 className={styles.description}>
-                    <RemoteHtmlRawText html={description} removeInnerHtmlTags={true} />
-                </h5>
-            )}
+            {description && <RemoteHtmlRawText html={description} className={styles.description} />}
         </div>
     );
 };
