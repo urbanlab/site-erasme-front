@@ -5,7 +5,9 @@ import { CollaborateursSection, PartenairesSection } from './_ui/_components/com
 import styles from './page.module.css';
 
 export default async function Equipe() {
-    const { rubrique } = await getRubrique(parseInt(process.env.SPIP_RUBRIQUE_EQUIPE_ID ?? ''));
+    const { rubriqueBasicInformation: rubrique } = await getRubrique(
+        parseInt(process.env.SPIP_RUBRIQUE_EQUIPE_ID ?? '')
+    );
 
     const { groupeMotsWithMots } = await getGroupeMotsWithMots(
         parseInt(process.env.SPIP_GROUPE_MOTS_PARTENAIRES_ID ?? '')

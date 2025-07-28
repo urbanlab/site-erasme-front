@@ -1,13 +1,12 @@
 import { getRubriqueWithArticles } from '@data/queries';
 import { FragmentType, getFragmentData } from '@services/graphql/__generated__';
 import { DocumentFullInformationFieldsFragmentDoc } from '@services/graphql/__generated__/graphql';
+import ArticleListWrapper from '@ui/client-components/articleListWrapper';
 import Carousel from '@ui/client-components/carousel';
-import ArticleList from '@ui/components/articleList';
 import { ChiffresCles } from '@ui/components/chiffresCles';
 import { Timeline } from '@ui/components/timeline';
 import { DescriptionSection, RubriquePresentation } from './_ui/_components/components';
 import styles from './page.module.css';
-import ArticleListWrapper from '@ui/client-components/articleListWrapper';
 
 /**
  * Do not generate pages other than the ones defined in `generateStaticParams`
@@ -45,9 +44,7 @@ export default async function Projet({ params }: { params: Promise<{ id: string 
                 />
             )}
 
-            {/* <ArticleList articles={articles} /> */}
-
-            <ArticleListWrapper articles={articles}  />
+            <ArticleListWrapper articles={articles} />
 
             {projet.titre_section_supplementaire_2 && projet.texte_section_supplementaire_2 && (
                 <DescriptionSection
@@ -65,7 +62,9 @@ export default async function Projet({ params }: { params: Promise<{ id: string 
                     {projet.data_section_stades_dev && <Timeline timeline={projet.data_section_stades_dev} />}
                 </div>
 
-                {imagesFromProjet && imagesFromProjet.length > 0 && <Carousel images={imagesFromProjet} className={styles.carousel} />}
+                {imagesFromProjet && imagesFromProjet.length > 0 && (
+                    <Carousel images={imagesFromProjet} className={styles.carousel} />
+                )}
             </div>
 
             <ChiffresCles

@@ -5,8 +5,9 @@ import { ArticleSection } from './_ui/_components/components';
 import styles from './page.module.css';
 
 export default async function Contact() {
-    const { rubrique } = await getRubrique(parseInt(process.env.SPIP_RUBRIQUE_CONTACT_ID ?? ''));
-
+    const { rubriqueBasicInformation: rubrique } = await getRubrique(
+        parseInt(process.env.SPIP_RUBRIQUE_CONTACT_ID ?? '')
+    );
     const { article: articleNousJoindre } = await getArticle(
         parseInt(process.env.SPIP_RUBRIQUE_CONTACT_ARTICLE_NOUS_JOINDRE_ID ?? '')
     );

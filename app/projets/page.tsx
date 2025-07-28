@@ -4,7 +4,9 @@ import { RubriquePresentation } from './_ui/_components/components';
 import styles from './page.module.css';
 
 export default async function Projets() {
-    const { rubrique } = await getRubrique(parseInt(process.env.SPIP_RUBRIQUE_PROJETS_ID ?? ''));
+    const { rubriqueBasicInformation: rubrique } = await getRubrique(
+        parseInt(process.env.SPIP_RUBRIQUE_PROJETS_ID ?? '')
+    );
 
     const { projets } = await getAllProjets();
 
