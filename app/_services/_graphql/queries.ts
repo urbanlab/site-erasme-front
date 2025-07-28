@@ -93,8 +93,8 @@ const SEARCH = gql(`
             $pagination: Int = 5000, 
             $page: Int = 1, 
             $where: String!,
-            $withAuteurs: Boolean = false,
-            $whereAuteurs: [String!]) {
+            $withAuteurs: Boolean = false
+        ) {
         recherche(texte: $texte, orderby: $generalOrderBy, pagination: $pagination, page: $page, where: $where) {
             result {
                 ...on Rubrique {

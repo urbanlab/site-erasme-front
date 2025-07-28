@@ -9,7 +9,7 @@ import xShapedIcon from '@public/x-shaped-icon.svg';
 import ArticleCard from '@ui/components/articleCard';
 import ImageCard from '@ui/components/imageCard';
 import ShapedImage from '@ui/components/shapedImage';
-import LinkButton from '@ui/elements/linkButton';
+import LinkButton from '@ui/components/linkButton';
 import Image from 'next/image';
 import { imageCardsContent, pageTexts } from '../../_data/pageTexts';
 import { ArchiveArticleCard } from '../_client-components/client-components';

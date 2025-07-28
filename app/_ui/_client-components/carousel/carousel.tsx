@@ -1,7 +1,7 @@
 'use client';
 
 import chevronIcon from '@public/chevron-up-icon.svg';
-import Button from '@ui/elements/button';
+import Button from '@ui/components/button';
 import Image from 'next/image';
 import { useState } from 'react';
 import styles from './carousel.module.css';

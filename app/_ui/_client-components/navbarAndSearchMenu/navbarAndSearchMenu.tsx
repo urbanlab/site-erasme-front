@@ -2,17 +2,17 @@
 
 import { ControlledComponentValueType } from '@globals/types';
 import { useIsDesktop } from '@hooks/useIsDesktop';
-import Backdrop from '@ui/elements/backdrop';
-import { FormEvent, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import Navbar from './navbar';
+import Backdrop from '@ui/components/backdrop';
 import {
     addSuggestionToList,
     getSearchSuggestionsFromLocalStorage,
     removeSuggestionFromList,
 } from '@utils/searchUtils';
+import { FormEvent, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+import Navbar from './_navbar/navbar';
 
-export default function NavbarWrapper({className}: {className?: string}) {
+export default function NavbarAndSearchMenu({ className }: { className?: string }) {
     const [isSearchMode, setIsSearchMode] = useState(false);
     const [showSearchResults, setShowSearchResults] = useState(false);
     const [searchInput, setSearchInput] = useState('');
@@ -44,18 +44,6 @@ export default function NavbarWrapper({className}: {className?: string}) {
     const handleSearchFilterChange = (searchFilter: ControlledComponentValueType) => {
         setSelectedSearchFilter(searchFilter);
     };
-
-    //Test to block scroll when the search menu is open, but I don't like it very much. Removing for now.
-    //Probably needs to apply to html instead...
-    // useEffect(() => {
-    //     if (isSearchMode) {
-    //         document.body.classList.add('noScroll');
-    //         // document.body.style.overflow = 'hidden'
-    //     } else {
-    //         document.body.classList.remove('noScroll');
-    //         // document.body.style.overflow = ''
-    //     }
-    // }, [isSearchMode]);
 
     return (
         <>

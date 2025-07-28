@@ -1,5 +1,5 @@
 import { getAllProjets, getGroupeMotsWithMots, getRubrique } from '@data/queries';
-import ProjectListWrapper from '@ui/components/projectListWrapper';
+import ProjectListWrapper from '@ui/client-components/projectListWrapper';
 import { RubriquePresentation } from './_ui/_components/components';
 import styles from './page.module.css';
 

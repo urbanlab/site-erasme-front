@@ -2,7 +2,7 @@
 
 import { Tabs } from '@base-ui-components/react/tabs';
 import { useIsDesktop } from '@hooks/useIsDesktop';
-import Button from '@ui/elements/button';
+import Button from '@ui/components/button';
 import { JSX } from 'react';
 import styles from './client-components.module.css';
 

@@ -5,7 +5,7 @@ import { ArticleFullInformationFieldsFragment } from '@services/graphql/__genera
 import useCookieAllowedServices from '@hooks/useCookieAllowedServices';
 import { useIsDesktop } from '@hooks/useIsDesktop';
 import { RemoteHtmlWithIframesAndCookieConsentManagement } from '@services/remoteHtml';
-import Button from '@ui/elements/button';
+import Button from '@ui/components/button';
 import { JSX } from 'react';
 import styles from './client-components.module.css'
 

@@ -1,9 +1,9 @@
 import '@globals/styles.css';
 import { ApolloWrapper } from '@services/apollo/apolloWrapper';
 import { CookieConsentManager } from '@services/cookieConsent/cookieConsentManager';
-import Footer from '@ui/components/footer';
-import NavbarWrapper from '@ui/components/navbarWrapper';
-import NavigateBack from '@ui/components/navigateBack';
+import Footer from '@ui/client-components/footer';
+import NavbarAndSearchMenu from '@ui/client-components/navbarAndSearchMenu';
+import NavigateBack from '@ui/client-components/navigateBack';
 import type { Metadata } from 'next';
 import { K2D } from 'next/font/google';
 import styles from './layout.module.css';
@@ -29,10 +29,10 @@ export default function RootLayout({
                 <CookieConsentManager />
 
                 <ApolloWrapper>
-                    <NavbarWrapper className={styles.navbar} />
+                    <NavbarAndSearchMenu className={styles.navbar} />
                     <NavigateBack className={styles.navigateBack} />
                     <div className={styles.contentContainer}>{children}</div>
-                    <Footer className={styles.footer}/>
+                    <Footer className={styles.footer} />
                 </ApolloWrapper>
             </body>
         </html>

@@ -8,8 +8,8 @@ import {
 } from '@services/graphql/__generated__/graphql';
 import { RemoteHtml } from '@services/remoteHtml';
 import ShapedImage from '@ui/components/shapedImage';
-import Carousel from '@ui/elements/carousel';
-import Tag from '@ui/elements/tag';
+import Carousel from '@ui/client-components/carousel';
+import Tag from '@ui/components/tag';
 import { dateFormat } from '@utils/dateUtils';
 import Link from 'next/link';
 import { ecosystemeCards, prototypeCards } from '../../_data/pageTexts';

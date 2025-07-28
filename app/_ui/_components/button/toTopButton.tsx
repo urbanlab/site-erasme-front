@@ -1,6 +1,6 @@
 'use client';
 
-import Arrow from '@ui/elements/arrow';
+import Arrow from '@ui/components/arrow';
 import Button from './button';
 
 export default function ToTopButton({ className }: { className?: string }) {

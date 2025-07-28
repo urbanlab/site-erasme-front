@@ -1,4 +1,4 @@
-import Button from '@ui/elements/button';
+import Button from '@ui/components/button';
 import styles from './pagination.module.css';
 
 type PaginationProps = {

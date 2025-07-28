@@ -5,9 +5,9 @@ import { FragmentType, getFragmentData } from '@services/graphql/__generated__';
 import { ArticleFullInformationFieldsFragmentDoc } from '@services/graphql/__generated__/graphql';
 import { ARTICLE } from '@services/graphql/queries';
 import ArticleCard from '@ui/components/articleCard';
-import Button from '@ui/elements/button';
-import styles from './client-components.module.css';
+import Button from '@ui/components/button';
 import { useCallback, useEffect } from 'react';
+import styles from './client-components.module.css';
 
 const LoadArchiveIcon = ({ className }: { className: string }) => (
     <svg

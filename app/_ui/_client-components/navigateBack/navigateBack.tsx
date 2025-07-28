@@ -4,7 +4,7 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import styles from './navigateBack.module.css';
 import { useIsDesktop } from '@hooks/useIsDesktop';
-import Button from '@ui/elements/button';
+import Button from '@ui/components/button';
 
 export default function NavigateBackButton({className}: {className?: string}) {
     const router = useRouter();

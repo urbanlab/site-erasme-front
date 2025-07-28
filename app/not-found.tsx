@@ -1,6 +1,6 @@
 import notFoundImage from '@public/not-found.png';
 import ShapedImage from '@ui/components/shapedImage';
-import LinkButton from '@ui/elements/linkButton';
+import LinkButton from '@ui/components/linkButton';
 import styles from 'not-found.module.css';
 
 export default function NotFound() {

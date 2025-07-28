@@ -1,7 +1,7 @@
 import { getActiveAuteurs, getAllProjets, getAuteur, getGroupeMotsWithMots } from '@data/queries';
 import { FragmentType, getFragmentData } from '@services/graphql/__generated__/fragment-masking';
 import { AuteurFullInformationFieldsFragmentDoc } from '@services/graphql/__generated__/graphql';
-import ProjectListWrapper from '@ui/components/projectListWrapper';
+import ProjectListWrapper from '@ui/client-components/projectListWrapper';
 import { AuteurPresentation } from './_ui/_components/components';
 import styles from './page.module.css';
 

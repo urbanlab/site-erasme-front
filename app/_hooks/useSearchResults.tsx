@@ -9,7 +9,6 @@ import {
     DocumentBasicInformationFieldsFragmentDoc,
     ListProjetsFieldsFragment,
     ListProjetsFieldsFragmentDoc,
-    SearchQuery,
 } from '@services/graphql/__generated__/graphql';
 import { SEARCH } from '@services/graphql/queries';
 import { useEffect, useState } from 'react';
@@ -29,14 +28,16 @@ export function useSearchResults({ searchInput }: { searchInput: string }) {
         images: [],
     });
 
-    const { data } = useSuspenseQuery<SearchQuery>(SEARCH, {
+    const { data } = useSuspenseQuery(SEARCH, {
         variables: {
             texte: searchInput,
             where: `statut="publie"`,
             generalOrderBy: [`date_DESC`],
             articlesInRubriqueOrderBy: [`date_DESC`],
+            withAuteurs: false,
         },
     });
+
     useEffect(() => {
         const searchQuery = () => {
             const articles = getFragmentData(

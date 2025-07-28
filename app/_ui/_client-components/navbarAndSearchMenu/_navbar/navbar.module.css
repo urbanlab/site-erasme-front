@@ -92,40 +92,6 @@
     }
 }
 
-.searchMenuContainer {
-    display: grid;
-    grid-template-areas:
-        '. closeButton'
-        'searchInput searchInput'
-        'searchFilter searchButton'
-        'searchResults searchResults';
-
-    & .closeButton {
-        grid-area: closeButton;
-        justify-self: end;
-    }
-
-    & .searchInput {
-        grid-area: searchInput;
-        margin-bottom: 1.875rem;
-    }
-
-    & .searchButton {
-        grid-area: searchButton;
-        justify-self: end;
-    }
-
-    & .searchFilter {
-        grid-area: searchFilter;
-        justify-self: start;
-    }
-
-    & .searchResults {
-        grid-area: searchResults;
-        margin-top: 2.5rem;
-    }
-}
-
 .burgerMenuContainer {
     display: flex;
     flex-direction: column;
@@ -169,47 +135,14 @@
         min-width: var(--anchor-width);
     }
 
-    .verticalOffset {
-        margin-top: var(--navbar-padding-top-bottom);
-    }
-
     .bigScreenContainer {
         display: flex;
         gap: 3.125rem;
-
-        .searchMenuContainer {
-            display: grid;
-            grid-template-areas: 'searchFilter searchInput searchButton closeButton';
-            column-gap: 0.625rem;
-
-            & .closeButton {
-                justify-self: unset;
-            }
-
-            & .searchInput {
-                margin-bottom: unset;
-                width: clamp(24rem, 30vw, 31.25rem);
-            }
-
-            & .searchButton {
-                justify-self: unset;
-            }
-
-            & .searchFilter {
-                justify-self: unset;
-            }
-        }
 
         & .mainNavigationContainer {
             display: flex;
             column-gap: 0.625rem;
             align-self: center;
         }
-    }
-
-    .desktopSearchResultsContainer {
-        max-width: var(--anchor-width);
-        margin-top: unset;
-        background: var(--color-background);
     }
 }

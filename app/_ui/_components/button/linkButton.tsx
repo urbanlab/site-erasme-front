@@ -1,4 +1,4 @@
-import { ButtonVariantType } from '@ui/elements/button';
+import { ButtonVariantType } from '@ui/components/button';
 import Link from 'next/link';
 import styles from './button.module.css';
 

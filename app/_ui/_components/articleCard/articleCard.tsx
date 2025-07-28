@@ -1,8 +1,6 @@
-'use client';
-
 import { ArticleFullInformationFieldsFragment } from '@services/graphql/__generated__/graphql';
 import { RemoteHtmlRawText } from '@services/remoteHtml';
-import Arrow from '@ui/elements/arrow';
+import Arrow from '@ui/components/arrow';
 import { dateFormat } from '@utils/dateUtils';
 import Link from 'next/link';
 import styles from './articleCard.module.css';

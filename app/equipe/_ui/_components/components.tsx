@@ -4,7 +4,7 @@ import {
     MotsAndGroupeMotsFieldsFragment,
     MotsAndGroupeMotsFieldsFragmentDoc,
 } from '@services/graphql/__generated__/graphql';
-import LinkButton from '@ui/elements/linkButton';
+import LinkButton from '@ui/components/linkButton';
 import Link from 'next/link';
 import { pageTexts } from '../../_data/page-texts';
 import styles from './components.module.css';

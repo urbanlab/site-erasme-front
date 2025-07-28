@@ -11,10 +11,10 @@ import {
 } from '@services/graphql/__generated__/graphql';
 import { useIsDesktop } from '@hooks/useIsDesktop';
 import ProjectList from '@ui/components/projectList';
-import FilterPopover from '@ui/elements/filterPopover';
-import Pagination from '@ui/elements/pagination';
-import SelectBox from '@ui/elements/selectBox';
-import ToggleGroup from '@ui/elements/toggleGroup';
+import FilterPopover from '@ui/components/filterPopover';
+import Pagination from '@ui/components/pagination';
+import SelectBox from '@ui/components/selectBox';
+import ToggleGroup from '@ui/components/toggleGroup';
 import { useState } from 'react';
 import styles from './projectListWrapper.module.css';
 

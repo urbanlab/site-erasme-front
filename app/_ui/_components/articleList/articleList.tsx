@@ -1,6 +1,6 @@
 import { ArticleBasicInformationFieldsFragment } from '@services/graphql/__generated__/graphql';
-import Arrow from '@ui/elements/arrow';
-import Tag from '@ui/elements/tag';
+import Arrow from '@ui/components/arrow';
+import Tag from '@ui/components/tag';
 import { dateFormat } from '@utils/dateUtils';
 import Link from 'next/link';
 import styles from './articleList.module.css';

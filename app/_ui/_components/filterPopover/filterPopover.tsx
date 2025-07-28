@@ -1,6 +1,6 @@
 import { Popover } from '@base-ui-components/react/popover';
 import chevronIcon from '@public/chevron-up-icon.svg';
-import Button from '@ui/elements/button';
+import Button from '@ui/components/button';
 import Image from 'next/image';
 import styles from './filterPopover.module.css';
 

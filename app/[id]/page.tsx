@@ -1,5 +1,5 @@
 import { getPageArticleOrPrototype } from '@data/queries';
-import ToTopButton from '@ui/elements/toTopButton';
+import ToTopButton from '@ui/components/toTopButton';
 import ArticleCommon from './_ui/_client-components/client-components';
 import { ArticlePresentation, ArticlePrototype } from './_ui/_components/components';
 import styles from './page.module.css';

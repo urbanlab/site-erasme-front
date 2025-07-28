@@ -1,5 +1,5 @@
 import { ControlledComponentType, ControlledComponentValueType } from '@globals/types';
-import Button, { ButtonVariantType } from '@ui/elements/button';
+import Button, { ButtonVariantType } from '@ui/components/button';
 
 type ToggleGroupProps = {
     items: ControlledComponentType[];
