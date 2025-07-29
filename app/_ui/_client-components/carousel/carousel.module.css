@@ -10,6 +10,8 @@
 .imagesWrapper {
     position: relative;
 
+    cursor: pointer;
+
     display: grid;
     grid-template-rows: 1fr;
     grid-template-areas: 'imageWithController';
@@ -32,6 +34,8 @@
 
     .commandsWrapper {
         grid-area: imageWithController;
+
+        cursor: default;
 
         place-self: end;
 
