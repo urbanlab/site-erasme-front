@@ -1,25 +1,23 @@
 .localVariables {
-    --border-radius: 1.25rem;
+    --border-radius: 1rem;
 
     --padding-top: 30px;
     --padding-bottom: 16px;
-    --padding-left: 8px;
+    --padding-left: 12px;
     --padding-right: 16px;
 
     --padding-arrow: 10px;
 
-    --padding-title: 4.5px var(--padding-left);
+    --padding-title: 10px 24px 10px var(--padding-left);
 
-    --font-size-title: 1.125rem
+    --font-size-title: 1.125rem;
 }
 
 .cardWrapper {
     display: grid;
     grid-template-rows: 1fr;
     position: relative;
-
 }
-
 
 .overlay {
     z-index: 1;
@@ -28,14 +26,13 @@
 .cardTexts {
     display: grid;
     grid-template-rows: var(--padding-top) auto minmax(12rem, 1fr) auto var(--padding-bottom);
-    grid-template-columns: 1fr auto var(--padding-right);
+    grid-template-columns: auto 1fr auto var(--padding-right);
     grid-template-areas:
-        '  .        .         .'
-        'title      .         .'
-        '  .        .         .'
-        '  .    savoirPlus    .'
-        '  .        .         .';
-
+        '  .        .       .         .'
+        'title      .       .         .'
+        '  .        .       .         .'
+        '  .        .   savoirPlus    .'
+        '  .        .       .         .';
 
     .title {
         grid-area: title;
@@ -66,7 +63,6 @@
 
         padding: var(--padding-arrow);
     }
-
 }
 
 .cardImage {
@@ -79,39 +75,37 @@
     display: none;
 }
 
-
 @media screen and (min-width: 80rem) {
-
     .localVariables {
         --border-radius: 1.25rem;
 
-        --padding-top: 80px;
+        --padding-top: 30px;
         --padding-bottom: 30px;
-        --padding-left: 20px;
+        --padding-left: 24px;
         --padding-right: 25px;
 
-        --padding-arrow: 26px 40px;
+        --padding-arrow: 12px 24px;
 
-        --padding-title: 22px var(--padding-left);
+        --padding-title: 12px 48px 12px var(--padding-left);
 
         --font-size-title: 1.75rem;
-
     }
 
     .cardWrapper {
         &:hover {
             .cardTexts {
-                grid-template-columns: var(--padding-left) 1fr minmax(0, 0.25fr) var(--padding-right);
+                grid-template-columns: var(--padding-left) auto auto 1fr auto var(--padding-right);
                 grid-template-areas:
-                    '  .        .               .        .'
-                    'title    title             .        .'
-                    '  .        .               .        .'
-                    '  .     savoirPlus    savoirPlus    .'
-                    '  .        .               .        .';
+                    '  .        .       .        .          .           .'
+                    'title    title     .        .          .           .'
+                    '  .        .       .        .          .           .'
+                    '  .        .       .        .      savoirPlus      .'
+                    '  .        .       .        .          .           .';
 
                 .savoirPlus {
                     display: flex;
                     justify-content: space-between;
+                    gap: 18px;
 
                     font-size: 1.5rem;
                     font-weight: var(--font-weight-medium);
@@ -122,8 +116,6 @@
                 .onHoverOnly {
                     display: unset;
                 }
-
-
             }
 
             .cardImage {
@@ -135,5 +127,4 @@
             filter: grayscale(1);
         }
     }
-
 }
