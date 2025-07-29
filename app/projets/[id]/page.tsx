@@ -53,26 +53,30 @@ export default async function Projet({ params }: { params: Promise<{ id: string 
                 />
             )}
 
-            <div className={styles.sectionsWrapper}>
-                <div className={styles.stadesDevContainer}>
-                    <DescriptionSection
-                        title={projet.titre_section_stades_dev ?? ''}
-                        content={projet.texte_section_stades_dev ?? ''}
-                    />
-                    {projet.data_section_stades_dev && <Timeline timeline={projet.data_section_stades_dev} />}
+            {(projet.texte_section_stades_dev || imagesFromProjet) && imagesFromProjet.length > 0 && (
+                <div className={styles.sectionsWrapper}>
+                    <div className={styles.stadesDevContainer}>
+                        <DescriptionSection
+                            title={projet.titre_section_stades_dev ?? ''}
+                            content={projet.texte_section_stades_dev ?? ''}
+                        />
+                        {projet.data_section_stades_dev && <Timeline timeline={projet.data_section_stades_dev} />}
+                    </div>
+
+                    {imagesFromProjet && imagesFromProjet.length > 0 && (
+                        <Carousel images={imagesFromProjet} className={styles.carousel} />
+                    )}
                 </div>
+            )}
 
-                {imagesFromProjet && imagesFromProjet.length > 0 && (
-                    <Carousel images={imagesFromProjet} className={styles.carousel} />
-                )}
-            </div>
-
-            <ChiffresCles
-                title={projet.titre_section_chiffres_cles ?? ''}
-                chiffresCles={projet.texte_section_chiffres_cles ?? ''}
-                splitBy=":"
-                className={styles.chiffresClesContainer}
-            />
+            {projet.texte_section_chiffres_cles && (
+                <ChiffresCles
+                    title={projet.titre_section_chiffres_cles ?? ''}
+                    chiffresCles={projet.texte_section_chiffres_cles ?? ''}
+                    splitBy=":"
+                    className={styles.chiffresClesContainer}
+                />
+            )}
         </div>
     );
 }
