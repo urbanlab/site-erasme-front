@@ -148,7 +148,10 @@ const getAllProjets = async (withAuteurs: boolean = false) => {
     const { data } = await getClient().query({
         query: ALL_PROJECTS_AND_NESTED_COLLECTIONS,
         variables: {
-            whereRubriques: [`id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`],
+            whereRubriques: [
+                `id_parent=${process.env.SPIP_RUBRIQUE_PROJETS_ID}`,
+                `id_rubrique!=${process.env.SPIP_RUBRIQUE_PROJETS_ARCHIVES_ID}`,
+            ],
             rubriquesOrderBy: [`date_DESC`],
             articlesInRubriqueOrderBy: [`date_DESC`],
             withAuteurs: withAuteurs,
