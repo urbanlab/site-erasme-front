@@ -40,7 +40,9 @@
     }
 }
 
-
+.desktopOnly {
+    display: none;
+}
 
 @media screen and (min-width: 80rem) {
     .localVariables {
@@ -52,9 +54,20 @@
         .contentContainer {
             grid-template-columns: 1fr 1fr;
             grid-template-areas:
-                'nousRejoindre nousRejoindre'
+                'nousRejoindre icon'
                 'wrapper wrapper'
                 'laclasse reseauxSociaux';
         }
+
+        .icon {
+            grid-area: icon;
+            height: 300px;
+            align-self: center;
+            justify-self: start;
+        }
+    }
+
+    .desktopOnly {
+        display: unset;
     }
 }

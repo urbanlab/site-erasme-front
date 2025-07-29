@@ -3,6 +3,8 @@ import ShapedImage from '@ui/components/shapedImage';
 import { AddessesWrapper } from './_ui/_client-components/client-components';
 import { ArticleSection } from './_ui/_components/components';
 import styles from './page.module.css';
+import contactIcon from '@public/contact-icon.svg';
+import Image from 'next/image';
 
 export default async function Contact() {
     const { rubriqueBasicInformation: rubrique } = await getRubrique(
@@ -30,6 +32,8 @@ export default async function Contact() {
 
             <div className={styles.contentContainer}>
                 <ArticleSection article={articleNousJoindre} className={{ container: styles.nousRejoindre }} />
+
+                <Image src={contactIcon} alt="" className={`${styles.icon} ${styles.desktopOnly}`} />
 
                 <AddessesWrapper
                     bureauxAdministratifsSection={<ArticleSection article={articleBureauxAdministratifs} />}
