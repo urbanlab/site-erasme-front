@@ -1,7 +1,9 @@
 .mainContainer {
     display: flex;
     align-items: center;
-    column-gap: 20px;
+    justify-content: end;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .currentPage {
