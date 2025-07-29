@@ -17,7 +17,7 @@
 }
 
 .zIndex {
-    z-index: 100;
+    z-index: var(--zIndex-navbar);
 }
 
 .mainContainer {

@@ -6,7 +6,6 @@ import { DocumentFullInformationFieldsFragment } from '@services/graphql/__gener
 import Button from '@ui/components/button';
 import Image from 'next/image';
 import { useState } from 'react';
-
 import styles from './carousel.module.css';
 
 const ImageDialog = ({

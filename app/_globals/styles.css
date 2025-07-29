@@ -46,6 +46,8 @@
 
     --gap-section: 2.625rem;
     --gap-inside-section: 24px;
+
+    --zIndex-navbar: 100;
 }
 
 * {

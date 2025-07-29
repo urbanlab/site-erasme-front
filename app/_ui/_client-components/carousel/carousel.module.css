@@ -71,15 +71,19 @@
     }
 }
 
-.overlay {
-    z-index: 1;
+.dialogOverlay {
+    z-index: calc(var(--zIndex-navbar) + 2);
+}
+
+.backdrop {
+    z-index: calc(var(--zIndex-navbar) + 1);
 }
 
 .dialogPopup {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -42.5%);
+    transform: translate(-50%, -50%);
 }
 
 .dialogImageContainer {

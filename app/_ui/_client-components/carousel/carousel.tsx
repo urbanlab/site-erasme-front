@@ -26,10 +26,12 @@ export default function Carousel({
         <>
             <CarouselBase images={images} handleImageClick={handleImageClick} className={className} />
 
-            <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
+            <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen} dismissible>
                 <Dialog.Portal>
-                    <Dialog.Backdrop render={<Backdrop />} />
-                    <Dialog.Popup className={`${styles.dialogPopup} ${styles.overlay}`}>
+                    <Dialog.Backdrop
+                        render={<Backdrop className={styles.backdrop} onClick={() => setDialogOpen(false)} />}
+                    />
+                    <Dialog.Popup className={`${styles.dialogPopup} ${styles.dialogOverlay}`}>
                         <CarouselBase images={images} handleImageClick={() => null} isDialog firstImage={activeImage} />
                     </Dialog.Popup>
                 </Dialog.Portal>
