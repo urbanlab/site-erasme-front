@@ -116,7 +116,7 @@ export default function CarouselBase({
                         src={images[activeImage - 1].fichier ?? ''}
                         fill
                         alt={images[activeImage - 1].alt ?? ''}
-                        className={`${styles.image} ${styles.imageBorder} ${isTransition ? styles.imageTransition : ''}`}
+                        className={`${styles.image} ${styles.imageBorder} ${styles.cursorPointer} ${isTransition ? styles.imageTransition : ''}`}
                         style={{ objectFit: 'cover' }}
                         onClick={() => handleImageClick(activeImage)}
                     />

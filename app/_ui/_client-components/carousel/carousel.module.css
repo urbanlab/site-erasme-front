@@ -10,8 +10,6 @@
 .imagesWrapper {
     position: relative;
 
-    cursor: pointer;
-
     display: grid;
     grid-template-rows: 1fr;
     grid-template-areas: 'imageWithController';
@@ -26,6 +24,10 @@
 
     .imageBorder {
         border-radius: var(--border-radius-images);
+    }
+
+    .cursorPointer{
+        cursor: pointer;
     }
 
     .imageTransition {
