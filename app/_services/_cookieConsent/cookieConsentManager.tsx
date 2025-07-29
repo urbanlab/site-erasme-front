@@ -9,7 +9,7 @@ import 'vanilla-cookieconsent/dist/cookieconsent.css';
  *
  * This function analyzes the hostname of the provided URL and maps it to a known third-party service
  * (such as 'youtube', 'vimeo', 'google', etc.). If the hostname does not match any known service,
- * it returns the main domain as a fallback. Note that this fallback indicates that the service consent is 
+ * it returns the main domain as a fallback. Note that this fallback indicates that the service consent is
  * not configured, yet. You will need to add it to the list below and to include it in {@link CookieConsentManager}.
  *
  * @param url - The url as a string.
@@ -17,7 +17,10 @@ import 'vanilla-cookieconsent/dist/cookieconsent.css';
  */
 const getServiceName = (url: string): string => {
     let service: string = '';
-    const parsedUrl = new URL(url);
+    
+    //Some embedded services do not include `https` part by default, leading to an invalid `URL` when parsed. This fix it.
+    const validUrl = url.startsWith('//') ? `https:${url}` : url;
+    const parsedUrl = new URL(validUrl);
     const host = parsedUrl.hostname;
 
     if (host.includes('youtube.com') || host.includes('youtu.be') || host.includes('youtube-nocookie.com')) {
