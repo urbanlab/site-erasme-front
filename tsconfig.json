@@ -42,6 +42,7 @@
       "@ui/components/articleList": ["_ui/_components/articleList/articleList.tsx"],
       "@ui/components/timeline": ["_ui/_components/timeline/timeline.tsx"],
       "@ui/components/chiffresCles": ["_ui/_components/chiffresCles/chiffresCles.tsx"],
+      "@ui/components/imageDialog": ["_ui/_components/imageDialog/imageDialog.tsx"],
       "@ui/client-components/carousel": ["_ui/_client-components/carousel/carousel.tsx"],
       "@ui/client-components/footer": ["_ui/_client-components/footer/footer.tsx"],
       "@ui/client-components/navbarAndSearchMenu": ["_ui/_client-components/navbarAndSearchMenu/navbarAndSearchMenu.tsx"],

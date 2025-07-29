@@ -1,8 +1,8 @@
 import { DocumentFullInformationFieldsFragment } from '@services/graphql/__generated__/graphql';
 import { RemoteHtml, RemoteHtmlRawText } from '@services/remoteHtml';
 import Carousel from '@ui/client-components/carousel';
-import styles from './components.module.css';
 import ShapedImage from '@ui/components/shapedImage';
+import styles from './components.module.css';
 
 const RubriquePresentation = ({
     logo,
@@ -46,4 +46,4 @@ const ArticleSection = ({
     );
 };
 
-export { RubriquePresentation, ArticleSection };
+export { ArticleSection, RubriquePresentation };
