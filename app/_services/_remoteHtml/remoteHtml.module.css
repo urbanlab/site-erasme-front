@@ -2,7 +2,7 @@
     * {
         max-width: 100%;
     }
-    
+
     &div {
         font-size: var(--font-size-default-body);
         line-height: var(--line-height-default-body);
@@ -17,6 +17,12 @@
         flex-direction: column;
         justify-self: center;
         align-items: center;
+    }
+
+    iframe {
+        width: 80%;
+        height: auto;
+        aspect-ratio: 16/9;
     }
 
     a {
