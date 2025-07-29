@@ -13,6 +13,7 @@ const PAGINATION_FIELDS_FRAGMENT = gql(`
 const RUBRIQUE_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
     fragment rubriqueBasicInformationFields on Rubrique {
         id
+        identifiant
         titre
         texte
         logo
@@ -22,6 +23,7 @@ const RUBRIQUE_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
 const RUBRIQUE_FULL_INFORMATION_FIELDS_FRAGMENT = gql(`
     fragment rubriqueFullInformationFields on Rubrique {
         id
+        identifiant
         titre
         texte
         logo
@@ -47,6 +49,7 @@ const RUBRIQUE_FULL_INFORMATION_FIELDS_FRAGMENT = gql(`
 const ARTICLE_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
     fragment articleBasicInformationFields on Article {
         id
+        identifiant
         titre
         date
         logo
@@ -57,6 +60,7 @@ const ARTICLE_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
 const ARTICLE_FULL_INFORMATION_FIELDS_FRAGMENT = gql(`
     fragment articleFullInformationFields on Article {
         id
+        identifiant
         titre
         texte
         logo
@@ -147,6 +151,7 @@ const DOCUMENT_FULL_INFORMATION_FIELDS_FRAGMENT = gql(`
 const LIST_PROJETS_FIELDS_FRAGMENT = gql(`
     fragment listProjetsFields on Rubrique{
         id
+        identifiant
         titre
         texte
         date
@@ -178,6 +183,7 @@ const LIST_PROJETS_FIELDS_FRAGMENT = gql(`
 const MOTS_AND_GROUPE_MOTS_FIELDS_FRAGMENT = gql(`
     fragment motsAndGroupeMotsFields on Mot {
         id
+        identifiant
         titre
         groupe {
             id

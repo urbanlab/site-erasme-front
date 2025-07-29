@@ -14,7 +14,7 @@ type ArticleCardProps = {
 
 export default function ArticleCard({ article, variant, textLength, className }: ArticleCardProps) {
     return (
-        <Link href={`/${article?.id}`} className={`${styles.card} ${className} ${styles[variant]}`}>
+        <Link href={`/${article?.identifiant}`} className={`${styles.card} ${className} ${styles[variant]}`}>
             <h4 className={styles.title}>{article?.titre}</h4>
             <Arrow
                 className={styles.arrow}

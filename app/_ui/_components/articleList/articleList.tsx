@@ -24,7 +24,11 @@ export default function ArticleList({
 
                     return (
                         <li key={article?.id}>
-                            <Link href={`/${article?.id}`} className={styles.item} onNavigate={handleNavigation}>
+                            <Link
+                                href={`/${article?.identifiant}`}
+                                className={styles.item}
+                                onNavigate={handleNavigation}
+                            >
                                 <p className={styles.title}>{article?.titre}</p>
                                 <div className={`${styles.conditionalDisplay} ${styles.desktopFields}`}>
                                     {isTagStyle ? (

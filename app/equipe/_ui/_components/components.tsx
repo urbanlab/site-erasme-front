@@ -52,7 +52,11 @@ const PartenairesSection = async ({
                     );
 
                     return (
-                        <Link key={motFragment.id} href={`/mot-cle/${motFragment.id}`} className={styles.linkStyle}>
+                        <Link
+                            key={motFragment.id}
+                            href={`/mot-cle/${motFragment.identifiant}`}
+                            className={styles.linkStyle}
+                        >
                             {motFragment.titre}
                         </Link>
                     );

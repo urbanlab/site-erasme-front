@@ -1,3 +1,4 @@
+import { getClient } from '@services/apollo/apolloClient';
 import { FragmentType, getFragmentData } from '@services/graphql/__generated__/fragment-masking';
 import {
     ArticleBasicInformationFieldsFragmentDoc,
@@ -15,15 +16,15 @@ import {
     ACTIVE_AUTHORS,
     ALL_PROJECTS_AND_NESTED_COLLECTIONS,
     ARTICLE,
-    ARTICLE_AND_PROTOTYPE,
+    ARTICLE_AND_PROTOTYPE_BY_IDENTIFIANT,
     AUTEUR,
     GROUPE_MOTS_WITH_MOTS,
     HOMEPAGE,
-    MOT,
+    MOT_BY_IDENTIFIANT,
     RUBRIQUE_PRESENTATION,
     RUBRIQUE_WITH_ARTICLES,
+    RUBRIQUE_WITH_ARTICLES_BY_IDENTIFIANT,
 } from '@services/graphql/queries';
-import { getClient } from '@services/apollo/apolloClient';
 
 const getRubriqueWithArticles = async (
     id: number,
@@ -34,6 +35,45 @@ const getRubriqueWithArticles = async (
         query: RUBRIQUE_WITH_ARTICLES,
         variables: {
             id: id,
+            withRubriqueFullInformation: withRubriqueFullInformation,
+            withArticleFullInformation: withArticleFullInformation,
+        },
+    });
+
+    const rubriqueBasicInformation = getFragmentData(
+        RubriqueBasicInformationFieldsFragmentDoc,
+        data.getRubrique as FragmentType<typeof RubriqueBasicInformationFieldsFragmentDoc>
+    );
+
+    const rubriqueFullInformation = getFragmentData(
+        RubriqueFullInformationFieldsFragmentDoc,
+        data.getRubrique as FragmentType<typeof RubriqueFullInformationFieldsFragmentDoc>
+    );
+
+    const articlesFullInformation =
+        getFragmentData(
+            ArticleFullInformationFieldsFragmentDoc,
+            data.getRubrique?.articles?.result as FragmentType<typeof ArticleFullInformationFieldsFragmentDoc>[]
+        ) ?? [];
+
+    const articlesBasicInformation =
+        getFragmentData(
+            ArticleBasicInformationFieldsFragmentDoc,
+            data.getRubrique?.articles?.result as FragmentType<typeof ArticleBasicInformationFieldsFragmentDoc>[]
+        ) ?? [];
+
+    return { rubriqueBasicInformation, rubriqueFullInformation, articlesBasicInformation, articlesFullInformation };
+};
+
+const getRubriqueWithArticlesByIdentifiant = async (
+    identifiant: string,
+    withRubriqueFullInformation: boolean = false,
+    withArticleFullInformation: boolean = false
+) => {
+    const { data } = await getClient().query({
+        query: RUBRIQUE_WITH_ARTICLES_BY_IDENTIFIANT,
+        variables: {
+            identifiant: identifiant,
             withRubriqueFullInformation: withRubriqueFullInformation,
             withArticleFullInformation: withArticleFullInformation,
         },
@@ -111,10 +151,10 @@ const getAuteur = async (id: number) => {
     return { auteur };
 };
 
-const getMot = async (id: number) => {
+const getMotByIdentifiant = async (identifiant: string) => {
     const { data } = await getClient().query({
-        query: MOT,
-        variables: { id: id },
+        query: MOT_BY_IDENTIFIANT,
+        variables: { identifiant: identifiant },
     });
 
     const mot = getFragmentData(
@@ -180,10 +220,10 @@ const getGroupeMotsWithMots = async (id: number) => {
     return { groupeMotsWithMots };
 };
 
-const getPageArticleOrPrototype = async (id: number) => {
+const getPageArticleOrPrototypeByIdentifiant = async (identifiant: string) => {
     const { data } = await getClient().query({
-        query: ARTICLE_AND_PROTOTYPE,
-        variables: { id: id },
+        query: ARTICLE_AND_PROTOTYPE_BY_IDENTIFIANT,
+        variables: { identifiant: identifiant },
     });
 
     const articleFields = getFragmentData(
@@ -257,8 +297,9 @@ export {
     getAuteur,
     getGroupeMotsWithMots,
     getHomepage,
-    getMot,
-    getPageArticleOrPrototype,
+    getMotByIdentifiant,
+    getPageArticleOrPrototypeByIdentifiant,
     getRubrique,
     getRubriqueWithArticles,
+    getRubriqueWithArticlesByIdentifiant,
 };

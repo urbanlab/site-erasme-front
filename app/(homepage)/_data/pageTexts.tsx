@@ -38,13 +38,13 @@ const imageCardsContent = [
     {
         title: 'INCUBATION',
         image: incubationLogo,
-        link: `/projets/${process.env.SPIP_RUBRIQUE_PROJETS_INCUBATION_ID}`,
+        link: `/projets/${process.env.SPIP_RUBRIQUE_PROJETS_INCUBATION_IDENTIFIANT}`,
         isInternalLink: true,
     },
     {
         title: 'CCN',
         image: ccnLogo,
-        link: `/projets/${process.env.SPIP_RUBRIQUE_PROJETS_CCN_ID}`,
+        link: `/projets/${process.env.SPIP_RUBRIQUE_PROJETS_CCN_IDENTIFIANT}`,
         isInternalLink: true,
     },
 ];

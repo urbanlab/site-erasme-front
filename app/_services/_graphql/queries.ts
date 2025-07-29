@@ -9,9 +9,9 @@ const ARTICLE = gql(`
     }
 `);
 
-const ARTICLE_AND_PROTOTYPE = gql(`
-    query ArticleAndPrototype($id: Int!) {
-        getArticle(id: $id) {
+const ARTICLE_AND_PROTOTYPE_BY_IDENTIFIANT = gql(`
+    query ArticleAndPrototypeByIdentifiant($identifiant: String!) {
+        getArticle(identifiant: $identifiant) {
             ...articleFullInformationFields
             
             ...prototypeInformationFields
@@ -68,9 +68,29 @@ const RUBRIQUE_WITH_ARTICLES = gql(`
     }
 `);
 
-const MOT = gql(`
-    query Mot($id: Int!) {
-        getMot(id: $id) {
+const RUBRIQUE_WITH_ARTICLES_BY_IDENTIFIANT = gql(`
+    query RubriqueWithArticlesByIdentifiant(
+            $identifiant: String!,
+            $withArticleFullInformation: Boolean! = false,
+            $withRubriqueFullInformation: Boolean! = false,
+        ) {
+        getRubrique(identifiant: $identifiant) {
+            ...rubriqueBasicInformationFields @skip(if: $withRubriqueFullInformation) 
+            ...rubriqueFullInformationFields @include(if: $withRubriqueFullInformation)
+
+            articles(pagination: 500, orderby: ["date_DESC"]) {
+                result {
+                    ...articleBasicInformationFields @skip(if: $withArticleFullInformation)
+                    ...articleFullInformationFields @include(if: $withArticleFullInformation)
+                }
+            }
+        }
+    }
+`);
+
+const MOT_BY_IDENTIFIANT = gql(`
+    query MotByIdentifiant($identifiant: String!) {
+        getMot(identifiant: $identifiant) {
             ...motBasicInformationFields
         }
     }
@@ -238,12 +258,13 @@ export {
     ACTIVE_AUTHORS,
     ALL_PROJECTS_AND_NESTED_COLLECTIONS,
     ARTICLE,
-    ARTICLE_AND_PROTOTYPE,
+    ARTICLE_AND_PROTOTYPE_BY_IDENTIFIANT,
     AUTEUR,
     GROUPE_MOTS_WITH_MOTS,
     HOMEPAGE,
-    MOT,
+    MOT_BY_IDENTIFIANT,
     RUBRIQUE_PRESENTATION,
     RUBRIQUE_WITH_ARTICLES,
+    RUBRIQUE_WITH_ARTICLES_BY_IDENTIFIANT,
     SEARCH,
 };

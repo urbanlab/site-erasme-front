@@ -184,7 +184,7 @@ const InfoCard = ({
                 {items.mots.map(mot => {
                     return items.hasLink ? (
                         <li key={mot.id}>
-                            <Link key={mot.id} href={`/mot-cle/${mot.id}`} className={styles.linkStyle}>
+                            <Link key={mot.id} href={`/mot-cle/${mot.identifiant}`} className={styles.linkStyle}>
                                 {mot.titre}
                             </Link>
                         </li>

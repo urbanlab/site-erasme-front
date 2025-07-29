@@ -1,4 +1,4 @@
-import { getRubriqueWithArticles } from '@data/queries';
+import { getRubriqueWithArticlesByIdentifiant } from '@data/queries';
 import { FragmentType, getFragmentData } from '@services/graphql/__generated__';
 import { DocumentFullInformationFieldsFragmentDoc } from '@services/graphql/__generated__/graphql';
 import ArticleListWrapper from '@ui/client-components/articleListWrapper';
@@ -15,18 +15,19 @@ import styles from './page.module.css';
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-    return [{ id: process.env.SPIP_RUBRIQUE_PROJETS_INCUBATION_ID }, { id: process.env.SPIP_RUBRIQUE_PROJETS_CCN_ID }];
+    return [
+        { identifiant: process.env.SPIP_RUBRIQUE_PROJETS_INCUBATION_IDENTIFIANT },
+        { identifiant: process.env.SPIP_RUBRIQUE_PROJETS_CCN_IDENTIFIANT },
+    ];
 }
 
-export default async function Projet({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = await params;
+export default async function Projet({ params }: { params: Promise<{ identifiant: string }> }) {
+    const { identifiant } = await params;
+    console.log('identifianto projet', identifiant);
 
     try {
-        const { rubriqueFullInformation: projet, articlesBasicInformation: articles } = await getRubriqueWithArticles(
-            parseInt(id),
-            true,
-            false
-        );
+        const { rubriqueFullInformation: projet, articlesBasicInformation: articles } =
+            await getRubriqueWithArticlesByIdentifiant(identifiant, true, false);
 
         const imagesFromProjet = getFragmentData(
             DocumentFullInformationFieldsFragmentDoc,

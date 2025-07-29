@@ -1,4 +1,4 @@
-import { getAllProjets, getGroupeMotsWithMots, getMot } from '@data/queries';
+import { getAllProjets, getGroupeMotsWithMots, getMotByIdentifiant } from '@data/queries';
 import { FragmentType, getFragmentData } from '@services/graphql/__generated__/fragment-masking';
 import { MotsAndGroupeMotsFieldsFragmentDoc } from '@services/graphql/__generated__/graphql';
 import ProjectListWrapper from '@ui/client-components/projectListWrapper';
@@ -20,11 +20,11 @@ export async function generateStaticParams() {
     });
 }
 
-export default async function MotCleItem({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = await params;
+export default async function MotCleItem({ params }: { params: Promise<{ identifiant: string }> }) {
+    const { identifiant } = await params;
 
     try {
-        const { mot } = await getMot(parseInt(id));
+        const { mot } = await getMotByIdentifiant(identifiant);
 
         const { groupeMotsWithMots } = await getGroupeMotsWithMots(
             parseInt(process.env.SPIP_GROUPE_MOTS_POLITIQUES_PUBLIQUES_ID ?? '')
@@ -39,7 +39,7 @@ export default async function MotCleItem({ params }: { params: Promise<{ id: str
                         article?.mots?.result as FragmentType<typeof MotsAndGroupeMotsFieldsFragmentDoc>[]
                     );
 
-                    return motsFromArticleFragment.some(mot => mot?.id === id);
+                    return motsFromArticleFragment.some(mot => mot?.identifiant === identifiant);
                 });
 
                 if (filteredArticles?.length === 0) return null;
