@@ -54,7 +54,7 @@
     .desktopContainer {
         display: grid;
         gap: var(--gap);
-        grid-auto-rows: min-content;
+        grid-template-rows: auto auto 1fr;
         grid-template-columns: 1fr repeat(3, 1fr);
         grid-template-areas:
             '. totalItems articleTypeFilter itemsPerPage'
