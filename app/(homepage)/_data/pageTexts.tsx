@@ -30,9 +30,6 @@ const pageTexts = {
             },
         ],
     },
-    servicesSection: {
-        title: 'Services',
-    },
 };
 
 export { pageTexts };

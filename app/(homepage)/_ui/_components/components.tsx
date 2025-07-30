@@ -90,7 +90,7 @@ const ProgrammesSection = () => {
 const ServicesSection = ({ articles }: { articles: ArticleBasicInformationFieldsFragment[] }) => {
     return (
         <div className={styles.servicesContainer}>
-            <h2>{pageTexts.servicesSection.title}</h2>
+            <h2>{articles.at(0)?.rubrique?.titre}</h2>
             <div className={styles.tagIconWrapper}>
                 <Image src={xShapedIcon} alt="" className={`${styles.desktopDisplayOnly} ${styles.firstIcon}`} />
                 <div className={styles.tagsContainer}>

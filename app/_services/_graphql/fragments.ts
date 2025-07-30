@@ -54,6 +54,10 @@ const ARTICLE_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
         date
         logo
         isprototype
+        rubrique {
+            id
+            titre
+        }
     }
 `);
 
