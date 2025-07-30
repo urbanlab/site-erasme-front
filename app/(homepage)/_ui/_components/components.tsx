@@ -11,7 +11,7 @@ import ImageCard from '@ui/components/imageCard';
 import LinkButton from '@ui/components/linkButton';
 import ShapedImage from '@ui/components/shapedImage';
 import Image from 'next/image';
-import { imageCardsContent, pageTexts } from '../../_data/pageTexts';
+import { pageTexts } from '../../_data/pageTexts';
 import { ArchiveArticleCard } from '../_client-components/client-components';
 import styles from './components.module.css';
 
@@ -70,9 +70,9 @@ const EnCeMomentSection = ({
 const ProgrammesSection = () => {
     return (
         <div className={styles.programsContainer}>
-            <h2>{pageTexts.ProgramsSection.title}</h2>
+            <h2>{pageTexts.programmesSection.title}</h2>
             <div className={styles.imageCardsContainer}>
-                {imageCardsContent.map((card, index) => (
+                {pageTexts.programmesSection.imageCardsContent.map((card, index) => (
                     <ImageCard
                         className={styles.imageCard}
                         title={card.title}

@@ -23,6 +23,8 @@ Then, run the development server:
 npm run dev
 ```
 
+or
+
 - Compiling without Turbopack:
 ```bash
 npm run dev-no-turbopack
