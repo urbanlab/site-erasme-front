@@ -15,6 +15,7 @@
         grid-area: title;
         justify-self: start;
         align-self: center;
+        text-wrap: nowrap;
     }
 
     .itemsPerPage {
