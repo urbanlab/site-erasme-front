@@ -44,20 +44,9 @@ All the application code is inside the `app` folder.
 - Shared components are inside private folders (the ones prefixed with an underscore) in the root of the `app` folder (`_ui`, `_globals`, `_hooks`...)
 - For individual routes, use the following model:
 
-`
-  _ui
-  	  _components
-  		    components.tsx
-      		components.module.css
-  	  _client-components
-  		    client-components.tsx
-      		client-components.module.css
-  _data
-    	page-texts.tsx
-  _utils.tsx
-  page.tsx
-  page.module.css
-`
+<img width="318" height="258" alt="image" src="https://github.com/user-attachments/assets/20888031-c7d7-4e1b-a824-d7e2f50db6fe" />
+
+
 
   Where the private folders are only used in the context of the corresponding route.
 
