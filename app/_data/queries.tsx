@@ -17,7 +17,7 @@ import {
     ALL_PROJECTS_AND_NESTED_COLLECTIONS,
     ARTICLE,
     ARTICLE_AND_PROTOTYPE_BY_IDENTIFIANT,
-    AUTEUR,
+    AUTEUR_BY_IDENTIFIANT,
     GROUPE_MOTS_WITH_MOTS,
     HOMEPAGE,
     MOT_BY_IDENTIFIANT,
@@ -137,10 +137,10 @@ const getRubrique = async (id: number, withRubriqueFullInformation: boolean = fa
     return { rubriqueBasicInformation, rubriqueFullInformation };
 };
 
-const getAuteur = async (id: number) => {
+const getAuteurByIdentifiant = async (identifiant: string) => {
     const { data } = await getClient().query({
-        query: AUTEUR,
-        variables: { id: id },
+        query: AUTEUR_BY_IDENTIFIANT,
+        variables: { identifiant: identifiant },
     });
 
     const auteur = getFragmentData(
@@ -294,7 +294,7 @@ export {
     getActiveAuteurs,
     getAllProjets,
     getArticle,
-    getAuteur,
+    getAuteurByIdentifiant,
     getGroupeMotsWithMots,
     getHomepage,
     getMotByIdentifiant,

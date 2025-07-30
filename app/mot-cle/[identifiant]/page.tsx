@@ -16,7 +16,7 @@ export async function generateStaticParams() {
     );
 
     return groupeMotsWithMots.map(mot => {
-        return { id: mot.id ?? '' };
+        return { identifiant: mot.identifiant ?? '' };
     });
 }
 

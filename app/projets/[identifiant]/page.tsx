@@ -23,7 +23,6 @@ export async function generateStaticParams() {
 
 export default async function Projet({ params }: { params: Promise<{ identifiant: string }> }) {
     const { identifiant } = await params;
-    console.log('identifianto projet', identifiant);
 
     try {
         const { rubriqueFullInformation: projet, articlesBasicInformation: articles } =

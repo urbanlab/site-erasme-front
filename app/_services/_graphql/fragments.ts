@@ -105,6 +105,7 @@ const PROTOTYPE_INFORMATION_FIELDS_FRAGMENT = gql(`
 const AUTEUR_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
     fragment auteurBasicInformationFields on Auteur {
         id
+        identifiant
         titre
     }
 `);
@@ -112,6 +113,7 @@ const AUTEUR_BASIC_INFORMATION_FIELDS_FRAGMENT = gql(`
 const AUTEUR_FULL_INFORMATION_FIELDS_FRAGMENT = gql(`
     fragment auteurFullInformationFields on Auteur {
         id
+        identifiant
         titre
         logo
         descriptif

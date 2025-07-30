@@ -96,9 +96,9 @@ const MOT_BY_IDENTIFIANT = gql(`
     }
 `);
 
-const AUTEUR = gql(`
-    query Auteur($id: Int!) {
-        getAuteur(id: $id) {
+const AUTEUR_BY_IDENTIFIANT = gql(`
+    query AuteurByIdentifiant($identifiant: String!) {
+        getAuteur(identifiant: $identifiant) {
             ...auteurFullInformationFields
         }
     }
@@ -259,7 +259,7 @@ export {
     ALL_PROJECTS_AND_NESTED_COLLECTIONS,
     ARTICLE,
     ARTICLE_AND_PROTOTYPE_BY_IDENTIFIANT,
-    AUTEUR,
+    AUTEUR_BY_IDENTIFIANT,
     GROUPE_MOTS_WITH_MOTS,
     HOMEPAGE,
     MOT_BY_IDENTIFIANT,

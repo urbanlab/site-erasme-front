@@ -22,7 +22,7 @@ const CollaborateursSection = async ({
             <div className={styles.tagsContainer}>
                 {activeAuteurs.map(auteur => {
                     return (
-                        <LinkButton href={`/equipe/${auteur?.id}`} variant="ghost" key={auteur?.id}>
+                        <LinkButton href={`/equipe/${auteur?.identifiant}`} variant="ghost" key={auteur?.id}>
                             {auteur?.titre}
                         </LinkButton>
                     );

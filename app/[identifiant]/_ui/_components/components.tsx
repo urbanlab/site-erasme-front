@@ -46,7 +46,7 @@ const ArticlePresentation = ({
                 {authors?.map(author => {
                     return (
                         <li key={author?.id} className={styles.linkStyle}>
-                            <Link href={`/equipe/${author?.id}`}>{author?.titre}</Link>
+                            <Link href={`/equipe/${author?.identifiant}`}>{author?.titre}</Link>
                         </li>
                     );
                 })}

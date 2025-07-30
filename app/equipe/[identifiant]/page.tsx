@@ -1,4 +1,4 @@
-import { getActiveAuteurs, getAllProjets, getAuteur, getGroupeMotsWithMots } from '@data/queries';
+import { getActiveAuteurs, getAllProjets, getAuteurByIdentifiant, getGroupeMotsWithMots } from '@data/queries';
 import { FragmentType, getFragmentData } from '@services/graphql/__generated__/fragment-masking';
 import { AuteurFullInformationFieldsFragmentDoc } from '@services/graphql/__generated__/graphql';
 import ProjectListWrapper from '@ui/client-components/projectListWrapper';
@@ -11,15 +11,15 @@ export async function generateStaticParams() {
     const { activeAuteurs } = await getActiveAuteurs();
 
     return activeAuteurs.map(auteur => {
-        return { id: auteur.id };
+        return { identifiant: auteur.identifiant };
     });
 }
 
-export default async function Auteur({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = await params;
+export default async function Auteur({ params }: { params: Promise<{ identifiant: string }> }) {
+    const { identifiant } = await params;
 
     try {
-        const { auteur } = await getAuteur(parseInt(id));
+        const { auteur } = await getAuteurByIdentifiant(identifiant);
 
         const { projets } = await getAllProjets(true);
 
@@ -35,7 +35,7 @@ export default async function Auteur({ params }: { params: Promise<{ id: string 
                         article?.auteurs?.result as FragmentType<typeof AuteurFullInformationFieldsFragmentDoc>[]
                     );
 
-                    return auteurs.some(auteur => auteur.id === id);
+                    return auteurs.some(auteur => auteur.identifiant === identifiant);
                 });
 
                 if (filteredArticles?.length === 0) return null;
