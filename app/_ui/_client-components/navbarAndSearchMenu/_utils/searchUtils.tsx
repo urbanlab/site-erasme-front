@@ -15,14 +15,6 @@ const searchFilterMap: Record<string, ControlledComponentType> = {
         label: 'Projet',
         value: 'Projet',
     },
-    image: {
-        label: 'Image',
-        value: 'Image',
-    },
-    document: {
-        label: 'Document',
-        value: 'Document',
-    },
 };
 
 /**
@@ -54,7 +46,7 @@ const getSearchSuggestionsFromLocalStorage = (): string[] => {
  * Retrieves the current list of suggestions, adds the new input at the beginning if not present,
  * keeps a maximum of 5 suggestions (removing the oldest if needed), updates localStorage,
  * and returns the updated list.
- * 
+ *
  * @param input - The search suggestion string to add.
  * @returns The updated array of search suggestion strings from localStorage.
  */
@@ -65,7 +57,7 @@ const addSuggestionToList = (input: string): string[] => {
     const updatedSuggestions = suggestions.includes(input) ? suggestions : [input, ...suggestions];
 
     //Keep 5 items maximum. Remove the oldest item if needed
-    const latestSuggestions = updatedSuggestions.slice(0, 5)
+    const latestSuggestions = updatedSuggestions.slice(0, 5);
 
     localStorage.setItem(searchSuggestionsKey, JSON.stringify(latestSuggestions));
 

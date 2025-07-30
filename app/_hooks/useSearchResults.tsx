@@ -5,8 +5,6 @@ import { FragmentType, getFragmentData } from '@services/graphql/__generated__/f
 import {
     ArticleBasicInformationFieldsFragment,
     ArticleBasicInformationFieldsFragmentDoc,
-    DocumentBasicInformationFieldsFragment,
-    DocumentBasicInformationFieldsFragmentDoc,
     ListProjetsFieldsFragment,
     ListProjetsFieldsFragmentDoc,
 } from '@services/graphql/__generated__/graphql';
@@ -16,16 +14,12 @@ import { useEffect, useState } from 'react';
 type SearchResults = {
     articles: ArticleBasicInformationFieldsFragment[];
     projets: ListProjetsFieldsFragment[];
-    documents: DocumentBasicInformationFieldsFragment[];
-    images: DocumentBasicInformationFieldsFragment[];
 };
 
 export function useSearchResults({ searchInput }: { searchInput: string }) {
     const [searchResults, setSearchResults] = useState<SearchResults>({
         articles: [],
         projets: [],
-        documents: [],
-        images: [],
     });
 
     const { data } = useSuspenseQuery(SEARCH, {
@@ -54,16 +48,7 @@ export function useSearchResults({ searchInput }: { searchInput: string }) {
                 >[]
             );
 
-            const documentsFragment = getFragmentData(
-                DocumentBasicInformationFieldsFragmentDoc,
-                data.recherche?.result?.filter(item => item?.__typename === 'Document') as FragmentType<
-                    typeof DocumentBasicInformationFieldsFragmentDoc
-                >[]
-            );
-            const documents = documentsFragment.filter(item => item.media === 'file');
-            const images = documentsFragment.filter(item => item.media === 'image');
-
-            setSearchResults({ articles: articles, projets: projets, documents: documents, images: images });
+            setSearchResults({ articles: articles, projets: projets });
         };
 
         searchQuery();

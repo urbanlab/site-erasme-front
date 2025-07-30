@@ -21,7 +21,7 @@ export default function SearchResults({
 }) {
     const isDesktop = useIsDesktop();
 
-    const { articles, projets, documents, images } = useSearchResults({ searchInput: searchInput });
+    const { articles, projets } = useSearchResults({ searchInput: searchInput });
 
     const shouldDisplay = (filter: ControlledComponentValueType): boolean => {
         return searchFilter === searchFilterMap.tout.value || searchFilter === filter;
@@ -42,28 +42,6 @@ export default function SearchResults({
                 <div>
                     <h4 className={styles.sectionTitle}>{`PROJETS : ${projets.length}`}</h4>
                     <ProjectList projets={projets} handleNavigation={handleNavigation} />
-                </div>
-            )}
-
-            {shouldDisplay(searchFilterMap.document.value) && documents && documents.length > 0 && (
-                <div>
-                    <h4 className={styles.sectionTitle}>{`DOCUMENTS : ${documents.length}`}</h4>
-                    <ul>
-                        {documents.map(item => (
-                            <li key={item.id}>{item.titre === '' ? 'Document' : item.titre}</li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-
-            {shouldDisplay(searchFilterMap.image.value) && images && images.length > 0 && (
-                <div>
-                    <h4 className={styles.sectionTitle}>{`IMAGES : ${images.length}`}</h4>
-                    <ul>
-                        {images.map(item => (
-                            <li key={item.id}>{item.titre === '' ? 'Image' : item.titre}</li>
-                        ))}
-                    </ul>
                 </div>
             )}
         </div>
